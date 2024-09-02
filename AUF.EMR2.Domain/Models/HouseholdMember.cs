@@ -26,5 +26,7 @@ namespace AUF.EMR2.Domain.Models
         public Household Household { get; set; }
         public string? NameOfMother { get; set; }
         public string? NameOfFather { get; set; }
+        public bool IsNhts { get; set; }
+        public bool? IsInSchool { get; set; }
     }
 }

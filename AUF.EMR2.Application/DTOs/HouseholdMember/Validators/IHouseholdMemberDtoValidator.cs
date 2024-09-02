@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace AUF.EMR2.Application.DTOs.HouseholdMember.Validators
 {
-    public class IHouseholdMemberValidator : AbstractValidator<IHouseholdMemberDto>
+    public class IHouseholdMemberDtoValidator : AbstractValidator<IHouseholdMemberDto>
     {
-        public IHouseholdMemberValidator(IUnitOfWork unitOfWork)
+        public IHouseholdMemberDtoValidator(IUnitOfWork unitOfWork)
         {
             RuleFor(q => q.FirstName)
                 .NotNull().WithMessage("{PropertyName} must not be empty.")
@@ -23,7 +23,7 @@ namespace AUF.EMR2.Application.DTOs.HouseholdMember.Validators
             RuleFor(q => q.RelationshipToHouseholdHead)
                 .NotNull().WithMessage("{PropertyName} must not be empty.")
                 .GreaterThan(0).WithMessage("{PropertyName} must be more than 0.")
-                .LessThanOrEqualTo(5).WithMessage("{PropertyName} must be less than 6.");
+                .LessThanOrEqualTo(5).WithMessage("{PropertyName} must be less than {ComparisonValue}.");
 
             RuleFor(q => q.Sex)
                 .NotNull().WithMessage("{PropertyName} must not be empty.");

@@ -29,7 +29,7 @@ namespace AUF.EMR2.Application.Features.HouseholdMembers.Commands.CreateHousehol
         public async Task<BaseCommandResponse<int>> Handle(CreateHouseholdMemberCommand request, CancellationToken cancellationToken)
         {
             var response = new BaseCommandResponse<int>();
-            var validator = new CreateHouseholdMemberValidator(_unitOfWork);
+            var validator = new CreateHouseholdMemberDtoValidator(_unitOfWork);
             var validationResult = await validator.ValidateAsync(request.HouseholdMemberDto, cancellationToken);
 
             if (!validationResult.IsValid)

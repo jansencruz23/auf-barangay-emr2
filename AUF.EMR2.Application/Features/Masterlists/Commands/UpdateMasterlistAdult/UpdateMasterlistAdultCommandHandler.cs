@@ -1,6 +1,6 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
-using AUF.EMR2.Application.DTOs.Household.Validators;
 using AUF.EMR2.Application.DTOs.HouseholdMember.Validators;
+using AUF.EMR2.Application.DTOs.Masterlist.Validators;
 using AUF.EMR2.Application.Exceptions;
 using AUF.EMR2.Application.Responses;
 using AUF.EMR2.Domain.Models;
@@ -13,14 +13,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AUF.EMR2.Application.Features.HouseholdMembers.Commands.UpdateHouseholdMember
+namespace AUF.EMR2.Application.Features.Masterlists.Commands.UpdateMasterlistAdult
 {
-    public class UpdateHouseholdMemberCommandHandler : IRequestHandler<UpdateHouseholdMemberCommand, BaseCommandResponse<int>>
+    public class UpdateMasterlistAdultCommandHandler : IRequestHandler<UpdateMasterlistAdultCommand, BaseCommandResponse<int>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public UpdateHouseholdMemberCommandHandler(
+        public UpdateMasterlistAdultCommandHandler(
             IUnitOfWork unitOfWork,
             IMapper mapper)
         {
@@ -28,11 +28,11 @@ namespace AUF.EMR2.Application.Features.HouseholdMembers.Commands.UpdateHousehol
             _mapper = mapper;
         }
 
-        public async Task<BaseCommandResponse<int>> Handle(UpdateHouseholdMemberCommand request, CancellationToken cancellationToken)
+        public async Task<BaseCommandResponse<int>> Handle(UpdateMasterlistAdultCommand request, CancellationToken cancellationToken)
         {
             var response = new BaseCommandResponse<int>();
-            var validator = new UpdateHouseholdMemberDtoValidator(_unitOfWork);
-            var validationResult = await validator.ValidateAsync(request.HouseholdMemberDto, cancellationToken);
+            var validator = new UpdateMasterlistAdultDtoValidator();
+            var validationResult = await validator.ValidateAsync(request.MasterlistDto, cancellationToken);
 
             if (!validationResult.IsValid)
             {
@@ -43,17 +43,17 @@ namespace AUF.EMR2.Application.Features.HouseholdMembers.Commands.UpdateHousehol
                 throw new ValidationException(validationResult);
             }
 
-            var householdMember = await _unitOfWork.HouseholdMemberRepository.GetHouseholdMember(request.HouseholdMemberDto.Id);
+            var householdMember = await _unitOfWork.HouseholdMemberRepository.GetHouseholdMember(request.MasterlistDto.Id);
 
             if (householdMember == null)
             {
                 response.Success = false;
-                response.Message = $"{nameof(HouseholdMember)} with id: {request.HouseholdMemberDto.Id} is not existing";
+                response.Message = $"{nameof(HouseholdMember)} with id: {request.MasterlistDto.Id} is not existing";
 
-                throw new NotFoundException(nameof(HouseholdMember), request.HouseholdMemberDto.Id);
+                throw new NotFoundException(nameof(HouseholdMember), request.MasterlistDto.Id);
             }
 
-            _mapper.Map(request.HouseholdMemberDto, householdMember);
+            _mapper.Map(request.MasterlistDto, householdMember);
 
             try
             {
@@ -67,7 +67,7 @@ namespace AUF.EMR2.Application.Features.HouseholdMembers.Commands.UpdateHousehol
 
             response.Success = true;
             response.Message = "Updation is successful";
-            response.Id = request.HouseholdMemberDto.Id;
+            response.Id = request.MasterlistDto.Id;
 
             return response;
         }

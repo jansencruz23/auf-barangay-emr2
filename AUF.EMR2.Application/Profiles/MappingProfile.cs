@@ -1,5 +1,6 @@
 ﻿using AUF.EMR2.Application.DTOs.Household;
 using AUF.EMR2.Application.DTOs.HouseholdMember;
+using AUF.EMR2.Application.DTOs.Masterlist;
 using AUF.EMR2.Domain.Models;
 using AutoMapper;
 using System;
@@ -17,10 +18,16 @@ namespace AUF.EMR2.Application.Profiles
             CreateMap<Household, HouseholdDto>().ReverseMap();
             CreateMap<Household, CreateHouseholdDto>().ReverseMap();
             CreateMap<Household, UpdateHouseholdDto>().ReverseMap();
+            CreateMap<Household, HouseholdOnlyDto>().ReverseMap();
 
             CreateMap<HouseholdMember, HouseholdMemberDto>().ReverseMap();
             CreateMap<HouseholdMember, CreateHouseholdMemberDto>().ReverseMap();
             CreateMap<HouseholdMember, UpdateHouseholdMemberDto>().ReverseMap();
+
+            CreateMap<HouseholdMember, MasterlistAdultDto>().ReverseMap();
+            CreateMap<HouseholdMember, MasterlistChildDto>().ReverseMap();
+            CreateMap<HouseholdMember, UpdateMasterlistAdultDto>().ReverseMap();
+            CreateMap<HouseholdMember, UpdateMasterlistChildDto>().ReverseMap();
         }
     }
 }

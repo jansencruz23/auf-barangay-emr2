@@ -14,6 +14,7 @@ namespace AUF.EMR2.Persistence.Repositories.Common
 
         private IHouseholdRepository _householdRepository;
         private IHouseholdMemberRepository _householdMemberRepository;
+        private IMasterlistRepository _masterlistRepository;
 
         public UnitOfWork(EmrDbContext dbContext)
         {
@@ -25,6 +26,9 @@ namespace AUF.EMR2.Persistence.Repositories.Common
 
         public IHouseholdMemberRepository HouseholdMemberRepository =>
             _householdMemberRepository ??= new HouseholdMemberRepository(_dbContext);
+
+        public IMasterlistRepository MasterlistRepository =>
+            _masterlistRepository ??= new MasterlistRepository(_dbContext);
 
         public void Dispose()
         {

@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace AUF.EMR2.Application.DTOs.HouseholdMember.Validators
 {
-    public class CreateHouseholdMemberValidator : AbstractValidator<CreateHouseholdMemberDto>
+    public class CreateHouseholdMemberDtoValidator : AbstractValidator<CreateHouseholdMemberDto>
     {
-        public CreateHouseholdMemberValidator(IUnitOfWork unitOfWork)
+        public CreateHouseholdMemberDtoValidator(IUnitOfWork unitOfWork)
         {
-            Include(new IHouseholdMemberValidator(unitOfWork));
+            Include(new IHouseholdMemberDtoValidator(unitOfWork));
         }
     }
 }

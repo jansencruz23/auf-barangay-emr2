@@ -24,5 +24,6 @@ namespace AUF.EMR2.Application.DTOs.HouseholdMember
         public int HouseholdId { get; set; }
         public string? NameOfMother { get; set; }
         public string? NameOfFather { get; set; }
+        public bool IsNhts { get; set; }
     }
 }
