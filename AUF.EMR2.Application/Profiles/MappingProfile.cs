@@ -1,6 +1,7 @@
 ﻿using AUF.EMR2.Application.DTOs.Household;
 using AUF.EMR2.Application.DTOs.HouseholdMember;
 using AUF.EMR2.Application.DTOs.Masterlist;
+using AUF.EMR2.Application.DTOs.OralHealth;
 using AUF.EMR2.Domain.Models;
 using AutoMapper;
 using System;
@@ -28,6 +29,9 @@ namespace AUF.EMR2.Application.Profiles
             CreateMap<HouseholdMember, MasterlistChildDto>().ReverseMap();
             CreateMap<HouseholdMember, UpdateMasterlistAdultDto>().ReverseMap();
             CreateMap<HouseholdMember, UpdateMasterlistChildDto>().ReverseMap();
+
+            CreateMap<HouseholdMember, OralHealthDto>().ReverseMap();
+            CreateMap<HouseholdMember, UpdateOralHealthDto>().ReverseMap();
         }
     }
 }

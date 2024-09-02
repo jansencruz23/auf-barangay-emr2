@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AUF.EMR2.Application.Features.Masterlists.Queries.GetMasterlistChildDetail
 {
-    public record GetMasterlistChildDetailRequest : IRequest<MasterlistChildDto>
+    public record GetMasterlistChildRecordRequest : IRequest<MasterlistChildDto>
     {
         public int Id { get; set; }
     }

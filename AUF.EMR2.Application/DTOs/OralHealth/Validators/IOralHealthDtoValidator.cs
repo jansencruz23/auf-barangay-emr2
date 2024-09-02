@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AUF.EMR2.Application.DTOs.Masterlist.Validators
+namespace AUF.EMR2.Application.DTOs.OralHealth.Validators
 {
-    public class IMasterlistDtoValidator : AbstractValidator<IMasterlistDto>
+    public class IOralHealthDtoValidator : AbstractValidator<IOralHealthDto>
     {
-        public IMasterlistDtoValidator()
+        public IOralHealthDtoValidator()
         {
             RuleFor(q => q.FirstName)
                 .NotNull().WithMessage("{PropertyName} must not be empty.")

@@ -3,7 +3,7 @@ using AUF.EMR2.Application.Features.Masterlists.Commands.UpdateMasterlistAdult;
 using AUF.EMR2.Application.Features.Masterlists.Commands.UpdateMasterlistChild;
 using AUF.EMR2.Application.Features.Masterlists.Queries.GetMasterlistAdolescent;
 using AUF.EMR2.Application.Features.Masterlists.Queries.GetMasterlistAdult;
-using AUF.EMR2.Application.Features.Masterlists.Queries.GetMasterlistAdultDetail;
+using AUF.EMR2.Application.Features.Masterlists.Queries.GetMasterlistAdultRecord;
 using AUF.EMR2.Application.Features.Masterlists.Queries.GetMasterlistChildDetail;
 using AUF.EMR2.Application.Features.Masterlists.Queries.GetMasterlistInfant;
 using AUF.EMR2.Application.Features.Masterlists.Queries.GetMasterlistNewborn;
@@ -87,17 +87,17 @@ namespace AUF.EMR2.API.Controllers
 
         // GET api/<MasterlistController>/child/5
         [HttpGet("child/{id}")]
-        public async Task<ActionResult<MasterlistChildDto>> GetChildDetails(int id)
+        public async Task<ActionResult<MasterlistChildDto>> GetChildRecord(int id)
         {
-            var response = await _mediator.Send(new GetMasterlistChildDetailRequest { Id = id });
+            var response = await _mediator.Send(new GetMasterlistChildRecordRequest { Id = id });
             return Ok(response);
         }
 
         // GET api/<MasterlistController>/adult/5
         [HttpGet("adult/{id}")]
-        public async Task<ActionResult<MasterlistChildDto>> GetAdultDetails(int id)
+        public async Task<ActionResult<MasterlistChildDto>> GetAdultRecord(int id)
         {
-            var response = await _mediator.Send(new GetMasterlistAdultDetailRequest { Id = id });
+            var response = await _mediator.Send(new GetMasterlistAdultRecordRequest { Id = id });
             return Ok(response);
         }
 

@@ -11,6 +11,7 @@ namespace AUF.EMR2.Application.Abstraction.Persistence.Common
         IHouseholdRepository HouseholdRepository { get; }
         IHouseholdMemberRepository HouseholdMemberRepository { get; }
         IMasterlistRepository MasterlistRepository { get; }
+        IOralHealthRepository OralHealthRepository { get; }
         Task SaveAsync();
     }
 }

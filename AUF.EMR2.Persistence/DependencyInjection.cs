@@ -27,6 +27,7 @@ namespace AUF.EMR2.Persistence
             services.AddScoped<IHouseholdRepository, HouseholdRepository>();
             services.AddScoped<IHouseholdMemberRepository, HouseholdMemberRepository>();
             services.AddScoped<IMasterlistRepository, MasterlistRepository>();
+            services.AddScoped<IOralHealthRepository, OralHealthRepository>();
 
             return services;
         }

@@ -1,5 +1,4 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
-using AUF.EMR2.Application.DTOs.Masterlist;
 using AUF.EMR2.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -9,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace AUF.EMR2.Application.Abstraction.Persistence
 {
-    public interface IMasterlistRepository : IHouseholdMemberDerivedRepository
+    public interface IOralHealthRepository : IHouseholdMemberDerivedRepository
     {
+        Task<List<HouseholdMember>> GetPregnantHouseholdMembers(string householdNo, DateTime startDate, DateTime endDate);
     }
 }

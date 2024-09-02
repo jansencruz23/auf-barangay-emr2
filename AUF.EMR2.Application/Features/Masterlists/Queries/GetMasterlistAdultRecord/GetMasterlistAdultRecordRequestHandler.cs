@@ -9,14 +9,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AUF.EMR2.Application.Features.Masterlists.Queries.GetMasterlistAdultDetail
+namespace AUF.EMR2.Application.Features.Masterlists.Queries.GetMasterlistAdultRecord
 {
-    public class GetMasterlistAdultDetailRequestHandler : IRequestHandler<GetMasterlistAdultDetailRequest, MasterlistAdultDto>
+    public class GetMasterlistAdultRecordRequestHandler : IRequestHandler<GetMasterlistAdultRecordRequest, MasterlistAdultDto>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public GetMasterlistAdultDetailRequestHandler(
+        public GetMasterlistAdultRecordRequestHandler(
             IUnitOfWork unitOfWork,
             IMapper mapper)
         {
@@ -24,7 +24,7 @@ namespace AUF.EMR2.Application.Features.Masterlists.Queries.GetMasterlistAdultDe
             _mapper = mapper;
         }
 
-        public async Task<MasterlistAdultDto> Handle(GetMasterlistAdultDetailRequest request, CancellationToken cancellationToken)
+        public async Task<MasterlistAdultDto> Handle(GetMasterlistAdultRecordRequest request, CancellationToken cancellationToken)
         {
             var adult = await _unitOfWork.MasterlistRepository.GetSingleMasterlistRecord(request.Id);
             var adultDto = _mapper.Map<MasterlistAdultDto>(adult);

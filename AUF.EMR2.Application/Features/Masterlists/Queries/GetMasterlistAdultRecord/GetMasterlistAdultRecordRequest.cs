@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AUF.EMR2.Application.Features.Masterlists.Queries.GetMasterlistAdultDetail
+namespace AUF.EMR2.Application.Features.Masterlists.Queries.GetMasterlistAdultRecord
 {
-    public record GetMasterlistAdultDetailRequest : IRequest<MasterlistAdultDto>
+    public record GetMasterlistAdultRecordRequest : IRequest<MasterlistAdultDto>
     {
         public int Id { get; set; }
     }

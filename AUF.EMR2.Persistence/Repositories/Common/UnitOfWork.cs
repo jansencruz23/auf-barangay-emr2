@@ -15,6 +15,7 @@ namespace AUF.EMR2.Persistence.Repositories.Common
         private IHouseholdRepository _householdRepository;
         private IHouseholdMemberRepository _householdMemberRepository;
         private IMasterlistRepository _masterlistRepository;
+        private IOralHealthRepository _oralHealthRepository;
 
         public UnitOfWork(EmrDbContext dbContext)
         {
@@ -29,6 +30,9 @@ namespace AUF.EMR2.Persistence.Repositories.Common
 
         public IMasterlistRepository MasterlistRepository =>
             _masterlistRepository ??= new MasterlistRepository(_dbContext);
+
+        public IOralHealthRepository OralHealthRepository =>
+            _oralHealthRepository ??= new OralHealthRepository(_dbContext);
 
         public void Dispose()
         {

@@ -1,8 +1,6 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence;
-using AUF.EMR2.Application.Abstraction.Persistence.Common;
 using AUF.EMR2.Domain.Models;
 using AUF.EMR2.Persistence.Repositories.Common;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,14 +9,19 @@ using System.Threading.Tasks;
 
 namespace AUF.EMR2.Persistence.Repositories
 {
-    public class MasterlistRepository : HouseholdMemberDerivedRepository, IMasterlistRepository
+    public class OralHealthRepository : HouseholdMemberDerivedRepository, IOralHealthRepository
     {
         private readonly EmrDbContext _dbContext;
 
-        public MasterlistRepository(EmrDbContext dbContext) 
+        public OralHealthRepository(EmrDbContext dbContext) 
             : base(dbContext)
         {
             _dbContext = dbContext;
+        }
+
+        public Task<List<HouseholdMember>> GetPregnantHouseholdMembers(string householdNo, DateTime startDate, DateTime endDate)
+        {
+            throw new NotImplementedException();
         }
     }
 }

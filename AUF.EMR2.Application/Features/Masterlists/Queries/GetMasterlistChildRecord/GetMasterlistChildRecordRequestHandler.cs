@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace AUF.EMR2.Application.Features.Masterlists.Queries.GetMasterlistChildDetail
 {
-    public class GetMasterlistChildDetailRequestHandler : IRequestHandler<GetMasterlistChildDetailRequest, MasterlistChildDto>
+    public class GetMasterlistChildRecordRequestHandler : IRequestHandler<GetMasterlistChildRecordRequest, MasterlistChildDto>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public GetMasterlistChildDetailRequestHandler(
+        public GetMasterlistChildRecordRequestHandler(
             IUnitOfWork unitOfWork,
             IMapper mapper)
         {
@@ -23,7 +23,7 @@ namespace AUF.EMR2.Application.Features.Masterlists.Queries.GetMasterlistChildDe
             _mapper = mapper;
         }
 
-        public async Task<MasterlistChildDto> Handle(GetMasterlistChildDetailRequest request, CancellationToken cancellationToken)
+        public async Task<MasterlistChildDto> Handle(GetMasterlistChildRecordRequest request, CancellationToken cancellationToken)
         {
             var child = await _unitOfWork.MasterlistRepository.GetSingleMasterlistRecord(request.Id);
             var childDto = _mapper.Map<MasterlistChildDto>(child);
