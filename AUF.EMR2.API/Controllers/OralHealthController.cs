@@ -5,7 +5,7 @@ using AUF.EMR2.Application.Features.OralHealths.Queries.GetOralHealthInfant;
 using AUF.EMR2.Application.Features.OralHealths.Queries.GetOralHealthOneToFour;
 using AUF.EMR2.Application.Features.OralHealths.Queries.GetOralHealthPregnantFifteenToNineteen;
 using AUF.EMR2.Application.Features.OralHealths.Queries.GetOralHealthPregnantTwentyToFourtyNine;
-using AUF.EMR2.Application.Features.OralHealths.Queries.GetOralHealthRecord;
+using AUF.EMR2.Application.Features.OralHealths.Queries.GetOralHealth;
 using AUF.EMR2.Application.Features.OralHealths.Queries.GetOralHealthTenToFourteen;
 using AUF.EMR2.Application.Features.OralHealths.Queries.GetPrintOralHealthRecords;
 using AUF.EMR2.Application.Responses;
@@ -87,7 +87,7 @@ namespace AUF.EMR2.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<OralHealthDto>> Get(int id)
         {
-            var response = await _mediator.Send(new GetOralHealthRecordRequest { Id = id });
+            var response = await _mediator.Send(new GetOralHealthRequest { Id = id });
             return Ok(response);
         }
 
