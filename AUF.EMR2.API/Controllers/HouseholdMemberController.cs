@@ -3,6 +3,7 @@ using AUF.EMR2.Application.Features.HouseholdMembers.Commands.CreateHouseholdMem
 using AUF.EMR2.Application.Features.HouseholdMembers.Commands.UpdateHouseholdMember;
 using AUF.EMR2.Application.Features.HouseholdMembers.Queries.GetHouseholdMember;
 using AUF.EMR2.Application.Features.HouseholdMembers.Queries.GetHouseholdMemberListByHouseholdNo;
+using AUF.EMR2.Application.Features.HouseholdMembers.Queries.GetWraHouseholdMemberList;
 using AUF.EMR2.Application.Features.Households.Commands.DeleteHousehold;
 using AUF.EMR2.Application.Responses;
 using MediatR;
@@ -28,6 +29,14 @@ namespace AUF.EMR2.API.Controllers
         public async Task<ActionResult<List<HouseholdMemberDto>>> GetHouseholdMembers(string householdNo)
         {
             var response = await _mediator.Send(new GetHouseholdMemberListByHouseholdNoRequest { HouseholdNo = householdNo });
+            return Ok(response);
+        }
+
+        // GET: api/<HouseholdMemberController>
+        [HttpGet("women-of-reproductive-age/{householdNo}")]
+        public async Task<ActionResult<List<HouseholdMemberDto>>> GetWraHouseholdMembers(string householdNo)
+        {
+            var response = await _mediator.Send(new GetWraHouseholdMemberListRequest { HouseholdNo = householdNo });
             return Ok(response);
         }
 

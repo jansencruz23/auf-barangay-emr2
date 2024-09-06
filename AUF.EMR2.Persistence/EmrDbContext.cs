@@ -19,6 +19,7 @@ namespace AUF.EMR2.Persistence
 
         public DbSet<Household> Households { get; set; }
         public DbSet<HouseholdMember> HouseholdMembers { get; set; }
+        public DbSet<WomanOfReproductiveAge> WomenOfReproductiveAge { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {

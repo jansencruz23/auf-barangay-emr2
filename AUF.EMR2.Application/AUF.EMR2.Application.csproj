@@ -19,4 +19,8 @@
     <ProjectReference Include="..\AUF.EMR2.Domain\AUF.EMR2.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DTOs\WomanOfReproductiveAge\" />
+  </ItemGroup>
+
 </Project>
