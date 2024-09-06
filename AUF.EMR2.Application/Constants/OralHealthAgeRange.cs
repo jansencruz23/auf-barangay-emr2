@@ -10,8 +10,8 @@ namespace AUF.EMR2.Application.Constants
     {
         public const int InfantStart = -1;
 
-        public const int OneToFiveStart = -5;
-        public const int OneToFiveEnd = -1;
+        public const int OneToFourStart = -5;
+        public const int OneToFourEnd = -1;
 
         public const int FiveToNineStart = -10;
         public const int FiveToNineEnd = -5;

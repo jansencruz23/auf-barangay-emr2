@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AUF.EMR2.Application.DTOs.Masterlist
+namespace AUF.EMR2.Application.DTOs.OralHealth
 {
-    public class MasterlistAdultOnlyDto : IMasterlistDto
+    public class OralHealthOnlyDto : IOralHealthDto
     {
         public int Id { get; set; }
         public string LastName { get; set; }

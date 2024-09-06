@@ -1,4 +1,5 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
+using AUF.EMR2.Application.Abstraction.Services;
 using AUF.EMR2.Application.Constants;
 using AUF.EMR2.Application.DTOs.Masterlist;
 using AUF.EMR2.Application.DTOs.OralHealth;
@@ -15,22 +16,22 @@ namespace AUF.EMR2.Application.Features.OralHealths.Queries.GetOralHealthFiveToN
     public class GetOralHealthFiveToNineRequestHandler : IRequestHandler<GetOralHealthFiveToNineRequest, List<OralHealthDto>>
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IOralHealthService _oralHealthService;
         private readonly IMapper _mapper;
 
         public GetOralHealthFiveToNineRequestHandler(
             IUnitOfWork unitOfWork,
+            IOralHealthService oralHealthService,
             IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _oralHealthService = oralHealthService;
             _mapper = mapper;
         }
 
         public async Task<List<OralHealthDto>> Handle(GetOralHealthFiveToNineRequest request, CancellationToken cancellationToken)
         {
-            var startDate = DateTime.Today.AddYears(OralHealthAgeRange.FiveToNineStart).AddDays(1);
-            var endDate = DateTime.Today.AddYears(OralHealthAgeRange.FiveToNineEnd);
-
-            var oralHealth = await _unitOfWork.OralHealthRepository.GetListQuery(request.HouseholdNo, startDate, endDate);
+            var oralHealth = await _oralHealthService.GetFiveToNineChildren(request.HouseholdNo);
             var oralHealthListDto = _mapper.Map<List<OralHealthDto>>(oralHealth);
 
             return oralHealthListDto;

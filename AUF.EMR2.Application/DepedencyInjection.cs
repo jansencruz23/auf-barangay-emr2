@@ -20,6 +20,7 @@ namespace AUF.EMR2.Application
                     Assembly.GetExecutingAssembly()));
 
             services.AddScoped<IMasterlistService, MasterlistService>();
+            services.AddScoped<IOralHealthService, OralHealthService>();
 
             return services;
         }

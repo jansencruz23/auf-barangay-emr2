@@ -33,6 +33,7 @@ namespace AUF.EMR2.Application.Profiles
             CreateMap<HouseholdMember, UpdateMasterlistChildDto>().ReverseMap();
 
             CreateMap<HouseholdMember, OralHealthDto>().ReverseMap();
+            CreateMap<HouseholdMember, OralHealthOnlyDto>().ReverseMap();
             CreateMap<HouseholdMember, UpdateOralHealthDto>().ReverseMap();
         }
     }
