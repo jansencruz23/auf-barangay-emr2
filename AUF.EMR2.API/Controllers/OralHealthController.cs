@@ -7,7 +7,7 @@ using AUF.EMR2.Application.Features.OralHealths.Queries.GetOralHealthPregnantFif
 using AUF.EMR2.Application.Features.OralHealths.Queries.GetOralHealthPregnantTwentyToFourtyNine;
 using AUF.EMR2.Application.Features.OralHealths.Queries.GetOralHealth;
 using AUF.EMR2.Application.Features.OralHealths.Queries.GetOralHealthTenToFourteen;
-using AUF.EMR2.Application.Features.OralHealths.Queries.GetPrintOralHealthRecords;
+using AUF.EMR2.Application.Features.OralHealths.Queries.GetPrintOralHealthRecordList;
 using AUF.EMR2.Application.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -79,7 +79,7 @@ namespace AUF.EMR2.API.Controllers
         [HttpGet("print/{householdNo}")]
         public async Task<ActionResult<PrintOralHealthDto>> GetPrintOralHealthRecords(string householdNo)
         {
-            var response = await _mediator.Send(new GetPrintOralHealthRecordsRequest { HouseholdNo = householdNo });
+            var response = await _mediator.Send(new GetPrintOralHealthRecordListRequest { HouseholdNo = householdNo });
             return Ok(response);
         }
 

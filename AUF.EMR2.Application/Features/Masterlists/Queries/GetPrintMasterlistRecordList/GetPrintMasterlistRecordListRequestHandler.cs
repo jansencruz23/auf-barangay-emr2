@@ -9,15 +9,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AUF.EMR2.Application.Features.Masterlists.Queries.GetPrintMasterlistChildrenRecords
+namespace AUF.EMR2.Application.Features.Masterlists.Queries.GetPrintMasterlistRecordList
 {
-    public class GetPrintMasterlistRecordRequestHandler : IRequestHandler<GetPrintMasterlistRecordRequest, PrintMasterlistRecordsDto>
+    public class GetPrintMasterlistRecordListRequestHandler : IRequestHandler<GetPrintMasterlistRecordListRequest, PrintMasterlistRecordsDto>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMasterlistService _masterlistService;
         private readonly IMapper _mapper;
 
-        public GetPrintMasterlistRecordRequestHandler(
+        public GetPrintMasterlistRecordListRequestHandler(
             IUnitOfWork unitOfWork,
             IMasterlistService masterlistService,
             IMapper mapper)
@@ -27,7 +27,7 @@ namespace AUF.EMR2.Application.Features.Masterlists.Queries.GetPrintMasterlistCh
             _mapper = mapper;
         }
 
-        public async Task<PrintMasterlistRecordsDto> Handle(GetPrintMasterlistRecordRequest request, CancellationToken cancellationToken)
+        public async Task<PrintMasterlistRecordsDto> Handle(GetPrintMasterlistRecordListRequest request, CancellationToken cancellationToken)
         {
             var dto = new PrintMasterlistRecordsDto();
 

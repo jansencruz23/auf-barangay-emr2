@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AUF.EMR2.Application.Features.OralHealths.Queries.GetPrintOralHealthRecords
+namespace AUF.EMR2.Application.Features.OralHealths.Queries.GetPrintOralHealthRecordList
 {
-    public record GetPrintOralHealthRecordsRequest : IRequest<PrintOralHealthDto>
+    public record GetPrintOralHealthRecordListRequest : IRequest<PrintOralHealthDto>
     {
         public string HouseholdNo { get; set; }
     }

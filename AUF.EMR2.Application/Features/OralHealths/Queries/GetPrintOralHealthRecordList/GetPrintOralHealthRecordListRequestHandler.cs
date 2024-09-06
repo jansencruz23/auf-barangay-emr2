@@ -9,15 +9,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AUF.EMR2.Application.Features.OralHealths.Queries.GetPrintOralHealthRecords
+namespace AUF.EMR2.Application.Features.OralHealths.Queries.GetPrintOralHealthRecordList
 {
-    public class GetPrintOralHealthRecordsRequestHandler : IRequestHandler<GetPrintOralHealthRecordsRequest, PrintOralHealthDto>
+    public class GetPrintOralHealthRecordListRequestHandler : IRequestHandler<GetPrintOralHealthRecordListRequest, PrintOralHealthDto>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IOralHealthService _oralHealthService;
         private readonly IMapper _mapper;
 
-        public GetPrintOralHealthRecordsRequestHandler(
+        public GetPrintOralHealthRecordListRequestHandler(
             IUnitOfWork unitOfWork,
             IOralHealthService oralHealthService,
             IMapper mapper)
@@ -27,7 +27,7 @@ namespace AUF.EMR2.Application.Features.OralHealths.Queries.GetPrintOralHealthRe
             _mapper = mapper;
         }
 
-        public async Task<PrintOralHealthDto> Handle(GetPrintOralHealthRecordsRequest request, CancellationToken cancellationToken)
+        public async Task<PrintOralHealthDto> Handle(GetPrintOralHealthRecordListRequest request, CancellationToken cancellationToken)
         {
             var dto = new PrintOralHealthDto();
 

@@ -39,9 +39,9 @@ namespace AUF.EMR2.Application.DTOs.WomanOfReproductiveAge.Validators
                 .GreaterThan(0).WithMessage("{PropertyName} must be greater than {ComparisonValue}.")
                 .MustAsync(async (id, token) =>
                 {
-                    return await unitOfWork.HouseholdMemberRepository.Exists(id);
+                    return await unitOfWork.HouseholdMemberRepository.IsWraMember(id);
                 })
-                .WithMessage("{PropertyName} must exist.");
+                .WithMessage("{PropertyName} must exist and be a woman of reproductive age.");
         }
     }
 }

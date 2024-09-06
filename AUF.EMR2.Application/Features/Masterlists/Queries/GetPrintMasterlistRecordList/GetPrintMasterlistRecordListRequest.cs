@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AUF.EMR2.Application.Features.Masterlists.Queries.GetPrintMasterlistChildrenRecords
+namespace AUF.EMR2.Application.Features.Masterlists.Queries.GetPrintMasterlistRecordList
 {
-    public record GetPrintMasterlistRecordRequest : IRequest<PrintMasterlistRecordsDto>
+    public record GetPrintMasterlistRecordListRequest : IRequest<PrintMasterlistRecordsDto>
     {
         public string HouseholdNo { get; set; }
     }

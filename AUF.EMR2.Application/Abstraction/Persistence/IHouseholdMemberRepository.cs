@@ -14,5 +14,6 @@ namespace AUF.EMR2.Application.Abstraction.Persistence
         Task<List<HouseholdMember>> GetHouseholdMemberList(string householdNo);
         Task<HouseholdMember> GetHouseholdMember(int id);
         Task<List<HouseholdMember>> GetWraHouseholdMemberList(string householdNo);
+        Task<bool> IsWraMember(int id);
     }
 }

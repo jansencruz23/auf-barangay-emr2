@@ -2,6 +2,7 @@
 using AUF.EMR2.Application.DTOs.HouseholdMember;
 using AUF.EMR2.Application.DTOs.Masterlist;
 using AUF.EMR2.Application.DTOs.OralHealth;
+using AUF.EMR2.Application.DTOs.WomanOfReproductiveAge;
 using AUF.EMR2.Domain.Models;
 using AutoMapper;
 using System;
@@ -22,6 +23,7 @@ namespace AUF.EMR2.Application.Profiles
             CreateMap<Household, HouseholdOnlyDto>().ReverseMap();
 
             CreateMap<HouseholdMember, HouseholdMemberDto>().ReverseMap();
+            CreateMap<HouseholdMember, HouseholdMemberOnlyDto>().ReverseMap();
             CreateMap<HouseholdMember, CreateHouseholdMemberDto>().ReverseMap();
             CreateMap<HouseholdMember, UpdateHouseholdMemberDto>().ReverseMap();
 
@@ -35,6 +37,11 @@ namespace AUF.EMR2.Application.Profiles
             CreateMap<HouseholdMember, OralHealthDto>().ReverseMap();
             CreateMap<HouseholdMember, OralHealthOnlyDto>().ReverseMap();
             CreateMap<HouseholdMember, UpdateOralHealthDto>().ReverseMap();
+
+            CreateMap<WomanOfReproductiveAge, WraDto>().ReverseMap();
+            CreateMap<WomanOfReproductiveAge, WraOnlyDto>().ReverseMap();
+            CreateMap<WomanOfReproductiveAge, CreateWraDto>().ReverseMap();
+            CreateMap<WomanOfReproductiveAge, UpdateWraDto>().ReverseMap();
         }
     }
 }

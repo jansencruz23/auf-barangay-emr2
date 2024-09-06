@@ -1,5 +1,6 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence;
 using AUF.EMR2.Application.Constants;
+using AUF.EMR2.Application.DTOs.Household;
 using AUF.EMR2.Domain.Models;
 using AUF.EMR2.Persistence.Repositories.Common;
 using Microsoft.EntityFrameworkCore;
@@ -52,7 +53,7 @@ namespace AUF.EMR2.Persistence.Repositories
             var startDate = DateTime.Today.AddYears(WraAgeRange.WraStart).AddDays(1);
             var endDate = DateTime.Today.AddYears(WraAgeRange.WraEnd);
                 
-            var WraMembers = await _dbContext.HouseholdMembers
+            var wraMembers = await _dbContext.HouseholdMembers
                 .AsNoTracking()
                 .Include(m => m.Household)
                 .Where(m => m.Status && m.Household.Status &&
@@ -62,7 +63,25 @@ namespace AUF.EMR2.Persistence.Repositories
                             m.Birthday <= endDate)
                 .ToListAsync();
 
-            return WraMembers;
+            return wraMembers;
+        }
+
+        public async Task<bool> IsWraMember(int id)
+        {
+            var startDate = DateTime.Today.AddYears(WraAgeRange.WraStart).AddDays(1);
+            var endDate = DateTime.Today.AddYears(WraAgeRange.WraEnd);
+
+            var isMember = await _dbContext.HouseholdMembers
+                .AsNoTracking()
+                .Include(m => m.Household)
+                .Where(m => m.Status &&
+                            m.Household.Status &&
+                            m.Sex.Equals('F') &&
+                            m.Birthday >= startDate &&
+                            m.Birthday <= endDate)
+                .FirstOrDefaultAsync(q => q.Id == id);
+
+            return isMember != null;
         }
     }
 }

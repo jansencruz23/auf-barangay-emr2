@@ -33,6 +33,7 @@ namespace AUF.EMR2.Application.DTOs.HouseholdMember.Validators
                 .LessThanOrEqualTo(DateTime.Now).WithMessage("{PropertyName} must be a date in the past or today..");
 
             RuleFor(q => q.HouseholdId)
+                .NotNull().WithMessage("{PropertyName} is required.")
                 .GreaterThan(0).WithMessage("{PropertyName} must be greater than {ComparisonValue}.")
                 .MustAsync(async (id, token) =>
                 {
