@@ -15,5 +15,6 @@ namespace AUF.EMR2.Application.Abstraction.Persistence
         Task<IPagedList<Household>> GetHouseholdList(RequestParams requestParams, string query = "");
         Task<Household> GetHousehold(int id);
         Task<Household> GetHouseholdByHouseholdNo(string householdNo);
+        Task<string> GetFullAddress(string householdNo);
     }
 }

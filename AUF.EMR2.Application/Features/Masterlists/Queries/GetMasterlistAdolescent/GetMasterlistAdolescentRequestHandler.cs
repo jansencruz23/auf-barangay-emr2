@@ -1,4 +1,5 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
+using AUF.EMR2.Application.Abstraction.Services;
 using AUF.EMR2.Application.Constants;
 using AUF.EMR2.Application.DTOs.HouseholdMember;
 using AUF.EMR2.Application.DTOs.Masterlist;
@@ -15,22 +16,22 @@ namespace AUF.EMR2.Application.Features.Masterlists.Queries.GetMasterlistAdolesc
     public class GetMasterlistAdolescentRequestHandler : IRequestHandler<GetMasterlistAdolescentRequest, List<MasterlistChildDto>>
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMasterlistService _masterlistService;
         private readonly IMapper _mapper;
 
         public GetMasterlistAdolescentRequestHandler(
             IUnitOfWork unitOfWork,
+            IMasterlistService masterlistService,
             IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _masterlistService = masterlistService;
             _mapper = mapper;
         }
 
         public async Task<List<MasterlistChildDto>> Handle(GetMasterlistAdolescentRequest request, CancellationToken cancellationToken)
         {
-            var startDate = DateTime.Today.AddYears(MasterlistAgeRange.AdolescentStart).AddDays(1);
-            var endDate = DateTime.Today.AddYears(MasterlistAgeRange.AdolescentEnd);
-
-            var adolescents = await _unitOfWork.MasterlistRepository.GetListQuery(request.HouseholdNo, startDate, endDate);
+            var adolescents = await _masterlistService.GetMasterlistAdolescents(request.HouseholdNo);
             var adolescentsListDto = _mapper.Map<List<MasterlistChildDto>>(adolescents);
 
             return adolescentsListDto;

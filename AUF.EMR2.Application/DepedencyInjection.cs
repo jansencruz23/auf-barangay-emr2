@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using AUF.EMR2.Application.Abstraction.Services;
+using AUF.EMR2.Application.Services;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +18,8 @@ namespace AUF.EMR2.Application
             services.AddMediatR(config =>
                 config.RegisterServicesFromAssembly(
                     Assembly.GetExecutingAssembly()));
+
+            services.AddScoped<IMasterlistService, MasterlistService>();
 
             return services;
         }

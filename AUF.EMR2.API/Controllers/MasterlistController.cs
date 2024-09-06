@@ -10,6 +10,7 @@ using AUF.EMR2.Application.Features.Masterlists.Queries.GetMasterlistNewborn;
 using AUF.EMR2.Application.Features.Masterlists.Queries.GetMasterlistSchoolAged;
 using AUF.EMR2.Application.Features.Masterlists.Queries.GetMasterlistSenior;
 using AUF.EMR2.Application.Features.Masterlists.Queries.GetMasterlistUnderFive;
+using AUF.EMR2.Application.Features.Masterlists.Queries.GetPrintMasterlistChildrenRecords;
 using AUF.EMR2.Application.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -85,6 +86,14 @@ namespace AUF.EMR2.API.Controllers
             return Ok(response);
         }
 
+        // GET: api/<MasterlistController>/seniors/
+        [HttpGet("print/{householdNo}")]
+        public async Task<ActionResult<PrintMasterlistRecordsDto>> GetPrintMasterlistRecords(string householdNo)
+        {
+            var response = await _mediator.Send(new GetPrintMasterlistRecordRequest { HouseholdNo = householdNo });
+            return Ok(response);
+        }
+
         // GET api/<MasterlistController>/child/5
         [HttpGet("child/{id}")]
         public async Task<ActionResult<MasterlistChildDto>> GetChildRecord(int id)
@@ -100,7 +109,6 @@ namespace AUF.EMR2.API.Controllers
             var response = await _mediator.Send(new GetMasterlistAdultRecordRequest { Id = id });
             return Ok(response);
         }
-
 
         // PUT api/<MasterlistController>/child/5
         [HttpPut("child/{id}")]

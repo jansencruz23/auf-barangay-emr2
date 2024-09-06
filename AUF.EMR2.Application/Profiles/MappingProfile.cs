@@ -26,7 +26,9 @@ namespace AUF.EMR2.Application.Profiles
             CreateMap<HouseholdMember, UpdateHouseholdMemberDto>().ReverseMap();
 
             CreateMap<HouseholdMember, MasterlistAdultDto>().ReverseMap();
+            CreateMap<HouseholdMember, MasterlistAdultOnlyDto>().ReverseMap();
             CreateMap<HouseholdMember, MasterlistChildDto>().ReverseMap();
+            CreateMap<HouseholdMember, MasterlistChildOnlyDto>().ReverseMap();
             CreateMap<HouseholdMember, UpdateMasterlistAdultDto>().ReverseMap();
             CreateMap<HouseholdMember, UpdateMasterlistChildDto>().ReverseMap();
 

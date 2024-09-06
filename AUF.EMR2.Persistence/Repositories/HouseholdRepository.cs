@@ -22,6 +22,17 @@ namespace AUF.EMR2.Persistence.Repositories
             _dbContext = dbContext;
         }
 
+        public async Task<string> GetFullAddress(string householdNo)
+        {
+            var address = await _dbContext.Households
+                .AsNoTracking()
+                .Where(q => q.Status && q.HouseholdNo.Equals(householdNo))
+                .Select(q => $"{q.HouseNoAndStreet} {q.Barangay}, {q.City}, {q.Province}")
+                .FirstOrDefaultAsync();
+
+            return address;
+        }
+
         public async Task<Household> GetHousehold(int id)
         {
             var household = await _dbContext.Households
