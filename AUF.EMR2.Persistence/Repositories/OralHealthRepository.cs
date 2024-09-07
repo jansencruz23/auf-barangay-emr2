@@ -29,7 +29,7 @@ namespace AUF.EMR2.Persistence.Repositories
                     .ThenInclude(m => m.Household)
                 .Where(p => p.Status &&
                     p.HouseholdMember.Household.HouseholdNo.Equals(householdNo) &&
-                    p.HouseholdMember.Household.Status &&
+                    p.HouseholdMember.Household.Status && 
                     p.HouseholdMember.Status)
                 .Where(p => p.PregnancyOutcome == null || p.PregnancyOutcome == PregnancyOutcome.OngoingPregnancy)
                 .Where(p => p.HouseholdMember.Birthday >= startDate && p.HouseholdMember.Birthday <= endDate)
