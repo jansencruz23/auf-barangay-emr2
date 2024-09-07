@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AUF.EMR2.Persistence.Repositories.Common
 {
-    public class HouseholdMemberDerivedRepository : GenericRepository<HouseholdMember>, IHouseholdMemberDerivedRepository
+    public abstract class HouseholdMemberDerivedRepository : GenericRepository<HouseholdMember>, IHouseholdMemberDerivedRepository
     {
         private readonly EmrDbContext _dbContext;
 

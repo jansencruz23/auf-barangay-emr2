@@ -8,6 +8,7 @@ namespace AUF.EMR2.Application.Abstraction.Persistence.Common
 {
     public interface IUnitOfWork : IDisposable
     {
+        IBarangayRepository BarangayRepository { get; }
         IHouseholdRepository HouseholdRepository { get; }
         IHouseholdMemberRepository HouseholdMemberRepository { get; }
         IMasterlistRepository MasterlistRepository { get; }

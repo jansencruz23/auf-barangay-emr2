@@ -12,6 +12,7 @@ namespace AUF.EMR2.Persistence.Repositories.Common
     {
         private readonly EmrDbContext _dbContext;
 
+        private IBarangayRepository _barangayRepository;
         private IHouseholdRepository _householdRepository;
         private IHouseholdMemberRepository _householdMemberRepository;
         private IMasterlistRepository _masterlistRepository;
@@ -23,6 +24,8 @@ namespace AUF.EMR2.Persistence.Repositories.Common
         {
             _dbContext = dbContext;
         }
+        public IBarangayRepository BarangayRepository =>
+            _barangayRepository ??= new BarangayRepository(_dbContext);
 
         public IHouseholdRepository HouseholdRepository =>
             _householdRepository ??= new HouseholdRepository(_dbContext);

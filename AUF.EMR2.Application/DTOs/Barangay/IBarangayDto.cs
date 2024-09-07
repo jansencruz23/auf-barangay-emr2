@@ -1,13 +1,12 @@
-﻿using AUF.EMR2.Domain.Models.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AUF.EMR2.Domain.Models
+namespace AUF.EMR2.Application.DTOs.Barangay
 {
-    public class Barangay : BaseDomainEntity
+    public interface IBarangayDto
     {
         public string BarangayName { get; set; }
         public byte[]? Logo { get; set; }

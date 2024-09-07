@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AUF.EMR2.Persistence.Repositories.Common
 {
-    public class GenericRepository<T> : IGenericRepository<T>
+    public abstract class GenericRepository<T> : IGenericRepository<T>
         where T : BaseDomainEntity
     {
         private readonly EmrDbContext _dbContext;
