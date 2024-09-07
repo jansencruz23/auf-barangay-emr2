@@ -37,16 +37,16 @@ namespace AUF.EMR2.Application.Features.OralHealths.Queries.GetPrintOralHealthRe
             var oneToFourChildren = await _oralHealthService.GetOneToFourChildren(request.HouseholdNo);
             var fiveToNineChildren = await _oralHealthService.GetFiveToNineChildren(request.HouseholdNo);
             var tenToFourteenChildren = await _oralHealthService.GetFiveToNineChildren(request.HouseholdNo);
-            //var pregnantFifteenToNineteen = await _oralHealthService.GetPregnantFifteenToNineteen(request.HouseholdNo);
-            //var pregnantTwentyToFourtyNine = await _oralHealthService.GetPregnantTwentyToFourtyNine(request.HouseholdNo);
+            var pregnantFifteenToNineteen = await _oralHealthService.GetPregnantFifteenToNineteen(request.HouseholdNo);
+            var pregnantTwentyToFourtyNine = await _oralHealthService.GetPregnantTwentyToFourtyNine(request.HouseholdNo);
 
             dto.Address = address;
             dto.Infants = _mapper.Map<List<OralHealthOnlyDto>>(infants);
             dto.OneToFourChildren = _mapper.Map<List<OralHealthOnlyDto>>(oneToFourChildren);
             dto.FiveToNineChildren = _mapper.Map<List<OralHealthOnlyDto>>(fiveToNineChildren);
             dto.TenToFourteenChildren = _mapper.Map<List<OralHealthOnlyDto>>(tenToFourteenChildren);
-            //dto.PregnantFifteenToNineteen = _mapper.Map<List<OralHealthOnlyDto>>(pregnantFifteenToNineteen);
-            //dto.PregnantTwentyToFourtyNine = _mapper.Map<List<OralHealthOnlyDto>>(pregnantTwentyToFourtyNine);
+            dto.PregnantFifteenToNineteen = _mapper.Map<List<OralHealthOnlyDto>>(pregnantFifteenToNineteen);
+            dto.PregnantTwentyToFourtyNine = _mapper.Map<List<OralHealthOnlyDto>>(pregnantTwentyToFourtyNine);
 
             return dto;
         }
