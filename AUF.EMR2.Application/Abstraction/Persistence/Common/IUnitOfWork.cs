@@ -13,6 +13,7 @@ namespace AUF.EMR2.Application.Abstraction.Persistence.Common
         IMasterlistRepository MasterlistRepository { get; }
         IOralHealthRepository OralHealthRepository { get; }
         IWraRepository WraRepository{ get; }
+        IPregnancyTrackingRepository PregnancyTrackingRepository { get; }
         Task SaveAsync();
     }
 }

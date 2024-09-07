@@ -26,8 +26,8 @@ namespace AUF.EMR2.Application.Features.HouseholdMembers.Queries.GetHouseholdMem
 
         public async Task<List<HouseholdMemberDto>> Handle(GetHouseholdMemberListByHouseholdNoRequest request, CancellationToken cancellationToken)
         {
-            var householdMember = await _unitOfWork.HouseholdMemberRepository.GetHouseholdMemberList(request.HouseholdNo);
-            var householdMemberListDto = _mapper.Map<List<HouseholdMemberDto>>(householdMember);
+            var householdMemberList = await _unitOfWork.HouseholdMemberRepository.GetHouseholdMemberList(request.HouseholdNo);
+            var householdMemberListDto = _mapper.Map<List<HouseholdMemberDto>>(householdMemberList);
 
             return householdMemberListDto;
         }

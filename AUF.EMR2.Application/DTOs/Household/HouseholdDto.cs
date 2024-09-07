@@ -29,6 +29,7 @@ namespace AUF.EMR2.Application.DTOs.Household
         public string? PhilhealthNo { get; set; }
         public string? Category { get; set; }
         public bool IsIP { get; set; }
+        public Guid Version { get; set; }
 
         public List<HouseholdMemberDto> HouseholdMembers { get; set; } = new();
     }

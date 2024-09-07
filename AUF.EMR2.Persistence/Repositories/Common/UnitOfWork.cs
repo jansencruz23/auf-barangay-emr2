@@ -17,6 +17,7 @@ namespace AUF.EMR2.Persistence.Repositories.Common
         private IMasterlistRepository _masterlistRepository;
         private IOralHealthRepository _oralHealthRepository;
         private IWraRepository _wraRepository;
+        private IPregnancyTrackingRepository _pregnancyTrackingRepository;
 
         public UnitOfWork(EmrDbContext dbContext)
         {
@@ -37,6 +38,9 @@ namespace AUF.EMR2.Persistence.Repositories.Common
 
         public IWraRepository WraRepository =>
             _wraRepository ??= new WraRepository(_dbContext);
+
+        public IPregnancyTrackingRepository PregnancyTrackingRepository =>
+            _pregnancyTrackingRepository ??= new PregnancyTrackingRepository(_dbContext);
 
         public void Dispose()
         {

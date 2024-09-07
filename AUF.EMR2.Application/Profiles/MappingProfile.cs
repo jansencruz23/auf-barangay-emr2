@@ -2,7 +2,9 @@
 using AUF.EMR2.Application.DTOs.HouseholdMember;
 using AUF.EMR2.Application.DTOs.Masterlist;
 using AUF.EMR2.Application.DTOs.OralHealth;
+using AUF.EMR2.Application.DTOs.PregnancyTracking;
 using AUF.EMR2.Application.DTOs.WomanOfReproductiveAge;
+using AUF.EMR2.Application.Extensions;
 using AUF.EMR2.Domain.Models;
 using AutoMapper;
 using System;
@@ -42,6 +44,12 @@ namespace AUF.EMR2.Application.Profiles
             CreateMap<WomanOfReproductiveAge, WraOnlyDto>().ReverseMap();
             CreateMap<WomanOfReproductiveAge, CreateWraDto>().ReverseMap();
             CreateMap<WomanOfReproductiveAge, UpdateWraDto>().ReverseMap();
+
+            CreateMap<PregnancyTracking, PregnancyTrackingDto>()
+                .ForMember(dest => dest.PregnancyOutcome, opt => opt.MapFrom(src => src.PregnancyOutcome.GetDisplayName()))
+                .ReverseMap();
+            CreateMap<PregnancyTracking, CreatePregnancyTrackingDto>().ReverseMap();
+            CreateMap<PregnancyTracking, UpdatePregnancyTrackingDto>().ReverseMap();
         }
     }
 }
