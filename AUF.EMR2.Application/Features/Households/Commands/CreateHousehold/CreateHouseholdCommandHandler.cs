@@ -1,4 +1,5 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
+using AUF.EMR2.Application.Abstraction.Services;
 using AUF.EMR2.Application.DTOs.Household.Validators;
 using AUF.EMR2.Application.Exceptions;
 using AUF.EMR2.Application.Responses;
@@ -16,20 +17,23 @@ namespace AUF.EMR2.Application.Features.Households.Commands.CreateHousehold
     public class CreateHouseholdCommandHandler : IRequestHandler<CreateHouseholdCommand, BaseCommandResponse<int>>
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IPregnancyTrackingHHService _pregnancyTrackingHHService;
         private readonly IMapper _mapper;
 
         public CreateHouseholdCommandHandler(
             IUnitOfWork unitOfWork,
+            IPregnancyTrackingHHService pregnancyTrackingHHService,
             IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _pregnancyTrackingHHService = pregnancyTrackingHHService;
             _mapper = mapper;
         }
 
         public async Task<BaseCommandResponse<int>> Handle(CreateHouseholdCommand request, CancellationToken cancellationToken)
         {
             var response = new BaseCommandResponse<int>();
-            var validator = new CreateHouseholdDtoValidator();
+            var validator = new CreateHouseholdDtoValidator(_unitOfWork);
             var validationResult = await validator.ValidateAsync(request.HouseholdDto, cancellationToken);
 
             if (!validationResult.IsValid)
@@ -41,13 +45,33 @@ namespace AUF.EMR2.Application.Features.Households.Commands.CreateHousehold
                 throw new ValidationException(validationResult);
             }
 
-            var household = _mapper.Map<Household>(request.HouseholdDto);
-            household = await _unitOfWork.HouseholdRepository.Add(household);
-            await _unitOfWork.SaveAsync();
+            using (var transaction = await _unitOfWork.BeginTransactionAsync())
+            {
+                try
+                {
+                    var household = _mapper.Map<Household>(request.HouseholdDto);
+                    household = await _unitOfWork.HouseholdRepository.Add(household);
+                    await _unitOfWork.SaveAsync();
 
-            response.Success = true;
-            response.Message = "Creation is Successful";
-            response.Id = household.Id;
+                    var pregnancyTrackingHh = await _pregnancyTrackingHHService.CreatePregnancyTrackingHH(household.Id);
+                    pregnancyTrackingHh = await _unitOfWork.PregnancyTrackingHhRepository.Add(pregnancyTrackingHh);
+
+                    await _unitOfWork.SaveAsync();
+                    await _unitOfWork.CommitTransactionAsync();
+
+                    response.Success = true;
+                    response.Message = "Creation is Successful";
+                    response.Id = household.Id;
+                }
+                catch (Exception ex)
+                {
+                    response.Success = false;
+                    response.Message = "Creation Failed";
+
+                    await _unitOfWork.RollbackTransactionAsync();
+                    throw new DataIntegrityException("Error while creating household and pregnancy tracking hh", ex);
+                }
+            }
 
             return response;
         }

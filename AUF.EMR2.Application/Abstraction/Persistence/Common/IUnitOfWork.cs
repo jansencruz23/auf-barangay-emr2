@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Storage;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,10 @@ namespace AUF.EMR2.Application.Abstraction.Persistence.Common
         IOralHealthRepository OralHealthRepository { get; }
         IWraRepository WraRepository{ get; }
         IPregnancyTrackingRepository PregnancyTrackingRepository { get; }
+        IPregnancyTrackingHhRepository PregnancyTrackingHhRepository { get; }
         Task SaveAsync();
+        Task<IDbContextTransaction> BeginTransactionAsync();
+        Task CommitTransactionAsync();
+        Task RollbackTransactionAsync();
     }
 }

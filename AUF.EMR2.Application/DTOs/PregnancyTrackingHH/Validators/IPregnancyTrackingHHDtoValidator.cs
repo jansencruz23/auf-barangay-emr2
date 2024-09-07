@@ -6,13 +6,32 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AUF.EMR2.Application.DTOs.PregnancyTrackingHH.Validators
+namespace AUF.EMR2.Application.DTOs.PregnancyTrackingHh.Validators
 {
-    public class IPregnancyTrackingHHDtoValidator : AbstractValidator<IPregnancyTrackingHHDto>
+    public class IPregnancyTrackingHhDtoValidator : AbstractValidator<IPregnancyTrackingHhDto>
     {
-        public IPregnancyTrackingHHDtoValidator(IUnitOfWork unitOfWork)
+        public IPregnancyTrackingHhDtoValidator(IUnitOfWork unitOfWork)
         {
-            
+            RuleFor(q => q.Year)
+                .NotNull().WithMessage("{PropertyName} is required.");
+
+            RuleFor(q => q.BarangayId)
+                .NotNull().WithMessage("{PropertyName} is required.")
+                .GreaterThan(0).WithMessage("{PropertyName} must be greater than {ComparisonValue}.")
+                .MustAsync(async (id, token) =>
+                {
+                    return await unitOfWork.BarangayRepository.Exists(id);
+                })
+                .WithMessage("{PropertyName} must exist.");
+
+            RuleFor(q => q.HouseholdId)
+                .NotNull().WithMessage("{PropertyName} is required.")
+                .GreaterThan(0).WithMessage("{PropertyName} must be greater than {ComparisonValue}.")
+                .MustAsync(async (id, token) =>
+                {
+                    return await unitOfWork.HouseholdRepository.Exists(id);
+                })
+                .WithMessage("{PropertyName} must exist.");
         }
     }
 }

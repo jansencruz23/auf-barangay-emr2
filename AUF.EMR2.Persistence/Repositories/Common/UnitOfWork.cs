@@ -1,5 +1,6 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence;
 using AUF.EMR2.Application.Abstraction.Persistence.Common;
+using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace AUF.EMR2.Persistence.Repositories.Common
     public class UnitOfWork : IUnitOfWork
     {
         private readonly EmrDbContext _dbContext;
+        private IDbContextTransaction _transaction;
 
         private IBarangayRepository _barangayRepository;
         private IHouseholdRepository _householdRepository;
@@ -19,6 +21,7 @@ namespace AUF.EMR2.Persistence.Repositories.Common
         private IOralHealthRepository _oralHealthRepository;
         private IWraRepository _wraRepository;
         private IPregnancyTrackingRepository _pregnancyTrackingRepository;
+        private IPregnancyTrackingHhRepository _pregnancyTrackingHhRepository;
 
         public UnitOfWork(EmrDbContext dbContext)
         {
@@ -45,15 +48,44 @@ namespace AUF.EMR2.Persistence.Repositories.Common
         public IPregnancyTrackingRepository PregnancyTrackingRepository =>
             _pregnancyTrackingRepository ??= new PregnancyTrackingRepository(_dbContext);
 
-        public void Dispose()
-        {
-            _dbContext.Dispose();
-            GC.SuppressFinalize(this);
-        }
+        public IPregnancyTrackingHhRepository PregnancyTrackingHhRepository =>
+            _pregnancyTrackingHhRepository ??= new PregnancyTrackingHhRepository(_dbContext);
 
         public async Task SaveAsync()
         {
             await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<IDbContextTransaction> BeginTransactionAsync()
+        {
+            _transaction = await _dbContext.Database.BeginTransactionAsync();
+            return _transaction;
+        }
+
+        public async Task CommitTransactionAsync()
+        {
+            if (_transaction != null)
+            {
+                await _transaction.CommitAsync();
+                await _transaction.DisposeAsync();
+                _transaction = null;
+            }
+        }
+
+        public async Task RollbackTransactionAsync()
+        {
+            if (_transaction != null)
+            {
+                await _transaction.RollbackAsync();
+                await _transaction.DisposeAsync();
+                _transaction = null;
+            }
+        }
+
+        public void Dispose()
+        {
+            _dbContext.Dispose();
+            GC.SuppressFinalize(this);
         }
     }
 }

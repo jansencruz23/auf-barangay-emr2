@@ -59,6 +59,11 @@ namespace AUF.EMR2.API.Middlewares
                     problemDetails.Type = nameof(DbUpdateConcurrencyException);
                     break;
 
+                case DataIntegrityException ex:
+                    statusCode = HttpStatusCode.InternalServerError;
+                    problemDetails.Type = nameof(DataIntegrityException);
+                    break;
+
                 default:
                     problemDetails.Type = nameof(HttpStatusCode.InternalServerError);
                     problemDetails.Detail = exception.StackTrace;

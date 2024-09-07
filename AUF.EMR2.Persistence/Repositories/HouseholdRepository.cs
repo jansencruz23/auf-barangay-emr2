@@ -79,5 +79,15 @@ namespace AUF.EMR2.Persistence.Repositories
 
             return households;
         }
+
+        public async Task<bool> IsHouseholdNoAvailable(string householdNo)
+        {
+            var existing = await _dbContext.Households
+                .AsNoTracking()
+                .Where(q => q.Status)
+                .AnyAsync(q => q.HouseholdNo.Equals(householdNo));
+
+            return !existing;
+        }
     }
 }

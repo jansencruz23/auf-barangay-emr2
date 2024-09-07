@@ -23,6 +23,7 @@ namespace AUF.EMR2.Persistence
         public DbSet<HouseholdMember> HouseholdMembers { get; set; }
         public DbSet<WomanOfReproductiveAge> WomenOfReproductiveAge { get; set; }
         public DbSet<PregnancyTracking> PregnancyTrackings { get; set; }
+        public DbSet<PregnancyTrackingHh> PregnancyTrackingHhs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

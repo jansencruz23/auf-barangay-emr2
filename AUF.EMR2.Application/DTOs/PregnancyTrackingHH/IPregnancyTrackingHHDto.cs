@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AUF.EMR2.Application.DTOs.PregnancyTrackingHH
+namespace AUF.EMR2.Application.DTOs.PregnancyTrackingHh
 {
-    public interface IPregnancyTrackingHHDto
+    public interface IPregnancyTrackingHhDto
     {
         public int Year { get; set; }
         public int BarangayId { get; set; }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AUF.EMR2.Domain.Models
 {
-    public class PregnancyTrackingHH : BaseDomainEntity
+    public class PregnancyTrackingHh : BaseDomainEntity
     {
         public int Year { get; set; }
         public int BarangayId { get; set; }
