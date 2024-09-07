@@ -2,6 +2,7 @@
 using AUF.EMR2.Application.Features.WomenOfReproductiveAge.Commands.CreateWra;
 using AUF.EMR2.Application.Features.WomenOfReproductiveAge.Commands.DeleteWra;
 using AUF.EMR2.Application.Features.WomenOfReproductiveAge.Commands.UpdateWra;
+using AUF.EMR2.Application.Features.WomenOfReproductiveAge.Queries.GetPrintWraRecords;
 using AUF.EMR2.Application.Features.WomenOfReproductiveAge.Queries.GetWra;
 using AUF.EMR2.Application.Features.WomenOfReproductiveAge.Queries.GetWraList;
 using AUF.EMR2.Application.Responses;
@@ -31,6 +32,14 @@ namespace AUF.EMR2.API.Controllers
             return Ok(response);
         }
 
+        // GET: api/<WraController>/print/householdNo
+        [HttpGet("print/{householdNo}")]
+        public async Task<ActionResult<List<WraOnlyDto>>> GetPrintWraRecords(string householdNo)
+        {
+            var response = await _mediator.Send(new GetPrintWraRecordsRequest { HouseholdNo = householdNo });
+            return Ok(response);
+        }
+
         // GET api/<WraController>/5
         [HttpGet("{id}")]
         public async Task<ActionResult<WraDto>> Get(int id)
@@ -48,7 +57,7 @@ namespace AUF.EMR2.API.Controllers
         }
 
         // PUT api/<WraController>/5
-        [HttpPut("{id}")]
+        [HttpPut]
         public async Task<ActionResult<BaseCommandResponse<int>>> Put([FromBody] UpdateWraDto dto)
         {
             var response = await _mediator.Send(new UpdateWraCommand { WraDto = dto });

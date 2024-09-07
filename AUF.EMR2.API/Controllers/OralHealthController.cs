@@ -75,7 +75,7 @@ namespace AUF.EMR2.API.Controllers
             return Ok(response);
         }
 
-        // GET: api/<OralHealthController>/pregnant-twenty-to-fourty-nine/
+        // GET: api/<OralHealthController>/print/householdNo
         [HttpGet("print/{householdNo}")]
         public async Task<ActionResult<PrintOralHealthDto>> GetPrintOralHealthRecords(string householdNo)
         {
@@ -93,7 +93,7 @@ namespace AUF.EMR2.API.Controllers
 
 
         // PUT api/<OralHealthController>/5
-        [HttpPut("{id}")]
+        [HttpPut]
         public async Task<ActionResult<BaseCommandResponse<int>>> Put([FromBody] UpdateOralHealthDto dto)
         {
             var response = await _mediator.Send(new UpdateOralHealthCommand { OralHealthDto = dto });

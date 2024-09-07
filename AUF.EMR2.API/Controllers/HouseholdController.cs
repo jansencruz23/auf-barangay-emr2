@@ -41,7 +41,7 @@ namespace AUF.EMR2.API.Controllers
             return Ok(response);
         }
 
-        // GET api/<HouseholdController>/5
+        // GET api/<HouseholdController>/household-no/householdNo
         [HttpGet("household-no/{householdNo}")]
         public async Task<ActionResult<HouseholdDto>> GetByHouseholdNo(string householdNo)
         {

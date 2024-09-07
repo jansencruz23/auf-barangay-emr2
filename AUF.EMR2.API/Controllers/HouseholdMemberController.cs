@@ -24,7 +24,7 @@ namespace AUF.EMR2.API.Controllers
             _mediator = mediator;
         }
 
-        // GET: api/<HouseholdMemberController>
+        // GET: api/<HouseholdMemberController>/household/householdNo
         [HttpGet("household/{householdNo}")]
         public async Task<ActionResult<List<HouseholdMemberDto>>> GetHouseholdMembers(string householdNo)
         {
@@ -32,8 +32,8 @@ namespace AUF.EMR2.API.Controllers
             return Ok(response);
         }
 
-        // GET: api/<HouseholdMemberController>
-        [HttpGet("women-of-reproductive-age/{householdNo}")]
+        // GET: api/<HouseholdMemberController>/wra/householdNo
+        [HttpGet("wra/{householdNo}")]
         public async Task<ActionResult<List<HouseholdMemberDto>>> GetWraHouseholdMembers(string householdNo)
         {
             var response = await _mediator.Send(new GetWraHouseholdMemberListRequest { HouseholdNo = householdNo });

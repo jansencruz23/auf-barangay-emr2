@@ -30,7 +30,7 @@ namespace AUF.EMR2.API.Controllers
             _mediator = mediator;
         }
 
-        // GET: api/<MasterlistController>/newborns/
+        // GET: api/<MasterlistController>/newborns/householdNo
         [HttpGet("newborns/{householdNo}")]
         public async Task<ActionResult<List<MasterlistChildDto>>> GetNewborns(string householdNo)
         {
@@ -38,7 +38,7 @@ namespace AUF.EMR2.API.Controllers
             return Ok(response);
         }
 
-        // GET: api/<MasterlistController>/infants/
+        // GET: api/<MasterlistController>/infants/householdNo
         [HttpGet("infants/{householdNo}")]
         public async Task<ActionResult<List<MasterlistChildDto>>> GetInfants(string householdNo)
         {
@@ -46,7 +46,7 @@ namespace AUF.EMR2.API.Controllers
             return Ok(response);
         }
 
-        // GET: api/<MasterlistController>/under-five/
+        // GET: api/<MasterlistController>/under-five/householdNo
         [HttpGet("under-five/{householdNo}")]
         public async Task<ActionResult<List<MasterlistChildDto>>> GetUnderFiveChildren(string householdNo)
         {
@@ -54,7 +54,7 @@ namespace AUF.EMR2.API.Controllers
             return Ok(response);
         }
 
-        // GET: api/<MasterlistController>/school-aged/
+        // GET: api/<MasterlistController>/school-aged/householdNo
         [HttpGet("school-aged/{householdNo}")]
         public async Task<ActionResult<List<MasterlistChildDto>>> GetSchoolAgedChildren(string householdNo)
         {
@@ -62,7 +62,7 @@ namespace AUF.EMR2.API.Controllers
             return Ok(response);
         }
 
-        // GET: api/<MasterlistController>/adolescents/
+        // GET: api/<MasterlistController>/adolescents/householdNo
         [HttpGet("adolescents/{householdNo}")]
         public async Task<ActionResult<List<MasterlistChildDto>>> GetAdolescents(string householdNo)
         {
@@ -70,7 +70,7 @@ namespace AUF.EMR2.API.Controllers
             return Ok(response);
         }
 
-        // GET: api/<MasterlistController>/adults/
+        // GET: api/<MasterlistController>/adults/householdNo
         [HttpGet("adults/{householdNo}")]
         public async Task<ActionResult<List<MasterlistAdultDto>>> GetAdults(string householdNo)
         {
@@ -78,7 +78,7 @@ namespace AUF.EMR2.API.Controllers
             return Ok(response);
         }
 
-        // GET: api/<MasterlistController>/seniors/
+        // GET: api/<MasterlistController>/seniors/householdNo
         [HttpGet("seniors/{householdNo}")]
         public async Task<ActionResult<List<MasterlistAdultDto>>> GetSeniors(string householdNo)
         {
@@ -86,7 +86,7 @@ namespace AUF.EMR2.API.Controllers
             return Ok(response);
         }
 
-        // GET: api/<MasterlistController>/seniors/
+        // GET: api/<MasterlistController>/print/householdNo
         [HttpGet("print/{householdNo}")]
         public async Task<ActionResult<PrintMasterlistRecordsDto>> GetPrintMasterlistRecords(string householdNo)
         {
@@ -111,7 +111,7 @@ namespace AUF.EMR2.API.Controllers
         }
 
         // PUT api/<MasterlistController>/child/5
-        [HttpPut("child/{id}")]
+        [HttpPut("child")]
         public async Task<ActionResult<BaseCommandResponse<int>>> UpdateChild([FromBody] UpdateMasterlistChildDto dto)
         {
             var response = await _mediator.Send(new UpdateMasterlistChildCommand { MasterlistDto = dto });
@@ -119,7 +119,7 @@ namespace AUF.EMR2.API.Controllers
         }
 
         // PUT api/<MasterlistController>/child/5
-        [HttpPut("adult/{id}")]
+        [HttpPut("adult")]
         public async Task<ActionResult<BaseCommandResponse<int>>> UpdateAdult([FromBody] UpdateMasterlistAdultDto dto)
         {
             var response = await _mediator.Send(new UpdateMasterlistAdultCommand { MasterlistDto = dto });
