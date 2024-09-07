@@ -29,6 +29,11 @@ namespace AUF.EMR2.Persistence
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<PregnancyTrackingHh>()
+                .HasOne(q => q.Household)
+                .WithOne()
+                .HasForeignKey<PregnancyTrackingHh>(q => q.HouseholdId);
+
             modelBuilder.ApplyConfiguration(new BarangayConfiguration());
         }
 

@@ -1,8 +1,10 @@
-﻿using AUF.EMR2.Application.DTOs.Household;
+﻿using AUF.EMR2.Application.DTOs.Barangay;
+using AUF.EMR2.Application.DTOs.Household;
 using AUF.EMR2.Application.DTOs.HouseholdMember;
 using AUF.EMR2.Application.DTOs.Masterlist;
 using AUF.EMR2.Application.DTOs.OralHealth;
 using AUF.EMR2.Application.DTOs.PregnancyTracking;
+using AUF.EMR2.Application.DTOs.PregnancyTrackingHh;
 using AUF.EMR2.Application.DTOs.WomanOfReproductiveAge;
 using AUF.EMR2.Application.Extensions;
 using AUF.EMR2.Domain.Models;
@@ -19,6 +21,9 @@ namespace AUF.EMR2.Application.Profiles
     {
         public MappingProfile()
         {
+            CreateMap<Barangay, BarangayDto>().ReverseMap();
+            CreateMap<Barangay, UpdateBarangayDto>().ReverseMap();
+
             CreateMap<Household, HouseholdDto>().ReverseMap();
             CreateMap<Household, CreateHouseholdDto>().ReverseMap();
             CreateMap<Household, UpdateHouseholdDto>().ReverseMap();
@@ -50,6 +55,9 @@ namespace AUF.EMR2.Application.Profiles
                 .ReverseMap();
             CreateMap<PregnancyTracking, CreatePregnancyTrackingDto>().ReverseMap();
             CreateMap<PregnancyTracking, UpdatePregnancyTrackingDto>().ReverseMap();
+
+            CreateMap<PregnancyTrackingHh, PregnancyTrackingHhDto>().ReverseMap();
+            CreateMap<PregnancyTrackingHh, UpdatePregnancyTrackingHhDto>().ReverseMap();
         }
     }
 }

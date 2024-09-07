@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AUF.EMR2.Application.Features.PregnancyTrackingHhs.Queries.GetPregnancyTrackingHH
+namespace AUF.EMR2.Application.Features.PregnancyTrackingHhs.Queries.GetPregnancyTrackingHh
 {
-    public record GetPregnancyTrackingHHRequest : IRequest<PregnancyTrackingHhDto>
+    public record GetPregnancyTrackingHhRequest : IRequest<PregnancyTrackingHhDto>
     {
         public string HouseholdNo { get; set; }
     }

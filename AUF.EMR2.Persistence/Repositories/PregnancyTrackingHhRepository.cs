@@ -1,4 +1,5 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence;
+using AUF.EMR2.Application.DTOs.Household;
 using AUF.EMR2.Domain.Models;
 using AUF.EMR2.Persistence.Repositories.Common;
 using Microsoft.EntityFrameworkCore;
@@ -24,8 +25,20 @@ namespace AUF.EMR2.Persistence.Repositories
         {
             var pregnancyTrackingHh = await _dbContext.PregnancyTrackingHhs
                 .AsNoTracking()
-                .Include(p => p.Household)
-                .FirstOrDefaultAsync(p => p.Household.HouseholdNo.Equals(householdNo));
+                .Include(q => q.Household)
+                .Include(q => q.Barangay)
+                .FirstOrDefaultAsync(q => q.Household.HouseholdNo.Equals(householdNo));
+
+            return pregnancyTrackingHh;
+        }
+
+        public async Task<PregnancyTrackingHh> GetPregnancyTrackingHh(int id)
+        {
+            var pregnancyTrackingHh = await _dbContext.PregnancyTrackingHhs
+                .AsNoTracking()
+                .Include(q => q.Household)
+                .Include(q => q.Barangay)
+                .FirstOrDefaultAsync(q => q.Id == id);
 
             return pregnancyTrackingHh;
         }

@@ -11,5 +11,6 @@ namespace AUF.EMR2.Application.Abstraction.Persistence
     public interface IPregnancyTrackingHhRepository : IGenericRepository<PregnancyTrackingHh>
     {
         Task<PregnancyTrackingHh> GetPregnancyTrackingHh(string householdNo);
+        Task<PregnancyTrackingHh> GetPregnancyTrackingHh(int id);
     }
 }
