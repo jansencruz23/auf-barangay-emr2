@@ -26,7 +26,7 @@ namespace AUF.EMR2.Application.DTOs.PregnancyTracking.Validators
 
             RuleFor(q => q.HouseholdMemberId)
                 .NotNull().WithMessage("{PropertyName} is required.")
-                .GreaterThan(0).WithMessage("{PropertyName} must be greater than {ComparisonValue}.")
+                .NotEqual(Guid.Empty).WithMessage("{PropertyName} is required.")
                 .MustAsync(async (id, token) =>
                 {
                     return await unitOfWork.HouseholdMemberRepository.IsWraMember(id);

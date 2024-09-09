@@ -2,7 +2,7 @@
 using AUF.EMR2.Application.DTOs.Masterlist.Validators;
 using AUF.EMR2.Application.Exceptions;
 using AUF.EMR2.Application.Responses;
-using AUF.EMR2.Domain.Models;
+using AUF.EMR2.Domain.Entities;
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace AUF.EMR2.Application.Features.Masterlists.Commands.UpdateMasterlistChild
 {
-    public class UpdateMasterlistChildCommandHandler : IRequestHandler<UpdateMasterlistChildCommand, BaseCommandResponse<int>>
+    public class UpdateMasterlistChildCommandHandler : IRequestHandler<UpdateMasterlistChildCommand, BaseCommandResponse<Guid>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -27,9 +27,9 @@ namespace AUF.EMR2.Application.Features.Masterlists.Commands.UpdateMasterlistChi
             _mapper = mapper;
         }
 
-        public async Task<BaseCommandResponse<int>> Handle(UpdateMasterlistChildCommand request, CancellationToken cancellationToken)
+        public async Task<BaseCommandResponse<Guid>> Handle(UpdateMasterlistChildCommand request, CancellationToken cancellationToken)
         {
-            var response = new BaseCommandResponse<int>();
+            var response = new BaseCommandResponse<Guid>();
             var validator = new UpdateMasterlistChildDtoValidator();
             var validationResult = await validator.ValidateAsync(request.MasterlistDto, cancellationToken);
 

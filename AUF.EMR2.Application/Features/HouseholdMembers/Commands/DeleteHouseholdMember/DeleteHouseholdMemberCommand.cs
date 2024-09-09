@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace AUF.EMR2.Application.Features.HouseholdMembers.Commands.DeleteHouseholdMember
 {
-    public record DeleteHouseholdMemberCommand : IRequest<BaseCommandResponse<int>>
+    public record DeleteHouseholdMemberCommand : IRequest<BaseCommandResponse<Guid>>
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
     }
 }

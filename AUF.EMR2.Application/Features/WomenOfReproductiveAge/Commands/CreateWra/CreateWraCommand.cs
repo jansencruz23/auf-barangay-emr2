@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AUF.EMR2.Application.Features.WomenOfReproductiveAge.Commands.CreateWra
 {
-    public record CreateWraCommand : IRequest<BaseCommandResponse<int>>
+    public record CreateWraCommand : IRequest<BaseCommandResponse<Guid>>
     {
         public CreateWraDto WraDto { get; set; }
     }

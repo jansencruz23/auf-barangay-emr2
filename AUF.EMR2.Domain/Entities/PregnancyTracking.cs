@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AUF.EMR2.Domain.Models
+namespace AUF.EMR2.Domain.Entities
 {
     public class PregnancyTracking : BaseDomainEntity
     {
-        public int HouseholdMemberId { get; set; }
+        public Guid HouseholdMemberId { get; set; }
         public HouseholdMember HouseholdMember { get; set; }
         public int Age { get; set; }
         public int Gravidity { get; set; }

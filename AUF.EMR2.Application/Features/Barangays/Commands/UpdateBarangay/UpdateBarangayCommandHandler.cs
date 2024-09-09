@@ -3,7 +3,7 @@ using AUF.EMR2.Application.DTOs.Barangay.Validators;
 using AUF.EMR2.Application.DTOs.Household.Validators;
 using AUF.EMR2.Application.Exceptions;
 using AUF.EMR2.Application.Responses;
-using AUF.EMR2.Domain.Models;
+using AUF.EMR2.Domain.Entities;
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace AUF.EMR2.Application.Features.Barangays.Commands.UpdateBarangay
 {
-    public class UpdateBarangayCommandHandler : IRequestHandler<UpdateBarangayCommand, BaseCommandResponse<int>>
+    public class UpdateBarangayCommandHandler : IRequestHandler<UpdateBarangayCommand, BaseCommandResponse<Guid>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -28,9 +28,9 @@ namespace AUF.EMR2.Application.Features.Barangays.Commands.UpdateBarangay
             _mapper = mapper;
         }
 
-        public async Task<BaseCommandResponse<int>> Handle(UpdateBarangayCommand request, CancellationToken cancellationToken)
+        public async Task<BaseCommandResponse<Guid>> Handle(UpdateBarangayCommand request, CancellationToken cancellationToken)
         {
-            var response = new BaseCommandResponse<int>();
+            var response = new BaseCommandResponse<Guid>();
             var validator = new UpdateBarangayDtoValidator();
             var validationResult = await validator.ValidateAsync(request.BarangayDto, cancellationToken);
 

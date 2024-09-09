@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace AUF.EMR2.Application.Features.PregnancyTrackings.Commands.DeletePregnancyTracking
 {
-    public record DeletePregnancyTrackingCommand : IRequest<BaseCommandResponse<int>>
+    public record DeletePregnancyTrackingCommand : IRequest<BaseCommandResponse<Guid>>
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
     }
 }

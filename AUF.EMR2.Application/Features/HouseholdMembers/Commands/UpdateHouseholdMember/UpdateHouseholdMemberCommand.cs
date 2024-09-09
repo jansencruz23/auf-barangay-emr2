@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AUF.EMR2.Application.Features.HouseholdMembers.Commands.UpdateHouseholdMember
 {
-    public record UpdateHouseholdMemberCommand : IRequest<BaseCommandResponse<int>>
+    public record UpdateHouseholdMemberCommand : IRequest<BaseCommandResponse<Guid>>
     {
         public UpdateHouseholdMemberDto HouseholdMemberDto { get; set; }
     }

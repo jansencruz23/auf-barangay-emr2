@@ -85,7 +85,7 @@ namespace AUF.EMR2.API.Controllers
 
         // GET api/<OralHealthController>/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<OralHealthDto>> Get(int id)
+        public async Task<ActionResult<OralHealthDto>> Get(Guid id)
         {
             var response = await _mediator.Send(new GetOralHealthRequest { Id = id });
             return Ok(response);

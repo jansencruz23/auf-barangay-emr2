@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AUF.EMR2.Domain.Models
+namespace AUF.EMR2.Domain.Entities
 {
     public class HouseholdMember : BaseDomainEntity
     {
@@ -22,7 +22,7 @@ namespace AUF.EMR2.Domain.Models
         public string? ThirdQtrClassification { get; set; }
         public string? FourthQtrClassification { get; set; }
         public string? Remarks { get; set; }
-        public int HouseholdId { get; set; }
+        public Guid HouseholdId { get; set; }
         public Household Household { get; set; }
         public string? NameOfMother { get; set; }
         public string? NameOfFather { get; set; }

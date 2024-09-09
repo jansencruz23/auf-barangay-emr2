@@ -9,7 +9,7 @@ namespace AUF.EMR2.Application.DTOs.Household
 {
     public class HouseholdDto : IHouseholdDto
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public bool Status { get; set; } = true;
         public string HouseholdNo { get; set; }
         public DateTime? FirstQtrVisit { get; set; }

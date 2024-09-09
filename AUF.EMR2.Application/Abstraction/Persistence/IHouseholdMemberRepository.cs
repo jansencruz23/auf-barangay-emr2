@@ -1,6 +1,6 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
 using AUF.EMR2.Application.Models.Pagination;
-using AUF.EMR2.Domain.Models;
+using AUF.EMR2.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +12,8 @@ namespace AUF.EMR2.Application.Abstraction.Persistence
     public interface IHouseholdMemberRepository : IGenericRepository<HouseholdMember>
     {
         Task<List<HouseholdMember>> GetHouseholdMemberList(string householdNo);
-        Task<HouseholdMember> GetHouseholdMember(int id);
+        Task<HouseholdMember> GetHouseholdMember(Guid id);
         Task<List<HouseholdMember>> GetWraHouseholdMemberList(string householdNo);
-        Task<bool> IsWraMember(int id);
+        Task<bool> IsWraMember(Guid id);
     }
 }

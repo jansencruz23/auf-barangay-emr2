@@ -1,6 +1,6 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
 using AUF.EMR2.Application.Abstraction.Services;
-using AUF.EMR2.Domain.Models;
+using AUF.EMR2.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +18,7 @@ namespace AUF.EMR2.Application.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<PregnancyTrackingHh> CreatePregnancyTrackingHH(int householdId)
+        public async Task<PregnancyTrackingHh> CreatePregnancyTrackingHH(Guid householdId)
         {
             var barangay = await _unitOfWork.BarangayRepository.GetBarangay();
             var pregnancyTrackingHh = new PregnancyTrackingHh

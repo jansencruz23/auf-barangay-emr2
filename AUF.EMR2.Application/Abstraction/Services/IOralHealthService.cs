@@ -1,4 +1,4 @@
-﻿using AUF.EMR2.Domain.Models;
+﻿using AUF.EMR2.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

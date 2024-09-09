@@ -22,13 +22,50 @@ namespace AUF.EMR2.Persistence.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("AUF.EMR2.Domain.Models.Barangay", b =>
+            modelBuilder.Entity("AUF.EMR2.Domain.Entities.AdministeredVaccine", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("char(36)");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime>("LastModified")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("ModifiedById")
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<Guid>("VaccinationAppointmentId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("VaccineId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("Version")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("VaccinationAppointmentId");
+
+                    b.HasIndex("VaccineId");
+
+                    b.ToTable("AdministeredVaccines");
+                });
+
+            modelBuilder.Entity("AUF.EMR2.Domain.Entities.Barangay", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("BarangayHealthStation")
                         .IsRequired()
@@ -93,7 +130,7 @@ namespace AUF.EMR2.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = new Guid("484d39ef-1a24-4b4a-941f-05700f27484e"),
                             BarangayHealthStation = "Barangay Health Station",
                             BarangayName = "Brgy. Ninoy Aquino",
                             ContactNo = "09123441233",
@@ -109,13 +146,11 @@ namespace AUF.EMR2.Persistence.Migrations
                         });
                 });
 
-            modelBuilder.Entity("AUF.EMR2.Domain.Models.Household", b =>
+            modelBuilder.Entity("AUF.EMR2.Domain.Entities.Household", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Barangay")
                         .IsRequired()
@@ -202,13 +237,11 @@ namespace AUF.EMR2.Persistence.Migrations
                     b.ToTable("Households");
                 });
 
-            modelBuilder.Entity("AUF.EMR2.Domain.Models.HouseholdMember", b =>
+            modelBuilder.Entity("AUF.EMR2.Domain.Entities.HouseholdMember", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime>("Birthday")
                         .HasColumnType("datetime(6)");
@@ -231,6 +264,9 @@ namespace AUF.EMR2.Persistence.Migrations
 
                     b.Property<int>("HouseholdId")
                         .HasColumnType("int");
+
+                    b.Property<Guid>("HouseholdId1")
+                        .HasColumnType("char(36)");
 
                     b.Property<bool?>("IsInSchool")
                         .HasColumnType("tinyint(1)");
@@ -284,18 +320,16 @@ namespace AUF.EMR2.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("HouseholdId");
+                    b.HasIndex("HouseholdId1");
 
                     b.ToTable("HouseholdMembers");
                 });
 
-            modelBuilder.Entity("AUF.EMR2.Domain.Models.PregnancyTracking", b =>
+            modelBuilder.Entity("AUF.EMR2.Domain.Entities.PregnancyTracking", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("char(36)");
 
                     b.Property<int>("Age")
                         .HasColumnType("int");
@@ -320,6 +354,9 @@ namespace AUF.EMR2.Persistence.Migrations
 
                     b.Property<int>("HouseholdMemberId")
                         .HasColumnType("int");
+
+                    b.Property<Guid>("HouseholdMemberId1")
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime>("LastModified")
                         .HasColumnType("datetime(6)");
@@ -365,24 +402,22 @@ namespace AUF.EMR2.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("HouseholdMemberId");
+                    b.HasIndex("HouseholdMemberId1");
 
                     b.ToTable("PregnancyTrackings");
                 });
 
-            modelBuilder.Entity("AUF.EMR2.Domain.Models.PregnancyTrackingHh", b =>
+            modelBuilder.Entity("AUF.EMR2.Domain.Entities.PregnancyTrackingHh", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("BHWName")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("BarangayId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("BarangayId")
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("BirthingCenter")
                         .HasColumnType("longtext");
@@ -396,8 +431,8 @@ namespace AUF.EMR2.Persistence.Migrations
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("HouseholdId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("HouseholdId")
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime>("LastModified")
                         .HasColumnType("datetime(6)");
@@ -427,18 +462,178 @@ namespace AUF.EMR2.Persistence.Migrations
 
                     b.HasIndex("BarangayId");
 
-                    b.HasIndex("HouseholdId");
+                    b.HasIndex("HouseholdId")
+                        .IsUnique();
 
                     b.ToTable("PregnancyTrackingHhs");
                 });
 
-            modelBuilder.Entity("AUF.EMR2.Domain.Models.WomanOfReproductiveAge", b =>
+            modelBuilder.Entity("AUF.EMR2.Domain.Entities.VaccinationAppointment", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Height")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("LastModified")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("ModifiedById")
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<double?>("Temperature")
+                        .HasColumnType("double");
+
+                    b.Property<DateTime>("VaccinationDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<Guid>("VaccinationRecordId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("Version")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Weight")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("VaccinationRecordId");
+
+                    b.ToTable("VaccinationAppointments");
+                });
+
+            modelBuilder.Entity("AUF.EMR2.Domain.Entities.VaccinationRecord", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Attended")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("BirthPlace")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ContactNumber")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("FatherAge")
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    b.Property<DateTime>("FatherBirthday")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("FatherName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("LastModified")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("ModifiedById")
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("MotherAge")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("MotherBirthday")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("MotherName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("PatientId")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("PatientId1")
+                        .HasColumnType("char(36)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("TypeOfDelivery")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid>("Version")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Weight")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PatientId1");
+
+                    b.ToTable("VaccinationRecords");
+                });
+
+            modelBuilder.Entity("AUF.EMR2.Domain.Entities.Vaccine", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("LastModified")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("ModifiedById")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<Guid>("Version")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Vaccines");
+                });
+
+            modelBuilder.Entity("AUF.EMR2.Domain.Entities.WomanOfReproductiveAge", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
 
                     b.Property<bool>("AcceptModernFpMethod")
                         .HasColumnType("tinyint(1)");
@@ -457,6 +652,9 @@ namespace AUF.EMR2.Persistence.Migrations
 
                     b.Property<int>("HouseholdMemberId")
                         .HasColumnType("int");
+
+                    b.Property<Guid>("HouseholdMemberId1")
+                        .HasColumnType("char(36)");
 
                     b.Property<bool>("IsFPMethod")
                         .HasColumnType("tinyint(1)");
@@ -502,44 +700,63 @@ namespace AUF.EMR2.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("HouseholdMemberId");
+                    b.HasIndex("HouseholdMemberId1");
 
                     b.ToTable("WomenOfReproductiveAge");
                 });
 
-            modelBuilder.Entity("AUF.EMR2.Domain.Models.HouseholdMember", b =>
+            modelBuilder.Entity("AUF.EMR2.Domain.Entities.AdministeredVaccine", b =>
                 {
-                    b.HasOne("AUF.EMR2.Domain.Models.Household", "Household")
+                    b.HasOne("AUF.EMR2.Domain.Entities.VaccinationAppointment", "VaccinationAppointment")
+                        .WithMany("AdministeredVaccines")
+                        .HasForeignKey("VaccinationAppointmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AUF.EMR2.Domain.Entities.Vaccine", "Vaccine")
+                        .WithMany("AdministeredVaccines")
+                        .HasForeignKey("VaccineId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("VaccinationAppointment");
+
+                    b.Navigation("Vaccine");
+                });
+
+            modelBuilder.Entity("AUF.EMR2.Domain.Entities.HouseholdMember", b =>
+                {
+                    b.HasOne("AUF.EMR2.Domain.Entities.Household", "Household")
                         .WithMany("HouseholdMembers")
-                        .HasForeignKey("HouseholdId")
+                        .HasForeignKey("HouseholdId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Household");
                 });
 
-            modelBuilder.Entity("AUF.EMR2.Domain.Models.PregnancyTracking", b =>
+            modelBuilder.Entity("AUF.EMR2.Domain.Entities.PregnancyTracking", b =>
                 {
-                    b.HasOne("AUF.EMR2.Domain.Models.HouseholdMember", "HouseholdMember")
+                    b.HasOne("AUF.EMR2.Domain.Entities.HouseholdMember", "HouseholdMember")
                         .WithMany()
-                        .HasForeignKey("HouseholdMemberId")
+                        .HasForeignKey("HouseholdMemberId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("HouseholdMember");
                 });
 
-            modelBuilder.Entity("AUF.EMR2.Domain.Models.PregnancyTrackingHh", b =>
+            modelBuilder.Entity("AUF.EMR2.Domain.Entities.PregnancyTrackingHh", b =>
                 {
-                    b.HasOne("AUF.EMR2.Domain.Models.Barangay", "Barangay")
+                    b.HasOne("AUF.EMR2.Domain.Entities.Barangay", "Barangay")
                         .WithMany()
                         .HasForeignKey("BarangayId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("AUF.EMR2.Domain.Models.Household", "Household")
-                        .WithMany()
-                        .HasForeignKey("HouseholdId")
+                    b.HasOne("AUF.EMR2.Domain.Entities.Household", "Household")
+                        .WithOne()
+                        .HasForeignKey("AUF.EMR2.Domain.Entities.PregnancyTrackingHh", "HouseholdId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -548,20 +765,57 @@ namespace AUF.EMR2.Persistence.Migrations
                     b.Navigation("Household");
                 });
 
-            modelBuilder.Entity("AUF.EMR2.Domain.Models.WomanOfReproductiveAge", b =>
+            modelBuilder.Entity("AUF.EMR2.Domain.Entities.VaccinationAppointment", b =>
                 {
-                    b.HasOne("AUF.EMR2.Domain.Models.HouseholdMember", "HouseholdMember")
+                    b.HasOne("AUF.EMR2.Domain.Entities.VaccinationRecord", "VaccinationRecord")
+                        .WithMany("VaccinationAppointments")
+                        .HasForeignKey("VaccinationRecordId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("VaccinationRecord");
+                });
+
+            modelBuilder.Entity("AUF.EMR2.Domain.Entities.VaccinationRecord", b =>
+                {
+                    b.HasOne("AUF.EMR2.Domain.Entities.HouseholdMember", "Patient")
                         .WithMany()
-                        .HasForeignKey("HouseholdMemberId")
+                        .HasForeignKey("PatientId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Patient");
+                });
+
+            modelBuilder.Entity("AUF.EMR2.Domain.Entities.WomanOfReproductiveAge", b =>
+                {
+                    b.HasOne("AUF.EMR2.Domain.Entities.HouseholdMember", "HouseholdMember")
+                        .WithMany()
+                        .HasForeignKey("HouseholdMemberId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("HouseholdMember");
                 });
 
-            modelBuilder.Entity("AUF.EMR2.Domain.Models.Household", b =>
+            modelBuilder.Entity("AUF.EMR2.Domain.Entities.Household", b =>
                 {
                     b.Navigation("HouseholdMembers");
+                });
+
+            modelBuilder.Entity("AUF.EMR2.Domain.Entities.VaccinationAppointment", b =>
+                {
+                    b.Navigation("AdministeredVaccines");
+                });
+
+            modelBuilder.Entity("AUF.EMR2.Domain.Entities.VaccinationRecord", b =>
+                {
+                    b.Navigation("VaccinationAppointments");
+                });
+
+            modelBuilder.Entity("AUF.EMR2.Domain.Entities.Vaccine", b =>
+                {
+                    b.Navigation("AdministeredVaccines");
                 });
 #pragma warning restore 612, 618
         }

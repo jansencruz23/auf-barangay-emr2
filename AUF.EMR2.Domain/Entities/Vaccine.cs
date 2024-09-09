@@ -1,14 +1,14 @@
-﻿using System;
+﻿using AUF.EMR2.Domain.Primitives;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AUF.EMR2.Domain.Models
+namespace AUF.EMR2.Domain.Entities
 {
-    public class Vaccine
+    public class Vaccine : BaseDomainEntity
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string? Description { get; set; }
 

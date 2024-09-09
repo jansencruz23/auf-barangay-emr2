@@ -3,7 +3,7 @@ using AUF.EMR2.Application.DTOs.Household.Validators;
 using AUF.EMR2.Application.DTOs.HouseholdMember.Validators;
 using AUF.EMR2.Application.Exceptions;
 using AUF.EMR2.Application.Responses;
-using AUF.EMR2.Domain.Models;
+using AUF.EMR2.Domain.Entities;
 using AutoMapper;
 using MediatR;
 using System;
@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace AUF.EMR2.Application.Features.HouseholdMembers.Commands.CreateHouseholdMember
 {
-    public class CreateHouseholdMemberCommandHandler : IRequestHandler<CreateHouseholdMemberCommand, BaseCommandResponse<int>>
+    public class CreateHouseholdMemberCommandHandler : IRequestHandler<CreateHouseholdMemberCommand, BaseCommandResponse<Guid>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -26,9 +26,9 @@ namespace AUF.EMR2.Application.Features.HouseholdMembers.Commands.CreateHousehol
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-        public async Task<BaseCommandResponse<int>> Handle(CreateHouseholdMemberCommand request, CancellationToken cancellationToken)
+        public async Task<BaseCommandResponse<Guid>> Handle(CreateHouseholdMemberCommand request, CancellationToken cancellationToken)
         {
-            var response = new BaseCommandResponse<int>();
+            var response = new BaseCommandResponse<Guid>();
             var validator = new CreateHouseholdMemberDtoValidator(_unitOfWork);
             var validationResult = await validator.ValidateAsync(request.HouseholdMemberDto, cancellationToken);
 

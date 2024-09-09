@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AUF.EMR2.Application.Features.PregnancyTrackings.Commands.CreatePregnancyTracking
 {
-    public record CreatePregnancyTrackingCommand : IRequest<BaseCommandResponse<int>>
+    public record CreatePregnancyTrackingCommand : IRequest<BaseCommandResponse<Guid>>
     {
         public CreatePregnancyTrackingDto PregnancyTrackingDto { get; set; }
     }

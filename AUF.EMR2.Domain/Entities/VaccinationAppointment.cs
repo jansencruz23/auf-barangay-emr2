@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AUF.EMR2.Domain.Models
+namespace AUF.EMR2.Domain.Entities
 {
     public class VaccinationAppointment : BaseDomainEntity
     {
-        public int VaccinationRecordId { get; set; }
+        public Guid VaccinationRecordId { get; set; }
         public VaccinationRecord? VaccinationRecord { get; set; }
         public DateTime VaccinationDate { get; set; }
         public string Weight { get; set; }

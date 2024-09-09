@@ -96,7 +96,7 @@ namespace AUF.EMR2.API.Controllers
 
         // GET api/<MasterlistController>/child/5
         [HttpGet("child/{id}")]
-        public async Task<ActionResult<MasterlistChildDto>> GetChildRecord(int id)
+        public async Task<ActionResult<MasterlistChildDto>> GetChildRecord(Guid id)
         {
             var response = await _mediator.Send(new GetMasterlistChildRecordRequest { Id = id });
             return Ok(response);
@@ -104,7 +104,7 @@ namespace AUF.EMR2.API.Controllers
 
         // GET api/<MasterlistController>/adult/5
         [HttpGet("adult/{id}")]
-        public async Task<ActionResult<MasterlistChildDto>> GetAdultRecord(int id)
+        public async Task<ActionResult<MasterlistChildDto>> GetAdultRecord(Guid id)
         {
             var response = await _mediator.Send(new GetMasterlistAdultRecordRequest { Id = id });
             return Ok(response);
@@ -112,7 +112,7 @@ namespace AUF.EMR2.API.Controllers
 
         // PUT api/<MasterlistController>/child/5
         [HttpPut("child")]
-        public async Task<ActionResult<BaseCommandResponse<int>>> UpdateChild([FromBody] UpdateMasterlistChildDto dto)
+        public async Task<ActionResult<BaseCommandResponse<Guid>>> UpdateChild([FromBody] UpdateMasterlistChildDto dto)
         {
             var response = await _mediator.Send(new UpdateMasterlistChildCommand { MasterlistDto = dto });
             return Ok(response);
@@ -120,7 +120,7 @@ namespace AUF.EMR2.API.Controllers
 
         // PUT api/<MasterlistController>/child/5
         [HttpPut("adult")]
-        public async Task<ActionResult<BaseCommandResponse<int>>> UpdateAdult([FromBody] UpdateMasterlistAdultDto dto)
+        public async Task<ActionResult<BaseCommandResponse<Guid>>> UpdateAdult([FromBody] UpdateMasterlistAdultDto dto)
         {
             var response = await _mediator.Send(new UpdateMasterlistAdultCommand { MasterlistDto = dto });
             return Ok(response);

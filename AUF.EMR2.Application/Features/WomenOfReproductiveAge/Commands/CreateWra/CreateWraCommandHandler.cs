@@ -3,7 +3,7 @@ using AUF.EMR2.Application.DTOs.Household.Validators;
 using AUF.EMR2.Application.DTOs.WomanOfReproductiveAge.Validators;
 using AUF.EMR2.Application.Exceptions;
 using AUF.EMR2.Application.Responses;
-using AUF.EMR2.Domain.Models;
+using AUF.EMR2.Domain.Entities;
 using AutoMapper;
 using MediatR;
 using System;
@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace AUF.EMR2.Application.Features.WomenOfReproductiveAge.Commands.CreateWra
 {
-    public class CreateWraCommandHandler : IRequestHandler<CreateWraCommand, BaseCommandResponse<int>>
+    public class CreateWraCommandHandler : IRequestHandler<CreateWraCommand, BaseCommandResponse<Guid>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -27,9 +27,9 @@ namespace AUF.EMR2.Application.Features.WomenOfReproductiveAge.Commands.CreateWr
             _mapper = mapper;
         }
 
-        public async Task<BaseCommandResponse<int>> Handle(CreateWraCommand request, CancellationToken cancellationToken)
+        public async Task<BaseCommandResponse<Guid>> Handle(CreateWraCommand request, CancellationToken cancellationToken)
         {
-            var response = new BaseCommandResponse<int>();
+            var response = new BaseCommandResponse<Guid>();
             var validator = new CreateWraDtoValidator(_unitOfWork);
             var validationResult = await validator.ValidateAsync(request.WraDto, cancellationToken);
 

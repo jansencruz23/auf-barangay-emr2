@@ -8,7 +8,7 @@ namespace AUF.EMR2.Application.DTOs.PregnancyTracking
 {
     public interface IPregnancyTrackingDto
     {
-        public int HouseholdMemberId { get; set; }
+        public Guid HouseholdMemberId { get; set; }
         public int Age { get; set; }
         public int Gravidity { get; set; }
         public int Parity { get; set; }

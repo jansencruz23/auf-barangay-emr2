@@ -10,6 +10,6 @@ namespace AUF.EMR2.Application.Features.PregnancyTrackings.Queries.GetPregnancyT
 {
     public record GetPregnancyTrackingRequest : IRequest<PregnancyTrackingDto>
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
     }
 }

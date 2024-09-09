@@ -9,7 +9,7 @@ namespace AUF.EMR2.Application.DTOs.HouseholdMember
 {
     public class HouseholdMemberDto : IHouseholdMemberDto
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
         public string? MotherMaidenName { get; set; }
@@ -22,7 +22,7 @@ namespace AUF.EMR2.Application.DTOs.HouseholdMember
         public string? ThirdQtrClassification { get; set; }
         public string? FourthQtrClassification { get; set; }
         public string? Remarks { get; set; }
-        public int HouseholdId { get; set; }
+        public Guid HouseholdId { get; set; }
         public string? NameOfMother { get; set; }
         public string? NameOfFather { get; set; }
         public bool IsNhts { get; set; }

@@ -10,6 +10,6 @@ namespace AUF.EMR2.Application.Features.WomenOfReproductiveAge.Queries.GetWra
 {
     public record GetWraRequest : IRequest<WraDto>
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
     }
 }

@@ -3,7 +3,7 @@ using AUF.EMR2.Application.DTOs.HouseholdMember.Validators;
 using AUF.EMR2.Application.DTOs.PregnancyTracking.Validators;
 using AUF.EMR2.Application.Exceptions;
 using AUF.EMR2.Application.Responses;
-using AUF.EMR2.Domain.Models;
+using AUF.EMR2.Domain.Entities;
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace AUF.EMR2.Application.Features.PregnancyTrackings.Commands.UpdatePregnancyTracking
 {
-    public class UpdatePregnancyTrackingCommandHandler : IRequestHandler<UpdatePregnancyTrackingCommand, BaseCommandResponse<int>>
+    public class UpdatePregnancyTrackingCommandHandler : IRequestHandler<UpdatePregnancyTrackingCommand, BaseCommandResponse<Guid>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -28,9 +28,9 @@ namespace AUF.EMR2.Application.Features.PregnancyTrackings.Commands.UpdatePregna
             _mapper = mapper;
         }
 
-        public async Task<BaseCommandResponse<int>> Handle(UpdatePregnancyTrackingCommand request, CancellationToken cancellationToken)
+        public async Task<BaseCommandResponse<Guid>> Handle(UpdatePregnancyTrackingCommand request, CancellationToken cancellationToken)
         {
-            var response = new BaseCommandResponse<int>();
+            var response = new BaseCommandResponse<Guid>();
             var validator = new UpdatePregnancyTrackingDtoValidator(_unitOfWork);
             var validationResult = await validator.ValidateAsync(request.PregnancyTrackingDto, cancellationToken);
 

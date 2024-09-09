@@ -1,7 +1,7 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
 using AUF.EMR2.Application.Exceptions;
 using AUF.EMR2.Application.Responses;
-using AUF.EMR2.Domain.Models;
+using AUF.EMR2.Domain.Entities;
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace AUF.EMR2.Application.Features.Households.Commands.DeleteHousehold
 {
-    public class DeleteHouseholdCommandHandler : IRequestHandler<DeleteHouseholdCommand, BaseCommandResponse<int>>
+    public class DeleteHouseholdCommandHandler : IRequestHandler<DeleteHouseholdCommand, BaseCommandResponse<Guid>>
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -22,14 +22,14 @@ namespace AUF.EMR2.Application.Features.Households.Commands.DeleteHousehold
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<BaseCommandResponse<int>> Handle(DeleteHouseholdCommand request, CancellationToken cancellationToken)
+        public async Task<BaseCommandResponse<Guid>> Handle(DeleteHouseholdCommand request, CancellationToken cancellationToken)
         {
-            if (request.Id < 1)
+            if (request.Id == Guid.Empty)
             {
                 throw new BadRequestException("The request is invalid. Id (0).");
             }
 
-            var response = new BaseCommandResponse<int>();
+            var response = new BaseCommandResponse<Guid>();
             var existing = await _unitOfWork.HouseholdRepository.Exists(request.Id);
 
             if (!existing)

@@ -1,7 +1,7 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
 using AUF.EMR2.Application.Exceptions;
 using AUF.EMR2.Application.Responses;
-using AUF.EMR2.Domain.Models;
+using AUF.EMR2.Domain.Entities;
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace AUF.EMR2.Application.Features.PregnancyTrackings.Commands.DeletePregnancyTracking
 {
-    public class DeletePregnancyTrackingCommandHandler : IRequestHandler<DeletePregnancyTrackingCommand, BaseCommandResponse<int>>
+    public class DeletePregnancyTrackingCommandHandler : IRequestHandler<DeletePregnancyTrackingCommand, BaseCommandResponse<Guid>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -26,14 +26,14 @@ namespace AUF.EMR2.Application.Features.PregnancyTrackings.Commands.DeletePregna
             _mapper = mapper;
         }
 
-        public async Task<BaseCommandResponse<int>> Handle(DeletePregnancyTrackingCommand request, CancellationToken cancellationToken)
+        public async Task<BaseCommandResponse<Guid>> Handle(DeletePregnancyTrackingCommand request, CancellationToken cancellationToken)
         {
-            if (request.Id < 1)
+            if (request.Id == Guid.Empty)
             {
                 throw new BadRequestException("The request is invalid. Id (0).");
             }
 
-            var response = new BaseCommandResponse<int>();
+            var response = new BaseCommandResponse<Guid>();
             var existing = await _unitOfWork.PregnancyTrackingRepository.Exists(request.Id);
 
             if (!existing)

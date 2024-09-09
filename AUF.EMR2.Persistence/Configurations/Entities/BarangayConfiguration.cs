@@ -1,4 +1,4 @@
-﻿using AUF.EMR2.Domain.Models;
+﻿using AUF.EMR2.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -16,7 +16,7 @@ namespace AUF.EMR2.Persistence.Configurations.Entities
             builder.HasData(
                 new Barangay
                 {
-                    Id = 1,
+                    Id = Guid.NewGuid(),
                     BarangayName = "Brgy. Ninoy Aquino",
                     Street = "Ninoy Aquino",
                     Municipality = "Angeles City",

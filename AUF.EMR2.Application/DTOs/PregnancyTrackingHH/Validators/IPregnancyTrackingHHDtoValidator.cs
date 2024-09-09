@@ -17,7 +17,7 @@ namespace AUF.EMR2.Application.DTOs.PregnancyTrackingHh.Validators
 
             RuleFor(q => q.BarangayId)
                 .NotNull().WithMessage("{PropertyName} is required.")
-                .GreaterThan(0).WithMessage("{PropertyName} must be greater than {ComparisonValue}.")
+                .NotEqual(Guid.Empty).WithMessage("{PropertyName} is required.")
                 .MustAsync(async (id, token) =>
                 {
                     return await unitOfWork.BarangayRepository.Exists(id);
@@ -26,7 +26,7 @@ namespace AUF.EMR2.Application.DTOs.PregnancyTrackingHh.Validators
 
             RuleFor(q => q.HouseholdId)
                 .NotNull().WithMessage("{PropertyName} is required.")
-                .GreaterThan(0).WithMessage("{PropertyName} must be greater than {ComparisonValue}.")
+                .NotEqual(Guid.Empty).WithMessage("{PropertyName} is required.")
                 .MustAsync(async (id, token) =>
                 {
                     return await unitOfWork.HouseholdRepository.Exists(id);

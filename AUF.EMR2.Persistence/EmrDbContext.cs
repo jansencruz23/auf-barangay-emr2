@@ -1,5 +1,5 @@
-﻿using AUF.EMR2.Domain.Models;
-using AUF.EMR2.Domain.Models.Common;
+﻿using AUF.EMR2.Domain.Entities;
+using AUF.EMR2.Domain.Primitives;
 using AUF.EMR2.Persistence.Configurations.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -37,9 +37,6 @@ namespace AUF.EMR2.Persistence
                 .HasOne(q => q.Household)
                 .WithOne()
                 .HasForeignKey<PregnancyTrackingHh>(q => q.HouseholdId);
-
-            modelBuilder.Entity<AdministeredVaccine>()
-                .HasKey(q => new { q.VaccinationAppointmentId, q.VaccineId });
 
             modelBuilder.Entity<AdministeredVaccine>()
                 .HasOne(q => q.VaccinationAppointment)

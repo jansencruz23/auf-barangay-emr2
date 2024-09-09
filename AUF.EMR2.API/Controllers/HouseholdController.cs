@@ -35,7 +35,7 @@ namespace AUF.EMR2.API.Controllers
 
         // GET api/<HouseholdController>/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<HouseholdDto>> Get(int id)
+        public async Task<ActionResult<HouseholdDto>> Get(Guid id)
         {
             var response = await _mediator.Send(new GetHouseholdRequest { Id = id });
             return Ok(response);
@@ -51,7 +51,7 @@ namespace AUF.EMR2.API.Controllers
 
         // POST api/<HouseholdController>
         [HttpPost]
-        public async Task<ActionResult<BaseCommandResponse<int>>> Post([FromBody] CreateHouseholdDto dto)
+        public async Task<ActionResult<BaseCommandResponse<Guid>>> Post([FromBody] CreateHouseholdDto dto)
         {
             var response = await _mediator.Send(new CreateHouseholdCommand { HouseholdDto = dto });
             return Ok(response);
@@ -59,7 +59,7 @@ namespace AUF.EMR2.API.Controllers
 
         // PUT api/<HouseholdController>/5
         [HttpPut("{id}")]
-        public async Task<ActionResult<BaseCommandResponse<int>>> Put([FromBody] UpdateHouseholdDto dto)
+        public async Task<ActionResult<BaseCommandResponse<Guid>>> Put([FromBody] UpdateHouseholdDto dto)
         {
             var response = await _mediator.Send(new UpdateHouseholdCommand { HouseholdDto = dto });
             return Ok(response);
@@ -67,7 +67,7 @@ namespace AUF.EMR2.API.Controllers
 
         // DELETE api/<HouseholdController>/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<BaseCommandResponse<int>>> Delete(int id)
+        public async Task<ActionResult<BaseCommandResponse<Guid>>> Delete(Guid id)
         {
             var response = await _mediator.Send(new DeleteHouseholdCommand { Id = id });
             return Ok(response);

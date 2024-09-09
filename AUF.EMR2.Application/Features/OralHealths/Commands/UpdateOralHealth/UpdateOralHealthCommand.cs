@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AUF.EMR2.Application.Features.OralHealths.Commands.UpdateOralHealth
 {
-    public record UpdateOralHealthCommand : IRequest<BaseCommandResponse<int>>
+    public record UpdateOralHealthCommand : IRequest<BaseCommandResponse<Guid>>
     {
         public UpdateOralHealthDto OralHealthDto { get; set; }
     }

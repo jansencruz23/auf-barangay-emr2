@@ -8,18 +8,14 @@ namespace AUF.EMR2.Domain.Primitives
 {
     public abstract class BaseDomainEntity : IEquatable<BaseDomainEntity>
     {
-        protected BaseDomainEntity(Guid id)
-        {
-            Id = id;
-        }
 
-        public Guid Id { get; private init; }
-        public bool Status { get; private set; } = true;
-        public DateTime DateCreated { get; private set; }
-        public DateTime LastModified { get; private set; }
-        public string? CreatedBy { get; private set; }
-        public string? ModifiedById { get; private set; }
-        public Guid Version { get; private set; }
+        public Guid Id { get; set; }
+        public bool Status { get; set; } = true;
+        public DateTime DateCreated { get; set; }
+        public DateTime LastModified { get; set; }
+        public string? CreatedBy { get; set; }
+        public string? ModifiedById { get; set; }
+        public Guid Version { get; set; }
 
         public static bool operator == (BaseDomainEntity? first, BaseDomainEntity? second)
         {
