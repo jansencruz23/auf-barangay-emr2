@@ -1,6 +1,6 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence;
-using AUF.EMR2.Domain.Models;
-using AUF.EMR2.Domain.Models.Enums;
+using AUF.EMR2.Domain.Entities;
+using AUF.EMR2.Domain.Enums;
 using AUF.EMR2.Persistence.Repositories.Common;
 using Microsoft.EntityFrameworkCore;
 using System;

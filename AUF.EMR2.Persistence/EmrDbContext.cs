@@ -1,5 +1,5 @@
-﻿using AUF.EMR2.Domain.Models;
-using AUF.EMR2.Domain.Models.Common;
+﻿using AUF.EMR2.Domain.Entities;
+using AUF.EMR2.Domain.Primitives;
 using AUF.EMR2.Persistence.Configurations.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;

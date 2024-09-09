@@ -3,7 +3,7 @@ using AUF.EMR2.Application.DTOs.Masterlist.Validators;
 using AUF.EMR2.Application.DTOs.OralHealth.Validators;
 using AUF.EMR2.Application.Exceptions;
 using AUF.EMR2.Application.Responses;
-using AUF.EMR2.Domain.Models;
+using AUF.EMR2.Domain.Entities;
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

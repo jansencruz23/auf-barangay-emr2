@@ -1,4 +1,4 @@
-﻿using AUF.EMR2.Domain.Models.Enums;
+﻿using AUF.EMR2.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;

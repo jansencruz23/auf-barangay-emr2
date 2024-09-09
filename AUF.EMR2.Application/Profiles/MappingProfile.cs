@@ -7,7 +7,7 @@ using AUF.EMR2.Application.DTOs.PregnancyTracking;
 using AUF.EMR2.Application.DTOs.PregnancyTrackingHh;
 using AUF.EMR2.Application.DTOs.WomanOfReproductiveAge;
 using AUF.EMR2.Application.Extensions;
-using AUF.EMR2.Domain.Models;
+using AUF.EMR2.Domain.Entities;
 using AutoMapper;
 using System;
 using System.Collections.Generic;

@@ -1,5 +1,5 @@
-﻿using AUF.EMR2.Domain.Models.Common;
-using AUF.EMR2.Domain.Models.Enums;
+﻿using AUF.EMR2.Domain.Enums;
+using AUF.EMR2.Domain.Primitives;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AUF.EMR2.Domain.Models
+namespace AUF.EMR2.Domain.Entities
 {
     public class PregnancyTracking : BaseDomainEntity
     {

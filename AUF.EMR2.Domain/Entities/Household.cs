@@ -1,4 +1,4 @@
-﻿using AUF.EMR2.Domain.Models.Common;
+﻿using AUF.EMR2.Domain.Primitives;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AUF.EMR2.Domain.Models
+namespace AUF.EMR2.Domain.Entities
 {
-    public class Household : BaseDomainEntity
+    public sealed class Household : BaseDomainEntity
     {
         public string HouseholdNo { get; set; }
         public DateTime? FirstQtrVisit { get; set; }
@@ -30,5 +30,7 @@ namespace AUF.EMR2.Domain.Models
         public bool IsIP { get; set; }
 
         public List<HouseholdMember> HouseholdMembers { get; set; } = new();
+
+
     }
 }

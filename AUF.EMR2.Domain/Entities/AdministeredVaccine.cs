@@ -1,11 +1,11 @@
-﻿using AUF.EMR2.Domain.Models.Common;
+﻿using AUF.EMR2.Domain.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AUF.EMR2.Domain.Models
+namespace AUF.EMR2.Domain.Entities
 {
     public class AdministeredVaccine
     {

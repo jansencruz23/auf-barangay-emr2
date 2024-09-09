@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AUF.EMR2.Domain.Models.Common
+namespace AUF.EMR2.Domain.Primitives
 {
     public abstract class BaseDomainEntity
     {
