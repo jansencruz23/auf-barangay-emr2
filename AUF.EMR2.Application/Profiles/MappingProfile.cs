@@ -50,13 +50,14 @@ namespace AUF.EMR2.Application.Profiles
             CreateMap<WomanOfReproductiveAge, CreateWraDto>().ReverseMap();
             CreateMap<WomanOfReproductiveAge, UpdateWraDto>().ReverseMap();
 
+            CreateMap<PregnancyTracking, CreatePregnancyTrackingDto>().ReverseMap();
+            CreateMap<PregnancyTracking, UpdatePregnancyTrackingDto>().ReverseMap();
             CreateMap<PregnancyTracking, PregnancyTrackingDto>()
                 .ForMember(dest => dest.PregnancyOutcome, opt => opt.MapFrom(src => src.PregnancyOutcome.GetDisplayName()))
                 .ReverseMap();
-            CreateMap<PregnancyTracking, CreatePregnancyTrackingDto>().ReverseMap();
-            CreateMap<PregnancyTracking, UpdatePregnancyTrackingDto>().ReverseMap();
 
             CreateMap<PregnancyTrackingHh, PregnancyTrackingHhDto>().ReverseMap();
+            CreateMap<PregnancyTrackingHh, PregnancyTrackingHhOnlyDto>().ReverseMap();
             CreateMap<PregnancyTrackingHh, UpdatePregnancyTrackingHhDto>().ReverseMap();
         }
     }

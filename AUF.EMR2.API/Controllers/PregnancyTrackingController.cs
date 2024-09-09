@@ -4,6 +4,7 @@ using AUF.EMR2.Application.Features.PregnancyTrackings.Commands.DeletePregnancyT
 using AUF.EMR2.Application.Features.PregnancyTrackings.Commands.UpdatePregnancyTracking;
 using AUF.EMR2.Application.Features.PregnancyTrackings.Queries.GetPregnancyTracking;
 using AUF.EMR2.Application.Features.PregnancyTrackings.Queries.GetPregnancyTrackingList;
+using AUF.EMR2.Application.Features.PregnancyTrackings.Queries.GetPrintPregnancyTrackingRecords;
 using AUF.EMR2.Application.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -28,6 +29,15 @@ namespace AUF.EMR2.API.Controllers
         public async Task<ActionResult<List<PregnancyTrackingDto>>> Get(string householdNo)
         {
             var response = await _mediator.Send(new GetPregnancyTrackingListRequest { HouseholdNo = householdNo });
+            return Ok(response);
+        }
+
+
+        // GET: api/<PregnancyTrackingController>
+        [HttpGet("print/{householdNo}")]
+        public async Task<ActionResult<PrintPregnancyTrackingDto>> GetPrintPregnancyTracking(string householdNo)
+        {
+            var response = await _mediator.Send(new GetPrintPregnancyTrackingRecordsRequest { HouseholdNo = householdNo });
             return Ok(response);
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AUF.EMR2.Application.DTOs.PregnancyTrackingHh;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace AUF.EMR2.Application.DTOs.PregnancyTracking
 {
     public class PrintPregnancyTrackingDto
     {
+        public PregnancyTrackingHhOnlyDto PregnancyTrackingHh { get; set; }
         public List<PregnancyTrackingDto> PregnancyTrackingList { get; set; }
     }
 }
