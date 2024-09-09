@@ -19,7 +19,7 @@ namespace AUF.EMR2.Persistence.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<PregnancyTracking> GetPregnancyTracking(int id)
+        public async Task<PregnancyTracking> GetPregnancyTracking(Guid id)
         {
             var pregnancyTracking = await _dbContext.PregnancyTrackings
                 .AsNoTracking()

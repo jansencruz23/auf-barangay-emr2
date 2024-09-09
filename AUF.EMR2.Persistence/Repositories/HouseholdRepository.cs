@@ -33,7 +33,7 @@ namespace AUF.EMR2.Persistence.Repositories
             return address;
         }
 
-        public async Task<Household> GetHousehold(int id)
+        public async Task<Household> GetHousehold(Guid id)
         {
             var household = await _dbContext.Households
                 .AsNoTracking()

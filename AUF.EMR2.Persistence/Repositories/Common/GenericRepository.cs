@@ -25,19 +25,19 @@ namespace AUF.EMR2.Persistence.Repositories.Common
             return entity;
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(Guid id)
         {
             var entity = await Get(id);
             _dbContext.Remove(entity);
         }
 
-        public async Task<bool> Exists(int id)
+        public async Task<bool> Exists(Guid id)
         {
             var entity = await Get(id);
             return entity != null;
         }
 
-        public async Task<T> Get(int id)
+        public async Task<T> Get(Guid id)
         {
             return await _dbContext.Set<T>().AsNoTracking().FirstOrDefaultAsync(q => q.Id == id);
         }

@@ -22,7 +22,7 @@ namespace AUF.EMR2.Persistence.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<HouseholdMember> GetHouseholdMember(int id)
+        public async Task<HouseholdMember> GetHouseholdMember(Guid id)
         {
             var householdMember = await _dbContext.HouseholdMembers
                 .AsNoTracking()
@@ -66,7 +66,7 @@ namespace AUF.EMR2.Persistence.Repositories
             return wraMembers;
         }
 
-        public async Task<bool> IsWraMember(int id)
+        public async Task<bool> IsWraMember(Guid id)
         {
             var startDate = DateTime.Today.AddYears(WraAgeRange.WraStart).AddDays(1);
             var endDate = DateTime.Today.AddYears(WraAgeRange.WraEnd);

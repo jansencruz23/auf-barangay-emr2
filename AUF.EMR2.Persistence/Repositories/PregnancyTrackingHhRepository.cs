@@ -32,7 +32,7 @@ namespace AUF.EMR2.Persistence.Repositories
             return pregnancyTrackingHh;
         }
 
-        public async Task<PregnancyTrackingHh> GetPregnancyTrackingHh(int id)
+        public async Task<PregnancyTrackingHh> GetPregnancyTrackingHh(Guid id)
         {
             var pregnancyTrackingHh = await _dbContext.PregnancyTrackingHhs
                 .AsNoTracking()

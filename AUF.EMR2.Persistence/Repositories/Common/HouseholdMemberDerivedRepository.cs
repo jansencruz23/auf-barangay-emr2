@@ -62,7 +62,7 @@ namespace AUF.EMR2.Persistence.Repositories.Common
             return records;
         }
 
-        public async Task<HouseholdMember> GetSingleMasterlistRecord(int id)
+        public async Task<HouseholdMember> GetSingleMasterlistRecord(Guid id)
         {
             var record = await _dbContext.HouseholdMembers
                 .AsNoTracking()

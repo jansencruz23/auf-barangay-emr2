@@ -20,7 +20,7 @@ namespace AUF.EMR2.Persistence.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<WomanOfReproductiveAge> GetWra(int id)
+        public async Task<WomanOfReproductiveAge> GetWra(Guid id)
         {
             var wra = await _dbContext.WomenOfReproductiveAge
                 .AsNoTracking()
