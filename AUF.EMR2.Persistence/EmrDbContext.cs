@@ -24,6 +24,10 @@ namespace AUF.EMR2.Persistence
         public DbSet<WomanOfReproductiveAge> WomenOfReproductiveAge { get; set; }
         public DbSet<PregnancyTracking> PregnancyTrackings { get; set; }
         public DbSet<PregnancyTrackingHh> PregnancyTrackingHhs { get; set; }
+        public DbSet<VaccinationRecord> VaccinationRecords { get; set; }
+        public DbSet<VaccinationAppointment> VaccinationAppointments { get; set; }
+        public DbSet<Vaccine> Vaccines { get; set; }
+        public DbSet<AdministeredVaccine> AdministeredVaccines { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -33,6 +37,19 @@ namespace AUF.EMR2.Persistence
                 .HasOne(q => q.Household)
                 .WithOne()
                 .HasForeignKey<PregnancyTrackingHh>(q => q.HouseholdId);
+
+            modelBuilder.Entity<AdministeredVaccine>()
+                .HasKey(q => new { q.VaccinationAppointmentId, q.VaccineId });
+
+            modelBuilder.Entity<AdministeredVaccine>()
+                .HasOne(q => q.VaccinationAppointment)
+                .WithMany(q => q.AdministeredVaccines)
+                .HasForeignKey(q => q.VaccinationAppointmentId);
+
+            modelBuilder.Entity<AdministeredVaccine>()
+                .HasOne(q => q.Vaccine)
+                .WithMany(q => q.AdministeredVaccines)
+                .HasForeignKey(q => q.VaccineId);
 
             modelBuilder.ApplyConfiguration(new BarangayConfiguration());
         }
