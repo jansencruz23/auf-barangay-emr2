@@ -1,5 +1,7 @@
-﻿using AUF.EMR2.Domain.Entities;
-using AUF.EMR2.Domain.Primitives;
+﻿using AUF.EMR2.Domain.Aggregates;
+using AUF.EMR2.Domain.Aggregates.HouseholdAggregate;
+using AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate;
+using AUF.EMR2.Domain.Common.Models;
 using AUF.EMR2.Persistence.Configurations.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -53,7 +55,7 @@ namespace AUF.EMR2.Persistence
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-            foreach (var entry in ChangeTracker.Entries<BaseDomainEntity>())
+            foreach (var entry in ChangeTracker.Entries<Entity>())
             {
                 entry.Entity.LastModified = DateTime.Now;
 
@@ -68,10 +70,10 @@ namespace AUF.EMR2.Persistence
             var deletedEntities = ChangeTracker.Entries().Where(q => q.State == EntityState.Deleted);
             foreach (var entity in deletedEntities)
             {
-                if (entity.Entity is BaseDomainEntity)
+                if (entity.Entity is Entity)
                 {
                     entity.State = EntityState.Modified;
-                    var deletedEntity = entity.Entity as BaseDomainEntity;
+                    var deletedEntity = entity.Entity as Entity;
                     deletedEntity.Status = false;
                 }
             }

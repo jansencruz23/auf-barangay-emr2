@@ -1,14 +1,14 @@
-﻿using AUF.EMR2.Domain.Entities;
-using AUF.EMR2.Domain.Primitives;
+﻿using AUF.EMR2.Domain.Aggregates;
+using AUF.EMR2.Domain.Common.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AUF.EMR2.Domain.Entities
+namespace AUF.EMR2.Domain.Aggregates
 {
-    public class Barangay : BaseDomainEntity
+    public class Barangay 
     {
         public string BarangayName { get; set; }
         public byte[]? Logo { get; set; }

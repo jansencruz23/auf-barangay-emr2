@@ -1,5 +1,5 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
-using AUF.EMR2.Domain.Primitives;
+using AUF.EMR2.Domain.Common.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace AUF.EMR2.Persistence.Repositories.Common
 {
     public abstract class GenericRepository<T> : IGenericRepository<T>
-        where T : BaseDomainEntity
+        where T : Entity
     {
         private readonly EmrDbContext _dbContext;
 

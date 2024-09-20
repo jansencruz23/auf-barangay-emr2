@@ -1,4 +1,4 @@
-﻿using AUF.EMR2.Domain.Primitives;
+﻿using AUF.EMR2.Domain.Common.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AUF.EMR2.Domain.Entities
+namespace AUF.EMR2.Domain.Aggregates
 {
-    public class VaccinationAppointment : BaseDomainEntity
+    public class VaccinationAppointment 
     {
         public Guid VaccinationRecordId { get; set; }
         public VaccinationRecord? VaccinationRecord { get; set; }

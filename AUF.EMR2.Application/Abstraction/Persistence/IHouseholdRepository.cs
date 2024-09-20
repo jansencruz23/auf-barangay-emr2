@@ -1,6 +1,6 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
 using AUF.EMR2.Application.Models.Pagination;
-using AUF.EMR2.Domain.Entities;
+using AUF.EMR2.Domain.Aggregates.HouseholdAggregate;
 using System;
 using System.Collections.Generic;
 using System.Linq;

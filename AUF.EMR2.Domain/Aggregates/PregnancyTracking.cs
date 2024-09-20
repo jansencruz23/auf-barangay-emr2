@@ -1,15 +1,9 @@
-﻿using AUF.EMR2.Domain.Enums;
-using AUF.EMR2.Domain.Primitives;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate;
+using AUF.EMR2.Domain.Enums;
 
-namespace AUF.EMR2.Domain.Entities
+namespace AUF.EMR2.Domain.Aggregates
 {
-    public class PregnancyTracking : BaseDomainEntity
+    public class PregnancyTracking 
     {
         public Guid HouseholdMemberId { get; set; }
         public HouseholdMember HouseholdMember { get; set; }

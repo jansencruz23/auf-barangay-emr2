@@ -1,7 +1,7 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
 using AUF.EMR2.Application.Exceptions;
 using AUF.EMR2.Application.Responses;
-using AUF.EMR2.Domain.Entities;
+using AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;

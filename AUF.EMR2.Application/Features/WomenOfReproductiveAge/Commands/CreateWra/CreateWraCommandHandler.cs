@@ -3,7 +3,7 @@ using AUF.EMR2.Application.DTOs.Household.Validators;
 using AUF.EMR2.Application.DTOs.WomanOfReproductiveAge.Validators;
 using AUF.EMR2.Application.Exceptions;
 using AUF.EMR2.Application.Responses;
-using AUF.EMR2.Domain.Entities;
+using AUF.EMR2.Domain.Aggregates;
 using AutoMapper;
 using MediatR;
 using System;
