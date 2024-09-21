@@ -1,6 +1,6 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
 using AUF.EMR2.Application.DTOs.Masterlist;
-using AutoMapper;
+using MapsterMapper;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -25,10 +25,11 @@ namespace AUF.EMR2.Application.Features.Masterlists.Queries.GetMasterlistChildDe
 
         public async Task<MasterlistChildDto> Handle(GetMasterlistChildRecordRequest request, CancellationToken cancellationToken)
         {
-            var child = await _unitOfWork.MasterlistRepository.GetSingleMasterlistRecord(request.Id);
-            var childDto = _mapper.Map<MasterlistChildDto>(child);
+            throw new NotImplementedException();
+            //var child = await _unitOfWork.MasterlistRepository.GetSingleMasterlistRecord(request.Id);
+            //var childDto = _mapper.Map<MasterlistChildDto>(child);
 
-            return childDto;
+            //return childDto;
         }
     }
 }

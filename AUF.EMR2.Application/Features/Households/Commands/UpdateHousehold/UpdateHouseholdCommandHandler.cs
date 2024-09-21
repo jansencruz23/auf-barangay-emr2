@@ -1,8 +1,6 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
-using AUF.EMR2.Application.DTOs.Household.Validators;
-using AUF.EMR2.Application.Exceptions;
-using AUF.EMR2.Application.Responses;
-using AutoMapper;
+using AUF.EMR2.Application.Common.Responses;
+using MapsterMapper;
 using MediatR;
 
 namespace AUF.EMR2.Application.Features.Households.Commands.UpdateHousehold;

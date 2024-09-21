@@ -32,14 +32,14 @@ namespace AUF.EMR2.Application.DTOs.HouseholdMember.Validators
                 .NotNull().WithMessage("{PropertyName} is required.")
                 .LessThanOrEqualTo(DateTime.Now).WithMessage("{PropertyName} must be a date in the past or today..");
 
-            RuleFor(q => q.HouseholdId)
-                .NotNull().WithMessage("{PropertyName} is required.")
-                .NotEqual(Guid.Empty).WithMessage("{PropertyName} is required.")
-                .MustAsync(async (id, token) =>
-                {
-                    return await unitOfWork.HouseholdRepository.Exists(id);
-                })
-                .WithMessage("{PropertyName} must exist.");
+            //RuleFor(q => q.HouseholdId)
+            //    .NotNull().WithMessage("{PropertyName} is required.")
+            //    .NotEqual(Guid.Empty).WithMessage("{PropertyName} is required.")
+            //    .MustAsync(async (id, token) =>
+            //    {
+            //        return await unitOfWork.HouseholdRepository.Exists(id);
+            //    })
+            //    .WithMessage("{PropertyName} must exist.");
         }
     }
 }

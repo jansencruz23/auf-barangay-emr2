@@ -4,7 +4,7 @@ using AUF.EMR2.Application.DTOs.Household.Validators;
 using AUF.EMR2.Application.DTOs.WomanOfReproductiveAge.Validators;
 using AUF.EMR2.Application.Exceptions;
 using AUF.EMR2.Domain.Aggregates.WomanOfReproductiveAgeAggregate;
-using AutoMapper;
+using MapsterMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -30,46 +30,47 @@ namespace AUF.EMR2.Application.Features.WomenOfReproductiveAge.Commands.UpdateWr
 
         public async Task<BaseCommandResponse<Guid>> Handle(UpdateWraCommand request, CancellationToken cancellationToken)
         {
-            var response = new BaseCommandResponse<Guid>();
-            var validator = new UpdateWraDtoValidator(_unitOfWork);
-            var validationResult = await validator.ValidateAsync(request.WraDto, cancellationToken);
+            throw new NotImplementedException();
+            //var response = new BaseCommandResponse<Guid>();
+            //var validator = new UpdateWraDtoValidator(_unitOfWork);
+            //var validationResult = await validator.ValidateAsync(request.WraDto, cancellationToken);
 
-            if (!validationResult.IsValid)
-            {
-                response.Success = false;
-                response.Message = "Updation Failed";
-                response.Errors = validationResult.Errors.Select(q => q.ErrorMessage).ToList();
+            //if (!validationResult.IsValid)
+            //{
+            //    response.Success = false;
+            //    response.Message = "Updation Failed";
+            //    response.Errors = validationResult.Errors.Select(q => q.ErrorMessage).ToList();
 
-                throw new ValidationException(validationResult);
-            }
+            //    throw new ValidationException(validationResult);
+            //}
 
-            var wra = await _unitOfWork.WraRepository.GetWra(request.WraDto.Id);
+            //var wra = await _unitOfWork.WraRepository.GetWra(request.WraDto.Id);
 
-            if (wra == null)
-            {
-                response.Success = false;
-                response.Message = $"{nameof(WomanOfReproductiveAge)} with id: {request.WraDto.Id} is not existing";
+            //if (wra == null)
+            //{
+            //    response.Success = false;
+            //    response.Message = $"{nameof(WomanOfReproductiveAge)} with id: {request.WraDto.Id} is not existing";
 
-                throw new NotFoundException(nameof(WomanOfReproductiveAge), request.WraDto.Id);
-            }
+            //    throw new NotFoundException(nameof(WomanOfReproductiveAge), request.WraDto.Id);
+            //}
 
-            _mapper.Map(request.WraDto, wra);
+            //_mapper.Map(request.WraDto, wra);
 
-            try
-            {
-                _unitOfWork.WraRepository.Update(wra);
-                await _unitOfWork.SaveAsync();
-            }
-            catch (DbUpdateConcurrencyException ex)
-            {
-                throw new ConcurrencyException("The entity you attempted to update was modified by another user.", ex);
-            }
+            //try
+            //{
+            //    _unitOfWork.WraRepository.Update(wra);
+            //    await _unitOfWork.SaveAsync();
+            //}
+            //catch (DbUpdateConcurrencyException ex)
+            //{
+            //    throw new ConcurrencyException("The entity you attempted to update was modified by another user.", ex);
+            //}
 
-            response.Success = true;
-            response.Message = "Updation is successful";
-            response.Id = request.WraDto.Id;
+            //response.Success = true;
+            //response.Message = "Updation is successful";
+            //response.Id = request.WraDto.Id;
 
-            return response;
+            //return response;
         }
     }
 }

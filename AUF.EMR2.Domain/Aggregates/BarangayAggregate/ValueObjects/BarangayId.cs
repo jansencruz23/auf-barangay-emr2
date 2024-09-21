@@ -25,4 +25,6 @@ public sealed class BarangayId : ValueObject
     {
         yield return Value;
     }
+
+    private BarangayId() { }
 }

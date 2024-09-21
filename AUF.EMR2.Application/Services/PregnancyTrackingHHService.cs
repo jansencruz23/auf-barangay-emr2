@@ -20,15 +20,16 @@ namespace AUF.EMR2.Application.Services
 
         public async Task<PregnancyTrackingHh> CreatePregnancyTrackingHH(Guid householdId)
         {
-            var barangay = await _unitOfWork.BarangayRepository.GetBarangay();
-            var pregnancyTrackingHh = new PregnancyTrackingHh
-            {
-                BarangayId = barangay.Id,
-                HouseholdId = householdId,
-                Year = DateTime.Now.Year
-            };
+            throw new NotImplementedException();
+            //var barangay = await _unitOfWork.BarangayRepository.GetBarangay();
+            //var pregnancyTrackingHh = new PregnancyTrackingHh
+            //{
+            //    BarangayId = barangay.Id,
+            //    HouseholdId = householdId,
+            //    Year = DateTime.Now.Year
+            //};
 
-            return pregnancyTrackingHh;
+            //return pregnancyTrackingHh;
         }
     }
 }

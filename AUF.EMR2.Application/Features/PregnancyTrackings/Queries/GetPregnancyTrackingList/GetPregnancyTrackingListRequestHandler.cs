@@ -1,7 +1,7 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
 using AUF.EMR2.Application.DTOs.HouseholdMember;
 using AUF.EMR2.Application.DTOs.PregnancyTracking;
-using AutoMapper;
+using MapsterMapper;
 using MediatR;
 using System;
 using System.Collections.Generic;

@@ -25,4 +25,6 @@ public sealed class VaccinationRecordId : ValueObject
     {
         yield return Value;
     }
+
+    private VaccinationRecordId() { }
 }

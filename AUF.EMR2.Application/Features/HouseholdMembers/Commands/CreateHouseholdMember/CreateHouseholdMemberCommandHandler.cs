@@ -4,7 +4,7 @@ using AUF.EMR2.Application.DTOs.Household.Validators;
 using AUF.EMR2.Application.DTOs.HouseholdMember.Validators;
 using AUF.EMR2.Application.Exceptions;
 using AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate;
-using AutoMapper;
+using MapsterMapper;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -28,28 +28,29 @@ namespace AUF.EMR2.Application.Features.HouseholdMembers.Commands.CreateHousehol
         }
         public async Task<BaseCommandResponse<Guid>> Handle(CreateHouseholdMemberCommand request, CancellationToken cancellationToken)
         {
-            var response = new BaseCommandResponse<Guid>();
-            var validator = new CreateHouseholdMemberDtoValidator(_unitOfWork);
-            var validationResult = await validator.ValidateAsync(request.HouseholdMemberDto, cancellationToken);
+            throw new NotImplementedException();
+            //var response = new BaseCommandResponse<Guid>();
+            //var validator = new CreateHouseholdMemberDtoValidator(_unitOfWork);
+            //var validationResult = await validator.ValidateAsync(request.HouseholdMemberDto, cancellationToken);
 
-            if (!validationResult.IsValid)
-            {
-                response.Success = false;
-                response.Message = "Creation Failed";
-                response.Errors = validationResult.Errors.Select(q => q.ErrorMessage).ToList();
+            //if (!validationResult.IsValid)
+            //{
+            //    response.Success = false;
+            //    response.Message = "Creation Failed";
+            //    response.Errors = validationResult.Errors.Select(q => q.ErrorMessage).ToList();
 
-                throw new ValidationException(validationResult);
-            }
+            //    throw new ValidationException(validationResult);
+            //}
 
-            var householdMember = _mapper.Map<HouseholdMember>(request.HouseholdMemberDto);
-            householdMember = await _unitOfWork.HouseholdMemberRepository.Add(householdMember);
-            await _unitOfWork.SaveAsync();
+            //var householdMember = _mapper.Map<HouseholdMember>(request.HouseholdMemberDto);
+            //householdMember = await _unitOfWork.HouseholdMemberRepository.Add(householdMember);
+            //await _unitOfWork.SaveAsync();
 
-            response.Success = true;
-            response.Message = "Creation is Successful";
-            response.Id = householdMember.Id;
+            //response.Success = true;
+            //response.Message = "Creation is Successful";
+            //response.Id = householdMember.Id;
 
-            return response;
+            //return response;
         }
     }
 }

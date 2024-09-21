@@ -1,7 +1,7 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
 using AUF.EMR2.Application.DTOs.HouseholdMember;
 using AUF.EMR2.Application.DTOs.PregnancyTracking;
-using AutoMapper;
+using MapsterMapper;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -26,10 +26,11 @@ namespace AUF.EMR2.Application.Features.PregnancyTrackings.Queries.GetPregnancyT
 
         public async Task<PregnancyTrackingDto> Handle(GetPregnancyTrackingRequest request, CancellationToken cancellationToken)
         {
-            var pregnancyTracking = await _unitOfWork.PregnancyTrackingRepository.GetPregnancyTracking(request.Id);
-            var pregnancyTrackingDto = _mapper.Map<PregnancyTrackingDto>(pregnancyTracking);
+            throw new NotImplementedException();
+            //var pregnancyTracking = await _unitOfWork.PregnancyTrackingRepository.GetPregnancyTracking(request.Id);
+            //var pregnancyTrackingDto = _mapper.Map<PregnancyTrackingDto>(pregnancyTracking);
 
-            return pregnancyTrackingDto;
+            //return pregnancyTrackingDto;
         }
     }
 }

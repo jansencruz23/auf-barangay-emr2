@@ -25,4 +25,6 @@ public sealed class WomanOfReproductiveAgeId : ValueObject
     {
         yield return Value;
     }
+
+    private WomanOfReproductiveAgeId() { }
 }

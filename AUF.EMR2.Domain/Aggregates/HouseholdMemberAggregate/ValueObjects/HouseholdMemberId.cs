@@ -23,6 +23,8 @@ public class HouseholdMemberId : ValueObject
 
     public override IEnumerable<object> GetEqualityComponents()
     {
-        throw new NotImplementedException();
+        yield return Value;
     }
+
+    private HouseholdMemberId() { }
 }

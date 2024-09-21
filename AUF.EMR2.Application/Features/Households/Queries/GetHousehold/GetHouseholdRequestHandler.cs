@@ -1,6 +1,6 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
 using AUF.EMR2.Application.DTOs.Household;
-using AutoMapper;
+using MapsterMapper;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -25,10 +25,11 @@ namespace AUF.EMR2.Application.Features.Households.Queries.GetHousehold
 
         public async Task<HouseholdDto> Handle(GetHouseholdRequest request, CancellationToken cancellationToken)
         {
-            var household = await _unitOfWork.HouseholdRepository.GetHousehold(request.Id);
-            var householdDto = _mapper.Map<HouseholdDto>(household);
+            throw new NotImplementedException();
+            //var household = await _unitOfWork.HouseholdRepository.GetHousehold(request.Id);
+            //var householdDto = _mapper.Map<HouseholdDto>(household);
 
-            return householdDto;
+            //return householdDto;
         }
     }
 }

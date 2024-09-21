@@ -4,7 +4,7 @@ using AUF.EMR2.Application.DTOs.Household.Validators;
 using AUF.EMR2.Application.DTOs.PregnancyTracking.Validators;
 using AUF.EMR2.Application.Exceptions;
 using AUF.EMR2.Domain.Aggregates.PregnancyTrackingAggregate;
-using AutoMapper;
+using MapsterMapper;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -29,28 +29,29 @@ namespace AUF.EMR2.Application.Features.PregnancyTrackings.Commands.CreatePregna
 
         public async Task<BaseCommandResponse<Guid>> Handle(CreatePregnancyTrackingCommand request, CancellationToken cancellationToken)
         {
-            var response = new BaseCommandResponse<Guid>();
-            var validator = new CreatePregnancyTrackingDtoValidator(_unitOfWork);
-            var validationResult = await validator.ValidateAsync(request.PregnancyTrackingDto, cancellationToken);
+            throw new NotImplementedException();
+            //var response = new BaseCommandResponse<Guid>();
+            //var validator = new CreatePregnancyTrackingDtoValidator(_unitOfWork);
+            //var validationResult = await validator.ValidateAsync(request.PregnancyTrackingDto, cancellationToken);
 
-            if (!validationResult.IsValid)
-            {
-                response.Success = false;
-                response.Message = "Creation Failed";
-                response.Errors = validationResult.Errors.Select(q => q.ErrorMessage).ToList();
+            //if (!validationResult.IsValid)
+            //{
+            //    response.Success = false;
+            //    response.Message = "Creation Failed";
+            //    response.Errors = validationResult.Errors.Select(q => q.ErrorMessage).ToList();
 
-                throw new ValidationException(validationResult);
-            }
+            //    throw new ValidationException(validationResult);
+            //}
 
-            var pregnancyTracking = _mapper.Map<PregnancyTracking>(request.PregnancyTrackingDto);
-            pregnancyTracking = await _unitOfWork.PregnancyTrackingRepository.Add(pregnancyTracking);
-            await _unitOfWork.SaveAsync();
+            //var pregnancyTracking = _mapper.Map<PregnancyTracking>(request.PregnancyTrackingDto);
+            //pregnancyTracking = await _unitOfWork.PregnancyTrackingRepository.Add(pregnancyTracking);
+            //await _unitOfWork.SaveAsync();
 
-            response.Success = true;
-            response.Message = "Creation is Successful";
-            response.Id = pregnancyTracking.Id;
+            //response.Success = true;
+            //response.Message = "Creation is Successful";
+            //response.Id = pregnancyTracking.Id;
 
-            return response;
+            //return response;
         }
     }
 }

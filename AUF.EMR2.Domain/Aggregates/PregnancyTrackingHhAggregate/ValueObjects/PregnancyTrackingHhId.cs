@@ -1,6 +1,6 @@
 ﻿using AUF.EMR2.Domain.Common.Models;
 
-namespace AUF.EMR2.Domain.Aggregates.HouseholdAggregate.ValueObjects;
+namespace AUF.EMR2.Domain.Aggregates.PregnancyTrackingHhAggregate.ValueObjects;
 
 public sealed class PregnancyTrackingHhId : ValueObject
 {
@@ -8,7 +8,7 @@ public sealed class PregnancyTrackingHhId : ValueObject
 
     private PregnancyTrackingHhId(Guid value)
     {
-        Value = value;  
+        Value = value;
     }
 
     public static PregnancyTrackingHhId Create()
@@ -25,4 +25,6 @@ public sealed class PregnancyTrackingHhId : ValueObject
     {
         yield return Value;
     }
+
+    private PregnancyTrackingHhId() { }
 }

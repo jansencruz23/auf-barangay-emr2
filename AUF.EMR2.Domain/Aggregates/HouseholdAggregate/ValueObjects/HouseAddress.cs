@@ -37,4 +37,6 @@ public sealed class HouseAddress : ValueObject
         yield return City;
         yield return Province;
     }
+
+    private HouseAddress() { }
 }

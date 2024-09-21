@@ -1,15 +1,14 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
 using AUF.EMR2.Application.Abstraction.Services;
-using AUF.EMR2.Application.DTOs.Household.Validators;
-using AUF.EMR2.Application.Exceptions;
-using AUF.EMR2.Application.Responses;
 using AUF.EMR2.Domain.Aggregates.HouseholdAggregate;
-using AutoMapper;
+using AUF.EMR2.Domain.Aggregates.HouseholdAggregate.ValueObjects;
+using ErrorOr;
+using MapsterMapper;
 using MediatR;
 
 namespace AUF.EMR2.Application.Features.Households.Commands.CreateHousehold;
 
-public class CreateHouseholdCommandHandler : IRequestHandler<CreateHouseholdCommand, BaseCommandResponse<Guid>>
+public class CreateHouseholdCommandHandler : IRequestHandler<CreateHouseholdCommand, ErrorOr<Guid>>
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IPregnancyTrackingHHService _pregnancyTrackingHHService;
@@ -25,9 +24,39 @@ public class CreateHouseholdCommandHandler : IRequestHandler<CreateHouseholdComm
         _mapper = mapper;
     }
 
-    public async Task<BaseCommandResponse<Guid>> Handle(CreateHouseholdCommand request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<Guid>> Handle(CreateHouseholdCommand request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var dto = request.HouseholdDto;
+
+        var household = Household.Create(
+            householdNo: dto.HouseholdNo,
+            firstQtrVisit: dto.FirstQtrVisit,
+            secondQtrVisit: dto.SecondQtrVisit,
+            thirdQtrVisit: dto.ThirdQtrVisit,
+            fourthQtrVisit: dto.FourthQtrVisit,
+            lastName: dto.LastName,
+            firstName: dto.FirstName,
+            motherMaidenName: dto.MotherMaidenName,
+            houseAddress: HouseAddress.Create(
+                houseNoAndStreet: dto.HouseAddress.HouseNoAndStreet,
+                barangay: dto.HouseAddress.Barangay,
+                city: dto.HouseAddress.City,
+                province: dto.HouseAddress.Province),
+            contactNo: dto.ContactNo,
+            isNhts: dto.IsNhts,
+            philhealth: Philhealth.Create(
+                isHeadPhilhealthMember: dto.Philhealth.IsHeadPhilhealthMember,
+                philhealthNo: dto.Philhealth.PhilhealthNo,
+                category: dto.Philhealth.Category),
+            isIp: dto.IsIp
+        );
+
+        await _unitOfWork.HouseholdRepository.Add(household);
+        await _unitOfWork.SaveAsync();
+
+        return household.Id.Value;
+
+
         //var response = new BaseCommandResponse<Guid>();
         //var validator = new CreateHouseholdDtoValidator(_unitOfWork);
         //var validationResult = await validator.ValidateAsync(request.HouseholdDto, cancellationToken);

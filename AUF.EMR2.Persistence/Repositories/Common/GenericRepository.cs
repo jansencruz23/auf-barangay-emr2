@@ -1,61 +1,56 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
 using AUF.EMR2.Domain.Common.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace AUF.EMR2.Persistence.Repositories.Common
+namespace AUF.EMR2.Persistence.Repositories.Common;
+
+public abstract class GenericRepository<T, TId> : IGenericRepository<T, TId>
+    where T : AggregateRoot<TId>
+    where TId : ValueObject
 {
-    public abstract class GenericRepository<T> : IGenericRepository<T>
-        where T : Entity
+    private readonly EmrDbContext _dbContext;
+
+    public GenericRepository(EmrDbContext dbContext)
     {
-        private readonly EmrDbContext _dbContext;
+        _dbContext = dbContext;
+    }
 
-        public GenericRepository(EmrDbContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
+    public async Task<T> Add(T entity)
+    {
+        var result = await _dbContext.AddAsync(entity);
+        return entity;
+    }
 
-        public async Task<T> Add(T entity)
-        {
-            var result = await _dbContext.AddAsync(entity);
-            return entity;
-        }
+    public async Task Delete(TId id)
+    {
+        var entity = await Get(id);
+        _dbContext.Remove(entity);
+    }
 
-        public async Task Delete(Guid id)
-        {
-            var entity = await Get(id);
-            _dbContext.Remove(entity);
-        }
+    public async Task<bool> Exists(TId id)
+    {
+        var entity = await Get(id);
+        return entity != null;
+    }
 
-        public async Task<bool> Exists(Guid id)
-        {
-            var entity = await Get(id);
-            return entity != null;
-        }
+    public async Task<T> Get(TId id)
+    {
+        return await _dbContext.Set<T>().AsNoTracking().FirstOrDefaultAsync(q => q.Id == id);
+    }
 
-        public async Task<T> Get(Guid id)
-        {
-            return await _dbContext.Set<T>().AsNoTracking().FirstOrDefaultAsync(q => q.Id == id);
-        }
+    public async Task<List<T>> GetAll()
+    {
+        return await _dbContext.Set<T>().AsNoTracking().ToListAsync();
+    }
 
-        public async Task<List<T>> GetAll()
-        {
-            return await _dbContext.Set<T>().AsNoTracking().ToListAsync();
-        }
+    public async Task<int> TotalCount()
+    {
+        return await _dbContext.Set<T>().AsNoTracking().CountAsync();
+    }
 
-        public async Task<int> TotalCount()
-        {
-            return await _dbContext.Set<T>().AsNoTracking().CountAsync();
-        }
-
-        public void Update(T entity)
-        {
-            _dbContext.Entry(entity).OriginalValues["Version"] = entity.Version;
-            _dbContext.Update(entity);
-        }
+    public void Update(T entity)
+    {
+        _dbContext.Entry(entity).OriginalValues["Version"] = entity.Version;
+        _dbContext.Update(entity);
     }
 }

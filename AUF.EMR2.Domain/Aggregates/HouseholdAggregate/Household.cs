@@ -16,13 +16,11 @@ public sealed class Household : AggregateRoot<HouseholdId>
     public string LastName { get; private set; } = null!;
     public string FirstName { get; private set; } = null!;
     public string? MotherMaidenName { get; private set; }
-    public HouseAddress Address { get; private set; } = null!;
+    public HouseAddress HouseAddress { get; private set; } = null!;
     public string ContactNo { get; private set; } = null!;
-    public bool IsNhts { get; }
-    public bool IsNHTS { get; private set; }
+    public bool IsNhts { get; private set; }
     public Philhealth Philhealth { get; private set; } = null!;
-    public bool IsIp { get; }
-    public bool IsIP { get; private set; }
+    public bool IsIp { get; private set; }
 
     public IReadOnlyList<HouseholdMemberId> HouseholdMemberIds => _householdMemberIds.AsReadOnly();
 
@@ -36,7 +34,7 @@ public sealed class Household : AggregateRoot<HouseholdId>
         string lastName,
         string firstName,
         string? motherMaidenName,
-        HouseAddress address,
+        HouseAddress houseAddress,
         string contactNo,
         bool isNhts,
         Philhealth philhealth,
@@ -51,7 +49,7 @@ public sealed class Household : AggregateRoot<HouseholdId>
         LastName = lastName;
         FirstName = firstName;
         MotherMaidenName = motherMaidenName;
-        Address = address;
+        HouseAddress = houseAddress;
         ContactNo = contactNo;
         IsNhts = isNhts;
         Philhealth = philhealth;
@@ -67,27 +65,28 @@ public sealed class Household : AggregateRoot<HouseholdId>
         string lastName,
         string firstName,
         string? motherMaidenName,
-        HouseAddress address,
+        HouseAddress houseAddress,
         string contactNo,
         bool isNhts,
         Philhealth philhealth,
         bool isIp)
     {
-        return new Household(
-            householdId: HouseholdId.Create(),
-            householdNo: householdNo,
-            firstQtrVisit: firstQtrVisit,
-            secondQtrVisit: secondQtrVisit,
-            thirdQtrVisit: thirdQtrVisit,
-            fourthQtrVisit: fourthQtrVisit,
-            lastName: lastName,
-            firstName: firstName,
-            motherMaidenName: motherMaidenName,
-            address: address,
-            contactNo: contactNo,
-            isNhts: isNhts,
-            philhealth: philhealth,
-            isIp: isIp);
+        return new Household
+        {
+            HouseholdNo = householdNo,
+            FirstQtrVisit = firstQtrVisit,
+            SecondQtrVisit = secondQtrVisit,
+            ThirdQtrVisit = thirdQtrVisit,
+            FourthQtrVisit = fourthQtrVisit,
+            LastName = lastName,
+            FirstName = firstName,
+            MotherMaidenName = motherMaidenName,
+            HouseAddress = houseAddress,
+            ContactNo = contactNo,
+            IsNhts = isNhts,
+            Philhealth = philhealth,
+            IsIp = isIp
+        };
     }
 
     private Household() { }

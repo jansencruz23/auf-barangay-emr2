@@ -4,7 +4,7 @@ using AUF.EMR2.Application.DTOs.Barangay.Validators;
 using AUF.EMR2.Application.DTOs.Household.Validators;
 using AUF.EMR2.Application.Exceptions;
 using AUF.EMR2.Domain.Aggregates.BarangayAggregate;
-using AutoMapper;
+using MapsterMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;

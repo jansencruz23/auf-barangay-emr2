@@ -25,4 +25,6 @@ public sealed class HouseholdId : ValueObject
     {
         yield return Value;
     }
+
+    private HouseholdId() { }
 }

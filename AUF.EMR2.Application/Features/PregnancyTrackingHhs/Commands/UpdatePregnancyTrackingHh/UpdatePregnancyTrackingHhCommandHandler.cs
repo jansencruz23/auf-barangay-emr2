@@ -4,7 +4,7 @@ using AUF.EMR2.Application.DTOs.OralHealth.Validators;
 using AUF.EMR2.Application.DTOs.PregnancyTrackingHh.Validators;
 using AUF.EMR2.Application.Exceptions;
 using AUF.EMR2.Domain.Aggregates.PregnancyTrackingHhAggregate;
-using AutoMapper;
+using MapsterMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -30,46 +30,47 @@ namespace AUF.EMR2.Application.Features.PregnancyTrackingHhs.Commands.UpdatePreg
 
         public async Task<BaseCommandResponse<Guid>> Handle(UpdatePregnancyTrackingHhCommand request, CancellationToken cancellationToken)
         {
-            var response = new BaseCommandResponse<Guid>();
-            var validator = new UpdatePregnancyTrackingHhDtoValidator(_unitOfWork);
-            var validationResult = await validator.ValidateAsync(request.PregnancyTrackingHHDto, cancellationToken);
+            throw new NotImplementedException();
+            //var response = new BaseCommandResponse<Guid>();
+            //var validator = new UpdatePregnancyTrackingHhDtoValidator(_unitOfWork);
+            //var validationResult = await validator.ValidateAsync(request.PregnancyTrackingHHDto, cancellationToken);
 
-            if (!validationResult.IsValid)
-            {
-                response.Success = false;
-                response.Message = "Updation Failed";
-                response.Errors = validationResult.Errors.Select(q => q.ErrorMessage).ToList();
+            //if (!validationResult.IsValid)
+            //{
+            //    response.Success = false;
+            //    response.Message = "Updation Failed";
+            //    response.Errors = validationResult.Errors.Select(q => q.ErrorMessage).ToList();
 
-                throw new ValidationException(validationResult);
-            }
+            //    throw new ValidationException(validationResult);
+            //}
 
-            var pregnancyTrackingHh = await _unitOfWork.PregnancyTrackingHhRepository.GetPregnancyTrackingHh(request.PregnancyTrackingHHDto.Id);
+            //var pregnancyTrackingHh = await _unitOfWork.PregnancyTrackingHhRepository.GetPregnancyTrackingHh(request.PregnancyTrackingHHDto.Id);
 
-            if (pregnancyTrackingHh == null)
-            {
-                response.Success = false;
-                response.Message = $"{nameof(PregnancyTrackingHh)} with id: {request.PregnancyTrackingHHDto.Id} is not existing";
+            //if (pregnancyTrackingHh == null)
+            //{
+            //    response.Success = false;
+            //    response.Message = $"{nameof(PregnancyTrackingHh)} with id: {request.PregnancyTrackingHHDto.Id} is not existing";
 
-                throw new NotFoundException(nameof(PregnancyTrackingHh), request.PregnancyTrackingHHDto.Id);
-            }
+            //    throw new NotFoundException(nameof(PregnancyTrackingHh), request.PregnancyTrackingHHDto.Id);
+            //}
 
-            _mapper.Map(request.PregnancyTrackingHHDto, pregnancyTrackingHh);
+            //_mapper.Map(request.PregnancyTrackingHHDto, pregnancyTrackingHh);
 
-            try
-            {
-                _unitOfWork.PregnancyTrackingHhRepository.Update(pregnancyTrackingHh);
-                await _unitOfWork.SaveAsync();
-            }
-            catch (DbUpdateConcurrencyException ex)
-            {
-                throw new ConcurrencyException("The entity you attempted to update was modified by another user.", ex);
-            }
+            //try
+            //{
+            //    _unitOfWork.PregnancyTrackingHhRepository.Update(pregnancyTrackingHh);
+            //    await _unitOfWork.SaveAsync();
+            //}
+            //catch (DbUpdateConcurrencyException ex)
+            //{
+            //    throw new ConcurrencyException("The entity you attempted to update was modified by another user.", ex);
+            //}
 
-            response.Success = true;
-            response.Message = "Updation is successful";
-            response.Id = request.PregnancyTrackingHHDto.Id;
+            //response.Success = true;
+            //response.Message = "Updation is successful";
+            //response.Id = request.PregnancyTrackingHHDto.Id;
 
-            return response;
+            //return response;
         }
     }
 }

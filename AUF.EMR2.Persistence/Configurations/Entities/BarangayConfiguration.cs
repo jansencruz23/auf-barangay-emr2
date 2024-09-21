@@ -13,19 +13,19 @@ namespace AUF.EMR2.Persistence.Configurations.Entities
     {
         public void Configure(EntityTypeBuilder<Barangay> builder)
         {
-            builder.HasData(
-                new Barangay
-                {
-                    Id = Guid.NewGuid(),
-                    BarangayName = "Brgy. Ninoy Aquino",
-                    Street = "Ninoy Aquino",
-                    Municipality = "Angeles City",
-                    Province = "Pampanga",
-                    Region = "III",
-                    ContactNo = "09123441233",
-                    BarangayHealthStation = "Barangay Health Station",
-                    RuralHealthUnit = "Rural Health Unit"
-                });
+            //builder.HasData(
+            //    new Barangay
+            //    {
+            //        Id = Guid.NewGuid(),
+            //        BarangayName = "Brgy. Ninoy Aquino",
+            //        Street = "Ninoy Aquino",
+            //        Municipality = "Angeles City",
+            //        Province = "Pampanga",
+            //        Region = "III",
+            //        ContactNo = "09123441233",
+            //        BarangayHealthStation = "Barangay Health Station",
+            //        RuralHealthUnit = "Rural Health Unit"
+            //    });
         }
     }
 }

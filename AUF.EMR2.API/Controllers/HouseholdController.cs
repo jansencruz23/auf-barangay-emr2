@@ -7,6 +7,7 @@ using AUF.EMR2.Application.Features.Households.Commands.UpdateHousehold;
 using AUF.EMR2.Application.Features.Households.Queries.GetHousehold;
 using AUF.EMR2.Application.Features.Households.Queries.GetHouseholdByHouseholdNo;
 using AUF.EMR2.Application.Features.Households.Queries.GetHouseholdList;
+using ErrorOr;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -51,9 +52,9 @@ namespace AUF.EMR2.API.Controllers
 
         // POST api/<HouseholdController>
         [HttpPost]
-        public async Task<ActionResult<BaseCommandResponse<Guid>>> Post([FromBody] CreateHouseholdDto dto)
+        public async Task<ActionResult<ErrorOr<Guid>>> Post([FromBody] CreateHouseholdDto dto)
         {
-            var response = await _mediator.Send(new CreateHouseholdCommand { HouseholdDto = dto });
+            var response = await _mediator.Send(new CreateHouseholdCommand(dto));
             return Ok(response);
         }
 

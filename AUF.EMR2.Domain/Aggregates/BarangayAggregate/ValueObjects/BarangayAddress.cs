@@ -41,4 +41,6 @@ public sealed class BarangayAddress : ValueObject
         yield return Province;
         yield return Region;
     }
+
+    private BarangayAddress() { }
 }

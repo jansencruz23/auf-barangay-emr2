@@ -1,5 +1,5 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
-using AUF.EMR2.Application.Responses;
+using AUF.EMR2.Application.Common.Responses;
 using MediatR;
 
 namespace AUF.EMR2.Application.Features.Households.Commands.DeleteHousehold;

@@ -25,4 +25,6 @@ public sealed class PregnancyTrackingId : ValueObject
     {
         yield return Value;
     }
+
+    private PregnancyTrackingId() { }
 }

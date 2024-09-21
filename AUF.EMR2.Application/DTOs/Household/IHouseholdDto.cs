@@ -14,7 +14,7 @@ public interface IHouseholdDto
     public string? MotherMaidenName { get; set; }
     public HouseAddressDto HouseAddress { get; set; } 
     public string ContactNo { get; set; }
-    public bool IsNHTS { get; set; }
+    public bool IsNhts { get; set; }
     public PhilhealthDto Philhealth { get; set; }
-    public bool IsIP { get; set; }
+    public bool IsIp { get; set; }
 }

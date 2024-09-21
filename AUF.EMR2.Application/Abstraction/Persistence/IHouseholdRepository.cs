@@ -1,21 +1,16 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
 using AUF.EMR2.Application.Common.Models.Pagination;
 using AUF.EMR2.Domain.Aggregates.HouseholdAggregate;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using AUF.EMR2.Domain.Aggregates.HouseholdAggregate.ValueObjects;
 using X.PagedList;
 
-namespace AUF.EMR2.Application.Abstraction.Persistence
+namespace AUF.EMR2.Application.Abstraction.Persistence;
+
+public interface IHouseholdRepository : IGenericRepository<Household, HouseholdId>
 {
-    public interface IHouseholdRepository : IGenericRepository<Household>
-    {
-        Task<IPagedList<Household>> GetHouseholdList(RequestParams requestParams, string query = "");
-        Task<Household> GetHousehold(Guid id);
-        Task<Household> GetHouseholdByHouseholdNo(string householdNo);
-        Task<string> GetFullAddress(string householdNo);
-        Task<bool> IsHouseholdNoAvailable(string householdNo);
-    }
+    Task<IPagedList<Household>> GetHouseholdList(RequestParams requestParams, string query = "");
+    Task<Household> GetHousehold(HouseholdId id);
+    Task<Household> GetHouseholdByHouseholdNo(string householdNo);
+    Task<string> GetFullAddress(string householdNo);
+    Task<bool> IsHouseholdNoAvailable(string householdNo);
 }

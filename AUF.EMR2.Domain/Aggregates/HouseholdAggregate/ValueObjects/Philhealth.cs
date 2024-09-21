@@ -32,4 +32,6 @@ public sealed class Philhealth : ValueObject
         yield return PhilhealthNo!;
         yield return Category!;
     }
+
+    private Philhealth() { }
 }

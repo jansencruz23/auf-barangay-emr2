@@ -17,9 +17,9 @@ public class HouseholdDto : IHouseholdDto
     public string? MotherMaidenName { get; set; }
     public HouseAddressDto HouseAddress { get; set; } = null!;
     public string ContactNo { get; set; } = null!;
-    public bool IsNHTS { get; set; }
+    public bool IsNhts { get; set; }
     public PhilhealthDto Philhealth { get; set; } = null!;
-    public bool IsIP { get; set; }
+    public bool IsIp { get; set; }
     public Guid Version { get; set; }
 
     public List<HouseholdMemberDto> HouseholdMembers { get; set; } = [];

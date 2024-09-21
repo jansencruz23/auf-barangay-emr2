@@ -4,7 +4,7 @@ using AUF.EMR2.Application.DTOs.HouseholdMember.Validators;
 using AUF.EMR2.Application.DTOs.PregnancyTracking.Validators;
 using AUF.EMR2.Application.Exceptions;
 using AUF.EMR2.Domain.Aggregates.PregnancyTrackingAggregate;
-using AutoMapper;
+using MapsterMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -30,46 +30,47 @@ namespace AUF.EMR2.Application.Features.PregnancyTrackings.Commands.UpdatePregna
 
         public async Task<BaseCommandResponse<Guid>> Handle(UpdatePregnancyTrackingCommand request, CancellationToken cancellationToken)
         {
-            var response = new BaseCommandResponse<Guid>();
-            var validator = new UpdatePregnancyTrackingDtoValidator(_unitOfWork);
-            var validationResult = await validator.ValidateAsync(request.PregnancyTrackingDto, cancellationToken);
+            throw new NotImplementedException();
+            //var response = new BaseCommandResponse<Guid>();
+            //var validator = new UpdatePregnancyTrackingDtoValidator(_unitOfWork);
+            //var validationResult = await validator.ValidateAsync(request.PregnancyTrackingDto, cancellationToken);
 
-            if (!validationResult.IsValid)
-            {
-                response.Success = false;
-                response.Message = "Updation Failed";
-                response.Errors = validationResult.Errors.Select(q => q.ErrorMessage).ToList();
+            //if (!validationResult.IsValid)
+            //{
+            //    response.Success = false;
+            //    response.Message = "Updation Failed";
+            //    response.Errors = validationResult.Errors.Select(q => q.ErrorMessage).ToList();
 
-                throw new ValidationException(validationResult);
-            }
+            //    throw new ValidationException(validationResult);
+            //}
 
-            var pregnancyTracking = await _unitOfWork.PregnancyTrackingRepository.GetPregnancyTracking(request.PregnancyTrackingDto.Id);
+            //var pregnancyTracking = await _unitOfWork.PregnancyTrackingRepository.GetPregnancyTracking(request.PregnancyTrackingDto.Id);
 
-            if (pregnancyTracking == null)
-            {
-                response.Success = false;
-                response.Message = $"{nameof(PregnancyTracking)} with id: {request.PregnancyTrackingDto.Id} is not existing";
+            //if (pregnancyTracking == null)
+            //{
+            //    response.Success = false;
+            //    response.Message = $"{nameof(PregnancyTracking)} with id: {request.PregnancyTrackingDto.Id} is not existing";
 
-                throw new NotFoundException(nameof(PregnancyTracking), request.PregnancyTrackingDto.Id);
-            }
+            //    throw new NotFoundException(nameof(PregnancyTracking), request.PregnancyTrackingDto.Id);
+            //}
 
-            _mapper.Map(request.PregnancyTrackingDto, pregnancyTracking);
+            //_mapper.Map(request.PregnancyTrackingDto, pregnancyTracking);
 
-            try
-            {
-                _unitOfWork.PregnancyTrackingRepository.Update(pregnancyTracking);
-                await _unitOfWork.SaveAsync();
-            }
-            catch (DbUpdateConcurrencyException ex)
-            {
-                throw new ConcurrencyException("The entity you attempted to update was modified by another user.", ex);
-            }
+            //try
+            //{
+            //    _unitOfWork.PregnancyTrackingRepository.Update(pregnancyTracking);
+            //    await _unitOfWork.SaveAsync();
+            //}
+            //catch (DbUpdateConcurrencyException ex)
+            //{
+            //    throw new ConcurrencyException("The entity you attempted to update was modified by another user.", ex);
+            //}
 
-            response.Success = true;
-            response.Message = "Updation is successful";
-            response.Id = request.PregnancyTrackingDto.Id;
+            //response.Success = true;
+            //response.Message = "Updation is successful";
+            //response.Id = request.PregnancyTrackingDto.Id;
 
-            return response;
+            //return response;
         }
     }
 }
