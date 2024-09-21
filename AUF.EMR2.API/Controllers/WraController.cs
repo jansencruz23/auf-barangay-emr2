@@ -1,11 +1,11 @@
-﻿using AUF.EMR2.Application.DTOs.WomanOfReproductiveAge;
+﻿using AUF.EMR2.Application.Common.Responses;
+using AUF.EMR2.Application.DTOs.WomanOfReproductiveAge;
 using AUF.EMR2.Application.Features.WomenOfReproductiveAge.Commands.CreateWra;
 using AUF.EMR2.Application.Features.WomenOfReproductiveAge.Commands.DeleteWra;
 using AUF.EMR2.Application.Features.WomenOfReproductiveAge.Commands.UpdateWra;
 using AUF.EMR2.Application.Features.WomenOfReproductiveAge.Queries.GetPrintWraRecords;
 using AUF.EMR2.Application.Features.WomenOfReproductiveAge.Queries.GetWra;
 using AUF.EMR2.Application.Features.WomenOfReproductiveAge.Queries.GetWraList;
-using AUF.EMR2.Application.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

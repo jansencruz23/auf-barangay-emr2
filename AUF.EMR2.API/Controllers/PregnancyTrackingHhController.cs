@@ -1,7 +1,7 @@
-﻿using AUF.EMR2.Application.DTOs.PregnancyTrackingHh;
+﻿using AUF.EMR2.Application.Common.Responses;
+using AUF.EMR2.Application.DTOs.PregnancyTrackingHh;
 using AUF.EMR2.Application.Features.PregnancyTrackingHhs.Commands.UpdatePregnancyTrackingHh;
 using AUF.EMR2.Application.Features.PregnancyTrackingHhs.Queries.GetPregnancyTrackingHh;
-using AUF.EMR2.Application.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

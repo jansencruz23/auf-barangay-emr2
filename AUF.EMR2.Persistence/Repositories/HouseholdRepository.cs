@@ -1,5 +1,5 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence;
-using AUF.EMR2.Application.Models.Pagination;
+using AUF.EMR2.Application.Common.Models.Pagination;
 using AUF.EMR2.Domain.Aggregates.HouseholdAggregate;
 using AUF.EMR2.Persistence.Repositories.Common;
 using Microsoft.EntityFrameworkCore;

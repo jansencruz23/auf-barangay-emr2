@@ -1,9 +1,9 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
+using AUF.EMR2.Application.Common.Responses;
 using AUF.EMR2.Application.DTOs.Barangay.Validators;
 using AUF.EMR2.Application.DTOs.Household.Validators;
 using AUF.EMR2.Application.Exceptions;
-using AUF.EMR2.Application.Responses;
-using AUF.EMR2.Domain.Aggregates;
+using AUF.EMR2.Domain.Aggregates.BarangayAggregate;
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

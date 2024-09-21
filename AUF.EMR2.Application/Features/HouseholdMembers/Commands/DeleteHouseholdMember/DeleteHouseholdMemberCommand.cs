@@ -1,4 +1,4 @@
-﻿using AUF.EMR2.Application.Responses;
+﻿using AUF.EMR2.Application.Common.Responses;
 using MediatR;
 using System;
 using System.Collections.Generic;

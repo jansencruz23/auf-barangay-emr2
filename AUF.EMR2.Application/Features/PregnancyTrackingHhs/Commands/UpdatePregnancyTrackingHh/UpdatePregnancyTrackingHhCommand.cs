@@ -1,5 +1,5 @@
-﻿using AUF.EMR2.Application.DTOs.PregnancyTrackingHh;
-using AUF.EMR2.Application.Responses;
+﻿using AUF.EMR2.Application.Common.Responses;
+using AUF.EMR2.Application.DTOs.PregnancyTrackingHh;
 using MediatR;
 using System;
 using System.Collections.Generic;

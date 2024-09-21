@@ -1,8 +1,8 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
+using AUF.EMR2.Application.Common.Responses;
 using AUF.EMR2.Application.DTOs.Masterlist.Validators;
 using AUF.EMR2.Application.DTOs.OralHealth.Validators;
 using AUF.EMR2.Application.Exceptions;
-using AUF.EMR2.Application.Responses;
 using AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate;
 using AutoMapper;
 using MediatR;

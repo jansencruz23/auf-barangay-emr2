@@ -1,12 +1,12 @@
-﻿using AUF.EMR2.Application.DTOs.Household;
+﻿using AUF.EMR2.Application.Common.Models.Pagination;
+using AUF.EMR2.Application.Common.Responses;
+using AUF.EMR2.Application.DTOs.Household;
 using AUF.EMR2.Application.Features.Households.Commands.CreateHousehold;
 using AUF.EMR2.Application.Features.Households.Commands.DeleteHousehold;
 using AUF.EMR2.Application.Features.Households.Commands.UpdateHousehold;
 using AUF.EMR2.Application.Features.Households.Queries.GetHousehold;
 using AUF.EMR2.Application.Features.Households.Queries.GetHouseholdByHouseholdNo;
 using AUF.EMR2.Application.Features.Households.Queries.GetHouseholdList;
-using AUF.EMR2.Application.Models.Pagination;
-using AUF.EMR2.Application.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

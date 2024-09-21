@@ -8,9 +8,9 @@ using AUF.EMR2.Application.Features.OralHealths.Queries.GetOralHealthPregnantTwe
 using AUF.EMR2.Application.Features.OralHealths.Queries.GetOralHealth;
 using AUF.EMR2.Application.Features.OralHealths.Queries.GetOralHealthTenToFourteen;
 using AUF.EMR2.Application.Features.OralHealths.Queries.GetPrintOralHealthRecordList;
-using AUF.EMR2.Application.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using AUF.EMR2.Application.Common.Responses;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 

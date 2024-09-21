@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AUF.EMR2.Application.Responses
+namespace AUF.EMR2.Application.Common.Responses
 {
     public class PagedQueryResponse<T>
         where T : class

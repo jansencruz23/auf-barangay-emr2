@@ -1,11 +1,11 @@
-﻿using AUF.EMR2.Application.DTOs.PregnancyTracking;
+﻿using AUF.EMR2.Application.Common.Responses;
+using AUF.EMR2.Application.DTOs.PregnancyTracking;
 using AUF.EMR2.Application.Features.PregnancyTrackings.Commands.CreatePregnancyTracking;
 using AUF.EMR2.Application.Features.PregnancyTrackings.Commands.DeletePregnancyTracking;
 using AUF.EMR2.Application.Features.PregnancyTrackings.Commands.UpdatePregnancyTracking;
 using AUF.EMR2.Application.Features.PregnancyTrackings.Queries.GetPregnancyTracking;
 using AUF.EMR2.Application.Features.PregnancyTrackings.Queries.GetPregnancyTrackingList;
 using AUF.EMR2.Application.Features.PregnancyTrackings.Queries.GetPrintPregnancyTrackingRecords;
-using AUF.EMR2.Application.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

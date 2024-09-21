@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AUF.EMR2.Application.Extensions
+namespace AUF.EMR2.Application.Common.Extensions
 {
     public static class EnumExtensions
     {

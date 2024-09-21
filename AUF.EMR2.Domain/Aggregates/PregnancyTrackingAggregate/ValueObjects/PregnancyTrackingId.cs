@@ -1,6 +1,6 @@
 ﻿using AUF.EMR2.Domain.Common.Models;
 
-namespace AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate.ValueObjects;
+namespace AUF.EMR2.Domain.Aggregates.PregnancyTrackingAggregate.ValueObjects;
 
 public sealed class PregnancyTrackingId : ValueObject
 {

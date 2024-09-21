@@ -1,4 +1,4 @@
-﻿using AUF.EMR2.Domain.Aggregates;
+﻿using AUF.EMR2.Domain.Aggregates.BarangayAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;

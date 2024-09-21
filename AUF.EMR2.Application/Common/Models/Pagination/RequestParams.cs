@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AUF.EMR2.Application.Models.Pagination
+namespace AUF.EMR2.Application.Common.Models.Pagination
 {
     public class RequestParams
     {
@@ -20,7 +20,7 @@ namespace AUF.EMR2.Application.Models.Pagination
             }
             set
             {
-                _pageSize = (value > maxPageSize) ? maxPageSize : value;
+                _pageSize = value > maxPageSize ? maxPageSize : value;
             }
         }
     }

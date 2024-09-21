@@ -1,4 +1,5 @@
-﻿using AUF.EMR2.Application.DTOs.Masterlist;
+﻿using AUF.EMR2.Application.Common.Responses;
+using AUF.EMR2.Application.DTOs.Masterlist;
 using AUF.EMR2.Application.Features.Masterlists.Commands.UpdateMasterlistAdult;
 using AUF.EMR2.Application.Features.Masterlists.Commands.UpdateMasterlistChild;
 using AUF.EMR2.Application.Features.Masterlists.Queries.GetMasterlistAdolescent;
@@ -11,7 +12,6 @@ using AUF.EMR2.Application.Features.Masterlists.Queries.GetMasterlistSchoolAged;
 using AUF.EMR2.Application.Features.Masterlists.Queries.GetMasterlistSenior;
 using AUF.EMR2.Application.Features.Masterlists.Queries.GetMasterlistUnderFive;
 using AUF.EMR2.Application.Features.Masterlists.Queries.GetPrintMasterlistRecordList;
-using AUF.EMR2.Application.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

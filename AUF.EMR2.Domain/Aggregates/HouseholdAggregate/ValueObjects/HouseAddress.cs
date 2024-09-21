@@ -2,14 +2,14 @@
 
 namespace AUF.EMR2.Domain.Aggregates.HouseholdAggregate.ValueObjects;
 
-public sealed class Address : ValueObject
+public sealed class HouseAddress : ValueObject
 {
     public string HouseNoAndStreet { get; } = null!;
     public string Barangay { get; } = null!;
     public string City { get; } = null!;
     public string Province { get; } = null!;
     
-    private Address(
+    private HouseAddress(
         string houseNoAndStreet,
         string barangay,
         string city,
@@ -21,13 +21,13 @@ public sealed class Address : ValueObject
         Province = province;
     }
 
-    public static Address Create(
+    public static HouseAddress Create(
         string houseNoAndStreet,
         string barangay,
         string city,
         string province)
     {
-        return new Address(houseNoAndStreet, barangay, city, province);
+        return new HouseAddress(houseNoAndStreet, barangay, city, province);
     }
 
     public override IEnumerable<object> GetEqualityComponents()

@@ -1,6 +1,6 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
+using AUF.EMR2.Application.Common.Responses;
 using AUF.EMR2.Application.DTOs.Household;
-using AUF.EMR2.Application.Responses;
 using AutoMapper;
 using MediatR;
 using System;

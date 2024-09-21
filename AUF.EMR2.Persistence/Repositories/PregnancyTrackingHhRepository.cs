@@ -1,6 +1,6 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence;
 using AUF.EMR2.Application.DTOs.Household;
-using AUF.EMR2.Domain.Aggregates.HouseholdAggregate.Entities;
+using AUF.EMR2.Domain.Aggregates.PregnancyTrackingHhAggregate;
 using AUF.EMR2.Persistence.Repositories.Common;
 using Microsoft.EntityFrameworkCore;
 using System;

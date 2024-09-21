@@ -16,7 +16,7 @@ public sealed class Household : AggregateRoot<HouseholdId>
     public string LastName { get; private set; } = null!;
     public string FirstName { get; private set; } = null!;
     public string? MotherMaidenName { get; private set; }
-    public Address Address { get; private set; } = null!;
+    public HouseAddress Address { get; private set; } = null!;
     public string ContactNo { get; private set; } = null!;
     public bool IsNhts { get; }
     public bool IsNHTS { get; private set; }
@@ -36,7 +36,7 @@ public sealed class Household : AggregateRoot<HouseholdId>
         string lastName,
         string firstName,
         string? motherMaidenName,
-        Address address,
+        HouseAddress address,
         string contactNo,
         bool isNhts,
         Philhealth philhealth,
@@ -67,7 +67,7 @@ public sealed class Household : AggregateRoot<HouseholdId>
         string lastName,
         string firstName,
         string? motherMaidenName,
-        Address address,
+        HouseAddress address,
         string contactNo,
         bool isNhts,
         Philhealth philhealth,

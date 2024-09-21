@@ -1,5 +1,5 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence;
-using AUF.EMR2.Domain.Aggregates;
+using AUF.EMR2.Domain.Aggregates.BarangayAggregate;
 using AUF.EMR2.Persistence.Repositories.Common;
 using Microsoft.EntityFrameworkCore;
 using System;

@@ -2,73 +2,67 @@
 using AUF.EMR2.Application.DTOs.Household.Validators;
 using AUF.EMR2.Application.Exceptions;
 using AUF.EMR2.Application.Responses;
-using AUF.EMR2.Domain.Aggregates.HouseholdAggregate;
 using AutoMapper;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace AUF.EMR2.Application.Features.Households.Commands.UpdateHousehold
+namespace AUF.EMR2.Application.Features.Households.Commands.UpdateHousehold;
+
+public class UpdateHouseholdCommandHandler : IRequestHandler<UpdateHouseholdCommand, BaseCommandResponse<Guid>>
 {
-    public class UpdateHouseholdCommandHandler : IRequestHandler<UpdateHouseholdCommand, BaseCommandResponse<Guid>>
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly IMapper _mapper;
+
+    public UpdateHouseholdCommandHandler(
+        IUnitOfWork unitOfWork,
+        IMapper mapper)
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
+        _unitOfWork = unitOfWork;
+        _mapper = mapper;
+    }
 
-        public UpdateHouseholdCommandHandler(
-            IUnitOfWork unitOfWork,
-            IMapper mapper)
-        {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
-        }
+    public async Task<BaseCommandResponse<Guid>> Handle(UpdateHouseholdCommand request, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
 
-        public async Task<BaseCommandResponse<Guid>> Handle(UpdateHouseholdCommand request, CancellationToken cancellationToken)
-        {
-            var response = new BaseCommandResponse<Guid>();
-            var validator = new UpdateHouseholdDtoValidator();
-            var validationResult = await validator.ValidateAsync(request.HouseholdDto, cancellationToken);
+        //var response = new BaseCommandResponse<Guid>();
+        //var validator = new UpdateHouseholdDtoValidator();
+        //var validationResult = await validator.ValidateAsync(request.HouseholdDto, cancellationToken);
 
-            if (!validationResult.IsValid)
-            {
-                response.Success = false;
-                response.Message = "Updation Failed";
-                response.Errors = validationResult.Errors.Select(q => q.ErrorMessage).ToList();
+        //if (!validationResult.IsValid)
+        //{
+        //    response.Success = false;
+        //    response.Message = "Updation Failed";
+        //    response.Errors = validationResult.Errors.Select(q => q.ErrorMessage).ToList();
 
-                throw new ValidationException(validationResult);
-            }
+        //    throw new ValidationException(validationResult);
+        //}
 
-            var household = await _unitOfWork.HouseholdRepository.GetHousehold(request.HouseholdDto.Id);
+        //var household = await _unitOfWork.HouseholdRepository.GetHousehold(request.HouseholdDto.Id);
 
-            if (household == null)
-            {
-                response.Success = false;
-                response.Message = $"{nameof(Household)} with id: {request.HouseholdDto.Id} is not existing";
+        //if (household == null)
+        //{
+        //    response.Success = false;
+        //    response.Message = $"{nameof(Household)} with id: {request.HouseholdDto.Id} is not existing";
 
-                throw new NotFoundException(nameof(Household), request.HouseholdDto.Id);
-            }
+        //    throw new NotFoundException(nameof(Household), request.HouseholdDto.Id);
+        //}
 
-            _mapper.Map(request.HouseholdDto, household);
+        //_mapper.Map(request.HouseholdDto, household);
 
-            try
-            {
-                _unitOfWork.HouseholdRepository.Update(household);
-                await _unitOfWork.SaveAsync();
-            }
-            catch (DbUpdateConcurrencyException ex)
-            {
-                throw new ConcurrencyException("The entity you attempted to update was modified by another user.", ex);
-            }
+        //try
+        //{
+        //    _unitOfWork.HouseholdRepository.Update(household);
+        //    await _unitOfWork.SaveAsync();
+        //}
+        //catch (DbUpdateConcurrencyException ex)
+        //{
+        //    throw new ConcurrencyException("The entity you attempted to update was modified by another user.", ex);
+        //}
 
-            response.Success = true;
-            response.Message = "Updation is successful";
-            response.Id = request.HouseholdDto.Id;
+        //response.Success = true;
+        //response.Message = "Updation is successful";
+        //response.Id = request.HouseholdDto.Id;
 
-            return response;
-        }
+        //return response;
     }
 }
