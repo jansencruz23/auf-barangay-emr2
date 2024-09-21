@@ -1,4 +1,4 @@
-﻿using AUF.EMR2.Domain.Aggregates;
+﻿using AUF.EMR2.Domain.Aggregates.HouseholdAggregate.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

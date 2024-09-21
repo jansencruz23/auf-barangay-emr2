@@ -3,7 +3,7 @@ using AUF.EMR2.Application.DTOs.OralHealth.Validators;
 using AUF.EMR2.Application.DTOs.PregnancyTrackingHh.Validators;
 using AUF.EMR2.Application.Exceptions;
 using AUF.EMR2.Application.Responses;
-using AUF.EMR2.Domain.Aggregates;
+using AUF.EMR2.Domain.Aggregates.HouseholdAggregate.Entities;
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

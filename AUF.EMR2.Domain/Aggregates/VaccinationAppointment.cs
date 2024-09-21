@@ -1,4 +1,5 @@
-﻿using AUF.EMR2.Domain.Common.Models;
+﻿using AUF.EMR2.Domain.Aggregates.VaccinationRecordAggregate;
+using AUF.EMR2.Domain.Common.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

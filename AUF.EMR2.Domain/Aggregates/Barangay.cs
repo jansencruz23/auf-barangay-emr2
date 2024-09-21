@@ -1,12 +1,4 @@
-﻿using AUF.EMR2.Domain.Aggregates;
-using AUF.EMR2.Domain.Common.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AUF.EMR2.Domain.Aggregates
+﻿namespace AUF.EMR2.Domain.Aggregates
 {
     public class Barangay 
     {

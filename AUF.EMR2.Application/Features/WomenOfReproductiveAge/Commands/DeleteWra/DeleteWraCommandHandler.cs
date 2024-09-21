@@ -1,7 +1,7 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
 using AUF.EMR2.Application.Exceptions;
 using AUF.EMR2.Application.Responses;
-using AUF.EMR2.Domain.Aggregates;
+using AUF.EMR2.Domain.Aggregates.WomanOfReproductiveAgeAggregate;
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

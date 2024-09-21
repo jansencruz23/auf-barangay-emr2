@@ -1,5 +1,5 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
-using AUF.EMR2.Domain.Aggregates;
+using AUF.EMR2.Domain.Aggregates.WomanOfReproductiveAgeAggregate;
 using System;
 using System.Collections.Generic;
 using System.Linq;

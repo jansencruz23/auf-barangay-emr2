@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AUF.EMR2.Domain.Enums
+namespace AUF.EMR2.Domain.Aggregates.PregnancyTrackingAggregate.Enums
 {
     public enum PregnancyOutcome
     {

@@ -1,6 +1,10 @@
 ﻿using AUF.EMR2.Domain.Aggregates;
 using AUF.EMR2.Domain.Aggregates.HouseholdAggregate;
+using AUF.EMR2.Domain.Aggregates.HouseholdAggregate.Entities;
 using AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate;
+using AUF.EMR2.Domain.Aggregates.PregnancyTrackingAggregate;
+using AUF.EMR2.Domain.Aggregates.VaccinationRecordAggregate;
+using AUF.EMR2.Domain.Aggregates.WomanOfReproductiveAgeAggregate;
 using AUF.EMR2.Domain.Common.Models;
 using AUF.EMR2.Persistence.Configurations.Entities;
 using Microsoft.EntityFrameworkCore;

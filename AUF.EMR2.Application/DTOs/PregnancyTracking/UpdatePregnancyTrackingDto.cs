@@ -1,4 +1,4 @@
-﻿using AUF.EMR2.Domain.Enums;
+﻿using AUF.EMR2.Domain.Aggregates.PregnancyTrackingAggregate.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;

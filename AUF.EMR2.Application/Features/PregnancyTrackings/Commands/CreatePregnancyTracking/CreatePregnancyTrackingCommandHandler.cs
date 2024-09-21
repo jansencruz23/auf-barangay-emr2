@@ -3,7 +3,7 @@ using AUF.EMR2.Application.DTOs.Household.Validators;
 using AUF.EMR2.Application.DTOs.PregnancyTracking.Validators;
 using AUF.EMR2.Application.Exceptions;
 using AUF.EMR2.Application.Responses;
-using AUF.EMR2.Domain.Aggregates;
+using AUF.EMR2.Domain.Aggregates.PregnancyTrackingAggregate;
 using AutoMapper;
 using MediatR;
 using System;
