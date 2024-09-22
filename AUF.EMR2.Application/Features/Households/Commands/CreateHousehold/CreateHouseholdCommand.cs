@@ -1,4 +1,5 @@
 ﻿using AUF.EMR2.Application.Common.Responses;
+using AUF.EMR2.Application.Features.Households.Commands.Common;
 using AUF.EMR2.Application.Features.Households.Common;
 using ErrorOr;
 using MediatR;
@@ -19,4 +20,4 @@ public sealed record CreateHouseholdCommand(
     bool IsNhts,
     PhilhealthRequest Philhealth,
     bool IsIp
-) : IRequest<ErrorOr<BaseCommandResponse<Guid>>>;
+) : IRequest<ErrorOr<BaseCommandResponse<Guid>>>, IHouseholdCommand;
