@@ -1,4 +1,5 @@
-﻿using AUF.EMR2.Application.Common.Models.Pagination;
+﻿using AUF.EMR2.API.Common.Errors;
+using AUF.EMR2.Application.Common.Models.Pagination;
 using AUF.EMR2.Application.Common.Responses;
 using AUF.EMR2.Application.DTOs.Household;
 using AUF.EMR2.Application.Features.Households.Commands.CreateHousehold;
@@ -51,14 +52,18 @@ namespace AUF.EMR2.API.Controllers
 
         // POST api/<HouseholdController>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ValidationProblemDetails))]
+        [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
         public async Task<IActionResult> Post([FromBody] CreateHouseholdDto dto)
         {
-            var response = await _mediator.Send(new CreateHouseholdCommand(dto));
-            return response.Match(ok => Ok(response.Value), errors => Problem(errors));
+            var result = await _mediator.Send(new CreateHouseholdCommand(dto));
+            return result.Match(response => Ok(response), errors => Problem(errors));
         }
 
         // PUT api/<HouseholdController>/5
-        [HttpPut("{id}")]
+        [HttpPut]
         public async Task<ActionResult<BaseCommandResponse<Guid>>> Put([FromBody] UpdateHouseholdDto dto)
         {
             var response = await _mediator.Send(new UpdateHouseholdCommand { HouseholdDto = dto });

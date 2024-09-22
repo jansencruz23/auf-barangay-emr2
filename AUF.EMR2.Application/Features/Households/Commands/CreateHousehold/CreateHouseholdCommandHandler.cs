@@ -1,14 +1,16 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
 using AUF.EMR2.Application.Abstraction.Services;
+using AUF.EMR2.Application.Common.Responses;
 using AUF.EMR2.Domain.Aggregates.HouseholdAggregate;
 using AUF.EMR2.Domain.Aggregates.HouseholdAggregate.ValueObjects;
+using AUF.EMR2.Domain.Common.Errors;
 using ErrorOr;
 using MapsterMapper;
 using MediatR;
 
 namespace AUF.EMR2.Application.Features.Households.Commands.CreateHousehold;
 
-public class CreateHouseholdCommandHandler : IRequestHandler<CreateHouseholdCommand, ErrorOr<Guid>>
+public class CreateHouseholdCommandHandler : IRequestHandler<CreateHouseholdCommand, ErrorOr<BaseCommandResponse<Guid>>>
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IPregnancyTrackingHHService _pregnancyTrackingHHService;
@@ -24,8 +26,15 @@ public class CreateHouseholdCommandHandler : IRequestHandler<CreateHouseholdComm
         _mapper = mapper;
     }
 
-    public async Task<ErrorOr<Guid>> Handle(CreateHouseholdCommand request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<BaseCommandResponse<Guid>>> Handle(CreateHouseholdCommand request, CancellationToken cancellationToken)
     {
+        var response = new BaseCommandResponse<Guid>();
+
+        if (!await _unitOfWork.HouseholdRepository.IsHouseholdNoAvailable(request.HouseholdDto.HouseholdNo))
+        {
+            return Errors.Household.DuplicateHouseholdNo;
+        }
+
         var dto = request.HouseholdDto;
 
         var philhealth = Philhealth.Create
@@ -63,7 +72,11 @@ public class CreateHouseholdCommandHandler : IRequestHandler<CreateHouseholdComm
         await _unitOfWork.HouseholdRepository.Add(household);
         await _unitOfWork.SaveAsync();
 
-        return household.Id.Value;
+        response.Success = true;
+        response.Id = household.Id.Value;
+        response.Message = "Created successfully";
+
+        return response;
 
 
         //var response = new BaseCommandResponse<Guid>();
