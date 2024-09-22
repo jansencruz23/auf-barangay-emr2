@@ -16,8 +16,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace AUF.EMR2.API.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
-    public class HouseholdController : ControllerBase
+    public class HouseholdController : ApiController
     {
         private readonly IMediator _mediator;
 
@@ -52,10 +51,10 @@ namespace AUF.EMR2.API.Controllers
 
         // POST api/<HouseholdController>
         [HttpPost]
-        public async Task<ActionResult<ErrorOr<Guid>>> Post([FromBody] CreateHouseholdDto dto)
+        public async Task<IActionResult> Post([FromBody] CreateHouseholdDto dto)
         {
             var response = await _mediator.Send(new CreateHouseholdCommand(dto));
-            return Ok(response);
+            return response.Match(ok => Ok(response.Value), errors => Problem(errors));
         }
 
         // PUT api/<HouseholdController>/5

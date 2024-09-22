@@ -28,7 +28,23 @@ public class CreateHouseholdCommandHandler : IRequestHandler<CreateHouseholdComm
     {
         var dto = request.HouseholdDto;
 
-        var household = Household.Create(
+        var philhealth = Philhealth.Create
+        (
+            isHeadPhilhealthMember: dto.Philhealth.IsHeadPhilhealthMember,
+            philhealthNo: dto.Philhealth.PhilhealthNo,
+            category: dto.Philhealth.Category
+        );
+
+        var houseAddress = HouseAddress.Create
+        (
+            houseNoAndStreet: dto.HouseAddress.HouseNoAndStreet,
+            barangay: dto.HouseAddress.Barangay,
+            city: dto.HouseAddress.City,
+            province: dto.HouseAddress.Province
+        );
+
+        var household = Household.Create
+        (
             householdNo: dto.HouseholdNo,
             firstQtrVisit: dto.FirstQtrVisit,
             secondQtrVisit: dto.SecondQtrVisit,
@@ -37,18 +53,11 @@ public class CreateHouseholdCommandHandler : IRequestHandler<CreateHouseholdComm
             lastName: dto.LastName,
             firstName: dto.FirstName,
             motherMaidenName: dto.MotherMaidenName,
-            houseAddress: HouseAddress.Create(
-                houseNoAndStreet: dto.HouseAddress.HouseNoAndStreet,
-                barangay: dto.HouseAddress.Barangay,
-                city: dto.HouseAddress.City,
-                province: dto.HouseAddress.Province),
             contactNo: dto.ContactNo,
             isNhts: dto.IsNhts,
-            philhealth: Philhealth.Create(
-                isHeadPhilhealthMember: dto.Philhealth.IsHeadPhilhealthMember,
-                philhealthNo: dto.Philhealth.PhilhealthNo,
-                category: dto.Philhealth.Category),
-            isIp: dto.IsIp
+            isIp: dto.IsIp,
+            philhealth: philhealth,
+            houseAddress: houseAddress
         );
 
         await _unitOfWork.HouseholdRepository.Add(household);

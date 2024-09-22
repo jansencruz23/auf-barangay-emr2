@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AUF.EMR2.Persistence.Configurations.Entities
 {
-    public class BarangayConfiguration : IEntityTypeConfiguration<Barangay>
+    public class BarangayConfiguration 
     {
         public void Configure(EntityTypeBuilder<Barangay> builder)
         {

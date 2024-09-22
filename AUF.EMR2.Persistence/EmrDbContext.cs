@@ -4,8 +4,10 @@ using AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate;
 using AUF.EMR2.Domain.Aggregates.PregnancyTrackingAggregate;
 using AUF.EMR2.Domain.Aggregates.PregnancyTrackingHhAggregate;
 using AUF.EMR2.Domain.Aggregates.WomanOfReproductiveAgeAggregate;
+using AUF.EMR2.Domain.Common.Models;
 using AUF.EMR2.Persistence.Configurations.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace AUF.EMR2.Persistence;
 
@@ -17,12 +19,12 @@ public class EmrDbContext : DbContext
         
     }
 
-    public DbSet<Barangay> Barangays { get; set; }
+    //public DbSet<Barangay> Barangays { get; set; }
     public DbSet<Household> Households { get; set; }
-    public DbSet<HouseholdMember> HouseholdMembers { get; set; }
-    public DbSet<WomanOfReproductiveAge> WomenOfReproductiveAge { get; set; }
-    public DbSet<PregnancyTracking> PregnancyTrackings { get; set; }
-    public DbSet<PregnancyTrackingHh> PregnancyTrackingHhs { get; set; }
+    //public DbSet<HouseholdMember> HouseholdMembers { get; set; }
+    //public DbSet<WomanOfReproductiveAge> WomenOfReproductiveAge { get; set; }
+    //public DbSet<PregnancyTracking> PregnancyTrackings { get; set; }
+    //public DbSet<PregnancyTrackingHh> PregnancyTrackingHhs { get; set; }
     //public DbSet<VaccinationRecord> VaccinationRecords { get; set; }
     //public DbSet<VaccinationAppointment> VaccinationAppointments { get; set; }
     //public DbSet<Vaccine> Vaccines { get; set; }
@@ -30,6 +32,10 @@ public class EmrDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder
+            .Ignore<List<IDomainEvent>>()
+            .ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
         base.OnModelCreating(modelBuilder);
 
         //modelBuilder.Entity<PregnancyTrackingHh>()
@@ -47,7 +53,7 @@ public class EmrDbContext : DbContext
         //    .WithMany(q => q.AdministeredVaccines)
         //    .HasForeignKey(q => q.VaccineId);
 
-        modelBuilder.ApplyConfiguration(new BarangayConfiguration());
+        //modelBuilder.ApplyConfiguration(new BarangayConfiguration());
     }
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

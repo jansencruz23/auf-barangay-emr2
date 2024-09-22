@@ -18,10 +18,11 @@ public class BarangayRepository : GenericRepository<Barangay, BarangayId>, IBara
 
     public async Task<Barangay> GetBarangay()
     {
-        var barangay = await _dbContext.Barangays
-            .AsNoTracking()
-            .FirstOrDefaultAsync();
+        throw new NotImplementedException();
+        //var barangay = await _dbContext.Barangays
+        //    .AsNoTracking()
+        //    .FirstOrDefaultAsync();
 
-        return barangay;
+        //return barangay;
     }
 }

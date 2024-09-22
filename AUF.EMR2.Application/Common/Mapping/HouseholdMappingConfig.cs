@@ -20,7 +20,6 @@ public class HouseholdMappingConfig : IRegister
         config.NewConfig<Household, UpdateHouseholdDto>();
 
         config.NewConfig<HouseAddressDto, HouseAddress>();
-
         config.NewConfig<Philhealth, PhilhealthDto>();
     }
 }

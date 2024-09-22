@@ -1,5 +1,5 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence;
-using AUF.EMR2.Application.Constants;
+
 using AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate;
 using AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate.ValueObjects;
 using AUF.EMR2.Persistence.Repositories.Common;
