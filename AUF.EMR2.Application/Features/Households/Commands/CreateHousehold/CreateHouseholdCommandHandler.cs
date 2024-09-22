@@ -13,28 +13,22 @@ namespace AUF.EMR2.Application.Features.Households.Commands.CreateHousehold;
 public class CreateHouseholdCommandHandler : IRequestHandler<CreateHouseholdCommand, ErrorOr<BaseCommandResponse<Guid>>>
 {
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IPregnancyTrackingHHService _pregnancyTrackingHHService;
+    private readonly IPregnancyTrackingHHService _pregnancyTrackingHhService;
     private readonly IMapper _mapper;
 
     public CreateHouseholdCommandHandler(
         IUnitOfWork unitOfWork,
-        IPregnancyTrackingHHService pregnancyTrackingHHService,
+        IPregnancyTrackingHHService pregnancyTrackingHhService,
         IMapper mapper)
     {
         _unitOfWork = unitOfWork;
-        _pregnancyTrackingHHService = pregnancyTrackingHHService;
+        _pregnancyTrackingHhService = pregnancyTrackingHhService;
         _mapper = mapper;
     }
 
     public async Task<ErrorOr<BaseCommandResponse<Guid>>> Handle(CreateHouseholdCommand request, CancellationToken cancellationToken)
     {
         var response = new BaseCommandResponse<Guid>();
-
-        if (!await _unitOfWork.HouseholdRepository.IsHouseholdNoAvailable(request.HouseholdDto.HouseholdNo))
-        {
-            return Errors.Household.DuplicateHouseholdNo;
-        }
-
         var dto = request.HouseholdDto;
 
         var philhealth = Philhealth.Create

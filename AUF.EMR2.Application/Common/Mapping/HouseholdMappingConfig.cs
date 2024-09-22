@@ -1,5 +1,5 @@
 ﻿using AUF.EMR2.Application.DTOs.Household;
-using AUF.EMR2.Application.DTOs.Household.ValueObjects;
+using AUF.EMR2.Application.DTOs.Household.ValueObjectDtos;
 using AUF.EMR2.Domain.Aggregates.HouseholdAggregate;
 using AUF.EMR2.Domain.Aggregates.HouseholdAggregate.ValueObjects;
 using Mapster;

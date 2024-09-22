@@ -1,4 +1,4 @@
-﻿using AUF.EMR2.Application.DTOs.Household.ValueObjects;
+﻿using AUF.EMR2.Application.DTOs.Household.ValueObjectDtos;
 
 namespace AUF.EMR2.Application.DTOs.Household;
 

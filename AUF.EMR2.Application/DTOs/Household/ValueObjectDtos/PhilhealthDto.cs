@@ -1,4 +1,4 @@
-﻿namespace AUF.EMR2.Application.DTOs.Household.ValueObjects;
+﻿namespace AUF.EMR2.Application.DTOs.Household.ValueObjectDtos;
 
 public sealed class PhilhealthDto
 {

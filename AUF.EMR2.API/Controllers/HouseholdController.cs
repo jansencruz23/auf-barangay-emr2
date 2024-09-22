@@ -52,14 +52,14 @@ namespace AUF.EMR2.API.Controllers
 
         // POST api/<HouseholdController>
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(BaseCommandResponse<Guid>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ValidationProblemDetails))]
         [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
         public async Task<IActionResult> Post([FromBody] CreateHouseholdDto dto)
         {
-            var result = await _mediator.Send(new CreateHouseholdCommand(dto));
-            return result.Match(response => Ok(response), errors => Problem(errors));
+            var response = await _mediator.Send(new CreateHouseholdCommand(dto));
+            return response.Match(value => Ok(value), errors => Problem(errors));
         }
 
         // PUT api/<HouseholdController>/5
