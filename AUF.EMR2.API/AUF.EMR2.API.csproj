@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AUF.EMR2.Contracts\AUF.EMR2.Contracts.csproj" />
     <ProjectReference Include="..\AUF.EMR2.Persistence\AUF.EMR2.Persistence.csproj" />
   </ItemGroup>
 

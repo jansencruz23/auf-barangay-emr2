@@ -1,9 +1,8 @@
 ﻿using Mapster;
 using MapsterMapper;
-using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
-namespace AUF.EMR2.Application.Common.Mapping;
+namespace AUF.EMR2.API.Common.Mappings;
 
 public static class DependencyInjection
 {

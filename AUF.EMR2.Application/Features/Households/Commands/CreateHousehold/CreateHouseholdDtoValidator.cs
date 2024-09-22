@@ -9,7 +9,7 @@ public class CreateHouseholdDtoValidator : AbstractValidator<CreateHouseholdComm
     public CreateHouseholdDtoValidator(IUnitOfWork unitOfWork)
     {
         
-        RuleFor(q => q.HouseholdDto.HouseholdNo)
+        RuleFor(q => q.HouseholdNo)
             .MustAsync(async (householdNo, token) =>
             {
                 return await unitOfWork.HouseholdRepository.IsHouseholdNoAvailable(householdNo);

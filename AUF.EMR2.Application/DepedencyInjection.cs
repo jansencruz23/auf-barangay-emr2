@@ -1,6 +1,5 @@
 ﻿using AUF.EMR2.Application.Abstraction.Services;
 using AUF.EMR2.Application.Common.Behaviors;
-using AUF.EMR2.Application.Common.Mapping;
 using AUF.EMR2.Application.Services;
 using FluentValidation;
 using MediatR;
@@ -14,7 +13,6 @@ public static class DepedencyInjection
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-        services.AddMappings();
 
         services.AddMediatR(config =>
             config.RegisterServicesFromAssembly(

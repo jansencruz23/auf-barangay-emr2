@@ -1,8 +1,8 @@
 ﻿using AUF.EMR2.Application.DTOs.Household.ValueObjectDtos;
 
-namespace AUF.EMR2.Application.DTOs.Household;
+namespace AUF.EMR2.Contracts.Households.Request;
 
-public class CreateHouseholdDto : IHouseholdDto
+public class CreateHouseholdDto /*: IHouseholdDto*/
 {
     public string HouseholdNo { get; set; } = null!;
     public DateTime? FirstQtrVisit { get; set; }

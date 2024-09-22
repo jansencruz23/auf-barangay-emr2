@@ -3,7 +3,6 @@ using AUF.EMR2.Application.Abstraction.Services;
 using AUF.EMR2.Application.Common.Responses;
 using AUF.EMR2.Domain.Aggregates.HouseholdAggregate;
 using AUF.EMR2.Domain.Aggregates.HouseholdAggregate.ValueObjects;
-using AUF.EMR2.Domain.Common.Errors;
 using ErrorOr;
 using MapsterMapper;
 using MediatR;
@@ -29,36 +28,35 @@ public class CreateHouseholdCommandHandler : IRequestHandler<CreateHouseholdComm
     public async Task<ErrorOr<BaseCommandResponse<Guid>>> Handle(CreateHouseholdCommand request, CancellationToken cancellationToken)
     {
         var response = new BaseCommandResponse<Guid>();
-        var dto = request.HouseholdDto;
 
         var philhealth = Philhealth.Create
         (
-            isHeadPhilhealthMember: dto.Philhealth.IsHeadPhilhealthMember,
-            philhealthNo: dto.Philhealth.PhilhealthNo,
-            category: dto.Philhealth.Category
+            isHeadPhilhealthMember: request.Philhealth.IsHeadPhilhealthMember,
+            philhealthNo: request.Philhealth.PhilhealthNo,
+            category: request.Philhealth.Category
         );
 
         var houseAddress = HouseAddress.Create
         (
-            houseNoAndStreet: dto.HouseAddress.HouseNoAndStreet,
-            barangay: dto.HouseAddress.Barangay,
-            city: dto.HouseAddress.City,
-            province: dto.HouseAddress.Province
+            houseNoAndStreet: request.HouseAddress.HouseNoAndStreet,
+            barangay: request.HouseAddress.Barangay,
+            city: request.HouseAddress.City,
+            province: request.HouseAddress.Province
         );
 
         var household = Household.Create
         (
-            householdNo: dto.HouseholdNo,
-            firstQtrVisit: dto.FirstQtrVisit,
-            secondQtrVisit: dto.SecondQtrVisit,
-            thirdQtrVisit: dto.ThirdQtrVisit,
-            fourthQtrVisit: dto.FourthQtrVisit,
-            lastName: dto.LastName,
-            firstName: dto.FirstName,
-            motherMaidenName: dto.MotherMaidenName,
-            contactNo: dto.ContactNo,
-            isNhts: dto.IsNhts,
-            isIp: dto.IsIp,
+            householdNo: request.HouseholdNo,
+            firstQtrVisit: request.FirstQtrVisit,
+            secondQtrVisit: request.SecondQtrVisit,
+            thirdQtrVisit: request.ThirdQtrVisit,
+            fourthQtrVisit: request.FourthQtrVisit,
+            lastName: request.LastName,
+            firstName: request.FirstName,
+            motherMaidenName: request.MotherMaidenName,
+            contactNo: request.ContactNo,
+            isNhts: request.IsNhts,
+            isIp: request.IsIp,
             philhealth: philhealth,
             houseAddress: houseAddress
         );

@@ -1,5 +1,4 @@
-﻿using AUF.EMR2.API.Common.Errors;
-using AUF.EMR2.Application.Common.Models.Pagination;
+﻿using AUF.EMR2.Application.Common.Models.Pagination;
 using AUF.EMR2.Application.Common.Responses;
 using AUF.EMR2.Application.DTOs.Household;
 using AUF.EMR2.Application.Features.Households.Commands.CreateHousehold;
@@ -8,7 +7,9 @@ using AUF.EMR2.Application.Features.Households.Commands.UpdateHousehold;
 using AUF.EMR2.Application.Features.Households.Queries.GetHousehold;
 using AUF.EMR2.Application.Features.Households.Queries.GetHouseholdByHouseholdNo;
 using AUF.EMR2.Application.Features.Households.Queries.GetHouseholdList;
+using AUF.EMR2.Contracts.Households.Request;
 using ErrorOr;
+using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,11 +20,13 @@ namespace AUF.EMR2.API.Controllers
     [Route("api/[controller]")]
     public class HouseholdController : ApiController
     {
-        private readonly IMediator _mediator;
+        private readonly ISender _mediator;
+        private readonly IMapper _mapper;
 
-        public HouseholdController(IMediator mediator)
+        public HouseholdController(ISender mediator, IMapper mapper)
         {
             _mediator = mediator;
+            _mapper = mapper;
         }
 
         // GET: api/<HouseholdController>
@@ -58,7 +61,8 @@ namespace AUF.EMR2.API.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
         public async Task<IActionResult> Post([FromBody] CreateHouseholdDto dto)
         {
-            var response = await _mediator.Send(new CreateHouseholdCommand(dto));
+            var command = _mapper.Map<CreateHouseholdCommand>(dto);
+            var response = await _mediator.Send(command);
             return response.Match(value => Ok(value), errors => Problem(errors));
         }
 

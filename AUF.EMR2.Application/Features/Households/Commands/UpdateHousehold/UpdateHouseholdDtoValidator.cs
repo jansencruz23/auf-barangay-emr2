@@ -12,7 +12,7 @@ namespace AUF.EMR2.Application.Features.Households.Commands.UpdateHousehold
     {
         public UpdateHouseholdDtoValidator()
         {
-            Include(new IHouseholdDtoValidator());
+            //Include(new IHouseholdDtoValidator());
         }
     }
 }
