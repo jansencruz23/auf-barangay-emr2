@@ -10,7 +10,7 @@ public class HouseholdMappingConfig : IRegister
 {
     public void Register(TypeAdapterConfig config)
     {
-        config.NewConfig<CreateHouseholdCommand, CreateHouseholdDto>();
+        config.NewConfig<CreateHouseholdCommand, CreateHouseholdRequest>();
 
         config.NewConfig<HouseAddressRequest, HouseAddressDto>();
         config.NewConfig<PhilhealthRequest, PhilhealthDto>();

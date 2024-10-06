@@ -2,7 +2,7 @@
 
 namespace AUF.EMR2.Contracts.Households.Request;
 
-public class CreateHouseholdDto /*: IHouseholdDto*/
+public class CreateHouseholdRequest /*: IHouseholdDto*/
 {
     public string HouseholdNo { get; set; } = null!;
     public DateTime? FirstQtrVisit { get; set; }

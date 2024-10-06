@@ -1,16 +1,25 @@
 ﻿using AUF.EMR2.Application.Common.Responses;
-using AUF.EMR2.Application.DTOs.Household;
+using AUF.EMR2.Application.Features.Households.Commands.Common;
+using AUF.EMR2.Application.Features.Households.Common;
+using ErrorOr;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace AUF.EMR2.Application.Features.Households.Commands.UpdateHousehold
-{
-    public record UpdateHouseholdCommand : IRequest<BaseCommandResponse<Guid>>
-    {
-        public UpdateHouseholdDto HouseholdDto { get; set; }
-    }
-}
+namespace AUF.EMR2.Application.Features.Households.Commands.UpdateHousehold;
+
+public sealed record UpdateHouseholdCommand(
+    Guid Id,
+    string HouseholdNo,
+    DateTime? FirstQtrVisit,
+    DateTime? SecondQtrVisit,
+    DateTime? ThirdQtrVisit,
+    DateTime? FourthQtrVisit,
+    string LastName,
+    string FirstName,
+    string? MotherMaidenName,
+    HouseAddressRequest HouseAddress,
+    string ContactNo,
+    bool IsNhts,
+    PhilhealthRequest Philhealth,
+    bool IsIp,
+    Guid Version
+) : IRequest<ErrorOr<BaseCommandResponse<Guid>>>, IHouseholdCommand;

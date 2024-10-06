@@ -32,15 +32,13 @@ public class HouseholdRepository : GenericRepository<Household, HouseholdId>, IH
 
     public async Task<Household> GetHousehold(HouseholdId id)
     {
-        throw new NotImplementedException();
+        var household = await _dbContext.Households
+            .AsNoTracking()
+            //.Include(q => q.HouseholdMembers.Where(w => w.Status))
+            .Where(q => q.Status)
+            .FirstOrDefaultAsync(q => q.Id == id);
 
-        //var household = await _dbContext.Households
-        //    .AsNoTracking()
-        //    .Include(q => q.HouseholdMembers.Where(w => w.Status))
-        //    .Where(q => q.Status)
-        //    .FirstOrDefaultAsync(q => q.Id == id);
-
-        //return household;
+        return household!;
     }
 
     public async Task<Household> GetHouseholdByHouseholdNo(string householdNo)

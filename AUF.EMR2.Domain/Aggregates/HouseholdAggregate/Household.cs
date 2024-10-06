@@ -1,6 +1,8 @@
 ﻿using AUF.EMR2.Domain.Aggregates.HouseholdAggregate.ValueObjects;
 using AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate.ValueObjects;
+using AUF.EMR2.Domain.Common.Errors;
 using AUF.EMR2.Domain.Common.Models;
+using ErrorOr;
 
 namespace AUF.EMR2.Domain.Aggregates.HouseholdAggregate;
 
@@ -57,6 +59,43 @@ public sealed class Household : AggregateRoot<HouseholdId>
             Philhealth = philhealth,
             IsIp = isIp
         };
+    }
+
+    public ErrorOr<HouseholdId> UpdateHousehold(
+        string householdNo,
+        DateTime? firstQtrVisit,
+        DateTime? secondQtrVisit,
+        DateTime? thirdQtrVisit,
+        DateTime? fourthQtrVisit,
+        string lastName,
+        string firstName,
+        string? motherMaidenName,
+        HouseAddress houseAddress,
+        string contactNo,
+        bool isNhts,
+        Philhealth philhealth,
+        bool isIp)
+    {
+        if (string.IsNullOrWhiteSpace(householdNo))
+        {
+            return Errors.Household.EmptyHouseholdNo;
+        }
+        
+        HouseholdNo = householdNo;
+        FirstQtrVisit = firstQtrVisit;
+        SecondQtrVisit = secondQtrVisit;
+        ThirdQtrVisit = thirdQtrVisit;
+        FourthQtrVisit = fourthQtrVisit;
+        LastName = lastName;
+        FirstName = firstName;
+        MotherMaidenName = motherMaidenName;
+        HouseAddress = houseAddress;
+        ContactNo = contactNo;
+        IsNhts = isNhts;
+        Philhealth = philhealth;
+        IsIp = isIp;
+
+        return Id;
     }
 
     private Household() { }

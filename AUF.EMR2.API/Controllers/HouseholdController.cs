@@ -59,19 +59,24 @@ namespace AUF.EMR2.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ValidationProblemDetails))]
         [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
-        public async Task<IActionResult> Post([FromBody] CreateHouseholdDto dto)
+        public async Task<IActionResult> Post([FromBody] CreateHouseholdRequest request)
         {
-            var command = _mapper.Map<CreateHouseholdCommand>(dto);
+            var command = _mapper.Map<CreateHouseholdCommand>(request);
             var response = await _mediator.Send(command);
             return response.Match(value => Ok(value), errors => Problem(errors));
         }
 
         // PUT api/<HouseholdController>/5
         [HttpPut]
-        public async Task<ActionResult<BaseCommandResponse<Guid>>> Put([FromBody] UpdateHouseholdDto dto)
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(BaseCommandResponse<Guid>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ValidationProblemDetails))]
+        [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
+        public async Task<IActionResult> Put([FromBody] UpdateHouseholdRequest request)
         {
-            var response = await _mediator.Send(new UpdateHouseholdCommand { HouseholdDto = dto });
-            return Ok(response);
+            var command = _mapper.Map<UpdateHouseholdCommand>(request);
+            var response = await _mediator.Send(command);
+            return response.Match(value => Ok(value), errors => Problem(errors));
         }
 
         // DELETE api/<HouseholdController>/5

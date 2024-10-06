@@ -1,11 +1,13 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
 using AUF.EMR2.Application.Common.Responses;
+using AUF.EMR2.Domain.Aggregates.HouseholdAggregate.ValueObjects;
+using ErrorOr;
 using MapsterMapper;
 using MediatR;
 
 namespace AUF.EMR2.Application.Features.Households.Commands.UpdateHousehold;
 
-public class UpdateHouseholdCommandHandler : IRequestHandler<UpdateHouseholdCommand, BaseCommandResponse<Guid>>
+public class UpdateHouseholdCommandHandler : IRequestHandler<UpdateHouseholdCommand, ErrorOr<BaseCommandResponse<Guid>>>
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
@@ -18,49 +20,50 @@ public class UpdateHouseholdCommandHandler : IRequestHandler<UpdateHouseholdComm
         _mapper = mapper;
     }
 
-    public async Task<BaseCommandResponse<Guid>> Handle(UpdateHouseholdCommand request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<BaseCommandResponse<Guid>>> Handle(UpdateHouseholdCommand request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var response = new BaseCommandResponse<Guid>();
 
-        //var response = new BaseCommandResponse<Guid>();
-        //var validator = new UpdateHouseholdDtoValidator();
-        //var validationResult = await validator.ValidateAsync(request.HouseholdDto, cancellationToken);
+        var philhealth = Philhealth.Create
+        (
+            isHeadPhilhealthMember: request.Philhealth.IsHeadPhilhealthMember,
+            philhealthNo: request.Philhealth.PhilhealthNo,
+            category: request.Philhealth.Category
+        );
 
-        //if (!validationResult.IsValid)
-        //{
-        //    response.Success = false;
-        //    response.Message = "Updation Failed";
-        //    response.Errors = validationResult.Errors.Select(q => q.ErrorMessage).ToList();
+        var houseAddress = HouseAddress.Create
+        (
+            houseNoAndStreet: request.HouseAddress.HouseNoAndStreet,
+            barangay: request.HouseAddress.Barangay,
+            city: request.HouseAddress.City,
+            province: request.HouseAddress.Province
+        );
 
-        //    throw new ValidationException(validationResult);
-        //}
+        var household = await _unitOfWork.HouseholdRepository.GetHousehold(HouseholdId.Create(request.Id));
 
-        //var household = await _unitOfWork.HouseholdRepository.GetHousehold(request.HouseholdDto.Id);
+        household.UpdateHousehold(
+            householdNo: request.HouseholdNo,
+            firstQtrVisit: request.FirstQtrVisit,
+            secondQtrVisit: request.SecondQtrVisit,
+            thirdQtrVisit: request.ThirdQtrVisit,
+            fourthQtrVisit: request.FourthQtrVisit,
+            lastName: request.LastName,
+            firstName: request.FirstName,
+            motherMaidenName: request.MotherMaidenName,
+            contactNo: request.ContactNo,
+            isNhts: request.IsNhts,
+            isIp: request.IsIp,
+            philhealth: philhealth,
+            houseAddress: houseAddress
+        );
 
-        //if (household == null)
-        //{
-        //    response.Success = false;
-        //    response.Message = $"{nameof(Household)} with id: {request.HouseholdDto.Id} is not existing";
+        _unitOfWork.HouseholdRepository.Update(household);
+        await _unitOfWork.SaveAsync();
 
-        //    throw new NotFoundException(nameof(Household), request.HouseholdDto.Id);
-        //}
+        response.Success = true;
+        response.Id = household.Id.Value;
+        response.Message = "Updated successfully";
 
-        //_mapper.Map(request.HouseholdDto, household);
-
-        //try
-        //{
-        //    _unitOfWork.HouseholdRepository.Update(household);
-        //    await _unitOfWork.SaveAsync();
-        //}
-        //catch (DbUpdateConcurrencyException ex)
-        //{
-        //    throw new ConcurrencyException("The entity you attempted to update was modified by another user.", ex);
-        //}
-
-        //response.Success = true;
-        //response.Message = "Updation is successful";
-        //response.Id = request.HouseholdDto.Id;
-
-        //return response;
+        return response;
     }
 }
