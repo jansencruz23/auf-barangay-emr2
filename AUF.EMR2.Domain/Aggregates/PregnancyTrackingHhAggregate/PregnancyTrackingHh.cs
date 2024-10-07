@@ -26,7 +26,8 @@ public sealed class PregnancyTrackingHh : AggregateRoot<PregnancyTrackingHhId>
         string? referralCenter,
         string? referralCenterAddress,
         string? bHWName,
-        string? midwifeName)
+        string? midwifeName,
+        HouseholdId householdId)
         : base(pregnancyTrackinggHhId)
     {
         Year = year;
@@ -36,6 +37,7 @@ public sealed class PregnancyTrackingHh : AggregateRoot<PregnancyTrackingHhId>
         ReferralCenterAddress = referralCenterAddress;
         BHWName = bHWName;
         MidwifeName = midwifeName;
+        HouseholdId = householdId;
     }
 
     public static PregnancyTrackingHh Create(
@@ -45,7 +47,8 @@ public sealed class PregnancyTrackingHh : AggregateRoot<PregnancyTrackingHhId>
         string? referralCenter,
         string? referralCenterAddress,
         string? bHWName,
-        string? midwifeName)
+        string? midwifeName,
+        HouseholdId householdId)
     {
         return new PregnancyTrackingHh(
             PregnancyTrackingHhId.Create(),
@@ -55,7 +58,8 @@ public sealed class PregnancyTrackingHh : AggregateRoot<PregnancyTrackingHhId>
             referralCenter: referralCenter,
             referralCenterAddress: referralCenterAddress,
             bHWName: bHWName,
-            midwifeName: midwifeName);
+            midwifeName: midwifeName,
+            householdId: householdId);
     }
 
     private PregnancyTrackingHh() { }

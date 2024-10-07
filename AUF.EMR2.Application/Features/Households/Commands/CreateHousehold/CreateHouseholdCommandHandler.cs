@@ -9,21 +9,14 @@ using MediatR;
 
 namespace AUF.EMR2.Application.Features.Households.Commands.CreateHousehold;
 
-public class CreateHouseholdCommandHandler : IRequestHandler<CreateHouseholdCommand, ErrorOr<BaseCommandResponse<Guid>>>
+public class CreateHouseholdCommandHandler(
+    IUnitOfWork unitOfWork,
+    IPregnancyTrackingHHService pregnancyTrackingHhService,
+    IMapper mapper) : IRequestHandler<CreateHouseholdCommand, ErrorOr<BaseCommandResponse<Guid>>>
 {
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly IPregnancyTrackingHHService _pregnancyTrackingHhService;
-    private readonly IMapper _mapper;
-
-    public CreateHouseholdCommandHandler(
-        IUnitOfWork unitOfWork,
-        IPregnancyTrackingHHService pregnancyTrackingHhService,
-        IMapper mapper)
-    {
-        _unitOfWork = unitOfWork;
-        _pregnancyTrackingHhService = pregnancyTrackingHhService;
-        _mapper = mapper;
-    }
+    private readonly IUnitOfWork _unitOfWork = unitOfWork;
+    private readonly IPregnancyTrackingHHService _pregnancyTrackingHhService = pregnancyTrackingHhService;
+    private readonly IMapper _mapper = mapper;
 
     public async Task<ErrorOr<BaseCommandResponse<Guid>>> Handle(CreateHouseholdCommand request, CancellationToken cancellationToken)
     {
