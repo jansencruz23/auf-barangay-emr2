@@ -6,18 +6,18 @@ using AUF.EMR2.Domain.Aggregates.PregnancyTrackingHhAggregate;
 using AUF.EMR2.Domain.Aggregates.WomanOfReproductiveAgeAggregate;
 using AUF.EMR2.Domain.Common.Models;
 using AUF.EMR2.Persistence.Configurations.Entities;
+using AUF.EMR2.Persistence.Interceptors;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 namespace AUF.EMR2.Persistence;
 
-public class EmrDbContext : DbContext
+public class EmrDbContext(
+    DbContextOptions<EmrDbContext> options,
+    PublishDomainEventsInterceptor publishDomainEventsInterceptor
+    ) : DbContext(options)
 {
-    public EmrDbContext(DbContextOptions<EmrDbContext> options)
-        : base (options)
-    {
-        
-    }
+    private readonly PublishDomainEventsInterceptor _publishDomainEventsInterceptor = publishDomainEventsInterceptor;
 
     //public DbSet<Barangay> Barangays { get; set; }
     public DbSet<Household> Households { get; set; }
@@ -29,6 +29,12 @@ public class EmrDbContext : DbContext
     //public DbSet<VaccinationAppointment> VaccinationAppointments { get; set; }
     //public DbSet<Vaccine> Vaccines { get; set; }
     //public DbSet<AdministeredVaccine> AdministeredVaccines { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.AddInterceptors(_publishDomainEventsInterceptor);
+        base.OnConfiguring(optionsBuilder);
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

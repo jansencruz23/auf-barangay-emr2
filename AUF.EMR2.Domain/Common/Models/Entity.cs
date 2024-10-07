@@ -26,7 +26,7 @@ public abstract class Entity<TId> : IEquatable<Entity<TId>>, IHasDomainEvents
         return Equals(left, right);
     }
 
-    public static bool operator !=(Entity<TId> left, Entity<TId?> right)
+    public static bool operator !=(Entity<TId> left, Entity<TId> right)
     {
         return !Equals(left, right);
     }
@@ -46,9 +46,14 @@ public abstract class Entity<TId> : IEquatable<Entity<TId>>, IHasDomainEvents
         return Id.GetHashCode();
     }
 
+    public void AddDomainEvent(IDomainEvent domainEvent)
+    {
+        _domainEvents.Add(domainEvent);
+    }
+
     public void ClearDomainEvents()
     {
-        throw new NotImplementedException();
+        _domainEvents.Clear();
     }
 
     #pragma warning disable CS8618

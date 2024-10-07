@@ -1,4 +1,5 @@
-﻿using AUF.EMR2.Domain.Aggregates.HouseholdAggregate.ValueObjects;
+﻿using AUF.EMR2.Domain.Aggregates.HouseholdAggregate.Events;
+using AUF.EMR2.Domain.Aggregates.HouseholdAggregate.ValueObjects;
 using AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate.ValueObjects;
 using AUF.EMR2.Domain.Common.Errors;
 using AUF.EMR2.Domain.Common.Models;
@@ -43,7 +44,7 @@ public sealed class Household : AggregateRoot<HouseholdId>
         Philhealth philhealth,
         bool isIp)
     {
-        return new Household(HouseholdId.Create())
+        var household = new Household(HouseholdId.Create())
         {
             HouseholdNo = householdNo,
             FirstQtrVisit = firstQtrVisit,
@@ -59,6 +60,9 @@ public sealed class Household : AggregateRoot<HouseholdId>
             Philhealth = philhealth,
             IsIp = isIp
         };
+
+        household.AddDomainEvent(new HouseholdCreated(household));
+        return household;
     }
 
     public ErrorOr<HouseholdId> UpdateHousehold(
