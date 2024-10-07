@@ -23,19 +23,23 @@ public class HouseholdConfigurations : IEntityTypeConfiguration<Household>
                 id => id.Value,
                 value => HouseholdId.Create(value));
 
-        builder.Property(household => household.ContactNo).HasMaxLength(HouseholdConstants.MaxContactNoLength);
-        builder.Property(household => household.FirstName).HasMaxLength(HouseholdConstants.MaxNameLength);
-        builder.Property(household => household.LastName).HasMaxLength(HouseholdConstants.MaxNameLength);
-        builder.Property(household => household.MotherMaidenName).HasMaxLength(HouseholdConstants.MaxNameLength);
+        builder.Property(household => household.ContactNo).HasMaxLength(TablePropertiesConstants.MaxContactNoLength);
+        builder.Property(household => household.FirstName).HasMaxLength(TablePropertiesConstants.MaxNameLength);
+        builder.Property(household => household.LastName).HasMaxLength(TablePropertiesConstants.MaxNameLength);
+        builder.Property(household => household.MotherMaidenName).HasMaxLength(TablePropertiesConstants.MaxNameLength);
 
         builder.OwnsOne(household => household.HouseAddress, addressBuilder =>
         {
-            addressBuilder.Property(address => address.HouseNoAndStreet).HasMaxLength(HouseholdConstants.MaxAddressLength);
-            addressBuilder.Property(address => address.Barangay).HasMaxLength(HouseholdConstants.MaxAddressLength);
-            addressBuilder.Property(address => address.City).HasMaxLength(HouseholdConstants.MaxAddressLength);
-            addressBuilder.Property(address => address.Province).HasMaxLength(HouseholdConstants.MaxAddressLength);
+            addressBuilder.Property(address => address.HouseNoAndStreet).HasMaxLength(TablePropertiesConstants.MaxAddressLength);
+            addressBuilder.Property(address => address.Barangay).HasMaxLength(TablePropertiesConstants.MaxAddressLength);
+            addressBuilder.Property(address => address.City).HasMaxLength(TablePropertiesConstants.MaxAddressLength);
+            addressBuilder.Property(address => address.Province).HasMaxLength(TablePropertiesConstants.MaxAddressLength);
         });
 
-        builder.OwnsOne(household => household.Philhealth);
+        builder.OwnsOne(household => household.Philhealth, philhealthBuilder =>
+        {
+            philhealthBuilder.Property(philhealth => philhealth.PhilhealthNo).HasMaxLength(TablePropertiesConstants.MaxNameLength);
+            philhealthBuilder.Property(philhealth => philhealth.Category).HasMaxLength(TablePropertiesConstants.MaxNameLength);
+        });
     }
 }

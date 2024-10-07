@@ -24,7 +24,7 @@ public class EmrDbContext(
     //public DbSet<HouseholdMember> HouseholdMembers { get; set; }
     //public DbSet<WomanOfReproductiveAge> WomenOfReproductiveAge { get; set; }
     //public DbSet<PregnancyTracking> PregnancyTrackings { get; set; }
-    //public DbSet<PregnancyTrackingHh> PregnancyTrackingHhs { get; set; }
+    public DbSet<PregnancyTrackingHh> PregnancyTrackingHhs { get; set; }
     //public DbSet<VaccinationRecord> VaccinationRecords { get; set; }
     //public DbSet<VaccinationAppointment> VaccinationAppointments { get; set; }
     //public DbSet<Vaccine> Vaccines { get; set; }
@@ -62,31 +62,31 @@ public class EmrDbContext(
         //modelBuilder.ApplyConfiguration(new BarangayConfiguration());
     }
 
-    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
-    {
-        //foreach (var entry in ChangeTracker.Entries<Entity>())
-        //{
-        //    entry.Entity.LastModified = DateTime.Now;
+    //public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    //{
+    //    //foreach (var entry in ChangeTracker.Entries<Entity>())
+    //    //{
+    //    //    entry.Entity.LastModified = DateTime.Now;
 
-        //    if (entry.State == EntityState.Added)
-        //    {
-        //        entry.Entity.DateCreated = DateTime.Now;
-        //    }
+    //    //    if (entry.State == EntityState.Added)
+    //    //    {
+    //    //        entry.Entity.DateCreated = DateTime.Now;
+    //    //    }
 
-        //    entry.Entity.Version = Guid.NewGuid();
-        //}
+    //    //    entry.Entity.Version = Guid.NewGuid();
+    //    //}
 
-        //var deletedEntities = ChangeTracker.Entries().Where(q => q.State == EntityState.Deleted);
-        //foreach (var entity in deletedEntities)
-        //{
-        //    if (entity.Entity is Entity)
-        //    {
-        //        entity.State = EntityState.Modified;
-        //        var deletedEntity = entity.Entity as Entity;
-        //        deletedEntity.Status = false;
-        //    }
-        //}
+    //    //var deletedEntities = ChangeTracker.Entries().Where(q => q.State == EntityState.Deleted);
+    //    //foreach (var entity in deletedEntities)
+    //    //{
+    //    //    if (entity.Entity is Entity)
+    //    //    {
+    //    //        entity.State = EntityState.Modified;
+    //    //        var deletedEntity = entity.Entity as Entity;
+    //    //        deletedEntity.Status = false;
+    //    //    }
+    //    //}
 
-        return base.SaveChangesAsync(cancellationToken);
-    }
+    //    return base.SaveChangesAsync(cancellationToken);
+    //}
 }

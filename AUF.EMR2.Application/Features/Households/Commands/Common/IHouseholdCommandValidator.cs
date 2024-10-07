@@ -14,32 +14,32 @@ public class IHouseholdCommandValidator : AbstractValidator<IHouseholdCommand>
         RuleFor(q => q.FirstName)
             .NotEmpty().WithMessage("{PropertyName} is required.")
             .NotNull().WithMessage("{PropertyName} is required.")
-            .MaximumLength(HouseholdConstants.MaxNameLength).WithMessage("{PropertyName} must not exceed {MaxLength} characters.");
+            .MaximumLength(TablePropertiesConstants.MaxNameLength).WithMessage("{PropertyName} must not exceed {MaxLength} characters.");
 
         RuleFor(q => q.LastName)
             .NotEmpty().WithMessage("{PropertyName} is required.")
             .NotNull().WithMessage("{PropertyName} is required.")
-            .MaximumLength(HouseholdConstants.MaxNameLength).WithMessage("{PropertyName} must not exceed {MaxLength} characters.");
+            .MaximumLength(TablePropertiesConstants.MaxNameLength).WithMessage("{PropertyName} must not exceed {MaxLength} characters.");
 
         RuleFor(q => q.HouseAddress.HouseNoAndStreet)
             .NotEmpty().WithMessage("House no. and street is required.")
             .NotNull().WithMessage("House no. and street is required.")
-            .MaximumLength(HouseholdConstants.MaxAddressLength).WithMessage("Barangay must not exceed {MaxLength} characters.");
+            .MaximumLength(TablePropertiesConstants.MaxAddressLength).WithMessage("Barangay must not exceed {MaxLength} characters.");
 
         RuleFor(q => q.HouseAddress.Barangay)
             .NotEmpty().WithMessage("Barangay is required.")
             .NotNull().WithMessage("Barangay is required.")
-            .MaximumLength(HouseholdConstants.MaxAddressLength).WithMessage("Barangay must not exceed {MaxLength} characters.");
+            .MaximumLength(TablePropertiesConstants.MaxAddressLength).WithMessage("Barangay must not exceed {MaxLength} characters.");
 
         RuleFor(q => q.HouseAddress.City)
             .NotEmpty().WithMessage("City is required.")
             .NotNull().WithMessage("City is required.")
-            .MaximumLength(HouseholdConstants.MaxAddressLength).WithMessage("City must not exceed {MaxLength} characters.");
+            .MaximumLength(TablePropertiesConstants.MaxAddressLength).WithMessage("City must not exceed {MaxLength} characters.");
 
         RuleFor(q => q.HouseAddress.Province)
             .NotEmpty().WithMessage("Province is required.")
             .NotNull().WithMessage("Province is required.")
-            .MaximumLength(HouseholdConstants.MaxAddressLength).WithMessage("Province must not exceed {MaxLength} characters.");
+            .MaximumLength(TablePropertiesConstants.MaxAddressLength).WithMessage("Province must not exceed {MaxLength} characters.");
 
         RuleFor(q => q.ContactNo)
             .NotNull().WithMessage("{PropertyName} is required.")

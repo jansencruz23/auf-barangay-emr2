@@ -4,6 +4,7 @@ using AUF.EMR2.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AUF.EMR2.Persistence.Migrations
 {
     [DbContext(typeof(EmrDbContext))]
-    partial class EmrDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241007020706_pregnancytrackinghh")]
+    partial class pregnancytrackinghh
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -146,9 +149,6 @@ namespace AUF.EMR2.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("HouseholdId")
-                        .IsUnique();
-
                     b.ToTable("PregnancyTrackingHh", (string)null);
                 });
 
@@ -212,15 +212,6 @@ namespace AUF.EMR2.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Philhealth")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("AUF.EMR2.Domain.Aggregates.PregnancyTrackingHhAggregate.PregnancyTrackingHh", b =>
-                {
-                    b.HasOne("AUF.EMR2.Domain.Aggregates.HouseholdAggregate.Household", null)
-                        .WithOne()
-                        .HasForeignKey("AUF.EMR2.Domain.Aggregates.PregnancyTrackingHhAggregate.PregnancyTrackingHh", "HouseholdId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

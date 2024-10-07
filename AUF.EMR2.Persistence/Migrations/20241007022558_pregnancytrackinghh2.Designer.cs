@@ -4,6 +4,7 @@ using AUF.EMR2.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AUF.EMR2.Persistence.Migrations
 {
     [DbContext(typeof(EmrDbContext))]
-    partial class EmrDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241007022558_pregnancytrackinghh2")]
+    partial class pregnancytrackinghh2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

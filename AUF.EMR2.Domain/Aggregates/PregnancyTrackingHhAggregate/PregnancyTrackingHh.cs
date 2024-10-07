@@ -16,7 +16,7 @@ public sealed class PregnancyTrackingHh : AggregateRoot<PregnancyTrackingHhId>
     public string? MidwifeName { get; private set; }
 
     public HouseholdId HouseholdId { get; private set; } = null!;
-    public BarangayId BarangayId { get; private set; } = null!;
+    //public BarangayId BarangayId { get; private set; } = null!;
 
     private PregnancyTrackingHh(
         PregnancyTrackingHhId pregnancyTrackinggHhId,

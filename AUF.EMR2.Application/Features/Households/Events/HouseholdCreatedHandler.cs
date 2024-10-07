@@ -10,7 +10,7 @@ public sealed class HouseholdCreatedHandler(IUnitOfWork unitOfWork) : INotificat
 
     public Task Handle(HouseholdCreated notification, CancellationToken cancellationToken)
     {
-        notification.household.
+        
         throw new NotImplementedException();
     }
 }
