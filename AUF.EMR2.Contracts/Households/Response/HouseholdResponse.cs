@@ -2,7 +2,7 @@
 
 namespace AUF.EMR2.Contracts.Households.Response;
 
-public class GetHouseholdListResponse
+public class HouseholdResponse
 {
     public Guid Id { get; set; }
     public bool Status { get; set; } = true;

@@ -1,9 +1,9 @@
 ﻿using AUF.EMR2.Application.DTOs.HouseholdMember;
 using AUF.EMR2.Application.Features.Households.Common;
 
-namespace AUF.EMR2.Application.Features.Households.Queries.GetHouseholdList;
+namespace AUF.EMR2.Application.Features.Households.Queries.Common;
 
-public class GetHouseholdListQueryResponse
+public sealed class HouseholdQueryResponse
 {
     public Guid Id { get; set; }
     public bool Status { get; set; } = true;
