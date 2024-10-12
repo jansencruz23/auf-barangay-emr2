@@ -4,7 +4,6 @@ using MediatR;
 
 namespace AUF.EMR2.Application.Features.Households.Queries.GetHouseholdByHouseholdNo;
 
-public record GetHouseholdByHouseholdNoQuery : IRequest<ErrorOr<HouseholdQueryResponse>>
-{
-    public string HouseholdNo { get; set; } = null!;
-}
+public record GetHouseholdByHouseholdNoQuery(
+    string HouseholdNo
+) : IRequest<ErrorOr<HouseholdQueryResponse>>;

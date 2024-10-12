@@ -102,5 +102,13 @@ public sealed class Household : AggregateRoot<HouseholdId>
         return Id;
     }
 
+    public ErrorOr<HouseholdId> DeleteHousehold()
+    {
+        Status = false;
+        AddDomainEvent(new HouseholdDeleted(Id));
+
+        return Id;
+    }
+
     private Household() { }
 }

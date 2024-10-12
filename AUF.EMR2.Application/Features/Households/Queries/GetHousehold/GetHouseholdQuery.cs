@@ -4,7 +4,6 @@ using MediatR;
 
 namespace AUF.EMR2.Application.Features.Households.Queries.GetHousehold;
 
-public record GetHouseholdQuery : IRequest<ErrorOr<HouseholdQueryResponse>>
-{
-    public Guid Id { get; set; }
-}
+public record GetHouseholdQuery(
+    Guid Id
+) : IRequest<ErrorOr<HouseholdQueryResponse>>;

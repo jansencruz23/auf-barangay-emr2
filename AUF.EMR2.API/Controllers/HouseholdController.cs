@@ -1,6 +1,5 @@
 ﻿using AUF.EMR2.Application.Common.Models.Pagination;
 using AUF.EMR2.Application.Common.Responses;
-using AUF.EMR2.Application.DTOs.Household;
 using AUF.EMR2.Application.Features.Households.Commands.CreateHousehold;
 using AUF.EMR2.Application.Features.Households.Commands.DeleteHousehold;
 using AUF.EMR2.Application.Features.Households.Commands.UpdateHousehold;
@@ -36,7 +35,7 @@ namespace AUF.EMR2.API.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
         public async Task<IActionResult> Get([FromQuery] RequestParams requestParams, string query = null!)
         {
-            var response = await _mediator.Send(new GetHouseholdListQuery { RequestParams = requestParams, Query = query });
+            var response = await _mediator.Send(new GetHouseholdListQuery(requestParams, query));
 
             return response.Match(
                 value => Ok(_mapper.Map<ApiPagedResponse<HouseholdResponse>>(value)),
@@ -49,7 +48,7 @@ namespace AUF.EMR2.API.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
         public async Task<IActionResult> Get(Guid id)
         {
-            var response = await _mediator.Send(new GetHouseholdQuery { Id = id });
+            var response = await _mediator.Send(new GetHouseholdQuery(id));
 
             return response.Match(
                 value => Ok(_mapper.Map<HouseholdResponse>(value)),
@@ -62,7 +61,7 @@ namespace AUF.EMR2.API.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
         public async Task<IActionResult> GetByHouseholdNo(string householdNo)
         {
-            var response = await _mediator.Send(new GetHouseholdByHouseholdNoQuery { HouseholdNo = householdNo });
+            var response = await _mediator.Send(new GetHouseholdByHouseholdNoQuery(householdNo));
 
             return response.Match(
                value => Ok(_mapper.Map<HouseholdResponse>(value)),

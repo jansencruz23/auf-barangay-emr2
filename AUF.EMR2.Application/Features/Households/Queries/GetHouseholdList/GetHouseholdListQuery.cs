@@ -6,8 +6,7 @@ using MediatR;
 
 namespace AUF.EMR2.Application.Features.Households.Queries.GetHouseholdList;
 
-public record GetHouseholdListQuery : IRequest<ErrorOr<PagedQueryResponse<HouseholdQueryResponse>>>
-{
-    public RequestParams RequestParams { get; set; } = null!;
-    public string Query { get; set; } = null!;
-}
+public record GetHouseholdListQuery(
+    RequestParams RequestParams, 
+    string Query
+) : IRequest<ErrorOr<PagedQueryResponse<HouseholdQueryResponse>>>;
