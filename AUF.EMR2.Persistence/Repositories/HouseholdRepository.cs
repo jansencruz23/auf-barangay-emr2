@@ -55,28 +55,26 @@ public class HouseholdRepository : GenericRepository<Household, HouseholdId>, IH
 
     public async Task<IPagedList<Household>> GetHouseholdList(RequestParams requestParams, string query = "")
     {
-        throw new NotImplementedException();
-        //var householdsQuery = _dbContext.Households
-        //    .AsNoTracking()
-        //    .Include(q => q.HouseholdMembers.Where(w => w.Status))
-        //    .Where(q => q.Status);
+        var householdsQuery = _dbContext.Households
+            .AsNoTracking()
+            .Where(q => q.Status);
 
-        //if (!string.IsNullOrWhiteSpace(query))
-        //{
-        //    householdsQuery = householdsQuery.Where(q =>
-        //        q.LastName.Contains(query) ||
-        //        q.FirstName.Contains(query) ||
-        //        (q.FirstName + " " + q.LastName).Contains(query) ||
-        //        q.HouseholdNo.Contains(query) ||
-        //        q.HouseholdMembers.Any(w =>
-        //            w.LastName.Contains(query) ||
-        //            w.FirstName.Contains(query) && w.Status));
-        //}
+        if (!string.IsNullOrWhiteSpace(query))
+        {
+            householdsQuery = householdsQuery.Where(q =>
+                q.LastName.Contains(query) ||
+                q.FirstName.Contains(query) ||
+                (q.FirstName + " " + q.LastName).Contains(query) ||
+                q.HouseholdNo.Contains(query));
+                //q.HouseholdMembers.Any(w =>
+                //    w.LastName.Contains(query) ||
+                //    w.FirstName.Contains(query) && w.Status));
+        }
 
-        //var households = await householdsQuery
-        //    .ToPagedListAsync(requestParams.PageNumber, requestParams.PageSize);
+        var households = await householdsQuery
+            .ToPagedListAsync(requestParams.PageNumber, requestParams.PageSize);
 
-        //return households;
+        return households;
     }
 
     public async Task<bool> IsHouseholdNoAvailable(string householdNo)

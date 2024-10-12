@@ -7,7 +7,9 @@ using AUF.EMR2.Application.Features.Households.Commands.UpdateHousehold;
 using AUF.EMR2.Application.Features.Households.Queries.GetHousehold;
 using AUF.EMR2.Application.Features.Households.Queries.GetHouseholdByHouseholdNo;
 using AUF.EMR2.Application.Features.Households.Queries.GetHouseholdList;
+using AUF.EMR2.Contracts.Common.Response;
 using AUF.EMR2.Contracts.Households.Request;
+using AUF.EMR2.Contracts.Households.Response;
 using ErrorOr;
 using MapsterMapper;
 using MediatR;
@@ -31,10 +33,13 @@ namespace AUF.EMR2.API.Controllers
 
         // GET: api/<HouseholdController>
         [HttpGet]
-        public async Task<ActionResult<PagedQueryResponse<HouseholdDto>>> Get([FromQuery] RequestParams requestParams, string query = null)
+        public async Task<IActionResult> Get([FromQuery] RequestParams requestParams, string query = null)
         {
-            var response = await _mediator.Send(new GetHouseholdListRequest { RequestParams = requestParams, Query = query });
-            return Ok(response);
+            var response = await _mediator.Send(new GetHouseholdListQuery { RequestParams = requestParams, Query = query });
+
+            return response.Match(
+                value => Ok(_mapper.Map<ApiPagedResponse<GetHouseholdListResponse>>(value)),
+                errors => Problem(errors));
         }
 
         // GET api/<HouseholdController>/5
@@ -55,7 +60,7 @@ namespace AUF.EMR2.API.Controllers
 
         // POST api/<HouseholdController>
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(BaseCommandResponse<Guid>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CommandResponse<Guid>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ValidationProblemDetails))]
         [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
@@ -63,12 +68,15 @@ namespace AUF.EMR2.API.Controllers
         {
             var command = _mapper.Map<CreateHouseholdCommand>(request);
             var response = await _mediator.Send(command);
-            return response.Match(value => Ok(value), errors => Problem(errors));
+
+            return response.Match(
+                value => Ok(_mapper.Map<ApiResponse<Guid>>(value)), 
+                errors => Problem(errors));
         }
 
         // PUT api/<HouseholdController>/5
         [HttpPut]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(BaseCommandResponse<Guid>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CommandResponse<Guid>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ValidationProblemDetails))]
         [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
@@ -76,12 +84,15 @@ namespace AUF.EMR2.API.Controllers
         {
             var command = _mapper.Map<UpdateHouseholdCommand>(request);
             var response = await _mediator.Send(command);
-            return response.Match(value => Ok(value), errors => Problem(errors));
+
+            return response.Match(
+               value => Ok(_mapper.Map<ApiResponse<Guid>>(value)),
+               errors => Problem(errors));
         }
 
         // DELETE api/<HouseholdController>/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<BaseCommandResponse<Guid>>> Delete(Guid id)
+        public async Task<ActionResult<CommandResponse<Guid>>> Delete(Guid id)
         {
             var response = await _mediator.Send(new DeleteHouseholdCommand { Id = id });
             return Ok(response);

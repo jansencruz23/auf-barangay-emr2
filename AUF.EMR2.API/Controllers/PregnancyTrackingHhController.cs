@@ -30,7 +30,7 @@ namespace AUF.EMR2.API.Controllers
 
         // PUT api/<PregnancyTrackingHhController>/5
         [HttpPut]
-        public async Task<ActionResult<BaseCommandResponse<Guid>>> Put([FromBody] UpdatePregnancyTrackingHhDto dto)
+        public async Task<ActionResult<CommandResponse<Guid>>> Put([FromBody] UpdatePregnancyTrackingHhDto dto)
         {
             var response = await _mediator.Send(new UpdatePregnancyTrackingHhCommand { PregnancyTrackingHHDto = dto });
             return Ok(response);

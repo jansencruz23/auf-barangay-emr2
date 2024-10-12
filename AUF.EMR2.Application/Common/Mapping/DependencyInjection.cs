@@ -1,12 +1,13 @@
 ﻿using Mapster;
 using MapsterMapper;
+using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
-namespace AUF.EMR2.API.Common.Mappings;
+namespace AUF.EMR2.Application.Common.Mapping;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddApiMappings(this IServiceCollection services)
+    public static IServiceCollection AddApplicationMappings(this IServiceCollection services)
     {
         var config = TypeAdapterConfig.GlobalSettings;
         config.Scan(Assembly.GetExecutingAssembly());

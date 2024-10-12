@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AUF.EMR2.Application.Features.WomenOfReproductiveAge.Commands.UpdateWra
 {
-    public record UpdateWraCommand : IRequest<BaseCommandResponse<Guid>>
+    public record UpdateWraCommand : IRequest<CommandResponse<Guid>>
     {
         public UpdateWraDto WraDto { get; set; }
     }

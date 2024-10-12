@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace AUF.EMR2.Application.Features.Masterlists.Commands.UpdateMasterlistChild
 {
-    public class UpdateMasterlistChildCommandHandler : IRequestHandler<UpdateMasterlistChildCommand, BaseCommandResponse<Guid>>
+    public class UpdateMasterlistChildCommandHandler : IRequestHandler<UpdateMasterlistChildCommand, CommandResponse<Guid>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -27,7 +27,7 @@ namespace AUF.EMR2.Application.Features.Masterlists.Commands.UpdateMasterlistChi
             _mapper = mapper;
         }
 
-        public async Task<BaseCommandResponse<Guid>> Handle(UpdateMasterlistChildCommand request, CancellationToken cancellationToken)
+        public async Task<CommandResponse<Guid>> Handle(UpdateMasterlistChildCommand request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
             //var response = new BaseCommandResponse<Guid>();

@@ -50,7 +50,7 @@ namespace AUF.EMR2.API.Controllers
 
         // POST api/<WraController>
         [HttpPost]
-        public async Task<ActionResult<BaseCommandResponse<Guid>>> Post([FromBody] CreateWraDto dto)
+        public async Task<ActionResult<CommandResponse<Guid>>> Post([FromBody] CreateWraDto dto)
         {
             var response = await _mediator.Send(new CreateWraCommand { WraDto = dto });
             return Ok(response);
@@ -58,7 +58,7 @@ namespace AUF.EMR2.API.Controllers
 
         // PUT api/<WraController>/5
         [HttpPut]
-        public async Task<ActionResult<BaseCommandResponse<Guid>>> Put([FromBody] UpdateWraDto dto)
+        public async Task<ActionResult<CommandResponse<Guid>>> Put([FromBody] UpdateWraDto dto)
         {
             var response = await _mediator.Send(new UpdateWraCommand { WraDto = dto });
             return Ok(response);
@@ -66,7 +66,7 @@ namespace AUF.EMR2.API.Controllers
 
         // DELETE api/<WraController>/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<BaseCommandResponse<Guid>>> Delete(Guid id)
+        public async Task<ActionResult<CommandResponse<Guid>>> Delete(Guid id)
         {
             var response = await _mediator.Send(new DeleteWraCommand { Id = id });
             return Ok(response);

@@ -12,15 +12,15 @@ namespace AUF.EMR2.Application.Features.Households.Commands.CreateHousehold;
 public class CreateHouseholdCommandHandler(
     IUnitOfWork unitOfWork,
     IPregnancyTrackingHHService pregnancyTrackingHhService,
-    IMapper mapper) : IRequestHandler<CreateHouseholdCommand, ErrorOr<BaseCommandResponse<Guid>>>
+    IMapper mapper) : IRequestHandler<CreateHouseholdCommand, ErrorOr<CommandResponse<Guid>>>
 {
     private readonly IUnitOfWork _unitOfWork = unitOfWork;
     private readonly IPregnancyTrackingHHService _pregnancyTrackingHhService = pregnancyTrackingHhService;
     private readonly IMapper _mapper = mapper;
 
-    public async Task<ErrorOr<BaseCommandResponse<Guid>>> Handle(CreateHouseholdCommand request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<CommandResponse<Guid>>> Handle(CreateHouseholdCommand request, CancellationToken cancellationToken)
     {
-        var response = new BaseCommandResponse<Guid>();
+        var response = new CommandResponse<Guid>();
 
         var philhealth = Philhealth.Create
         (

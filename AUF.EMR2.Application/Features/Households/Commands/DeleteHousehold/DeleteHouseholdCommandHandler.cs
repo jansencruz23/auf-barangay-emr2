@@ -4,7 +4,7 @@ using MediatR;
 
 namespace AUF.EMR2.Application.Features.Households.Commands.DeleteHousehold;
 
-public class DeleteHouseholdCommandHandler : IRequestHandler<DeleteHouseholdCommand, BaseCommandResponse<Guid>>
+public class DeleteHouseholdCommandHandler : IRequestHandler<DeleteHouseholdCommand, CommandResponse<Guid>>
 {
     private readonly IUnitOfWork _unitOfWork;
 
@@ -13,7 +13,7 @@ public class DeleteHouseholdCommandHandler : IRequestHandler<DeleteHouseholdComm
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<BaseCommandResponse<Guid>> Handle(DeleteHouseholdCommand request, CancellationToken cancellationToken)
+    public async Task<CommandResponse<Guid>> Handle(DeleteHouseholdCommand request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
         //if (request.Id == Guid.Empty)

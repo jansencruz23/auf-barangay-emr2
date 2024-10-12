@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AUF.EMR2.Application.Features.Barangays.Commands.UpdateBarangay
 {
-    public record UpdateBarangayCommand : IRequest<BaseCommandResponse<Guid>>
+    public record UpdateBarangayCommand : IRequest<CommandResponse<Guid>>
     {
         public UpdateBarangayDto BarangayDto { get; set; }
     }

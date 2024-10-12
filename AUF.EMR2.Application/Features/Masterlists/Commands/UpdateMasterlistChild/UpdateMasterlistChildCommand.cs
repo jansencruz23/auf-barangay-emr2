@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AUF.EMR2.Application.Features.Masterlists.Commands.UpdateMasterlistChild
 {
-    public record UpdateMasterlistChildCommand : IRequest<BaseCommandResponse<Guid>>
+    public record UpdateMasterlistChildCommand : IRequest<CommandResponse<Guid>>
     {
         public UpdateMasterlistChildDto MasterlistDto { get; set; }
     }

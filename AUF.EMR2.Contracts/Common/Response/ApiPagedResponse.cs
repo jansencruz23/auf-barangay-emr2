@@ -1,6 +1,6 @@
-﻿namespace AUF.EMR2.Application.Common.Responses;
+﻿namespace AUF.EMR2.Contracts.Common.Response;
 
-public class PagedQueryResponse<T>
+public class ApiPagedResponse<T>
     where T : class
 {
     public List<T> Data { get; set; } = null!;

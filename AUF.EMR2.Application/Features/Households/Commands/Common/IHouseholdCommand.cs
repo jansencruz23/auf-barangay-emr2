@@ -12,9 +12,9 @@ public interface IHouseholdCommand
     public string LastName { get; init; }
     public string FirstName { get; init; }
     public string? MotherMaidenName { get; init; }
-    public HouseAddressRequest HouseAddress { get; init; }
+    public HouseAddressData HouseAddress { get; init; }
     public string ContactNo { get; init; }
     public bool IsNhts { get; init; }
-    public PhilhealthRequest Philhealth { get; init; }
+    public PhilhealthData Philhealth { get; init; }
     public bool IsIp { get; init; }
 }

@@ -30,7 +30,7 @@ namespace AUF.EMR2.API.Controllers
 
         // PUT api/<BarangayController>/5
         [HttpPut]
-        public async Task<ActionResult<BaseCommandResponse<Guid>>> Put([FromBody] UpdateBarangayDto dto)
+        public async Task<ActionResult<CommandResponse<Guid>>> Put([FromBody] UpdateBarangayDto dto)
         {
             var response = await _mediator.Send(new UpdateBarangayCommand { BarangayDto = dto });
             return Ok(response);

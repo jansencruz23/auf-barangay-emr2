@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace AUF.EMR2.Application.Features.PregnancyTrackings.Commands.DeletePregnancyTracking
 {
-    public class DeletePregnancyTrackingCommandHandler : IRequestHandler<DeletePregnancyTrackingCommand, BaseCommandResponse<Guid>>
+    public class DeletePregnancyTrackingCommandHandler : IRequestHandler<DeletePregnancyTrackingCommand, CommandResponse<Guid>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -26,7 +26,7 @@ namespace AUF.EMR2.Application.Features.PregnancyTrackings.Commands.DeletePregna
             _mapper = mapper;
         }
 
-        public async Task<BaseCommandResponse<Guid>> Handle(DeletePregnancyTrackingCommand request, CancellationToken cancellationToken)
+        public async Task<CommandResponse<Guid>> Handle(DeletePregnancyTrackingCommand request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
             //if (request.Id == Guid.Empty)

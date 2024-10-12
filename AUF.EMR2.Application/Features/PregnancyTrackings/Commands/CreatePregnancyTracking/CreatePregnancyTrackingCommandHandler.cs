@@ -5,7 +5,7 @@ using MediatR;
 
 namespace AUF.EMR2.Application.Features.PregnancyTrackings.Commands.CreatePregnancyTracking;
 
-public class CreatePregnancyTrackingCommandHandler : IRequestHandler<CreatePregnancyTrackingCommand, BaseCommandResponse<Guid>>
+public class CreatePregnancyTrackingCommandHandler : IRequestHandler<CreatePregnancyTrackingCommand, CommandResponse<Guid>>
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
@@ -18,7 +18,7 @@ public class CreatePregnancyTrackingCommandHandler : IRequestHandler<CreatePregn
         _mapper = mapper;
     }
 
-    public async Task<BaseCommandResponse<Guid>> Handle(CreatePregnancyTrackingCommand request, CancellationToken cancellationToken)
+    public async Task<CommandResponse<Guid>> Handle(CreatePregnancyTrackingCommand request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
         //var response = new BaseCommandResponse<Guid>();

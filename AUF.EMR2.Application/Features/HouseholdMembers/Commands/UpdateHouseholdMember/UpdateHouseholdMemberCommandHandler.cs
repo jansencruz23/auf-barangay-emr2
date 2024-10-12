@@ -5,7 +5,7 @@ using MediatR;
 
 namespace AUF.EMR2.Application.Features.HouseholdMembers.Commands.UpdateHouseholdMember;
 
-public class UpdateHouseholdMemberCommandHandler : IRequestHandler<UpdateHouseholdMemberCommand, BaseCommandResponse<Guid>>
+public class UpdateHouseholdMemberCommandHandler : IRequestHandler<UpdateHouseholdMemberCommand, CommandResponse<Guid>>
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
@@ -18,7 +18,7 @@ public class UpdateHouseholdMemberCommandHandler : IRequestHandler<UpdateHouseho
         _mapper = mapper;
     }
 
-    public async Task<BaseCommandResponse<Guid>> Handle(UpdateHouseholdMemberCommand request, CancellationToken cancellationToken)
+    public async Task<CommandResponse<Guid>> Handle(UpdateHouseholdMemberCommand request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
         //var response = new BaseCommandResponse<Guid>();

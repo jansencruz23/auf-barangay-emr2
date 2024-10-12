@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace AUF.EMR2.Application.Features.HouseholdMembers.Commands.DeleteHouseholdMember
 {
-    public class DeleteHouseholdMemberCommandHandler : IRequestHandler<DeleteHouseholdMemberCommand, BaseCommandResponse<Guid>>
+    public class DeleteHouseholdMemberCommandHandler : IRequestHandler<DeleteHouseholdMemberCommand, CommandResponse<Guid>>
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -21,7 +21,7 @@ namespace AUF.EMR2.Application.Features.HouseholdMembers.Commands.DeleteHousehol
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<BaseCommandResponse<Guid>> Handle(DeleteHouseholdMemberCommand request, CancellationToken cancellationToken)
+        public async Task<CommandResponse<Guid>> Handle(DeleteHouseholdMemberCommand request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
             //if (request.Id == Guid.Empty)

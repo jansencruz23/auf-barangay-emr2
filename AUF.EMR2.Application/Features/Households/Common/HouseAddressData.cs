@@ -1,6 +1,6 @@
 ﻿namespace AUF.EMR2.Application.Features.Households.Common;
 
-public sealed record HouseAddressRequest(
+public sealed record HouseAddressData(
     string HouseNoAndStreet,
     string Barangay,
     string City,

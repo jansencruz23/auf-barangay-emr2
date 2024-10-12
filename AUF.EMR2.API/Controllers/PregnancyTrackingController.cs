@@ -51,7 +51,7 @@ namespace AUF.EMR2.API.Controllers
 
         // POST api/<PregnancyTrackingController>
         [HttpPost]
-        public async Task<ActionResult<BaseCommandResponse<Guid>>> Post([FromBody] CreatePregnancyTrackingDto dto)
+        public async Task<ActionResult<CommandResponse<Guid>>> Post([FromBody] CreatePregnancyTrackingDto dto)
         {
             var response = await _mediator.Send(new CreatePregnancyTrackingCommand { PregnancyTrackingDto = dto });
             return Ok(response);
@@ -59,7 +59,7 @@ namespace AUF.EMR2.API.Controllers
 
         // PUT api/<PregnancyTrackingController>/5
         [HttpPut]
-        public async Task<ActionResult<BaseCommandResponse<Guid>>> Put([FromBody] UpdatePregnancyTrackingDto dto)
+        public async Task<ActionResult<CommandResponse<Guid>>> Put([FromBody] UpdatePregnancyTrackingDto dto)
         {
             var response = await _mediator.Send(new UpdatePregnancyTrackingCommand { PregnancyTrackingDto = dto });
             return Ok(response);
@@ -67,7 +67,7 @@ namespace AUF.EMR2.API.Controllers
 
         // DELETE api/<PregnancyTrackingController>/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<BaseCommandResponse<Guid>>> Delete(Guid id)
+        public async Task<ActionResult<CommandResponse<Guid>>> Delete(Guid id)
         {
             var response = await _mediator.Send(new DeletePregnancyTrackingCommand { Id = id });
             return Ok(response);

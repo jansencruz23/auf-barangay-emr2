@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace AUF.EMR2.Application.Features.PregnancyTrackingHhs.Commands.UpdatePregnancyTrackingHh
 {
-    public class UpdatePregnancyTrackingHhCommandHandler : IRequestHandler<UpdatePregnancyTrackingHhCommand, BaseCommandResponse<Guid>>
+    public class UpdatePregnancyTrackingHhCommandHandler : IRequestHandler<UpdatePregnancyTrackingHhCommand, CommandResponse<Guid>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -28,7 +28,7 @@ namespace AUF.EMR2.Application.Features.PregnancyTrackingHhs.Commands.UpdatePreg
             _mapper = mapper;
         }
 
-        public async Task<BaseCommandResponse<Guid>> Handle(UpdatePregnancyTrackingHhCommand request, CancellationToken cancellationToken)
+        public async Task<CommandResponse<Guid>> Handle(UpdatePregnancyTrackingHhCommand request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
             //var response = new BaseCommandResponse<Guid>();

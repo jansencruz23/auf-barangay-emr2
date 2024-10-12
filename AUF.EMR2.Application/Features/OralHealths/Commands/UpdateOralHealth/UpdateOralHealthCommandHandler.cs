@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace AUF.EMR2.Application.Features.OralHealths.Commands.UpdateOralHealth
 {
-    public class UpdateOralHealthCommandHandler : IRequestHandler<UpdateOralHealthCommand, BaseCommandResponse<Guid>>
+    public class UpdateOralHealthCommandHandler : IRequestHandler<UpdateOralHealthCommand, CommandResponse<Guid>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -28,7 +28,7 @@ namespace AUF.EMR2.Application.Features.OralHealths.Commands.UpdateOralHealth
             _mapper = mapper;
         }
 
-        public async Task<BaseCommandResponse<Guid>> Handle(UpdateOralHealthCommand request, CancellationToken cancellationToken)
+        public async Task<CommandResponse<Guid>> Handle(UpdateOralHealthCommand request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
             //var response = new BaseCommandResponse<Guid>();

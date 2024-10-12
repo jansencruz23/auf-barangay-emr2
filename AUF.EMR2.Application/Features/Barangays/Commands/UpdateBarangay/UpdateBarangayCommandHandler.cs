@@ -5,7 +5,7 @@ using MediatR;
 
 namespace AUF.EMR2.Application.Features.Barangays.Commands.UpdateBarangay;
 
-public class UpdateBarangayCommandHandler : IRequestHandler<UpdateBarangayCommand, BaseCommandResponse<Guid>>
+public class UpdateBarangayCommandHandler : IRequestHandler<UpdateBarangayCommand, CommandResponse<Guid>>
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
@@ -18,7 +18,7 @@ public class UpdateBarangayCommandHandler : IRequestHandler<UpdateBarangayComman
         _mapper = mapper;
     }
 
-    public async Task<BaseCommandResponse<Guid>> Handle(UpdateBarangayCommand request, CancellationToken cancellationToken)
+    public async Task<CommandResponse<Guid>> Handle(UpdateBarangayCommand request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
         //var response = new BaseCommandResponse<Guid>();

@@ -5,7 +5,7 @@ using MediatR;
 
 namespace AUF.EMR2.Application.Features.WomenOfReproductiveAge.Commands.CreateWra;
 
-public class CreateWraCommandHandler : IRequestHandler<CreateWraCommand, BaseCommandResponse<Guid>>
+public class CreateWraCommandHandler : IRequestHandler<CreateWraCommand, CommandResponse<Guid>>
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
@@ -18,7 +18,7 @@ public class CreateWraCommandHandler : IRequestHandler<CreateWraCommand, BaseCom
         _mapper = mapper;
     }
 
-    public async Task<BaseCommandResponse<Guid>> Handle(CreateWraCommand request, CancellationToken cancellationToken)
+    public async Task<CommandResponse<Guid>> Handle(CreateWraCommand request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
         //var response = new BaseCommandResponse<Guid>();

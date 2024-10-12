@@ -94,7 +94,7 @@ namespace AUF.EMR2.API.Controllers
 
         // PUT api/<OralHealthController>/5
         [HttpPut]
-        public async Task<ActionResult<BaseCommandResponse<int>>> Put([FromBody] UpdateOralHealthDto dto)
+        public async Task<ActionResult<CommandResponse<int>>> Put([FromBody] UpdateOralHealthDto dto)
         {
             var response = await _mediator.Send(new UpdateOralHealthCommand { OralHealthDto = dto });
             return Ok(response);

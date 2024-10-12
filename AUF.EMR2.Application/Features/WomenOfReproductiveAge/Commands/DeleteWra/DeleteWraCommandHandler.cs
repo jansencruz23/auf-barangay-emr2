@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace AUF.EMR2.Application.Features.WomenOfReproductiveAge.Commands.DeleteWra
 {
-    public class DeleteWraCommandHandler : IRequestHandler<DeleteWraCommand, BaseCommandResponse<Guid>>
+    public class DeleteWraCommandHandler : IRequestHandler<DeleteWraCommand, CommandResponse<Guid>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -26,7 +26,7 @@ namespace AUF.EMR2.Application.Features.WomenOfReproductiveAge.Commands.DeleteWr
             _mapper = mapper;
         }
 
-        public async Task<BaseCommandResponse<Guid>> Handle(DeleteWraCommand request, CancellationToken cancellationToken)
+        public async Task<CommandResponse<Guid>> Handle(DeleteWraCommand request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
             //if (request.Id == Guid.Empty)

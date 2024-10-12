@@ -16,10 +16,10 @@ public sealed record UpdateHouseholdCommand(
     string LastName,
     string FirstName,
     string? MotherMaidenName,
-    HouseAddressRequest HouseAddress,
+    HouseAddressData HouseAddress,
     string ContactNo,
     bool IsNhts,
-    PhilhealthRequest Philhealth,
+    PhilhealthData Philhealth,
     bool IsIp,
     Guid Version
-) : IRequest<ErrorOr<BaseCommandResponse<Guid>>>, IHouseholdCommand;
+) : IRequest<ErrorOr<CommandResponse<Guid>>>, IHouseholdCommand;

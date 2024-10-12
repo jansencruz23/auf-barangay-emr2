@@ -7,7 +7,7 @@ using MediatR;
 
 namespace AUF.EMR2.Application.Features.Households.Commands.UpdateHousehold;
 
-public class UpdateHouseholdCommandHandler : IRequestHandler<UpdateHouseholdCommand, ErrorOr<BaseCommandResponse<Guid>>>
+public class UpdateHouseholdCommandHandler : IRequestHandler<UpdateHouseholdCommand, ErrorOr<CommandResponse<Guid>>>
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
@@ -20,9 +20,9 @@ public class UpdateHouseholdCommandHandler : IRequestHandler<UpdateHouseholdComm
         _mapper = mapper;
     }
 
-    public async Task<ErrorOr<BaseCommandResponse<Guid>>> Handle(UpdateHouseholdCommand request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<CommandResponse<Guid>>> Handle(UpdateHouseholdCommand request, CancellationToken cancellationToken)
     {
-        var response = new BaseCommandResponse<Guid>();
+        var response = new CommandResponse<Guid>();
 
         var philhealth = Philhealth.Create
         (
