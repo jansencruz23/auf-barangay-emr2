@@ -58,10 +58,15 @@ namespace AUF.EMR2.API.Controllers
 
         // GET api/<HouseholdController>/household-no/householdNo
         [HttpGet("household-no/{householdNo}")]
-        public async Task<ActionResult<HouseholdDto>> GetByHouseholdNo(string householdNo)
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HouseholdResponse))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
+        public async Task<IActionResult> GetByHouseholdNo(string householdNo)
         {
-            var response = await _mediator.Send(new GetHouseholdByHouseholdNoRequest { HouseholdNo = householdNo });
-            return Ok(response);
+            var response = await _mediator.Send(new GetHouseholdByHouseholdNoQuery { HouseholdNo = householdNo });
+
+            return response.Match(
+               value => Ok(_mapper.Map<HouseholdResponse>(value)),
+               errors => Problem(errors));
         }
 
         // POST api/<HouseholdController>

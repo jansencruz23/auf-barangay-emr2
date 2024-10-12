@@ -34,7 +34,6 @@ public class HouseholdRepository : GenericRepository<Household, HouseholdId>, IH
     {
         var household = await _dbContext.Households
             .AsNoTracking()
-            //.Include(q => q.HouseholdMembers.Where(w => w.Status))
             .Where(q => q.Status)
             .FirstOrDefaultAsync(q => q.Id == id);
 
@@ -43,14 +42,12 @@ public class HouseholdRepository : GenericRepository<Household, HouseholdId>, IH
 
     public async Task<Household> GetHouseholdByHouseholdNo(string householdNo)
     {
-        throw new NotImplementedException();
-        //var household = await _dbContext.Households
-        //    .AsNoTracking()
-        //    .Include(q => q.HouseholdMembers.Where(w => w.Status))
-        //    .Where(q => q.Status)
-        //    .FirstOrDefaultAsync(q => q.HouseholdNo.Equals(householdNo));
+        var household = await _dbContext.Households
+            .AsNoTracking()
+            .Where(q => q.Status)
+            .FirstOrDefaultAsync(q => q.HouseholdNo.Equals(householdNo));
 
-        //return household;
+        return household!;
     }
 
     public async Task<IPagedList<Household>> GetHouseholdList(RequestParams requestParams, string query = "")
