@@ -14,8 +14,8 @@ public static partial class Errors
             code: "Household.EmptyHouseholdNo",
             description: "Household no. cannot be empty.");
 
-        public static Error IdNotFound => Error.NotFound(
-            code: "Household.IdNotFound",
-            description: "Household Id cannot be found.");
+        public static Error HouseholdNotFound => Error.NotFound(
+            code: "Household.NotFound",
+            description: "Household cannot be found.");
     }
 }

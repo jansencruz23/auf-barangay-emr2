@@ -24,12 +24,12 @@ public class DeleteHouseholdCommandHandler : IRequestHandler<DeleteHouseholdComm
 
         if (household is null)
         {
-            return Errors.Household.IdNotFound;
+            return Errors.Household.HouseholdNotFound;
         }
 
         try
         {
-            household.DeleteHousehold();
+            household.Delete();
             _unitOfWork.HouseholdRepository.Update(household);
 
             await _unitOfWork.SaveAsync();

@@ -26,10 +26,11 @@ namespace AUF.EMR2.Application.Features.PregnancyTrackingHhs.Queries.GetPregnanc
 
         public async Task<PregnancyTrackingHhDto> Handle(GetPregnancyTrackingHhRequest request, CancellationToken cancellationToken)
         {
-            var pregnancyTrackingHh = await _unitOfWork.PregnancyTrackingHhRepository.GetPregnancyTrackingHh(request.HouseholdNo);
-            var pregnancyTrackingHhDto = _mapper.Map<PregnancyTrackingHhDto>(pregnancyTrackingHh);
+            throw new NotImplementedException();
+            //var pregnancyTrackingHh = await _unitOfWork.PregnancyTrackingHhRepository.GetPregnancyTrackingHh(request.HouseholdNo);
+            //var pregnancyTrackingHhDto = _mapper.Map<PregnancyTrackingHhDto>(pregnancyTrackingHh);
 
-            return pregnancyTrackingHhDto;
+            //return pregnancyTrackingHhDto;
         }
     }
 }

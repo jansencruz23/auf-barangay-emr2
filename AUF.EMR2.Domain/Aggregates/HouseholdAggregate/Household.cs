@@ -65,7 +65,7 @@ public sealed class Household : AggregateRoot<HouseholdId>
         return household;
     }
 
-    public ErrorOr<HouseholdId> UpdateHousehold(
+    public ErrorOr<HouseholdId> Update(
         string householdNo,
         DateTime? firstQtrVisit,
         DateTime? secondQtrVisit,
@@ -102,8 +102,13 @@ public sealed class Household : AggregateRoot<HouseholdId>
         return Id;
     }
 
-    public ErrorOr<HouseholdId> DeleteHousehold()
+    public ErrorOr<HouseholdId> Delete()
     {
+        if (Status == false)
+        {
+            return Errors.Household.HouseholdNotFound;
+        }
+
         Status = false;
         AddDomainEvent(new HouseholdDeleted(Id));
 

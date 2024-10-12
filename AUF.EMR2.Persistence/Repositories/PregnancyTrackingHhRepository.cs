@@ -1,4 +1,5 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence;
+using AUF.EMR2.Domain.Aggregates.HouseholdAggregate.ValueObjects;
 using AUF.EMR2.Domain.Aggregates.PregnancyTrackingHhAggregate;
 using AUF.EMR2.Domain.Aggregates.PregnancyTrackingHhAggregate.ValueObjects;
 using AUF.EMR2.Persistence.Repositories.Common;
@@ -16,16 +17,13 @@ public class PregnancyTrackingHhRepository : GenericRepository<PregnancyTracking
         _dbContext = dbContext;
     }
 
-    public async Task<PregnancyTrackingHh> GetPregnancyTrackingHh(string householdNo)
+    public async Task<PregnancyTrackingHh> GetPregnancyTrackingHh(HouseholdId householdId)
     {
-        throw new NotImplementedException();
-        //var pregnancyTrackingHh = await _dbContext.PregnancyTrackingHhs
-        //    .AsNoTracking()
-        //    .Include(q => q.Household)
-        //    .Include(q => q.Barangay)
-        //    .FirstOrDefaultAsync(q => q.Household.HouseholdNo.Equals(householdNo));
+        var pregnancyTrackingHh = await _dbContext.PregnancyTrackingHhs
+            .AsNoTracking()
+            .FirstOrDefaultAsync(q => q.HouseholdId == householdId);
 
-        //return pregnancyTrackingHh;
+        return pregnancyTrackingHh!;
     }
 
     public async Task<PregnancyTrackingHh> GetPregnancyTrackingHh(PregnancyTrackingHhId id)

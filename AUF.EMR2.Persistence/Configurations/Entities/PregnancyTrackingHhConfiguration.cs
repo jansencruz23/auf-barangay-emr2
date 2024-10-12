@@ -15,7 +15,7 @@ public class PregnancyTrackingHhConfiguration : IEntityTypeConfiguration<Pregnan
         ConfigurePregnancyTrackingHhTable(builder);
     }
 
-    private void ConfigurePregnancyTrackingHhTable(EntityTypeBuilder<PregnancyTrackingHh> builder)
+    private static void ConfigurePregnancyTrackingHhTable(EntityTypeBuilder<PregnancyTrackingHh> builder)
     {
         builder.ToTable("PregnancyTrackingHh");
         builder.HasKey(pregHh => pregHh.Id);

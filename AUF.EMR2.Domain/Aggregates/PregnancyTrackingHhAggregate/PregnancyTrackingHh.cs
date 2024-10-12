@@ -1,7 +1,9 @@
 ﻿using AUF.EMR2.Domain.Aggregates.BarangayAggregate.ValueObjects;
 using AUF.EMR2.Domain.Aggregates.HouseholdAggregate.ValueObjects;
 using AUF.EMR2.Domain.Aggregates.PregnancyTrackingHhAggregate.ValueObjects;
+using AUF.EMR2.Domain.Common.Errors;
 using AUF.EMR2.Domain.Common.Models;
+using ErrorOr;
 
 namespace AUF.EMR2.Domain.Aggregates.PregnancyTrackingHhAggregate;
 
@@ -60,6 +62,17 @@ public sealed class PregnancyTrackingHh : AggregateRoot<PregnancyTrackingHhId>
             bHWName: bHWName,
             midwifeName: midwifeName,
             householdId: householdId);
+    }
+
+    public ErrorOr<PregnancyTrackingHhId> Delete()
+    {
+        if (Status == false)
+        {
+            return Errors.PregnancyTrackingHh.NotFound;
+        }
+
+        Status = false;
+        return Id;
     }
 
     private PregnancyTrackingHh() { }

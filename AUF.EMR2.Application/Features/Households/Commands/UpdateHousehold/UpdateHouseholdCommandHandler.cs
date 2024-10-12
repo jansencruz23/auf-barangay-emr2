@@ -44,10 +44,10 @@ public class UpdateHouseholdCommandHandler : IRequestHandler<UpdateHouseholdComm
 
         if (household is null)
         {
-            return Errors.Household.IdNotFound;
+            return Errors.Household.HouseholdNotFound;
         }
 
-        household.UpdateHousehold(
+        household.Update(
             householdNo: request.HouseholdNo,
             firstQtrVisit: request.FirstQtrVisit,
             secondQtrVisit: request.SecondQtrVisit,

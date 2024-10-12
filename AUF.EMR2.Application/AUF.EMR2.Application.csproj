@@ -20,8 +20,4 @@
     <ProjectReference Include="..\AUF.EMR2.Domain\AUF.EMR2.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DTOs\Household\ValueObjectDtos\" />
-  </ItemGroup>
-
 </Project>
