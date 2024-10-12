@@ -1,6 +1,7 @@
 ﻿using AUF.EMR2.Application.Common.Responses;
 using AUF.EMR2.Application.DTOs.HouseholdMember;
 using AUF.EMR2.Application.Features.HouseholdMembers.Commands.CreateHouseholdMember;
+using AUF.EMR2.Application.Features.HouseholdMembers.Commands.DeleteHouseholdMember;
 using AUF.EMR2.Application.Features.HouseholdMembers.Commands.UpdateHouseholdMember;
 using AUF.EMR2.Application.Features.HouseholdMembers.Queries.GetHouseholdMember;
 using AUF.EMR2.Application.Features.HouseholdMembers.Queries.GetHouseholdMemberListByHouseholdNo;
@@ -68,7 +69,7 @@ namespace AUF.EMR2.API.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<CommandResponse<Guid>>> Delete(Guid id)
         {
-            var response = await _mediator.Send(new DeleteHouseholdCommand { Id = id });
+            var response = await _mediator.Send(new DeleteHouseholdMemberCommand { Id = id });
             return Ok(response);
         }
     }

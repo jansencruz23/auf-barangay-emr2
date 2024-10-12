@@ -1,6 +1,7 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
 using AUF.EMR2.Application.Common.Responses;
 using AUF.EMR2.Domain.Aggregates.HouseholdAggregate.ValueObjects;
+using AUF.EMR2.Domain.Common.Errors;
 using ErrorOr;
 using MapsterMapper;
 using MediatR;
@@ -40,6 +41,11 @@ public class UpdateHouseholdCommandHandler : IRequestHandler<UpdateHouseholdComm
         );
 
         var household = await _unitOfWork.HouseholdRepository.GetHousehold(HouseholdId.Create(request.Id));
+
+        if (household is null)
+        {
+            return Errors.Household.IdNotFound;
+        }
 
         household.UpdateHousehold(
             householdNo: request.HouseholdNo,

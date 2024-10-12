@@ -11,6 +11,10 @@ public class UpdateHouseholdCommandValidator : AbstractValidator<UpdateHousehold
     {
         Include(new IHouseholdCommandValidator());
 
+        RuleFor(q => q.Id)
+            .NotNull()
+            .NotEqual(Guid.Empty);
+
         RuleFor(q => q.HouseholdNo)
            .MustAsync(async (command, householdNo, token) =>
            {

@@ -13,8 +13,6 @@ using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace AUF.EMR2.API.Controllers
 {
     [Route("api/[controller]")]
@@ -102,10 +100,17 @@ namespace AUF.EMR2.API.Controllers
 
         // DELETE api/<HouseholdController>/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<CommandResponse<Guid>>> Delete(Guid id)
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CommandResponse<Guid>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ValidationProblemDetails))]
+        [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
+        public async Task<IActionResult> Delete(Guid id)
         {
-            var response = await _mediator.Send(new DeleteHouseholdCommand { Id = id });
-            return Ok(response);
+            var response = await _mediator.Send(new DeleteHouseholdCommand(id));
+
+            return response.Match(
+               value => Ok(_mapper.Map<ApiResponse<Guid>>(value)),
+               errors => Problem(errors));
         }
     }
 }

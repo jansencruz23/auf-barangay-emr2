@@ -1,10 +1,14 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
 using AUF.EMR2.Application.Common.Responses;
+using AUF.EMR2.Domain.Aggregates.HouseholdAggregate.ValueObjects;
+using AUF.EMR2.Domain.Common.Errors;
+using ErrorOr;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace AUF.EMR2.Application.Features.Households.Commands.DeleteHousehold;
 
-public class DeleteHouseholdCommandHandler : IRequestHandler<DeleteHouseholdCommand, CommandResponse<Guid>>
+public class DeleteHouseholdCommandHandler : IRequestHandler<DeleteHouseholdCommand, ErrorOr<CommandResponse<Guid>>>
 {
     private readonly IUnitOfWork _unitOfWork;
 
@@ -13,39 +17,32 @@ public class DeleteHouseholdCommandHandler : IRequestHandler<DeleteHouseholdComm
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<CommandResponse<Guid>> Handle(DeleteHouseholdCommand request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<CommandResponse<Guid>>> Handle(DeleteHouseholdCommand request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
-        //if (request.Id == Guid.Empty)
-        //{
-        //    throw new BadRequestException("The request is invalid. Id (0).");
-        //}
+        var response = new CommandResponse<Guid>();
+        var household = await _unitOfWork.HouseholdRepository.Get(HouseholdId.Create(request.Id));
 
-        //var response = new BaseCommandResponse<Guid>();
-        //var existing = await _unitOfWork.HouseholdRepository.Exists(request.Id);
+        if (household is null)
+        {
+            return Errors.Household.IdNotFound;
+        }
 
-        //if (!existing)
-        //{
-        //    response.Success = false;
-        //    response.Message = $"{nameof(Household)} with id: {request.Id} is not existing. It may be deleted or it never existed.";
+        try
+        {
+            household.DeleteHousehold();
+            _unitOfWork.HouseholdRepository.Update(household);
 
-        //    throw new NotFoundException(nameof(Household), request.Id);
-        //}
+            await _unitOfWork.SaveAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            return Errors.ConcurrentIssue;
+        }
 
-        //try
-        //{
-        //    await _unitOfWork.HouseholdRepository.Delete(request.Id);
-        //    await _unitOfWork.SaveAsync();
-        //}
-        //catch (DbUpdateConcurrencyException ex)
-        //{
-        //    throw new ConcurrencyException($"The {nameof(Household)} you attempted to update was deleted by another user.", ex);
-        //}
+        response.Success = true;
+        response.Message = "Deletion is successful";
+        response.Id = request.Id;
 
-        //response.Success = true;
-        //response.Message = "Deletion is successful";
-        //response.Id = request.Id;
-
-        //return response;
+        return response;
     }
 }
