@@ -20,7 +20,7 @@ public sealed class HouseholdCreatedHandler(IUnitOfWork unitOfWork) : INotificat
             birthingCenterAddress: "Address ng bc",
             referralCenter: "Referral",
             referralCenterAddress: "Ref address",
-            bHWName: "DK",
+            bwhName: "DK",
             midwifeName: "mid",
             householdId: householdId
         );

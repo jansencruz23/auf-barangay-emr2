@@ -23,6 +23,13 @@ public class UpdateHouseholdCommandHandler : IRequestHandler<UpdateHouseholdComm
 
     public async Task<ErrorOr<CommandResponse<Guid>>> Handle(UpdateHouseholdCommand request, CancellationToken cancellationToken)
     {
+        var household = await _unitOfWork.HouseholdRepository.GetHousehold(HouseholdId.Create(request.Id));
+
+        if (household is null)
+        {
+            return Errors.Household.HouseholdNotFound;
+        }
+
         var response = new CommandResponse<Guid>();
 
         var philhealth = Philhealth.Create
@@ -39,13 +46,6 @@ public class UpdateHouseholdCommandHandler : IRequestHandler<UpdateHouseholdComm
             city: request.HouseAddress.City,
             province: request.HouseAddress.Province
         );
-
-        var household = await _unitOfWork.HouseholdRepository.GetHousehold(HouseholdId.Create(request.Id));
-
-        if (household is null)
-        {
-            return Errors.Household.HouseholdNotFound;
-        }
 
         household.Update(
             householdNo: request.HouseholdNo,

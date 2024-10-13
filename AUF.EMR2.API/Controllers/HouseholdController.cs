@@ -13,104 +13,103 @@ using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AUF.EMR2.API.Controllers
+namespace AUF.EMR2.API.Controllers;
+
+[Route("api/[controller]")]
+public class HouseholdController : ApiController
 {
-    [Route("api/[controller]")]
-    public class HouseholdController : ApiController
+    private readonly ISender _mediator;
+    private readonly IMapper _mapper;
+
+    public HouseholdController(ISender mediator, IMapper mapper)
     {
-        private readonly ISender _mediator;
-        private readonly IMapper _mapper;
+        _mediator = mediator;
+        _mapper = mapper;
+    }
 
-        public HouseholdController(ISender mediator, IMapper mapper)
-        {
-            _mediator = mediator;
-            _mapper = mapper;
-        }
+    // GET: api/<HouseholdController>
+    [HttpGet]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiPagedResponse<HouseholdResponse>))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
+    public async Task<IActionResult> Get([FromQuery] RequestParams requestParams, string query = null!)
+    {
+        var response = await _mediator.Send(new GetHouseholdListQuery(requestParams, query));
 
-        // GET: api/<HouseholdController>
-        [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiPagedResponse<HouseholdResponse>))]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
-        public async Task<IActionResult> Get([FromQuery] RequestParams requestParams, string query = null!)
-        {
-            var response = await _mediator.Send(new GetHouseholdListQuery(requestParams, query));
+        return response.Match(
+            value => Ok(_mapper.Map<ApiPagedResponse<HouseholdResponse>>(value)),
+            errors => Problem(errors));
+    }
 
-            return response.Match(
-                value => Ok(_mapper.Map<ApiPagedResponse<HouseholdResponse>>(value)),
-                errors => Problem(errors));
-        }
+    // GET api/<HouseholdController>/5
+    [HttpGet("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HouseholdResponse))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
+    public async Task<IActionResult> Get(Guid id)
+    {
+        var response = await _mediator.Send(new GetHouseholdQuery(id));
 
-        // GET api/<HouseholdController>/5
-        [HttpGet("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HouseholdResponse))]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
-        public async Task<IActionResult> Get(Guid id)
-        {
-            var response = await _mediator.Send(new GetHouseholdQuery(id));
+        return response.Match(
+            value => Ok(_mapper.Map<HouseholdResponse>(value)),
+            errors => Problem(errors));
+    }
 
-            return response.Match(
-                value => Ok(_mapper.Map<HouseholdResponse>(value)),
-                errors => Problem(errors));
-        }
+    // GET api/<HouseholdController>/household-no/householdNo
+    [HttpGet("household-no/{householdNo}")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HouseholdResponse))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
+    public async Task<IActionResult> GetByHouseholdNo(string householdNo)
+    {
+        var response = await _mediator.Send(new GetHouseholdByHouseholdNoQuery(householdNo));
 
-        // GET api/<HouseholdController>/household-no/householdNo
-        [HttpGet("household-no/{householdNo}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HouseholdResponse))]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
-        public async Task<IActionResult> GetByHouseholdNo(string householdNo)
-        {
-            var response = await _mediator.Send(new GetHouseholdByHouseholdNoQuery(householdNo));
+        return response.Match(
+           value => Ok(_mapper.Map<HouseholdResponse>(value)),
+           errors => Problem(errors));
+    }
 
-            return response.Match(
-               value => Ok(_mapper.Map<HouseholdResponse>(value)),
-               errors => Problem(errors));
-        }
+    // POST api/<HouseholdController>
+    [HttpPost]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CommandResponse<Guid>))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ValidationProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
+    public async Task<IActionResult> Post([FromBody] CreateHouseholdRequest request)
+    {
+        var command = _mapper.Map<CreateHouseholdCommand>(request);
+        var response = await _mediator.Send(command);
 
-        // POST api/<HouseholdController>
-        [HttpPost]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CommandResponse<Guid>))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ValidationProblemDetails))]
-        [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
-        public async Task<IActionResult> Post([FromBody] CreateHouseholdRequest request)
-        {
-            var command = _mapper.Map<CreateHouseholdCommand>(request);
-            var response = await _mediator.Send(command);
+        return response.Match(
+            value => Ok(_mapper.Map<ApiResponse<Guid>>(value)), 
+            errors => Problem(errors));
+    }
 
-            return response.Match(
-                value => Ok(_mapper.Map<ApiResponse<Guid>>(value)), 
-                errors => Problem(errors));
-        }
+    // PUT api/<HouseholdController>/5
+    [HttpPut]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CommandResponse<Guid>))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ValidationProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
+    public async Task<IActionResult> Put([FromBody] UpdateHouseholdRequest request)
+    {
+        var command = _mapper.Map<UpdateHouseholdCommand>(request);
+        var response = await _mediator.Send(command);
 
-        // PUT api/<HouseholdController>/5
-        [HttpPut]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CommandResponse<Guid>))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ValidationProblemDetails))]
-        [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
-        public async Task<IActionResult> Put([FromBody] UpdateHouseholdRequest request)
-        {
-            var command = _mapper.Map<UpdateHouseholdCommand>(request);
-            var response = await _mediator.Send(command);
+        return response.Match(
+           value => Ok(_mapper.Map<ApiResponse<Guid>>(value)),
+           errors => Problem(errors));
+    }
 
-            return response.Match(
-               value => Ok(_mapper.Map<ApiResponse<Guid>>(value)),
-               errors => Problem(errors));
-        }
+    // DELETE api/<HouseholdController>/5
+    [HttpDelete("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CommandResponse<Guid>))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ValidationProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        var response = await _mediator.Send(new DeleteHouseholdCommand(id));
 
-        // DELETE api/<HouseholdController>/5
-        [HttpDelete("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CommandResponse<Guid>))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ValidationProblemDetails))]
-        [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
-        public async Task<IActionResult> Delete(Guid id)
-        {
-            var response = await _mediator.Send(new DeleteHouseholdCommand(id));
-
-            return response.Match(
-               value => Ok(_mapper.Map<ApiResponse<Guid>>(value)),
-               errors => Problem(errors));
-        }
+        return response.Match(
+           value => Ok(_mapper.Map<ApiResponse<Guid>>(value)),
+           errors => Problem(errors));
     }
 }

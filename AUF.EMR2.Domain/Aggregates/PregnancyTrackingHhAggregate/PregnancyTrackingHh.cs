@@ -14,7 +14,7 @@ public sealed class PregnancyTrackingHh : AggregateRoot<PregnancyTrackingHhId>
     public string? BirthingCenterAddress { get; private set; }
     public string? ReferralCenter { get; private set; }
     public string? ReferralCenterAddress { get; private set; }
-    public string? BHWName { get; private set; }
+    public string? BhwName { get; private set; }
     public string? MidwifeName { get; private set; }
 
     public HouseholdId HouseholdId { get; private set; } = null!;
@@ -37,7 +37,7 @@ public sealed class PregnancyTrackingHh : AggregateRoot<PregnancyTrackingHhId>
         BirthingCenterAddress = birthingCenterAddress;
         ReferralCenter = referralCenter;
         ReferralCenterAddress = referralCenterAddress;
-        BHWName = bHWName;
+        BhwName = bHWName;
         MidwifeName = midwifeName;
         HouseholdId = householdId;
     }
@@ -48,7 +48,7 @@ public sealed class PregnancyTrackingHh : AggregateRoot<PregnancyTrackingHhId>
         string? birthingCenterAddress,
         string? referralCenter,
         string? referralCenterAddress,
-        string? bHWName,
+        string? bwhName,
         string? midwifeName,
         HouseholdId householdId)
     {
@@ -59,9 +59,29 @@ public sealed class PregnancyTrackingHh : AggregateRoot<PregnancyTrackingHhId>
             birthingCenterAddress: birthingCenterAddress,
             referralCenter: referralCenter,
             referralCenterAddress: referralCenterAddress,
-            bHWName: bHWName,
+            bHWName: bwhName,
             midwifeName: midwifeName,
             householdId: householdId);
+    }
+
+    public ErrorOr<PregnancyTrackingHhId> Update(
+        int year,
+        string? birthingCenter,
+        string? birthingCenterAddress,
+        string? referralCenter,
+        string? referralCenterAddress,
+        string? bwhName,
+        string? midwifeName)
+    {
+        Year = year;
+        BirthingCenter = birthingCenter;
+        BirthingCenterAddress = birthingCenterAddress;
+        ReferralCenter = referralCenter;
+        ReferralCenterAddress = referralCenterAddress;
+        BhwName = bwhName;
+        MidwifeName = midwifeName;
+
+        return Id;
     }
 
     public ErrorOr<PregnancyTrackingHhId> Delete()

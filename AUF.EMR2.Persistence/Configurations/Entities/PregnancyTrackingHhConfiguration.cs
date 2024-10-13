@@ -26,7 +26,7 @@ public class PregnancyTrackingHhConfiguration : IEntityTypeConfiguration<Pregnan
                 value => PregnancyTrackingHhId.Create(value));
 
         builder.Property(pregHH => pregHH.MidwifeName).HasMaxLength(TablePropertiesConstants.MaxContactNoLength);
-        builder.Property(pregHH => pregHH.BHWName).HasMaxLength(TablePropertiesConstants.MaxContactNoLength);
+        builder.Property(pregHH => pregHH.BhwName).HasMaxLength(TablePropertiesConstants.MaxContactNoLength);
         builder.Property(pregHH => pregHH.BirthingCenter).HasMaxLength(TablePropertiesConstants.MaxAddressLength);
         builder.Property(pregHH => pregHH.BirthingCenterAddress).HasMaxLength(TablePropertiesConstants.MaxAddressLength);
         builder.Property(pregHH => pregHH.ReferralCenterAddress).HasMaxLength(TablePropertiesConstants.MaxAddressLength);

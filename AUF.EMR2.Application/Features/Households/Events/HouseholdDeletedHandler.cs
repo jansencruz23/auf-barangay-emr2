@@ -20,11 +20,11 @@ public sealed class HouseholdDeletedHandler(IUnitOfWork unitOfWork) : INotificat
             _unitOfWork.PregnancyTrackingHhRepository.Update(pregTrackHh);
 
             await _unitOfWork.SaveAsync();
-            await transaction.CommitAsync();
+            await transaction.CommitAsync(cancellationToken);
         }
         catch(Exception)
         {
-            await transaction.RollbackAsync();
+            await transaction.RollbackAsync(cancellationToken);
         }
     }
 }
