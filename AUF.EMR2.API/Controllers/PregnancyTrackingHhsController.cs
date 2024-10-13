@@ -1,5 +1,4 @@
 ﻿using AUF.EMR2.Application.Common.Responses;
-using AUF.EMR2.Application.DTOs.PregnancyTrackingHh;
 using AUF.EMR2.Application.Features.PregnancyTrackingHhs.Commands.UpdatePregnancyTrackingHh;
 using AUF.EMR2.Application.Features.PregnancyTrackingHhs.Queries.GetPregnancyTrackingHh;
 using AUF.EMR2.Contracts.Common.Response;
@@ -12,14 +11,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AUF.EMR2.API.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/pregnancy-tracking-hhs")]
 [ApiController]
-public class PregnancyTrackingHhController : ApiController
+public class PregnancyTrackingHhsController : ApiController
 {
     private readonly IMediator _mediator;
     private readonly IMapper _mapper;
 
-    public PregnancyTrackingHhController(
+    public PregnancyTrackingHhsController(
         IMediator mediator,
         IMapper mapper)
     {

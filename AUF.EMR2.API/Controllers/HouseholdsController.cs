@@ -15,13 +15,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AUF.EMR2.API.Controllers;
 
-[Route("api/[controller]")]
-public class HouseholdController : ApiController
+[Route("api/households")]
+public class HouseholdsController : ApiController
 {
     private readonly ISender _mediator;
     private readonly IMapper _mapper;
 
-    public HouseholdController(ISender mediator, IMapper mapper)
+    public HouseholdsController(ISender mediator, IMapper mapper)
     {
         _mediator = mediator;
         _mapper = mapper;
