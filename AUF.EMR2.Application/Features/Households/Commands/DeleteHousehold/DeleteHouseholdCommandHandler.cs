@@ -24,7 +24,7 @@ public class DeleteHouseholdCommandHandler : IRequestHandler<DeleteHouseholdComm
 
         if (household is null)
         {
-            return Errors.Household.HouseholdNotFound;
+            return Errors.Household.NotFound;
         }
 
         try

@@ -1,5 +1,6 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
 using AUF.EMR2.Application.Features.Households.Queries.Common;
+using AUF.EMR2.Domain.Common.Errors;
 using ErrorOr;
 using MapsterMapper;
 using MediatR;
@@ -22,8 +23,13 @@ public class GetHouseholdByHouseholdNoQueryHandler : IRequestHandler<GetHousehol
     public async Task<ErrorOr<HouseholdQueryResponse>> Handle(GetHouseholdByHouseholdNoQuery request, CancellationToken cancellationToken)
     {
         var household = await _unitOfWork.HouseholdRepository.GetHouseholdByHouseholdNo(request.HouseholdNo);
-        var householdDto = _mapper.Map<HouseholdQueryResponse>(household);
 
-        return householdDto;
+        if (household is null)
+        {
+            return Errors.Household.NotFound;
+        }
+
+        var response = _mapper.Map<HouseholdQueryResponse>(household);
+        return response;
     }
 }

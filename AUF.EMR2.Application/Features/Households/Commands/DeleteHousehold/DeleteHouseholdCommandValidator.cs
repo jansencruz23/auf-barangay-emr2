@@ -6,7 +6,7 @@ public class DeleteHouseholdCommandValidator : AbstractValidator<DeleteHousehold
 {
     public DeleteHouseholdCommandValidator()
     {
-        RuleFor(q => q.Id)
+        RuleFor(household => household.Id)
             .NotNull()
             .NotEqual(Guid.Empty).WithMessage("{PropertyName} must not be empty.");
     }

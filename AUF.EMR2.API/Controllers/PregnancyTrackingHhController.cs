@@ -3,12 +3,12 @@ using AUF.EMR2.Application.DTOs.PregnancyTrackingHh;
 using AUF.EMR2.Application.Features.PregnancyTrackingHhs.Commands.UpdatePregnancyTrackingHh;
 using AUF.EMR2.Application.Features.PregnancyTrackingHhs.Queries.GetPregnancyTrackingHh;
 using AUF.EMR2.Contracts.Common.Response;
+using AUF.EMR2.Contracts.Households.Response;
 using AUF.EMR2.Contracts.PregnancyTrackingHh.Request;
+using AUF.EMR2.Contracts.PregnancyTrackingHh.Response;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace AUF.EMR2.API.Controllers;
 
@@ -28,17 +28,24 @@ public class PregnancyTrackingHhController : ApiController
     }
 
     // GET api/<PregnancyTrackingHhController>/5
-    [HttpGet("{householdNo}")]
-    public async Task<ActionResult<PregnancyTrackingHhDto>> Get(string householdNo)
+    [HttpGet("{householdId}")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HouseholdResponse))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
+    public async Task<IActionResult> Get(Guid householdId)
     {
-        var response = await _mediator.Send(new GetPregnancyTrackingHhRequest { HouseholdNo = householdNo });
-        return Ok(response);
+        var response = await _mediator.Send(new GetPregnancyTrackingHhQuery(householdId));
+
+        return response.Match(
+            value => Ok(_mapper.Map<PregnancyTrackingHhResponse>(value)),
+            errors => Problem(errors));
     }
 
     // PUT api/<PregnancyTrackingHhController>/5
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CommandResponse<Guid>))]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ValidationProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
     public async Task<IActionResult> Put([FromBody] UpdatePregnancyTrackingHhRequest request)

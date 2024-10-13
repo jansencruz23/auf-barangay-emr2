@@ -11,11 +11,11 @@ public class UpdateHouseholdCommandValidator : AbstractValidator<UpdateHousehold
     {
         Include(new IHouseholdCommandValidator());
 
-        RuleFor(q => q.Id)
+        RuleFor(household => household.Id)
             .NotNull()
-            .NotEqual(Guid.Empty);
+            .NotEqual(Guid.Empty).WithMessage("{PropertyName} must not be empty.");
 
-        RuleFor(q => q.HouseholdNo)
+        RuleFor(household => household.HouseholdNo)
            .MustAsync(async (command, householdNo, token) =>
            {
                var existingHousehold = await unitOfWork.HouseholdRepository.Get(HouseholdId.Create(command.Id));

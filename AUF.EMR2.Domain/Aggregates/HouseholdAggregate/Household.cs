@@ -106,7 +106,7 @@ public sealed class Household : AggregateRoot<HouseholdId>
     {
         if (Status == false)
         {
-            return Errors.Household.HouseholdNotFound;
+            return Errors.Household.NotFound;
         }
 
         Status = false;

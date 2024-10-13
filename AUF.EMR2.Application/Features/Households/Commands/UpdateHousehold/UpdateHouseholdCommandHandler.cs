@@ -27,7 +27,7 @@ public class UpdateHouseholdCommandHandler : IRequestHandler<UpdateHouseholdComm
 
         if (household is null)
         {
-            return Errors.Household.HouseholdNotFound;
+            return Errors.Household.NotFound;
         }
 
         var response = new CommandResponse<Guid>();

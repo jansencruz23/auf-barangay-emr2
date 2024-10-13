@@ -43,6 +43,7 @@ public class HouseholdController : ApiController
     // GET api/<HouseholdController>/5
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HouseholdResponse))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
     public async Task<IActionResult> Get(Guid id)
     {
@@ -56,6 +57,7 @@ public class HouseholdController : ApiController
     // GET api/<HouseholdController>/household-no/householdNo
     [HttpGet("household-no/{householdNo}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HouseholdResponse))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
     public async Task<IActionResult> GetByHouseholdNo(string householdNo)
     {
@@ -86,6 +88,7 @@ public class HouseholdController : ApiController
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CommandResponse<Guid>))]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ValidationProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
     public async Task<IActionResult> Put([FromBody] UpdateHouseholdRequest request)
@@ -102,6 +105,7 @@ public class HouseholdController : ApiController
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CommandResponse<Guid>))]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ValidationProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
     public async Task<IActionResult> Delete(Guid id)

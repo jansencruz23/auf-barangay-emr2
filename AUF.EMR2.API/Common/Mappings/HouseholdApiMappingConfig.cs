@@ -8,7 +8,7 @@ using AUF.EMR2.Application.Features.Households.Queries.Common;
 
 namespace AUF.EMR2.API.Common.Mappings;
 
-public class ApiHouseholdMappingConfig : IRegister
+public class HouseholdApiMappingConfig : IRegister
 {
     public void Register(TypeAdapterConfig config)
     {
