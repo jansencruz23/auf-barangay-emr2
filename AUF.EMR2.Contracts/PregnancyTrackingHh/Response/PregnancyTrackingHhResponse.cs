@@ -1,6 +1,6 @@
 ﻿namespace AUF.EMR2.Contracts.PregnancyTrackingHh.Response;
 
-public class PregnancyTrackingHhResponse
+public sealed class PregnancyTrackingHhResponse
 {
     public Guid Id { get; set; }
     public int Year { get; set; }

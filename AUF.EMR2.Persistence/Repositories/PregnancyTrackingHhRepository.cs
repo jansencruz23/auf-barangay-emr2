@@ -21,20 +21,17 @@ public class PregnancyTrackingHhRepository : GenericRepository<PregnancyTracking
     {
         var pregnancyTrackingHh = await _dbContext.PregnancyTrackingHhs
             .AsNoTracking()
-            .FirstOrDefaultAsync(q => q.HouseholdId == householdId);
+            .FirstOrDefaultAsync(pregTrackHh => pregTrackHh.HouseholdId == householdId);
 
         return pregnancyTrackingHh!;
     }
 
     public async Task<PregnancyTrackingHh> GetPregnancyTrackingHh(PregnancyTrackingHhId id)
     {
-        throw new NotImplementedException();
-        //var pregnancyTrackingHh = await _dbContext.PregnancyTrackingHhs
-        //    .AsNoTracking()
-        //    .Include(q => q.Household)
-        //    .Include(q => q.Barangay)
-        //    .FirstOrDefaultAsync(q => q.Id == id);
+        var pregnancyTrackingHh = await _dbContext.PregnancyTrackingHhs
+            .AsNoTracking()
+            .FirstOrDefaultAsync(pregTrackHh => pregTrackHh.Id == id);
 
-        //return pregnancyTrackingHh;
+        return pregnancyTrackingHh!;
     }
 }

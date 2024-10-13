@@ -11,5 +11,6 @@ public class PregnancyTrackingHhMappingConfig : IRegister
         config.NewConfig<PregnancyTrackingHh, GetPregnancyTrackingHhQueryResponse>()
             .Map(dest => dest.Id, src => src.Id.Value)
             .Map(dest => dest.HouseholdId, src => src.HouseholdId.Value);
+        // pati barangay
     }
 }
