@@ -5,6 +5,8 @@ using MediatR;
 using ErrorOr;
 using AUF.EMR2.Domain.Aggregates.PregnancyTrackingHhAggregate.ValueObjects;
 using AUF.EMR2.Domain.Common.Errors;
+using AUF.EMR2.Domain.Aggregates.HouseholdAggregate.ValueObjects;
+using System.Data;
 
 namespace AUF.EMR2.Application.Features.PregnancyTrackingHhs.Commands.UpdatePregnancyTrackingHh
 {
@@ -31,6 +33,14 @@ namespace AUF.EMR2.Application.Features.PregnancyTrackingHhs.Commands.UpdatePreg
                 return Errors.PregnancyTrackingHh.NotFound;
             }
 
+            var householdExists = await _unitOfWork.HouseholdRepository
+                .Exists(HouseholdId.Create(request.HouseholdId));
+
+            if (!householdExists)
+            {
+                return Errors.Household.NotFound;
+            }
+
             var response = new CommandResponse<Guid>();
 
             pregTrackHh.Update(
@@ -43,8 +53,15 @@ namespace AUF.EMR2.Application.Features.PregnancyTrackingHhs.Commands.UpdatePreg
                 midwifeName: request.MidwifeName
             );
 
-            _unitOfWork.PregnancyTrackingHhRepository.Update(pregTrackHh);
-            await _unitOfWork.SaveAsync();
+            try
+            {
+                _unitOfWork.PregnancyTrackingHhRepository.Update(pregTrackHh);
+                await _unitOfWork.SaveAsync();
+            }
+            catch (DBConcurrencyException)
+            {
+                return Errors.ConcurrentIssue;
+            }
 
             response.Success = true;
             response.Message = "Updation is successful";

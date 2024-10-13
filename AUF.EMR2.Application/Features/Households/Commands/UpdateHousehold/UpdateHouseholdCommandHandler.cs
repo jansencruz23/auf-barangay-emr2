@@ -5,6 +5,7 @@ using AUF.EMR2.Domain.Common.Errors;
 using ErrorOr;
 using MapsterMapper;
 using MediatR;
+using System.Data;
 
 namespace AUF.EMR2.Application.Features.Households.Commands.UpdateHousehold;
 
@@ -24,10 +25,15 @@ public class UpdateHouseholdCommandHandler : IRequestHandler<UpdateHouseholdComm
     public async Task<ErrorOr<CommandResponse<Guid>>> Handle(UpdateHouseholdCommand request, CancellationToken cancellationToken)
     {
         var household = await _unitOfWork.HouseholdRepository.GetHousehold(HouseholdId.Create(request.Id));
-
         if (household is null)
         {
             return Errors.Household.NotFound;
+        }
+
+        var householdNoAvailable = await _unitOfWork.HouseholdRepository.IsHouseholdNoAvailable(request.HouseholdNo);
+        if (!household.HouseholdNo.Equals(request.HouseholdNo) && !householdNoAvailable)
+        {
+            return Errors.Household.DuplicateHouseholdNo;
         }
 
         var response = new CommandResponse<Guid>();
@@ -63,8 +69,15 @@ public class UpdateHouseholdCommandHandler : IRequestHandler<UpdateHouseholdComm
             houseAddress: houseAddress
         );
 
-        _unitOfWork.HouseholdRepository.Update(household);
-        await _unitOfWork.SaveAsync();
+        try
+        {
+            _unitOfWork.HouseholdRepository.Update(household);
+            await _unitOfWork.SaveAsync();
+        }
+        catch (DBConcurrencyException)
+        {
+            return Errors.ConcurrentIssue;
+        }
 
         response.Success = true;
         response.Id = household.Id.Value;
