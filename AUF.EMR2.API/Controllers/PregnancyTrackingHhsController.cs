@@ -1,10 +1,10 @@
 ﻿using AUF.EMR2.Application.Common.Responses;
 using AUF.EMR2.Application.Features.PregnancyTrackingHhs.Commands.UpdatePregnancyTrackingHh;
 using AUF.EMR2.Application.Features.PregnancyTrackingHhs.Queries.GetPregnancyTrackingHh;
-using AUF.EMR2.Contracts.Common.Response;
-using AUF.EMR2.Contracts.Households.Response;
-using AUF.EMR2.Contracts.PregnancyTrackingHh.Request;
-using AUF.EMR2.Contracts.PregnancyTrackingHh.Response;
+using AUF.EMR2.Contracts.Common.Responses;
+using AUF.EMR2.Contracts.Households.Responses;
+using AUF.EMR2.Contracts.PregnancyTrackingHhs.Requests;
+using AUF.EMR2.Contracts.PregnancyTrackingHhs.Responses;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

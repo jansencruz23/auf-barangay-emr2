@@ -1,5 +1,5 @@
 ﻿using AUF.EMR2.Application.Common.Responses;
-using AUF.EMR2.Contracts.Common.Response;
+using AUF.EMR2.Contracts.Common.Responses;
 using Mapster;
 
 namespace AUF.EMR2.API.Common.Mappings;

@@ -1,9 +1,8 @@
-﻿namespace AUF.EMR2.Application.DTOs.Household.ValueObjectDtos;
+﻿namespace AUF.EMR2.Contracts.Households.Common.ValueObjectDtos;
 
-public sealed class HouseAddressDto
-{
-    public string HouseNoAndStreet { get; set; } = null!;
-    public string Barangay { get; set; } = null!;
-    public string City { get; set; } = null!;
-    public string Province { get; set; } = null!;
-}
+public sealed record HouseAddressDto(
+    string HouseNoAndStreet,
+    string Barangay,
+    string City,
+    string Province
+);

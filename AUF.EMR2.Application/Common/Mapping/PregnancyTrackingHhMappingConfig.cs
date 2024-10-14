@@ -4,7 +4,7 @@ using Mapster;
 
 namespace AUF.EMR2.Application.Common.Mapping;
 
-public class PregnancyTrackingHhMappingConfig : IRegister
+public sealed class PregnancyTrackingHhMappingConfig : IRegister
 {
     public void Register(TypeAdapterConfig config)
     {

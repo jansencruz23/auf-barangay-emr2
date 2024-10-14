@@ -1,8 +1,7 @@
-﻿namespace AUF.EMR2.Application.DTOs.Household.ValueObjectDtos;
+﻿namespace AUF.EMR2.Contracts.Households.Common.ValueObjectDtos;
 
-public sealed class PhilhealthDto
-{
-    public bool IsHeadPhilhealthMember { get; set; }
-    public string? PhilhealthNo { get; set; }
-    public string? Category { get; set; }
-}
+public sealed record PhilhealthDto(
+    bool IsHeadPhilhealthMember,
+    string? PhilhealthNo,
+    string? Category
+);

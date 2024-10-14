@@ -1,4 +1,4 @@
-﻿namespace AUF.EMR2.Contracts.Common.Response;
+﻿namespace AUF.EMR2.Contracts.Common.Responses;
 
 public sealed class ApiResponse<T>
 {

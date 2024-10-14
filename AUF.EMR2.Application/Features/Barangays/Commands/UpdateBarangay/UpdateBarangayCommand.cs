@@ -1,16 +1,20 @@
 ﻿using AUF.EMR2.Application.Common.Responses;
-using AUF.EMR2.Application.DTOs.Barangay;
+using ErrorOr;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace AUF.EMR2.Application.Features.Barangays.Commands.UpdateBarangay
-{
-    public record UpdateBarangayCommand : IRequest<CommandResponse<Guid>>
-    {
-        public UpdateBarangayDto BarangayDto { get; set; }
-    }
-}
+namespace AUF.EMR2.Application.Features.Barangays.Commands.UpdateBarangay;
+
+public sealed record UpdateBarangayCommand(
+    Guid Id,
+    string BarangayName,
+    byte[]? Logo,
+    string Street,
+    string Municipality,
+    string Province,
+    string Region, 
+    string ContactNo,
+    string BarangayHealthStation,
+    string RuralHealthUnit,
+    string? Description,
+    Guid Version
+) : IRequest<ErrorOr<CommandResponse<Guid>>>;

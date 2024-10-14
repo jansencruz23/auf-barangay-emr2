@@ -1,5 +1,6 @@
 ﻿using AUF.EMR2.Domain.Aggregates.BarangayAggregate.ValueObjects;
 using AUF.EMR2.Domain.Common.Models;
+using ErrorOr;
 
 namespace AUF.EMR2.Domain.Aggregates.BarangayAggregate;
 
@@ -42,15 +43,37 @@ public sealed class Barangay : AggregateRoot<BarangayId>
         string ruralHealthUnit,
         string? description)
     {
-        return new Barangay(
-            barangayId: BarangayId.Create(),
-            barangayName: barangayName,
-            logo: logo,
-            barangayAddress: barangayAddress,
-            contactNo: contactNo,
-            barangayHealthStation: barangayHealthStation,
-            ruralHealthUnit: ruralHealthUnit,
-            description: description);
+        return new Barangay
+        {
+            Id = BarangayId.Create(),
+            BarangayName = barangayName,
+            Logo = logo,
+            BarangayAddress = barangayAddress,
+            ContactNo = contactNo,
+            BarangayHealthStation = barangayHealthStation,
+            RuralHealthUnit = ruralHealthUnit,
+            Description = description
+        };
+    }
+
+    public ErrorOr<BarangayId> Update(
+        string barangayName,
+        byte[]? logo,
+        BarangayAddress barangayAddress,
+        string contactNo,
+        string barangayHealthStation,
+        string ruralHealthUnit,
+        string? description)
+    {
+        BarangayName = barangayName;
+        Logo = logo;
+        BarangayAddress = barangayAddress;
+        ContactNo = contactNo;
+        BarangayHealthStation = barangayHealthStation;
+        RuralHealthUnit = ruralHealthUnit;
+        Description = description;
+
+        return Id;
     }
 
     private Barangay() { }

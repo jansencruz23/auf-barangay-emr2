@@ -1,6 +1,6 @@
-﻿namespace AUF.EMR2.Application.Features.PregnancyTrackingHhs.Queries.GetPregnancyTrackingHh;
+﻿namespace AUF.EMR2.Contracts.PregnancyTrackingHhs.Responses;
 
-public sealed record GetPregnancyTrackingHhQueryResponse (
+public sealed record PregnancyTrackingHhResponse(
     Guid Id,
     int Year,
     Guid BarangayId,

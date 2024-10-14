@@ -1,11 +1,15 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
 using AUF.EMR2.Application.Common.Responses;
+using AUF.EMR2.Domain.Aggregates.BarangayAggregate.ValueObjects;
+using AUF.EMR2.Domain.Common.Errors;
+using ErrorOr;
 using MapsterMapper;
 using MediatR;
+using System.Data;
 
 namespace AUF.EMR2.Application.Features.Barangays.Commands.UpdateBarangay;
 
-public class UpdateBarangayCommandHandler : IRequestHandler<UpdateBarangayCommand, CommandResponse<Guid>>
+public class UpdateBarangayCommandHandler : IRequestHandler<UpdateBarangayCommand, ErrorOr<CommandResponse<Guid>>>
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
@@ -17,49 +21,49 @@ public class UpdateBarangayCommandHandler : IRequestHandler<UpdateBarangayComman
         _unitOfWork = unitOfWork;
         _mapper = mapper;
     }
-
-    public async Task<CommandResponse<Guid>> Handle(UpdateBarangayCommand request, CancellationToken cancellationToken)
+    
+    public async Task<ErrorOr<CommandResponse<Guid>>> Handle(UpdateBarangayCommand request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
-        //var response = new BaseCommandResponse<Guid>();
-        //var validator = new UpdateBarangayDtoValidator();
-        //var validationResult = await validator.ValidateAsync(request.BarangayDto, cancellationToken);
+        var barangay = await _unitOfWork.BarangayRepository.GetBarangay();
 
-        //if (!validationResult.IsValid)
-        //{
-        //    response.Success = false;
-        //    response.Message = "Updation Failed";
-        //    response.Errors = validationResult.Errors.Select(q => q.ErrorMessage).ToList();
+        if (barangay is null)
+        {
+            return Errors.Barangay.NotFound;
+        }
 
-        //    throw new ValidationException(validationResult);
-        //}
+        var response = new CommandResponse<Guid>();
 
-        //var barangay = await _unitOfWork.BarangayRepository.GetBarangay();
+        var barangayAddress = BarangayAddress.Create(
+            street: request.Street,
+            municipality: request.Municipality,
+            province: request.Province,
+            region: request.Region
+        );
 
-        //if (barangay == null)
-        //{
-        //    response.Success = false;
-        //    response.Message = $"{nameof(Barangay)} with id: {request.BarangayDto.Id} is not existing";
+        barangay.Update(
+            barangayName: request.BarangayName,
+            logo: request.Logo,
+            barangayAddress: barangayAddress,
+            contactNo: request.ContactNo,
+            barangayHealthStation: request.BarangayHealthStation,
+            ruralHealthUnit: request.RuralHealthUnit,
+            description: request.Description
+        );
 
-        //    throw new NotFoundException(nameof(Barangay), request.BarangayDto.Id);
-        //}
+        try
+        {
+            _unitOfWork.BarangayRepository.Update(barangay);
+            await _unitOfWork.SaveAsync();
+        }
+        catch (DBConcurrencyException)
+        {
+            return Errors.ConcurrentIssue;
+        }
 
-        //_mapper.Map(request.BarangayDto, barangay);
+        response.Success = true;
+        response.Id = barangay.Id.Value;
+        response.Message = "Updated successfully";
 
-        //try
-        //{
-        //    _unitOfWork.BarangayRepository.Update(barangay);
-        //    await _unitOfWork.SaveAsync();
-        //}
-        //catch (DbUpdateConcurrencyException ex)
-        //{
-        //    throw new ConcurrencyException("The entity you attempted to update was modified by another user.", ex);
-        //}
-
-        //response.Success = true;
-        //response.Message = "Updation is successful";
-        //response.Id = request.BarangayDto.Id;
-
-        //return response;
+        return response;
     }
 }

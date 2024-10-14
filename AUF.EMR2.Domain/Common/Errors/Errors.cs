@@ -2,7 +2,7 @@
 
 namespace AUF.EMR2.Domain.Common.Errors;
 
-public partial class Errors
+public static partial class Errors
 {
     public static Error ConcurrentIssue => Error.Conflict(
         code: "Entity.ConcurrentIssue",

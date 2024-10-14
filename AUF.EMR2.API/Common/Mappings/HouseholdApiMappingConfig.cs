@@ -1,10 +1,10 @@
-﻿using AUF.EMR2.Application.DTOs.Household.ValueObjectDtos;
-using Mapster;
+﻿using Mapster;
 using AUF.EMR2.Application.Features.Households.Commands.CreateHousehold;
 using AUF.EMR2.Application.Features.Households.Common;
-using AUF.EMR2.Contracts.Households.Request;
-using AUF.EMR2.Contracts.Households.Response;
+using AUF.EMR2.Contracts.Households.Requests;
+using AUF.EMR2.Contracts.Households.Responses;
 using AUF.EMR2.Application.Features.Households.Queries.Common;
+using AUF.EMR2.Contracts.Households.Common.ValueObjectDtos;
 
 namespace AUF.EMR2.API.Common.Mappings;
 
