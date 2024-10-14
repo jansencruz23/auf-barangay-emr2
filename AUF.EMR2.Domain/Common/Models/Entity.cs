@@ -8,8 +8,8 @@ public abstract class Entity<TId> : IEquatable<Entity<TId>>, IHasDomainEvents
 
     public TId Id { get; protected set; }
     public bool Status { get; set; } = true;
-    public DateTime DateCreated { get; set; }
-    public DateTime LastModified { get; set; }
+    public DateTime DateCreated { get; set; } = DateTime.Now;
+    public DateTime LastModified { get; set; } = DateTime.Now;
     public string? CreatedBy { get; set; }
     public string? ModifiedById { get; set; }
     public Guid Version { get; set; }

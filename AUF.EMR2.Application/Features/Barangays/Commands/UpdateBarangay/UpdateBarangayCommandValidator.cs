@@ -7,8 +7,8 @@ public sealed class UpdateBarangayCommandValidator : AbstractValidator<UpdateBar
     public UpdateBarangayCommandValidator()
     {
         RuleFor(brgy => brgy.BarangayName)
-               .NotNull().WithMessage("{PropertyName} is required.")
-               .MaximumLength(50).WithMessage("{PropertyName} must not exceed {MaxLength} characters.");
+            .NotNull().WithMessage("{PropertyName} is required.")
+            .MaximumLength(50).WithMessage("{PropertyName} must not exceed {MaxLength} characters.");
 
         RuleFor(brgy => brgy.Street)
             .NotNull().WithMessage("{PropertyName} is required.")

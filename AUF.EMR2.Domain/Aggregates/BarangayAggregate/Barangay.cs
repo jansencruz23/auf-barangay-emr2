@@ -17,12 +17,12 @@ public sealed class Barangay : AggregateRoot<BarangayId>
     private Barangay(
         BarangayId barangayId,
         string barangayName,
-        byte[]? logo,
         BarangayAddress barangayAddress,
         string contactNo,
         string barangayHealthStation,
         string ruralHealthUnit,
-        string? description)
+        string? description = null,
+        byte[]? logo = null)
         : base(barangayId)
     {
         BarangayName = barangayName;
@@ -36,12 +36,12 @@ public sealed class Barangay : AggregateRoot<BarangayId>
 
     public static Barangay Create(
         string barangayName,
-        byte[]? logo,
         BarangayAddress barangayAddress,
         string contactNo,
         string barangayHealthStation,
         string ruralHealthUnit,
-        string? description)
+        string? description = null,
+        byte[]? logo = null)
     {
         return new Barangay
         {

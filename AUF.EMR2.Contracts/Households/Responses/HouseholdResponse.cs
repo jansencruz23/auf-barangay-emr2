@@ -9,6 +9,7 @@ public sealed record HouseholdResponse(
     DateTime? SecondQtrVisit,
     DateTime? ThirdQtrVisit,
     DateTime? FourthQtrVisit,
+    string FirstName,
     string LastName,
     string? MotherMaidenName,
     HouseAddressDto HouseAddress,

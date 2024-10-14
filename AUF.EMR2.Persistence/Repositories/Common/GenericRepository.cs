@@ -30,7 +30,7 @@ public abstract class GenericRepository<T, TId> : IGenericRepository<T, TId>
     public async Task<bool> Exists(TId id)
     {
         var entity = await Get(id);
-        return entity != null;
+        return entity != null!;
     }
 
     public async Task<T> Get(TId id)
@@ -51,6 +51,7 @@ public abstract class GenericRepository<T, TId> : IGenericRepository<T, TId>
     public void Update(T entity)
     {
         _dbContext.Entry(entity).OriginalValues["Version"] = entity.Version;
-        _dbContext.Update(entity);
+        _dbContext.Entry(entity).State = EntityState.Modified;
+        //_dbContext.Update(entity);
     }
 }

@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace AUF.EMR2.Persistence.Interceptors;
 
@@ -9,14 +10,32 @@ public class PublishDomainEventsInterceptor(IPublisher mediator) : SaveChangesIn
 {
     private readonly IPublisher _mediator = mediator;
 
-    public override InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result)
+    public override InterceptionResult<int> SavingChanges(
+        DbContextEventData eventData,
+        InterceptionResult<int> result)
     {
         PublishDomainEvents(eventData.Context).GetAwaiter().GetResult();
         return base.SavingChanges(eventData, result);
     }
 
-    public override async ValueTask<InterceptionResult<int>> SavingChangesAsync(DbContextEventData eventData, InterceptionResult<int> result, CancellationToken cancellationToken = default)
+    public override async ValueTask<InterceptionResult<int>> SavingChangesAsync(
+        DbContextEventData eventData,
+        InterceptionResult<int> result,
+        CancellationToken cancellationToken = default)
     {
+        var context = eventData.Context ?? throw new Exception();
+
+        foreach (var entry in context.ChangeTracker.Entries<Entity<ValueObject>>())
+        {
+            if (entry.State == EntityState.Added)
+            {
+                entry.Entity.DateCreated = DateTime.Now;
+            }
+
+            entry.Entity.LastModified = DateTime.Now;
+            entry.Entity.Version = Guid.NewGuid();
+        }
+
         await PublishDomainEvents(eventData.Context);
         return await base.SavingChangesAsync(eventData, result, cancellationToken);
     }
