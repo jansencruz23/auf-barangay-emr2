@@ -10,6 +10,6 @@ namespace AUF.EMR2.Application.Features.Masterlists.Queries.GetMasterlistChildDe
 {
     public record GetMasterlistChildRecordRequest : IRequest<MasterlistChildDto>
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
     }
 }

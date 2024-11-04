@@ -1,16 +1,19 @@
-﻿using AUF.EMR2.Application.DTOs.PregnancyTrackingHh;
-using AUF.EMR2.Application.Responses;
+﻿using AUF.EMR2.Application.Common.Responses;
+using ErrorOr;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace AUF.EMR2.Application.Features.PregnancyTrackingHhs.Commands.UpdatePregnancyTrackingHh
-{
-    public record UpdatePregnancyTrackingHhCommand : IRequest<BaseCommandResponse<int>>
-    {
-        public UpdatePregnancyTrackingHhDto PregnancyTrackingHHDto { get; set; }
-    }
-}
+namespace AUF.EMR2.Application.Features.PregnancyTrackingHhs.Commands.UpdatePregnancyTrackingHh;
+
+public record UpdatePregnancyTrackingHhCommand(
+    Guid Id,
+    int Year,
+    Guid BarangayId,
+    string? BirthingCenter,
+    string? BirthingCenterAddress,
+    string ReferralCenter,
+    string? ReferralCenterAddress,
+    string? BhwName,
+    string? MidwifeName,
+    Guid HouseholdId,
+    Guid Version
+) : IRequest<ErrorOr<CommandResponse<Guid>>>;

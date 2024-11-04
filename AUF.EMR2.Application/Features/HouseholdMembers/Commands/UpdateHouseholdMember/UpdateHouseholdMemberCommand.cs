@@ -1,5 +1,5 @@
-﻿using AUF.EMR2.Application.DTOs.HouseholdMember;
-using AUF.EMR2.Application.Responses;
+﻿using AUF.EMR2.Application.Common.Responses;
+using AUF.EMR2.Application.DTOs.HouseholdMember;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AUF.EMR2.Application.Features.HouseholdMembers.Commands.UpdateHouseholdMember
 {
-    public record UpdateHouseholdMemberCommand : IRequest<BaseCommandResponse<int>>
+    public record UpdateHouseholdMemberCommand : IRequest<CommandResponse<Guid>>
     {
         public UpdateHouseholdMemberDto HouseholdMemberDto { get; set; }
     }

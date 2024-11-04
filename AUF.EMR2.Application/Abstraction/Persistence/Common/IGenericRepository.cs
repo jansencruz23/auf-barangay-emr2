@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AUF.EMR2.Domain.Common.Models;
 
-namespace AUF.EMR2.Application.Abstraction.Persistence.Common
+namespace AUF.EMR2.Application.Abstraction.Persistence.Common;
+
+public interface IGenericRepository<T, TId>
+    where T : AggregateRoot<TId>
+    where TId : ValueObject
 {
-    public interface IGenericRepository<T>
-        where T : class
-    {
-        Task<List<T>> GetAll();
-        Task<T> Get(int id);
-        Task<T> Add(T entity);
-        void Update(T entity);
-        Task Delete(int id);
-        Task<bool> Exists(int id);
-        Task<int> TotalCount();
-    }
+    Task<List<T>> GetAll();
+    Task<T> Get(TId id);
+    Task<T> Add(T entity);
+    void Update(T entity);
+    Task Delete(TId id);
+    Task<bool> Exists(TId id);
+    Task<int> TotalCount();
 }

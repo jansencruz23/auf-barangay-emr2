@@ -1,6 +1,6 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
 using AUF.EMR2.Application.DTOs.WomanOfReproductiveAge;
-using AutoMapper;
+using MapsterMapper;
 using MediatR;
 using System;
 using System.Collections.Generic;

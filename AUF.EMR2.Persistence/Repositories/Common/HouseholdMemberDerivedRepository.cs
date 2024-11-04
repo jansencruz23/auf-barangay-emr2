@@ -1,75 +1,73 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
-using AUF.EMR2.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate;
+using AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate.ValueObjects;
 
-namespace AUF.EMR2.Persistence.Repositories.Common
+namespace AUF.EMR2.Persistence.Repositories.Common;
+
+public abstract class HouseholdMemberDerivedRepository : GenericRepository<HouseholdMember, HouseholdMemberId>, IHouseholdMemberDerivedRepository
 {
-    public abstract class HouseholdMemberDerivedRepository : GenericRepository<HouseholdMember>, IHouseholdMemberDerivedRepository
+    private readonly EmrDbContext _dbContext;
+
+    public HouseholdMemberDerivedRepository(EmrDbContext dbContext)
+        : base(dbContext)
     {
-        private readonly EmrDbContext _dbContext;
+        _dbContext = dbContext;
+    }
 
-        public HouseholdMemberDerivedRepository(EmrDbContext dbContext)
-            : base(dbContext)
-        {
-            _dbContext = dbContext;
-        }
+    public async Task<List<HouseholdMember>> GetAllList(string householdNo)
+    {
+        throw new NotImplementedException();
+        //var records = await _dbContext.HouseholdMembers
+        //    .AsNoTracking()
+        //    //.Include(m => m.Household)
+        //    .Where(m => m.Household.Status &&
+        //        m.Household.HouseholdNo.Equals(householdNo) &&
+        //        m.Status)
+        //    .ToListAsync();
 
-        public async Task<List<HouseholdMember>> GetAllList(string householdNo)
-        {
-            var records = await _dbContext.HouseholdMembers
-                .AsNoTracking()
-                .Include(m => m.Household)
-                .Where(m => m.Household.Status &&
-                    m.Household.HouseholdNo.Equals(householdNo) &&
-                    m.Status)
-                .ToListAsync();
+        //return records;
+    }
 
-            return records;
-        }
+    public async Task<List<HouseholdMember>> GetListQuery(string householdNo, DateTime startDate)
+    {
+        throw new NotImplementedException();
+        //var records = await _dbContext.HouseholdMembers
+        //    .AsNoTracking()
+        //    .Include(m => m.Household)
+        //    .Where(m => m.Household.Status &&
+        //        m.Household.HouseholdNo.Equals(householdNo) &&
+        //        m.Status &&
+        //        m.Birthday >= startDate &&
+        //        m.Birthday <= DateTime.Today)
+        //    .ToListAsync();
 
-        public async Task<List<HouseholdMember>> GetListQuery(string householdNo, DateTime startDate)
-        {
-            var records = await _dbContext.HouseholdMembers
-                .AsNoTracking()
-                .Include(m => m.Household)
-                .Where(m => m.Household.Status &&
-                    m.Household.HouseholdNo.Equals(householdNo) &&
-                    m.Status &&
-                    m.Birthday >= startDate &&
-                    m.Birthday <= DateTime.Today)
-                .ToListAsync();
+        //return records;
+    }
 
-            return records;
-        }
+    public async Task<List<HouseholdMember>> GetListQuery(string householdNo, DateTime startDate, DateTime endDate)
+    {
+        throw new NotImplementedException();
+        //var records = await _dbContext.HouseholdMembers
+        //    .AsNoTracking()
+        //    .Include(m => m.Household)
+        //    .Where(m => m.Household.Status &&
+        //        m.Household.HouseholdNo.Equals(householdNo) &&
+        //        m.Status &&
+        //        m.Birthday >= startDate &&
+        //        m.Birthday <= endDate)
+        //    .ToListAsync();
 
-        public async Task<List<HouseholdMember>> GetListQuery(string householdNo, DateTime startDate, DateTime endDate)
-        {
-            var records = await _dbContext.HouseholdMembers
-                .AsNoTracking()
-                .Include(m => m.Household)
-                .Where(m => m.Household.Status &&
-                    m.Household.HouseholdNo.Equals(householdNo) &&
-                    m.Status &&
-                    m.Birthday >= startDate &&
-                    m.Birthday <= endDate)
-                .ToListAsync();
+        //return records;
+    }
 
-            return records;
-        }
+    public async Task<HouseholdMember> GetSingleMasterlistRecord(HouseholdMemberId id)
+    {
+        throw new NotImplementedException();
+        //var record = await _dbContext.HouseholdMembers
+        //    .AsNoTracking()
+        //    .Include(q => q.Household)
+        //    .FirstOrDefaultAsync(q => q.Id == id);
 
-        public async Task<HouseholdMember> GetSingleMasterlistRecord(int id)
-        {
-            var record = await _dbContext.HouseholdMembers
-                .AsNoTracking()
-                .Include(q => q.Household)
-                .FirstOrDefaultAsync(q => q.Id == id);
-
-            return record;
-        }
+        //return record;
     }
 }

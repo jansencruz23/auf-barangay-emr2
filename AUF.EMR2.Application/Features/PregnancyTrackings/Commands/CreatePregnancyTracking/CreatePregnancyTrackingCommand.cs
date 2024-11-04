@@ -1,5 +1,5 @@
-﻿using AUF.EMR2.Application.DTOs.PregnancyTracking;
-using AUF.EMR2.Application.Responses;
+﻿using AUF.EMR2.Application.Common.Responses;
+using AUF.EMR2.Application.DTOs.PregnancyTracking;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AUF.EMR2.Application.Features.PregnancyTrackings.Commands.CreatePregnancyTracking
 {
-    public record CreatePregnancyTrackingCommand : IRequest<BaseCommandResponse<int>>
+    public record CreatePregnancyTrackingCommand : IRequest<CommandResponse<Guid>>
     {
         public CreatePregnancyTrackingDto PregnancyTrackingDto { get; set; }
     }

@@ -22,25 +22,25 @@ namespace AUF.EMR2.Persistence.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("AUF.EMR2.Domain.Models.Barangay", b =>
+            modelBuilder.Entity("AUF.EMR2.Domain.Aggregates.BarangayAggregate.Barangay", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    b.Property<Guid>("Id")
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("BarangayHealthStation")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("BarangayName")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("ContactNo")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(11)
+                        .HasColumnType("varchar(11)");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("longtext");
@@ -60,77 +60,45 @@ namespace AUF.EMR2.Persistence.Migrations
                     b.Property<string>("ModifiedById")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("Municipality")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Province")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Region")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<string>("RuralHealthUnit")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.Property<bool>("Status")
                         .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("Street")
-                        .IsRequired()
-                        .HasColumnType("longtext");
 
                     b.Property<Guid>("Version")
                         .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Barangays");
+                    b.ToTable("Barangays", (string)null);
 
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = new Guid("198743c4-da4d-44cd-93f9-70e6b078e728"),
                             BarangayHealthStation = "Barangay Health Station",
                             BarangayName = "Brgy. Ninoy Aquino",
-                            ContactNo = "09123441233",
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LastModified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Municipality = "Angeles City",
-                            Province = "Pampanga",
-                            Region = "III",
+                            ContactNo = "09XXXXXXXXX",
+                            DateCreated = new DateTime(2024, 10, 14, 16, 30, 31, 743, DateTimeKind.Local).AddTicks(575),
+                            LastModified = new DateTime(2024, 10, 14, 16, 30, 31, 743, DateTimeKind.Local).AddTicks(590),
                             RuralHealthUnit = "Rural Health Unit",
                             Status = true,
-                            Street = "Ninoy Aquino",
-                            Version = new Guid("00000000-0000-0000-0000-000000000000")
+                            Version = new Guid("105bf64a-7b6c-4970-b839-663713e6ff01")
                         });
                 });
 
-            modelBuilder.Entity("AUF.EMR2.Domain.Models.Household", b =>
+            modelBuilder.Entity("AUF.EMR2.Domain.Aggregates.HouseholdAggregate.Household", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Barangay")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Category")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                    b.Property<Guid>("Id")
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("ContactNo")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(11)
+                        .HasColumnType("varchar(11)");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("longtext");
@@ -140,7 +108,8 @@ namespace AUF.EMR2.Persistence.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.Property<DateTime?>("FirstQtrVisit")
                         .HasColumnType("datetime(6)");
@@ -148,21 +117,14 @@ namespace AUF.EMR2.Persistence.Migrations
                     b.Property<DateTime?>("FourthQtrVisit")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("HouseNoAndStreet")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<string>("HouseholdNo")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<bool>("IsHeadPhilhealthMember")
+                    b.Property<bool>("IsIp")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("IsIP")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool>("IsNHTS")
+                    b.Property<bool>("IsNhts")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<DateTime>("LastModified")
@@ -170,20 +132,15 @@ namespace AUF.EMR2.Persistence.Migrations
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("ModifiedById")
                         .HasColumnType("longtext");
 
                     b.Property<string>("MotherMaidenName")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("PhilhealthNo")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Province")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.Property<DateTime?>("SecondQtrVisit")
                         .HasColumnType("datetime(6)");
@@ -199,196 +156,25 @@ namespace AUF.EMR2.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Households");
+                    b.ToTable("Households", (string)null);
                 });
 
-            modelBuilder.Entity("AUF.EMR2.Domain.Models.HouseholdMember", b =>
+            modelBuilder.Entity("AUF.EMR2.Domain.Aggregates.PregnancyTrackingHhAggregate.PregnancyTrackingHh", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("Birthday")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("FirstQtrClassification")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("FourthQtrClassification")
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("HouseholdId")
-                        .HasColumnType("int");
-
-                    b.Property<bool?>("IsInSchool")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool>("IsNhts")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<DateTime>("LastModified")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("ModifiedById")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("MotherMaidenName")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("NameOfFather")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("NameOfMother")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("OtherRelation")
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("RelationshipToHouseholdHead")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Remarks")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("SecondQtrClassification")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Sex")
-                        .IsRequired()
-                        .HasColumnType("varchar(1)");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("ThirdQtrClassification")
-                        .HasColumnType("longtext");
-
-                    b.Property<Guid>("Version")
+                    b.Property<Guid>("Id")
                         .HasColumnType("char(36)");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("HouseholdId");
-
-                    b.ToTable("HouseholdMembers");
-                });
-
-            modelBuilder.Entity("AUF.EMR2.Domain.Models.PregnancyTracking", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Age")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime?>("EarlyNewbornDeath")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime>("ExpectedDateOfDelivery")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime?>("FirstAntenatalCheckUp")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("Gravidity")
-                        .HasColumnType("int");
-
-                    b.Property<int>("HouseholdMemberId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("LastModified")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime?>("LiveBirth")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime?>("MaternalDeath")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("ModifiedById")
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime?>("MoreCheckUp")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("Parity")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("PostnatalCheckUp24hrs")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime?>("PostnatalCheckUp7days")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int?>("PregnancyOutcome")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("SecondAntenatalCheckUp")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<DateTime?>("StillBirth")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime?>("ThirdAntenatalCheckUp")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<Guid>("Version")
-                        .HasColumnType("char(36)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("HouseholdMemberId");
-
-                    b.ToTable("PregnancyTrackings");
-                });
-
-            modelBuilder.Entity("AUF.EMR2.Domain.Models.PregnancyTrackingHh", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("BHWName")
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("BarangayId")
-                        .HasColumnType("int");
+                    b.Property<string>("BhwName")
+                        .HasMaxLength(11)
+                        .HasColumnType("varchar(11)");
 
                     b.Property<string>("BirthingCenter")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(150)
+                        .HasColumnType("varchar(150)");
 
                     b.Property<string>("BirthingCenterAddress")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(150)
+                        .HasColumnType("varchar(150)");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("longtext");
@@ -396,23 +182,26 @@ namespace AUF.EMR2.Persistence.Migrations
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("HouseholdId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("HouseholdId")
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime>("LastModified")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("MidwifeName")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(11)
+                        .HasColumnType("varchar(11)");
 
                     b.Property<string>("ModifiedById")
                         .HasColumnType("longtext");
 
                     b.Property<string>("ReferralCenter")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(150)
+                        .HasColumnType("varchar(150)");
 
                     b.Property<string>("ReferralCenterAddress")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(150)
+                        .HasColumnType("varchar(150)");
 
                     b.Property<bool>("Status")
                         .HasColumnType("tinyint(1)");
@@ -425,143 +214,125 @@ namespace AUF.EMR2.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BarangayId");
+                    b.HasIndex("HouseholdId")
+                        .IsUnique();
 
-                    b.HasIndex("HouseholdId");
-
-                    b.ToTable("PregnancyTrackingHhs");
+                    b.ToTable("PregnancyTrackingHh", (string)null);
                 });
 
-            modelBuilder.Entity("AUF.EMR2.Domain.Models.WomanOfReproductiveAge", b =>
+            modelBuilder.Entity("AUF.EMR2.Domain.Aggregates.BarangayAggregate.Barangay", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.OwnsOne("AUF.EMR2.Domain.Aggregates.BarangayAggregate.ValueObjects.BarangayAddress", "BarangayAddress", b1 =>
+                        {
+                            b1.Property<Guid>("BarangayId")
+                                .HasColumnType("char(36)");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                            b1.Property<string>("Municipality")
+                                .IsRequired()
+                                .HasMaxLength(150)
+                                .HasColumnType("varchar(150)")
+                                .HasColumnName("Municipality");
 
-                    b.Property<bool>("AcceptModernFpMethod")
-                        .HasColumnType("tinyint(1)");
+                            b1.Property<string>("Province")
+                                .IsRequired()
+                                .HasMaxLength(150)
+                                .HasColumnType("varchar(150)")
+                                .HasColumnName("Province");
 
-                    b.Property<int>("CivilStatus")
-                        .HasColumnType("int");
+                            b1.Property<string>("Region")
+                                .IsRequired()
+                                .HasMaxLength(150)
+                                .HasColumnType("varchar(150)")
+                                .HasColumnName("Region");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("longtext");
+                            b1.Property<string>("Street")
+                                .IsRequired()
+                                .HasMaxLength(150)
+                                .HasColumnType("varchar(150)")
+                                .HasColumnName("Street");
 
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime(6)");
+                            b1.HasKey("BarangayId");
 
-                    b.Property<DateTime?>("FPAcceptedDate")
-                        .HasColumnType("datetime(6)");
+                            b1.ToTable("Barangays");
 
-                    b.Property<int>("HouseholdMemberId")
-                        .HasColumnType("int");
+                            b1.WithOwner()
+                                .HasForeignKey("BarangayId");
+                        });
 
-                    b.Property<bool>("IsFPMethod")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool?>("IsFPModern")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool>("IsFecund")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool>("IsMFPUnmet")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool?>("IsPlanChildrenLimiting")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool?>("IsPlanChildrenNow")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool?>("IsPlanChildrenSpacing")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool>("IsPlanningChildren")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<DateTime>("LastModified")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("ModernFPMethod")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("ModifiedById")
-                        .HasColumnType("longtext");
-
-                    b.Property<bool?>("ShiftToModern")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<Guid>("Version")
-                        .HasColumnType("char(36)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("HouseholdMemberId");
-
-                    b.ToTable("WomenOfReproductiveAge");
+                    b.Navigation("BarangayAddress")
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("AUF.EMR2.Domain.Models.HouseholdMember", b =>
+            modelBuilder.Entity("AUF.EMR2.Domain.Aggregates.HouseholdAggregate.Household", b =>
                 {
-                    b.HasOne("AUF.EMR2.Domain.Models.Household", "Household")
-                        .WithMany("HouseholdMembers")
-                        .HasForeignKey("HouseholdId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                    b.OwnsOne("AUF.EMR2.Domain.Aggregates.HouseholdAggregate.ValueObjects.HouseAddress", "HouseAddress", b1 =>
+                        {
+                            b1.Property<Guid>("HouseholdId")
+                                .HasColumnType("char(36)");
+
+                            b1.Property<string>("Barangay")
+                                .IsRequired()
+                                .HasMaxLength(150)
+                                .HasColumnType("varchar(150)");
+
+                            b1.Property<string>("City")
+                                .IsRequired()
+                                .HasMaxLength(150)
+                                .HasColumnType("varchar(150)");
+
+                            b1.Property<string>("HouseNoAndStreet")
+                                .IsRequired()
+                                .HasMaxLength(150)
+                                .HasColumnType("varchar(150)");
+
+                            b1.Property<string>("Province")
+                                .IsRequired()
+                                .HasMaxLength(150)
+                                .HasColumnType("varchar(150)");
+
+                            b1.HasKey("HouseholdId");
+
+                            b1.ToTable("Households");
+
+                            b1.WithOwner()
+                                .HasForeignKey("HouseholdId");
+                        });
+
+                    b.OwnsOne("AUF.EMR2.Domain.Aggregates.HouseholdAggregate.ValueObjects.Philhealth", "Philhealth", b1 =>
+                        {
+                            b1.Property<Guid>("HouseholdId")
+                                .HasColumnType("char(36)");
+
+                            b1.Property<string>("Category")
+                                .HasMaxLength(100)
+                                .HasColumnType("varchar(100)");
+
+                            b1.Property<string>("PhilhealthNo")
+                                .HasMaxLength(100)
+                                .HasColumnType("varchar(100)");
+
+                            b1.HasKey("HouseholdId");
+
+                            b1.ToTable("Households");
+
+                            b1.WithOwner()
+                                .HasForeignKey("HouseholdId");
+                        });
+
+                    b.Navigation("HouseAddress")
                         .IsRequired();
 
-                    b.Navigation("Household");
+                    b.Navigation("Philhealth")
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("AUF.EMR2.Domain.Models.PregnancyTracking", b =>
+            modelBuilder.Entity("AUF.EMR2.Domain.Aggregates.PregnancyTrackingHhAggregate.PregnancyTrackingHh", b =>
                 {
-                    b.HasOne("AUF.EMR2.Domain.Models.HouseholdMember", "HouseholdMember")
-                        .WithMany()
-                        .HasForeignKey("HouseholdMemberId")
+                    b.HasOne("AUF.EMR2.Domain.Aggregates.HouseholdAggregate.Household", null)
+                        .WithOne()
+                        .HasForeignKey("AUF.EMR2.Domain.Aggregates.PregnancyTrackingHhAggregate.PregnancyTrackingHh", "HouseholdId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("HouseholdMember");
-                });
-
-            modelBuilder.Entity("AUF.EMR2.Domain.Models.PregnancyTrackingHh", b =>
-                {
-                    b.HasOne("AUF.EMR2.Domain.Models.Barangay", "Barangay")
-                        .WithMany()
-                        .HasForeignKey("BarangayId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("AUF.EMR2.Domain.Models.Household", "Household")
-                        .WithMany()
-                        .HasForeignKey("HouseholdId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Barangay");
-
-                    b.Navigation("Household");
-                });
-
-            modelBuilder.Entity("AUF.EMR2.Domain.Models.WomanOfReproductiveAge", b =>
-                {
-                    b.HasOne("AUF.EMR2.Domain.Models.HouseholdMember", "HouseholdMember")
-                        .WithMany()
-                        .HasForeignKey("HouseholdMemberId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("HouseholdMember");
-                });
-
-            modelBuilder.Entity("AUF.EMR2.Domain.Models.Household", b =>
-                {
-                    b.Navigation("HouseholdMembers");
                 });
 #pragma warning restore 612, 618
         }

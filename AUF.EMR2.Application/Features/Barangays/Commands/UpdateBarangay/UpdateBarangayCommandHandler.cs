@@ -1,75 +1,69 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
-using AUF.EMR2.Application.DTOs.Barangay.Validators;
-using AUF.EMR2.Application.DTOs.Household.Validators;
-using AUF.EMR2.Application.Exceptions;
-using AUF.EMR2.Application.Responses;
-using AUF.EMR2.Domain.Entities;
-using AutoMapper;
+using AUF.EMR2.Application.Common.Responses;
+using AUF.EMR2.Domain.Aggregates.BarangayAggregate.ValueObjects;
+using AUF.EMR2.Domain.Common.Errors;
+using ErrorOr;
+using MapsterMapper;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data;
 
-namespace AUF.EMR2.Application.Features.Barangays.Commands.UpdateBarangay
+namespace AUF.EMR2.Application.Features.Barangays.Commands.UpdateBarangay;
+
+public class UpdateBarangayCommandHandler : IRequestHandler<UpdateBarangayCommand, ErrorOr<CommandResponse<Guid>>>
 {
-    public class UpdateBarangayCommandHandler : IRequestHandler<UpdateBarangayCommand, BaseCommandResponse<int>>
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly IMapper _mapper;
+
+    public UpdateBarangayCommandHandler(
+        IUnitOfWork unitOfWork,
+        IMapper mapper)
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
+        _unitOfWork = unitOfWork;
+        _mapper = mapper;
+    }
+    
+    public async Task<ErrorOr<CommandResponse<Guid>>> Handle(UpdateBarangayCommand request, CancellationToken cancellationToken)
+    {
+        var barangay = await _unitOfWork.BarangayRepository.GetBarangay();
 
-        public UpdateBarangayCommandHandler(
-            IUnitOfWork unitOfWork,
-            IMapper mapper)
+        if (barangay is null)
         {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
+            return Errors.Barangay.NotFound;
         }
 
-        public async Task<BaseCommandResponse<int>> Handle(UpdateBarangayCommand request, CancellationToken cancellationToken)
+        var response = new CommandResponse<Guid>();
+
+        var barangayAddress = BarangayAddress.Create(
+            street: request.Street,
+            municipality: request.Municipality,
+            province: request.Province,
+            region: request.Region
+        );
+
+        barangay.Update(
+            barangayName: request.BarangayName,
+            logo: request.Logo,
+            barangayAddress: barangayAddress,
+            contactNo: request.ContactNo,
+            barangayHealthStation: request.BarangayHealthStation,
+            ruralHealthUnit: request.RuralHealthUnit,
+            description: request.Description
+        );
+
+        try
         {
-            var response = new BaseCommandResponse<int>();
-            var validator = new UpdateBarangayDtoValidator();
-            var validationResult = await validator.ValidateAsync(request.BarangayDto, cancellationToken);
-
-            if (!validationResult.IsValid)
-            {
-                response.Success = false;
-                response.Message = "Updation Failed";
-                response.Errors = validationResult.Errors.Select(q => q.ErrorMessage).ToList();
-
-                throw new ValidationException(validationResult);
-            }
-
-            var barangay = await _unitOfWork.BarangayRepository.GetBarangay();
-
-            if (barangay == null)
-            {
-                response.Success = false;
-                response.Message = $"{nameof(Barangay)} with id: {request.BarangayDto.Id} is not existing";
-
-                throw new NotFoundException(nameof(Barangay), request.BarangayDto.Id);
-            }
-
-            _mapper.Map(request.BarangayDto, barangay);
-
-            try
-            {
-                _unitOfWork.BarangayRepository.Update(barangay);
-                await _unitOfWork.SaveAsync();
-            }
-            catch (DbUpdateConcurrencyException ex)
-            {
-                throw new ConcurrencyException("The entity you attempted to update was modified by another user.", ex);
-            }
-
-            response.Success = true;
-            response.Message = "Updation is successful";
-            response.Id = request.BarangayDto.Id;
-
-            return response;
+            _unitOfWork.BarangayRepository.Update(barangay);
+            await _unitOfWork.SaveAsync();
         }
+        catch (DBConcurrencyException)
+        {
+            return Errors.ConcurrentIssue;
+        }
+
+        response.Success = true;
+        response.Id = barangay.Id.Value;
+        response.Message = "Updated successfully";
+
+        return response;
     }
 }

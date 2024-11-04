@@ -8,9 +8,9 @@ using AUF.EMR2.Application.Features.OralHealths.Queries.GetOralHealthPregnantTwe
 using AUF.EMR2.Application.Features.OralHealths.Queries.GetOralHealth;
 using AUF.EMR2.Application.Features.OralHealths.Queries.GetOralHealthTenToFourteen;
 using AUF.EMR2.Application.Features.OralHealths.Queries.GetPrintOralHealthRecordList;
-using AUF.EMR2.Application.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using AUF.EMR2.Application.Common.Responses;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -85,7 +85,7 @@ namespace AUF.EMR2.API.Controllers
 
         // GET api/<OralHealthController>/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<OralHealthDto>> Get(int id)
+        public async Task<ActionResult<OralHealthDto>> Get(Guid id)
         {
             var response = await _mediator.Send(new GetOralHealthRequest { Id = id });
             return Ok(response);
@@ -94,7 +94,7 @@ namespace AUF.EMR2.API.Controllers
 
         // PUT api/<OralHealthController>/5
         [HttpPut]
-        public async Task<ActionResult<BaseCommandResponse<int>>> Put([FromBody] UpdateOralHealthDto dto)
+        public async Task<ActionResult<CommandResponse<int>>> Put([FromBody] UpdateOralHealthDto dto)
         {
             var response = await _mediator.Send(new UpdateOralHealthCommand { OralHealthDto = dto });
             return Ok(response);

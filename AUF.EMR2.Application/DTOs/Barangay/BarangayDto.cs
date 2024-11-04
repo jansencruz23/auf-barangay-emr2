@@ -8,7 +8,7 @@ namespace AUF.EMR2.Application.DTOs.Barangay
 {
     public class BarangayDto : IBarangayDto
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string BarangayName { get; set; }
         public byte[]? Logo { get; set; }
         public string Street { get; set; }

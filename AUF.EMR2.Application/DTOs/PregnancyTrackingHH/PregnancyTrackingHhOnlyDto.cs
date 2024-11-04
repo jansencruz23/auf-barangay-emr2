@@ -10,9 +10,9 @@ namespace AUF.EMR2.Application.DTOs.PregnancyTrackingHh
 {
     public class PregnancyTrackingHhOnlyDto : IPregnancyTrackingHhDto
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public int Year { get; set; }
-        public int BarangayId { get; set; }
+        public Guid BarangayId { get; set; }
         public BarangayDto Barangay { get; set; }
         public string? BirthingCenter { get; set; }
         public string? BirthingCenterAddress { get; set; }
@@ -20,6 +20,6 @@ namespace AUF.EMR2.Application.DTOs.PregnancyTrackingHh
         public string? ReferralCenterAddress { get; set; }
         public string? BHWName { get; set; }
         public string? MidwifeName { get; set; }
-        public int HouseholdId { get; set; }
+        public Guid HouseholdId { get; set; }
     }
 }

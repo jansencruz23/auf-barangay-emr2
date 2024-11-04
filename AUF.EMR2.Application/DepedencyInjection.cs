@@ -1,29 +1,31 @@
 ﻿using AUF.EMR2.Application.Abstraction.Services;
+using AUF.EMR2.Application.Common.Behaviors;
+using AUF.EMR2.Application.Common.Mapping;
 using AUF.EMR2.Application.Services;
+using FluentValidation;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace AUF.EMR2.Application
+namespace AUF.EMR2.Application;
+
+public static class DepedencyInjection 
 {
-    public static class DepedencyInjection 
+    public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
-        public static IServiceCollection AddApplicationServices(this IServiceCollection services)
-        {
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
-            services.AddMediatR(config =>
-                config.RegisterServicesFromAssembly(
-                    Assembly.GetExecutingAssembly()));
+        services.AddApplicationMappings();
+        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
-            services.AddScoped<IMasterlistService, MasterlistService>();
-            services.AddScoped<IOralHealthService, OralHealthService>();
-            services.AddScoped<IPregnancyTrackingHHService, PregnancyTrackingHHService>();
+        services.AddMediatR(config =>
+            config.RegisterServicesFromAssembly(
+                Assembly.GetExecutingAssembly()));
 
-            return services;
-        }
+        services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+
+        services.AddScoped<IMasterlistService, MasterlistService>();
+        services.AddScoped<IOralHealthService, OralHealthService>();
+        services.AddScoped<IPregnancyTrackingHHService, PregnancyTrackingHHService>();
+
+        return services;
     }
 }

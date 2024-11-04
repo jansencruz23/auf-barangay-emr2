@@ -1,16 +1,12 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
-using AUF.EMR2.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using AUF.EMR2.Domain.Aggregates.HouseholdAggregate.ValueObjects;
+using AUF.EMR2.Domain.Aggregates.PregnancyTrackingHhAggregate;
+using AUF.EMR2.Domain.Aggregates.PregnancyTrackingHhAggregate.ValueObjects;
 
-namespace AUF.EMR2.Application.Abstraction.Persistence
+namespace AUF.EMR2.Application.Abstraction.Persistence;
+
+public interface IPregnancyTrackingHhRepository : IGenericRepository<PregnancyTrackingHh, PregnancyTrackingHhId>
 {
-    public interface IPregnancyTrackingHhRepository : IGenericRepository<PregnancyTrackingHh>
-    {
-        Task<PregnancyTrackingHh> GetPregnancyTrackingHh(string householdNo);
-        Task<PregnancyTrackingHh> GetPregnancyTrackingHh(int id);
-    }
+    Task<PregnancyTrackingHh> GetPregnancyTrackingHh(HouseholdId householdId);
+    Task<PregnancyTrackingHh> GetPregnancyTrackingHh(PregnancyTrackingHhId id);
 }

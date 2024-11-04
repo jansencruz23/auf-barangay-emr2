@@ -1,5 +1,5 @@
-﻿using AUF.EMR2.Application.DTOs.Masterlist;
-using AUF.EMR2.Application.Responses;
+﻿using AUF.EMR2.Application.Common.Responses;
+using AUF.EMR2.Application.DTOs.Masterlist;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AUF.EMR2.Application.Features.Masterlists.Commands.UpdateMasterlistChild
 {
-    public record UpdateMasterlistChildCommand : IRequest<BaseCommandResponse<int>>
+    public record UpdateMasterlistChildCommand : IRequest<CommandResponse<Guid>>
     {
         public UpdateMasterlistChildDto MasterlistDto { get; set; }
     }

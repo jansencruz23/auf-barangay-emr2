@@ -1,16 +1,11 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
-using AUF.EMR2.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using AUF.EMR2.Domain.Aggregates.WomanOfReproductiveAgeAggregate;
+using AUF.EMR2.Domain.Aggregates.WomanOfReproductiveAgeAggregate.ValueObjects;
 
-namespace AUF.EMR2.Application.Abstraction.Persistence
+namespace AUF.EMR2.Application.Abstraction.Persistence;
+
+public interface IWraRepository : IGenericRepository<WomanOfReproductiveAge, WomanOfReproductiveAgeId>
 {
-    public interface IWraRepository : IGenericRepository<WomanOfReproductiveAge>
-    {
-        Task<List<WomanOfReproductiveAge>> GetWraList(string householdNo);
-        Task<WomanOfReproductiveAge> GetWra(int id);
-    }
+    Task<List<WomanOfReproductiveAge>> GetWraList(string householdNo);
+    Task<WomanOfReproductiveAge> GetWra(WomanOfReproductiveAgeId id);
 }

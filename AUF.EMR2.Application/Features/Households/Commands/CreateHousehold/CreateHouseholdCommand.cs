@@ -1,16 +1,23 @@
-﻿using AUF.EMR2.Application.DTOs.Household;
-using AUF.EMR2.Application.Responses;
+﻿using AUF.EMR2.Application.Common.Responses;
+using AUF.EMR2.Application.Features.Households.Commands.Common;
+using AUF.EMR2.Application.Features.Households.Common;
+using ErrorOr;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace AUF.EMR2.Application.Features.Households.Commands.CreateHousehold
-{
-    public record CreateHouseholdCommand : IRequest<BaseCommandResponse<int>>
-    {
-        public CreateHouseholdDto HouseholdDto { get; set; }
-    }
-}
+namespace AUF.EMR2.Application.Features.Households.Commands.CreateHousehold;
+
+public sealed record CreateHouseholdCommand(
+    string HouseholdNo,
+    DateTime? FirstQtrVisit,
+    DateTime? SecondQtrVisit,
+    DateTime? ThirdQtrVisit,
+    DateTime? FourthQtrVisit,
+    string LastName,
+    string FirstName,
+    string? MotherMaidenName,
+    HouseAddressData HouseAddress,
+    string ContactNo,
+    bool IsNhts,
+    PhilhealthData Philhealth,
+    bool IsIp
+) : IRequest<ErrorOr<CommandResponse<Guid>>>, IHouseholdCommand;

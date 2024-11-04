@@ -1,7 +1,7 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
 using AUF.EMR2.Application.DTOs.PregnancyTracking;
 using AUF.EMR2.Application.DTOs.PregnancyTrackingHh;
-using AutoMapper;
+using MapsterMapper;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -26,15 +26,16 @@ namespace AUF.EMR2.Application.Features.PregnancyTrackings.Queries.GetPrintPregn
 
         public async Task<PrintPregnancyTrackingDto> Handle(GetPrintPregnancyTrackingRecordsRequest request, CancellationToken cancellationToken)
         {
-            var dto = new PrintPregnancyTrackingDto();
+            throw new NotImplementedException();
+            //var dto = new PrintPregnancyTrackingDto();
 
-            var pregnancyTrackingHh = await _unitOfWork.PregnancyTrackingHhRepository.GetPregnancyTrackingHh(request.HouseholdNo);
-            var pregnancyTrackingList = await _unitOfWork.PregnancyTrackingRepository.GetPregnancyTrackingList(request.HouseholdNo);
+            //var pregnancyTrackingHh = await _unitOfWork.PregnancyTrackingHhRepository.GetPregnancyTrackingHh(request.HouseholdNo);
+            //var pregnancyTrackingList = await _unitOfWork.PregnancyTrackingRepository.GetPregnancyTrackingList(request.HouseholdNo);
 
-            dto.PregnancyTrackingHh = _mapper.Map<PregnancyTrackingHhOnlyDto>(pregnancyTrackingHh);
-            dto.PregnancyTrackingList = _mapper.Map<List<PregnancyTrackingDto>>(pregnancyTrackingList);
+            //dto.PregnancyTrackingHh = _mapper.Map<PregnancyTrackingHhOnlyDto>(pregnancyTrackingHh);
+            //dto.PregnancyTrackingList = _mapper.Map<List<PregnancyTrackingDto>>(pregnancyTrackingList);
 
-            return dto;
+            //return dto;
         }
     }
 }

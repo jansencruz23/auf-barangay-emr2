@@ -1,6 +1,6 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
 using AUF.EMR2.Application.Abstraction.Services;
-using AUF.EMR2.Domain.Entities;
+using AUF.EMR2.Domain.Aggregates.PregnancyTrackingHhAggregate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,17 +18,18 @@ namespace AUF.EMR2.Application.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<PregnancyTrackingHh> CreatePregnancyTrackingHH(int householdId)
+        public async Task<PregnancyTrackingHh> CreatePregnancyTrackingHH(Guid householdId)
         {
-            var barangay = await _unitOfWork.BarangayRepository.GetBarangay();
-            var pregnancyTrackingHh = new PregnancyTrackingHh
-            {
-                BarangayId = barangay.Id,
-                HouseholdId = householdId,
-                Year = DateTime.Now.Year
-            };
+            throw new NotImplementedException();
+            //var barangay = await _unitOfWork.BarangayRepository.GetBarangay();
+            //var pregnancyTrackingHh = new PregnancyTrackingHh
+            //{
+            //    BarangayId = barangay.Id,
+            //    HouseholdId = householdId,
+            //    Year = DateTime.Now.Year
+            //};
 
-            return pregnancyTrackingHh;
+            //return pregnancyTrackingHh;
         }
     }
 }

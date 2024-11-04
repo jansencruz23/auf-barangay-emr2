@@ -1,4 +1,4 @@
-﻿using AUF.EMR2.Application.Responses;
+﻿using AUF.EMR2.Application.Common.Responses;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace AUF.EMR2.Application.Features.WomenOfReproductiveAge.Commands.DeleteWra
 {
-    public record DeleteWraCommand : IRequest<BaseCommandResponse<int>>
+    public record DeleteWraCommand : IRequest<CommandResponse<Guid>>
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
     }
 }

@@ -34,14 +34,14 @@ namespace AUF.EMR2.Application.DTOs.WomanOfReproductiveAge.Validators
                 .NotNull().WithMessage("{PropertyName} is required.")
                 .LessThanOrEqualTo(DateTime.Now).WithMessage("{PropertyName} must be a date in the past or today.");
 
-            RuleFor(q => q.HouseholdMemberId)
-                .NotNull().WithMessage("{PropertyName} is required.")
-                .GreaterThan(0).WithMessage("{PropertyName} must be greater than {ComparisonValue}.")
-                .MustAsync(async (id, token) =>
-                {
-                    return await unitOfWork.HouseholdMemberRepository.IsWraMember(id);
-                })
-                .WithMessage("{PropertyName} must exist and be a woman of reproductive age.");
+            //RuleFor(q => q.HouseholdMemberId)
+            //    .NotNull().WithMessage("{PropertyName} is required.")
+            //    .NotEqual(Guid.Empty).WithMessage("{PropertyName} is required.")
+            //    .MustAsync(async (id, token) =>
+            //    {
+            //        return await unitOfWork.HouseholdMemberRepository.IsWraMember(id);
+            //    })
+            //    .WithMessage("{PropertyName} must exist and be a woman of reproductive age.");
         }
     }
 }

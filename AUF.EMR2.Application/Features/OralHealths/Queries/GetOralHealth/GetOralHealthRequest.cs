@@ -10,6 +10,6 @@ namespace AUF.EMR2.Application.Features.OralHealths.Queries.GetOralHealth
 {
     public record GetOralHealthRequest : IRequest<OralHealthDto>
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
     }
 }

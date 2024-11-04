@@ -8,7 +8,7 @@ namespace AUF.EMR2.Application.DTOs.HouseholdMember
 {
     public class UpdateHouseholdMemberDto : CreateHouseholdMemberDto
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public Guid Version { get; set; }
     }
 }

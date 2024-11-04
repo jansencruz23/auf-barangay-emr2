@@ -10,6 +10,6 @@ namespace AUF.EMR2.Application.Features.HouseholdMembers.Queries.GetHouseholdMem
 {
     public record GetHouseholdMemberRequest : IRequest<HouseholdMemberDto>
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
     }
 }

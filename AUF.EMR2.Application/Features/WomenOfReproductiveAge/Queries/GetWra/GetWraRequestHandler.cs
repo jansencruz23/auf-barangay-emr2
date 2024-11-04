@@ -1,7 +1,7 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
 using AUF.EMR2.Application.DTOs.Household;
 using AUF.EMR2.Application.DTOs.WomanOfReproductiveAge;
-using AutoMapper;
+using MapsterMapper;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -26,10 +26,11 @@ namespace AUF.EMR2.Application.Features.WomenOfReproductiveAge.Queries.GetWra
 
         public async Task<WraDto> Handle(GetWraRequest request, CancellationToken cancellationToken)
         {
-            var wra = await _unitOfWork.WraRepository.GetWra(request.Id);
-            var wraDto = _mapper.Map<WraDto>(wra);
+            throw new NotImplementedException();
+            //var wra = await _unitOfWork.WraRepository.GetWra(request.Id);
+            //var wraDto = _mapper.Map<WraDto>(wra);
 
-            return wraDto;
+            //return wraDto;
         }
     }
 }

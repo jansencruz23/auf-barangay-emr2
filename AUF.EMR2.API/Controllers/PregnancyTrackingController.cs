@@ -1,11 +1,11 @@
-﻿using AUF.EMR2.Application.DTOs.PregnancyTracking;
+﻿using AUF.EMR2.Application.Common.Responses;
+using AUF.EMR2.Application.DTOs.PregnancyTracking;
 using AUF.EMR2.Application.Features.PregnancyTrackings.Commands.CreatePregnancyTracking;
 using AUF.EMR2.Application.Features.PregnancyTrackings.Commands.DeletePregnancyTracking;
 using AUF.EMR2.Application.Features.PregnancyTrackings.Commands.UpdatePregnancyTracking;
 using AUF.EMR2.Application.Features.PregnancyTrackings.Queries.GetPregnancyTracking;
 using AUF.EMR2.Application.Features.PregnancyTrackings.Queries.GetPregnancyTrackingList;
 using AUF.EMR2.Application.Features.PregnancyTrackings.Queries.GetPrintPregnancyTrackingRecords;
-using AUF.EMR2.Application.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -43,7 +43,7 @@ namespace AUF.EMR2.API.Controllers
 
         // GET api/<PregnancyTrackingController>/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<PregnancyTrackingDto>> Get(int id)
+        public async Task<ActionResult<PregnancyTrackingDto>> Get(Guid id)
         {
             var response = await _mediator.Send(new GetPregnancyTrackingRequest { Id = id });
             return Ok(response);
@@ -51,7 +51,7 @@ namespace AUF.EMR2.API.Controllers
 
         // POST api/<PregnancyTrackingController>
         [HttpPost]
-        public async Task<ActionResult<BaseCommandResponse<int>>> Post([FromBody] CreatePregnancyTrackingDto dto)
+        public async Task<ActionResult<CommandResponse<Guid>>> Post([FromBody] CreatePregnancyTrackingDto dto)
         {
             var response = await _mediator.Send(new CreatePregnancyTrackingCommand { PregnancyTrackingDto = dto });
             return Ok(response);
@@ -59,7 +59,7 @@ namespace AUF.EMR2.API.Controllers
 
         // PUT api/<PregnancyTrackingController>/5
         [HttpPut]
-        public async Task<ActionResult<BaseCommandResponse<int>>> Put([FromBody] UpdatePregnancyTrackingDto dto)
+        public async Task<ActionResult<CommandResponse<Guid>>> Put([FromBody] UpdatePregnancyTrackingDto dto)
         {
             var response = await _mediator.Send(new UpdatePregnancyTrackingCommand { PregnancyTrackingDto = dto });
             return Ok(response);
@@ -67,7 +67,7 @@ namespace AUF.EMR2.API.Controllers
 
         // DELETE api/<PregnancyTrackingController>/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<BaseCommandResponse<int>>> Delete(int id)
+        public async Task<ActionResult<CommandResponse<Guid>>> Delete(Guid id)
         {
             var response = await _mediator.Send(new DeletePregnancyTrackingCommand { Id = id });
             return Ok(response);

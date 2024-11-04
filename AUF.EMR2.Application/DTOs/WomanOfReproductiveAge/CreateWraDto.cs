@@ -8,7 +8,7 @@ namespace AUF.EMR2.Application.DTOs.WomanOfReproductiveAge
 {
     public class CreateWraDto : IWraDto
     {
-        public int HouseholdMemberId { get; set; }
+        public Guid HouseholdMemberId { get; set; }
         public int CivilStatus { get; set; }
         public bool IsPlanningChildren { get; set; }
         public bool? IsPlanChildrenNow { get; set; }

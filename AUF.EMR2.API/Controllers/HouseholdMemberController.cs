@@ -1,11 +1,12 @@
-﻿using AUF.EMR2.Application.DTOs.HouseholdMember;
+﻿using AUF.EMR2.Application.Common.Responses;
+using AUF.EMR2.Application.DTOs.HouseholdMember;
 using AUF.EMR2.Application.Features.HouseholdMembers.Commands.CreateHouseholdMember;
+using AUF.EMR2.Application.Features.HouseholdMembers.Commands.DeleteHouseholdMember;
 using AUF.EMR2.Application.Features.HouseholdMembers.Commands.UpdateHouseholdMember;
 using AUF.EMR2.Application.Features.HouseholdMembers.Queries.GetHouseholdMember;
 using AUF.EMR2.Application.Features.HouseholdMembers.Queries.GetHouseholdMemberListByHouseholdNo;
 using AUF.EMR2.Application.Features.HouseholdMembers.Queries.GetWraHouseholdMemberList;
 using AUF.EMR2.Application.Features.Households.Commands.DeleteHousehold;
-using AUF.EMR2.Application.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -42,7 +43,7 @@ namespace AUF.EMR2.API.Controllers
 
         // GET api/<HouseholdMemberController>/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<HouseholdMemberDto>> Get(int id)
+        public async Task<ActionResult<HouseholdMemberDto>> Get(Guid id)
         {
             var response = await _mediator.Send(new GetHouseholdMemberRequest { Id = id });
             return Ok(response);
@@ -50,7 +51,7 @@ namespace AUF.EMR2.API.Controllers
 
         // POST api/<HouseholdMemberController>
         [HttpPost]
-        public async Task<ActionResult<BaseCommandResponse<int>>> Post([FromBody] CreateHouseholdMemberDto dto)
+        public async Task<ActionResult<CommandResponse<Guid>>> Post([FromBody] CreateHouseholdMemberDto dto)
         {
             var response = await _mediator.Send(new CreateHouseholdMemberCommand { HouseholdMemberDto = dto });
             return Ok(response);
@@ -58,7 +59,7 @@ namespace AUF.EMR2.API.Controllers
 
         // PUT api/<HouseholdMemberController>/5
         [HttpPut("{id}")]
-        public async Task<ActionResult<BaseCommandResponse<int>>> Put([FromBody] UpdateHouseholdMemberDto dto)
+        public async Task<ActionResult<CommandResponse<Guid>>> Put([FromBody] UpdateHouseholdMemberDto dto)
         {
             var response = await _mediator.Send(new UpdateHouseholdMemberCommand { HouseholdMemberDto = dto });
             return Ok(response);
@@ -66,9 +67,9 @@ namespace AUF.EMR2.API.Controllers
 
         // DELETE api/<HouseholdMemberController>/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<BaseCommandResponse<int>>> Delete(int id)
+        public async Task<ActionResult<CommandResponse<Guid>>> Delete(Guid id)
         {
-            var response = await _mediator.Send(new DeleteHouseholdCommand { Id = id });
+            var response = await _mediator.Send(new DeleteHouseholdMemberCommand { Id = id });
             return Ok(response);
         }
     }
