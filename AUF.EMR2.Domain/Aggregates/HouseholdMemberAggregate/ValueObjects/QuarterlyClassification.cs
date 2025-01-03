@@ -4,10 +4,10 @@ namespace AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate.ValueObjects;
 
 public sealed class QuarterlyClassification : ValueObject
 {
-    public string? FirstQtrClassification { get; private set; }
-    public string? SecondQtrClassification { get; private set; }
-    public string? ThirdQtrClassification { get; private set; }
-    public string? FourthQtrClassification { get; private set; }
+    public string? FirstQtrClassification { get; }
+    public string? SecondQtrClassification { get; }
+    public string? ThirdQtrClassification { get; }
+    public string? FourthQtrClassification { get; }
 
     private QuarterlyClassification(
         string? firstQtrClassification,

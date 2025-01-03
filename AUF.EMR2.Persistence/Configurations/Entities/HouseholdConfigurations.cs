@@ -36,6 +36,14 @@ public sealed class HouseholdConfigurations : IEntityTypeConfiguration<Household
             addressBuilder.Property(address => address.Province).HasMaxLength(TablePropertiesConstants.MaxAddressLength);
         });
 
+        builder.OwnsOne(household => household.QuarterlyVisit, qtrBuilder =>
+        {
+            qtrBuilder.Property(qtr => qtr.FirstQtrVisit).HasColumnType(nameof(DateTime));
+            qtrBuilder.Property(qtr => qtr.SecondQtrVisit).HasColumnType(nameof(DateTime));
+            qtrBuilder.Property(qtr => qtr.ThirdQtrVisit).HasColumnType(nameof(DateTime));
+            qtrBuilder.Property(qtr => qtr.FourthQtrVisit).HasColumnType(nameof(DateTime));
+        });
+
         builder.OwnsOne(household => household.Philhealth, philhealthBuilder =>
         {
             philhealthBuilder.Property(philhealth => philhealth.PhilhealthNo).HasMaxLength(TablePropertiesConstants.MaxNameLength);

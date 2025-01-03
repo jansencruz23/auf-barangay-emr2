@@ -4,10 +4,7 @@ namespace AUF.EMR2.Contracts.Households.Requests;
 
 public sealed record CreateHouseholdRequest(
     string HouseholdNo,
-    DateTime? FirstQtrVisit,
-    DateTime? SecondQtrVisit,
-    DateTime? ThirdQtrVisit,
-    DateTime? FourthQtrVisit,
+    QuarterlyVisitDto QuarterlyVisit,
     string LastName,
     string FirstName,
     string? MotherMaidenName,

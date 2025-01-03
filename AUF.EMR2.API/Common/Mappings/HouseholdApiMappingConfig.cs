@@ -17,5 +17,6 @@ public class HouseholdApiMappingConfig : IRegister
 
         config.NewConfig<HouseAddressData, HouseAddressDto>();
         config.NewConfig<PhilhealthData, PhilhealthDto>();
+        config.NewConfig<QuarterlyVisitData, QuarterlyVisitDto>();
     }
 }

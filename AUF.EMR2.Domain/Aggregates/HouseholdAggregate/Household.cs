@@ -1,6 +1,5 @@
 ﻿using AUF.EMR2.Domain.Aggregates.HouseholdAggregate.Events;
 using AUF.EMR2.Domain.Aggregates.HouseholdAggregate.ValueObjects;
-using AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate.ValueObjects;
 using AUF.EMR2.Domain.Common.Errors;
 using AUF.EMR2.Domain.Common.Models;
 using ErrorOr;
@@ -12,10 +11,7 @@ public sealed class Household : AggregateRoot<HouseholdId>
     //private readonly List<HouseholdMemberId> _householdMemberIds = [];
 
     public string HouseholdNo { get; private set; } = null!;
-    public DateTime? FirstQtrVisit { get; private set; }
-    public DateTime? SecondQtrVisit { get; private set; }
-    public DateTime? ThirdQtrVisit { get; private set; }
-    public DateTime? FourthQtrVisit { get; private set; }
+    public QuarterlyVisit? QuarterlyVisit { get; private set; } = null!;
     public string LastName { get; private set; } = null!;
     public string FirstName { get; private set; } = null!;
     public string? MotherMaidenName { get; private set; }
@@ -31,10 +27,7 @@ public sealed class Household : AggregateRoot<HouseholdId>
 
     public static Household Create(
         string householdNo,
-        DateTime? firstQtrVisit,
-        DateTime? secondQtrVisit,
-        DateTime? thirdQtrVisit,
-        DateTime? fourthQtrVisit,
+        QuarterlyVisit quarterlyVisit,
         string lastName,
         string firstName,
         string? motherMaidenName,
@@ -47,10 +40,7 @@ public sealed class Household : AggregateRoot<HouseholdId>
         var household = new Household(HouseholdId.Create())
         {
             HouseholdNo = householdNo,
-            FirstQtrVisit = firstQtrVisit,
-            SecondQtrVisit = secondQtrVisit,
-            ThirdQtrVisit = thirdQtrVisit,
-            FourthQtrVisit = fourthQtrVisit,
+            QuarterlyVisit = quarterlyVisit,
             LastName = lastName,
             FirstName = firstName,
             MotherMaidenName = motherMaidenName,
@@ -67,10 +57,7 @@ public sealed class Household : AggregateRoot<HouseholdId>
 
     public ErrorOr<HouseholdId> Update(
         string householdNo,
-        DateTime? firstQtrVisit,
-        DateTime? secondQtrVisit,
-        DateTime? thirdQtrVisit,
-        DateTime? fourthQtrVisit,
+        QuarterlyVisit quarterlyVisit,
         string lastName,
         string firstName,
         string? motherMaidenName,
@@ -86,10 +73,7 @@ public sealed class Household : AggregateRoot<HouseholdId>
         }
         
         HouseholdNo = householdNo;
-        FirstQtrVisit = firstQtrVisit;
-        SecondQtrVisit = secondQtrVisit;
-        ThirdQtrVisit = thirdQtrVisit;
-        FourthQtrVisit = fourthQtrVisit;
+        QuarterlyVisit = quarterlyVisit;
         LastName = lastName;
         FirstName = firstName;
         MotherMaidenName = motherMaidenName;

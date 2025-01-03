@@ -5,10 +5,7 @@ namespace AUF.EMR2.Application.Features.Households.Commands.Common;
 public interface IHouseholdCommand
 {
     public string HouseholdNo { get; init; }
-    public DateTime? FirstQtrVisit { get; init; }
-    public DateTime? SecondQtrVisit { get; init; }
-    public DateTime? ThirdQtrVisit { get; init; }
-    public DateTime? FourthQtrVisit { get; init; }
+    public QuarterlyVisitData? QuarterlyVisit { get; init; }
     public string LastName { get; init; }
     public string FirstName { get; init; }
     public string? MotherMaidenName { get; init; }

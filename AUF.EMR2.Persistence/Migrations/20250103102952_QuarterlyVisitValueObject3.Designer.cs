@@ -4,6 +4,7 @@ using AUF.EMR2.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AUF.EMR2.Persistence.Migrations
 {
     [DbContext(typeof(EmrDbContext))]
-    partial class EmrDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250103102952_QuarterlyVisitValueObject3")]
+    partial class QuarterlyVisitValueObject3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,15 +81,15 @@ namespace AUF.EMR2.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("f4c3074e-1aa0-49ab-933c-8ecfdfb35d78"),
+                            Id = new Guid("ae4166e9-8bd4-434c-aa27-00ee45c6cb00"),
                             BarangayHealthStation = "Barangay Health Station",
                             BarangayName = "Brgy. Ninoy Aquino",
                             ContactNo = "09XXXXXXXXX",
-                            DateCreated = new DateTime(2025, 1, 3, 18, 30, 36, 27, DateTimeKind.Local).AddTicks(612),
-                            LastModified = new DateTime(2025, 1, 3, 18, 30, 36, 27, DateTimeKind.Local).AddTicks(628),
+                            DateCreated = new DateTime(2025, 1, 3, 18, 29, 52, 23, DateTimeKind.Local).AddTicks(4229),
+                            LastModified = new DateTime(2025, 1, 3, 18, 29, 52, 23, DateTimeKind.Local).AddTicks(4242),
                             RuralHealthUnit = "Rural Health Unit",
                             Status = true,
-                            Version = new Guid("0b648ec6-928e-4987-b407-713db946e2f5")
+                            Version = new Guid("ec3d1927-cba5-4858-8056-069d9af0d601")
                         });
                 });
 
@@ -393,15 +396,6 @@ namespace AUF.EMR2.Persistence.Migrations
                                 .HasColumnType("char(36)");
 
                             b1.Property<DateTime?>("FirstQtrVisit")
-                                .HasColumnType("DateTime");
-
-                            b1.Property<DateTime?>("FourthQtrVisit")
-                                .HasColumnType("DateTime");
-
-                            b1.Property<DateTime?>("SecondQtrVisit")
-                                .HasColumnType("DateTime");
-
-                            b1.Property<DateTime?>("ThirdQtrVisit")
                                 .HasColumnType("DateTime");
 
                             b1.HasKey("HouseholdId");

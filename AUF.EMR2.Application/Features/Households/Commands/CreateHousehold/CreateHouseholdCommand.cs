@@ -8,10 +8,7 @@ namespace AUF.EMR2.Application.Features.Households.Commands.CreateHousehold;
 
 public sealed record CreateHouseholdCommand(
     string HouseholdNo,
-    DateTime? FirstQtrVisit,
-    DateTime? SecondQtrVisit,
-    DateTime? ThirdQtrVisit,
-    DateTime? FourthQtrVisit,
+    QuarterlyVisitData? QuarterlyVisit,
     string LastName,
     string FirstName,
     string? MotherMaidenName,

@@ -42,13 +42,17 @@ public class CreateHouseholdCommandHandler(
             province: request.HouseAddress.Province
         );
 
+        var quarterlyVisit = QuarterlyVisit.Create(
+            firstQtrVisit: request.QuarterlyVisit?.FirstQtrVisit,
+            secondQtrVisit: request.QuarterlyVisit?.SecondQtrVisit,
+            thirdQtrVisit: request.QuarterlyVisit?.ThirdQtrVisit,
+            fourthQtrVisit: request.QuarterlyVisit?.FourthQtrVisit
+        );
+
         var household = Household.Create
         (
             householdNo: request.HouseholdNo,
-            firstQtrVisit: request.FirstQtrVisit,
-            secondQtrVisit: request.SecondQtrVisit,
-            thirdQtrVisit: request.ThirdQtrVisit,
-            fourthQtrVisit: request.FourthQtrVisit,
+            quarterlyVisit: quarterlyVisit,
             lastName: request.LastName,
             firstName: request.FirstName,
             motherMaidenName: request.MotherMaidenName,

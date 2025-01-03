@@ -9,10 +9,7 @@ namespace AUF.EMR2.Application.Features.Households.Commands.UpdateHousehold;
 public sealed record UpdateHouseholdCommand(
     Guid Id,
     string HouseholdNo,
-    DateTime? FirstQtrVisit,
-    DateTime? SecondQtrVisit,
-    DateTime? ThirdQtrVisit,
-    DateTime? FourthQtrVisit,
+    QuarterlyVisitData? QuarterlyVisit,
     string LastName,
     string FirstName,
     string? MotherMaidenName,

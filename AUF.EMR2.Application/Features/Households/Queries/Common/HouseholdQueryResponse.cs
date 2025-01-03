@@ -6,10 +6,7 @@ namespace AUF.EMR2.Application.Features.Households.Queries.Common;
 public sealed record HouseholdQueryResponse (
     Guid Id,
     string HouseholdNo,
-    DateTime? FirstQtrVisit,
-    DateTime? SecondQtrVisit,
-    DateTime? ThirdQtrVisit,
-    DateTime? FourthQtrVisit,
+    QuarterlyVisitData? QuarterlyVisit,
     string FirstName,
     string LastName,
     string? MotherMaidenName,

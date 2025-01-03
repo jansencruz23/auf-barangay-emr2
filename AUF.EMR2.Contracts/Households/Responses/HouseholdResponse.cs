@@ -5,10 +5,7 @@ namespace AUF.EMR2.Contracts.Households.Responses;
 public sealed record HouseholdResponse(
     Guid Id,
     string HouseholdNo,
-    DateTime? FirstQtrVisit,
-    DateTime? SecondQtrVisit,
-    DateTime? ThirdQtrVisit,
-    DateTime? FourthQtrVisit,
+    QuarterlyVisitDto QuarterlyVisit,
     string FirstName,
     string LastName,
     string? MotherMaidenName,
