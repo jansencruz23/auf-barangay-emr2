@@ -34,10 +34,10 @@ public class UpdateBarangayCommandHandler : IRequestHandler<UpdateBarangayComman
         var response = new CommandResponse<Guid>();
 
         var barangayAddress = BarangayAddress.Create(
-            street: request.Street,
-            municipality: request.Municipality,
-            province: request.Province,
-            region: request.Region
+            street: request.BarangayAddress.Street,
+            municipality: request.BarangayAddress.Municipality,
+            province: request.BarangayAddress.Province,
+            region: request.BarangayAddress.Street
         );
 
         barangay.Update(

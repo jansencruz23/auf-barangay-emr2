@@ -1,4 +1,5 @@
 ﻿using AUF.EMR2.Application.Common.Responses;
+using AUF.EMR2.Application.Features.Barangays.Common;
 using ErrorOr;
 using MediatR;
 
@@ -8,10 +9,7 @@ public sealed record UpdateBarangayCommand(
     Guid Id,
     string BarangayName,
     byte[]? Logo,
-    string Street,
-    string Municipality,
-    string Province,
-    string Region, 
+    BarangayAddressData BarangayAddress,
     string ContactNo,
     string BarangayHealthStation,
     string RuralHealthUnit,

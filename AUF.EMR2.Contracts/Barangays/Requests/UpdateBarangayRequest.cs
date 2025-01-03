@@ -1,13 +1,12 @@
-﻿namespace AUF.EMR2.Contracts.Barangays.Requests; 
+﻿using AUF.EMR2.Contracts.Barangays.Common.ValueObjectDtos;
+
+namespace AUF.EMR2.Contracts.Barangays.Requests; 
 
 public sealed record UpdateBarangayRequest(
     Guid Id,
     string BarangayName,
     byte[]? Logo,
-    string Street,
-    string Municipality,
-    string Province,
-    string Region,
+    BarangayAddressDto BarangayAddress,
     string ContactNo,
     string BarangayHealthStation,
     string RuralHealthUnit,

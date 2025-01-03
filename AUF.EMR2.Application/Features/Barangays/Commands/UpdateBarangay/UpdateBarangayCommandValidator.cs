@@ -10,19 +10,19 @@ public sealed class UpdateBarangayCommandValidator : AbstractValidator<UpdateBar
             .NotNull().WithMessage("{PropertyName} is required.")
             .MaximumLength(50).WithMessage("{PropertyName} must not exceed {MaxLength} characters.");
 
-        RuleFor(brgy => brgy.Street)
+        RuleFor(brgy => brgy.BarangayAddress.Street)
             .NotNull().WithMessage("{PropertyName} is required.")
             .MaximumLength(100).WithMessage("{PropertyName} must not exceed {MaxLength} characters.");
 
-        RuleFor(brgy => brgy.Municipality)
+        RuleFor(brgy => brgy.BarangayAddress.Municipality)
             .NotNull().WithMessage("{PropertyName} is required.")
             .MaximumLength(50).WithMessage("{PropertyName} must not exceed {MaxLength} characters.");
 
-        RuleFor(brgy => brgy.Province)
+        RuleFor(brgy => brgy.BarangayAddress.Province)
             .NotNull().WithMessage("{PropertyName} is required.")
             .MaximumLength(50).WithMessage("{PropertyName} must not exceed {MaxLength} characters.");
 
-        RuleFor(brgy => brgy.Region)
+        RuleFor(brgy => brgy.BarangayAddress.Region)
             .NotNull().WithMessage("{PropertyName} is required.")
             .MaximumLength(50).WithMessage("{PropertyName} must not exceed {MaxLength} characters.");
 
