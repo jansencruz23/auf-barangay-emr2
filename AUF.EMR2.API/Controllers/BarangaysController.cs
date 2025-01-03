@@ -2,6 +2,7 @@
 using AUF.EMR2.Application.Features.Barangays.Commands.UpdateBarangay;
 using AUF.EMR2.Application.Features.Barangays.Queries.GetBarangay;
 using AUF.EMR2.Contracts.Barangays.Requests;
+using AUF.EMR2.Contracts.Barangays.Responses;
 using AUF.EMR2.Contracts.Common.Responses;
 using MapsterMapper;
 using MediatR;
@@ -25,10 +26,12 @@ public class BarangaysController : ApiController
 
     // GET: api/<BarangayController>
     [HttpGet]
-    public async Task<ActionResult<BarangayDto>> Get()
+    public async Task<IActionResult> Get()
     {
         var response = await _mediator.Send(new GetBarangayQuery());
-        return Ok(response);
+        return response.Match(
+            value => Ok(_mapper.Map<BarangayResponse>(value)),
+            error => Problem(error));
     }
 
     // PUT api/<BarangayController>/5
