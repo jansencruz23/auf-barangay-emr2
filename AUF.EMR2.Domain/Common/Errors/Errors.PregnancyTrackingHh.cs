@@ -8,6 +8,6 @@ public partial class Errors
     {
         public static Error NotFound => Error.NotFound(
             code: "PregnancyTrackingHh.NotFound",
-            description: "PregnancyTrackingHh cannot be found.");
+            description: "PregnancyTrackingHh was not found.");
     }
 }

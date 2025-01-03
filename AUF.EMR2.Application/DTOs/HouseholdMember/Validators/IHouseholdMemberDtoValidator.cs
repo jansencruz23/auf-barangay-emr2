@@ -30,7 +30,7 @@ namespace AUF.EMR2.Application.DTOs.HouseholdMember.Validators
 
             RuleFor(q => q.Birthday)
                 .NotNull().WithMessage("{PropertyName} is required.")
-                .LessThanOrEqualTo(DateTime.Now).WithMessage("{PropertyName} must be a date in the past or today..");
+                .LessThanOrEqualTo(DateTime.Now).WithMessage("{PropertyName} must be a date in the past or today.");
 
             //RuleFor(q => q.HouseholdId)
             //    .NotNull().WithMessage("{PropertyName} is required.")

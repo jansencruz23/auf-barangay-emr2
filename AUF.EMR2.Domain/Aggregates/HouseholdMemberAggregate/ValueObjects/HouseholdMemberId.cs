@@ -2,7 +2,7 @@
 
 namespace AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate.ValueObjects;
 
-public class HouseholdMemberId : ValueObject
+public sealed class HouseholdMemberId : ValueObject
 {
     public Guid Value { get; }
     

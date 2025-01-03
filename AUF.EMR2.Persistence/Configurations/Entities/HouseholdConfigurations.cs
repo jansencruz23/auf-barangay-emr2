@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AUF.EMR2.Persistence.Configurations.Entities;
 
-public class HouseholdConfigurations : IEntityTypeConfiguration<Household>
+public sealed class HouseholdConfigurations : IEntityTypeConfiguration<Household>
 {
     public void Configure(EntityTypeBuilder<Household> builder)
     {

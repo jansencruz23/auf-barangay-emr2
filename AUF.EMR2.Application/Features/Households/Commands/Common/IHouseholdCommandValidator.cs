@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace AUF.EMR2.Application.Features.Households.Commands.Common;
 
-public class IHouseholdCommandValidator : AbstractValidator<IHouseholdCommand>
+public sealed class IHouseholdCommandValidator : AbstractValidator<IHouseholdCommand>
 {
     public IHouseholdCommandValidator()
     {
@@ -40,6 +40,9 @@ public class IHouseholdCommandValidator : AbstractValidator<IHouseholdCommand>
             .NotEmpty().WithMessage("Province is required.")
             .NotNull().WithMessage("Province is required.")
             .MaximumLength(TablePropertiesConstants.MaxAddressLength).WithMessage("Province must not exceed {MaxLength} characters.");
+
+        RuleFor(q => q.Philhealth.IsHeadPhilhealthMember)
+            .NotNull().WithMessage("Philhealth Member is required.");
 
         RuleFor(q => q.ContactNo)
             .NotNull().WithMessage("{PropertyName} is required.")

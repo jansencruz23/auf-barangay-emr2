@@ -8,7 +8,7 @@ using Mapster;
 
 namespace AUF.EMR2.API.Common.Mappings;
 
-public class BarangayApiMappingConfig : IRegister
+public sealed class BarangayApiMappingConfig : IRegister
 {
     public void Register(TypeAdapterConfig config)
     {

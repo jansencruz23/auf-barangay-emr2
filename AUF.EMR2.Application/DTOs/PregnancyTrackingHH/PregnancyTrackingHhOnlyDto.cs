@@ -1,4 +1,4 @@
-﻿using AUF.EMR2.Application.DTOs.Barangay;
+﻿
 using AUF.EMR2.Application.DTOs.Household;
 using System;
 using System.Collections.Generic;
@@ -13,7 +13,7 @@ namespace AUF.EMR2.Application.DTOs.PregnancyTrackingHh
         public Guid Id { get; set; }
         public int Year { get; set; }
         public Guid BarangayId { get; set; }
-        public BarangayDto Barangay { get; set; }
+        //public BarangayDto Barangay { get; set; }
         public string? BirthingCenter { get; set; }
         public string? BirthingCenterAddress { get; set; }
         public string? ReferralCenter { get; set; }

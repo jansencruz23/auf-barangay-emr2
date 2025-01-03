@@ -4,10 +4,10 @@ namespace AUF.EMR2.Domain.Common.Errors;
 
 public static partial class Errors
 {
-    public static class Barangay
+    public static class HouseholdMember
     {
         public static Error NotFound => Error.Conflict(
-            code: "Barangay.NotFound",
-            description: "Barangay was not found.");
+            code: "HouseholdMember.NotFound",
+            description: "Household Member was not found.");
     }
 }

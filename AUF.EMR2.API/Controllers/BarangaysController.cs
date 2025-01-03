@@ -1,4 +1,4 @@
-﻿using AUF.EMR2.Application.DTOs.Barangay;
+﻿using AUF.EMR2.Application.Common.Responses;
 using AUF.EMR2.Application.Features.Barangays.Commands.UpdateBarangay;
 using AUF.EMR2.Application.Features.Barangays.Queries.GetBarangay;
 using AUF.EMR2.Contracts.Barangays.Requests;
@@ -26,6 +26,9 @@ public class BarangaysController : ApiController
 
     // GET: api/<BarangayController>
     [HttpGet]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(BarangayResponse))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
     public async Task<IActionResult> Get()
     {
         var response = await _mediator.Send(new GetBarangayQuery());
@@ -36,6 +39,11 @@ public class BarangaysController : ApiController
 
     // PUT api/<BarangayController>/5
     [HttpPut]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<Guid>))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ValidationProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
     public async Task<IActionResult> Put([FromBody] UpdateBarangayRequest request)
     {
         var command = _mapper.Map<UpdateBarangayCommand>(request);

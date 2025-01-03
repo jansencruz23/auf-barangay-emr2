@@ -5,7 +5,7 @@ using AUF.EMR2.Domain.Common.Models;
 
 namespace AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate;
 
-public class HouseholdMember : AggregateRoot<HouseholdMemberId>
+public sealed class HouseholdMember : AggregateRoot<HouseholdMemberId>
 {
     public string LastName { get; private set; } = null!;
     public string FirstName { get; private set; } = null!;
@@ -14,10 +14,7 @@ public class HouseholdMember : AggregateRoot<HouseholdMemberId>
     public string? OtherRelation { get; private set; }
     public Sex Sex { get; private set; }
     public DateTime Birthday { get; private set; }
-    public string? FirstQtrClassification { get; private set; }
-    public string? SecondQtrClassification { get; private set; }
-    public string? ThirdQtrClassification { get; private set; }
-    public string? FourthQtrClassification { get; private set; }
+    public QuarterlyClassification? QuarterlyClassification { get; private set; }
     public string? Remarks { get; private set; }
     public string? NameOfMother { get; private set; }
     public string? NameOfFather { get; private set; }
@@ -35,15 +32,13 @@ public class HouseholdMember : AggregateRoot<HouseholdMemberId>
         string? otherRelation,
         Sex sex,
         DateTime birthday,
-        string? firstQtrClassification,
-        string? secondQtrClassification,
-        string? thirdQtrClassification,
-        string? fourthQtrClassification,
+        QuarterlyClassification? quarterlyClassification,
         string? remarks,
         string? nameOfMother,
         string? nameOfFather,
         bool isNhts,
-        bool? isInSchool)
+        bool? isInSchool,
+        Guid householdId)
         : base(householdMemberId)
     {
         LastName = lastName;
@@ -53,15 +48,13 @@ public class HouseholdMember : AggregateRoot<HouseholdMemberId>
         OtherRelation = otherRelation;
         Sex = sex;
         Birthday = birthday;
-        FirstQtrClassification = firstQtrClassification;
-        SecondQtrClassification = secondQtrClassification;
-        ThirdQtrClassification = thirdQtrClassification;
-        FourthQtrClassification = fourthQtrClassification;
+        QuarterlyClassification = quarterlyClassification;
         Remarks = remarks;
         NameOfMother = nameOfMother;
         NameOfFather = nameOfFather;
         IsNhts = isNhts;
         IsInSchool = isInSchool;
+        HouseholdId = HouseholdId.Create(householdId);
     }
 
     public static HouseholdMember Create(
@@ -72,15 +65,13 @@ public class HouseholdMember : AggregateRoot<HouseholdMemberId>
         string? otherRelation,
         Sex sex,
         DateTime birthday,
-        string? firstQtrClassification,
-        string? secondQtrClassification,
-        string? thirdQtrClassification,
-        string? fourthQtrClassification,
+        QuarterlyClassification? quarterlyClassification,
         string? remarks,
         string? nameOfMother,
         string? nameOfFather,
         bool isNhts,
-        bool? isInSchool)
+        bool? isInSchool,
+        Guid householdId)
     {
         return new HouseholdMember(
             householdMemberId: HouseholdMemberId.Create(),
@@ -91,16 +82,15 @@ public class HouseholdMember : AggregateRoot<HouseholdMemberId>
             otherRelation: otherRelation,
             sex: sex,
             birthday: birthday,
-            firstQtrClassification: firstQtrClassification,
-            secondQtrClassification: secondQtrClassification,
-            thirdQtrClassification: thirdQtrClassification,
-            fourthQtrClassification: fourthQtrClassification,
+            quarterlyClassification: quarterlyClassification,
             remarks: remarks,
             nameOfMother: nameOfMother,
             nameOfFather: nameOfFather,
             isNhts: isNhts,
-            isInSchool: isInSchool);
+            isInSchool: isInSchool,
+            householdId: householdId);
     }
 
     private HouseholdMember() { }
+    private HouseholdMember(HouseholdMemberId householdMemberId) : base(householdMemberId) { }
 }

@@ -70,7 +70,7 @@ public class HouseholdsController : ApiController
 
     // POST api/<HouseholdController>
     [HttpPost]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CommandResponse<Guid>))]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<Guid>))]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ValidationProblemDetails))]
     [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
@@ -86,7 +86,7 @@ public class HouseholdsController : ApiController
 
     // PUT api/<HouseholdController>/5
     [HttpPut]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CommandResponse<Guid>))]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<Guid>))]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ValidationProblemDetails))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]
@@ -103,7 +103,7 @@ public class HouseholdsController : ApiController
 
     // DELETE api/<HouseholdController>/5
     [HttpDelete("{id}")]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CommandResponse<Guid>))]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<Guid>))]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ValidationProblemDetails))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]

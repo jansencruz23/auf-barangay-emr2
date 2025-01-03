@@ -1,5 +1,4 @@
-﻿using AUF.EMR2.Application.DTOs.Barangay;
-using AUF.EMR2.Application.DTOs.Household;
+﻿using AUF.EMR2.Application.DTOs.Household;
 using System;
 using System.Collections.Generic;
 using System.Linq;

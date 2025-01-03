@@ -1,46 +1,57 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
 using AUF.EMR2.Application.Common.Responses;
+using AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate;
+using AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate.ValueObjects;
+using ErrorOr;
 using MapsterMapper;
 using MediatR;
 
 namespace AUF.EMR2.Application.Features.HouseholdMembers.Commands.CreateHouseholdMember;
 
-public class CreateHouseholdMemberCommandHandler : IRequestHandler<CreateHouseholdMemberCommand, CommandResponse<Guid>>
+public class CreateHouseholdMemberCommandHandler : IRequestHandler<CreateHouseholdMemberCommand, ErrorOr<CommandResponse<Guid>>>
 {
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IMapper _mapper;
 
-    public CreateHouseholdMemberCommandHandler(
-        IUnitOfWork unitOfWork,
-        IMapper mapper)
+    public CreateHouseholdMemberCommandHandler(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
-        _mapper = mapper;
     }
-    public async Task<CommandResponse<Guid>> Handle(CreateHouseholdMemberCommand request, CancellationToken cancellationToken)
+
+    public async Task<ErrorOr<CommandResponse<Guid>>> Handle(CreateHouseholdMemberCommand request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
-        //var response = new BaseCommandResponse<Guid>();
-        //var validator = new CreateHouseholdMemberDtoValidator(_unitOfWork);
-        //var validationResult = await validator.ValidateAsync(request.HouseholdMemberDto, cancellationToken);
+        var response = new CommandResponse<Guid>();
 
-        //if (!validationResult.IsValid)
-        //{
-        //    response.Success = false;
-        //    response.Message = "Creation Failed";
-        //    response.Errors = validationResult.Errors.Select(q => q.ErrorMessage).ToList();
+        var quarterlyClassification = QuarterlyClassification.Create(
+            firstQtrClassification: request.QuarterlyClassification?.FirstQtrClassification,
+            secondQtrClassification: request.QuarterlyClassification?.SecondQtrClassification,
+            thirdQtrClassification: request.QuarterlyClassification?.ThirdQtrClassification,
+            fourthQtrClassification: request.QuarterlyClassification?.FourthQtrClassification
+        );
 
-        //    throw new ValidationException(validationResult);
-        //}
+        var member = HouseholdMember.Create(
+            lastName: request.LastName,
+            firstName: request.FirstName,
+            motherMaidenName: request.MotherMaidenName,
+            relationshipToHouseholdHead: request.RelationshipToHouseholdHead,
+            otherRelation: request.OtherRelation,
+            sex: request.Sex,
+            birthday: request.Birthday,
+            quarterlyClassification: quarterlyClassification,
+            remarks: request.Remarks,
+            nameOfMother: request.NameOfMother,
+            nameOfFather: request.NameOfFather,
+            isNhts: request.IsNhts,
+            isInSchool: request.IsInSchool,
+            householdId: request.HouseholdId
+        );
 
-        //var householdMember = _mapper.Map<HouseholdMember>(request.HouseholdMemberDto);
-        //householdMember = await _unitOfWork.HouseholdMemberRepository.Add(householdMember);
-        //await _unitOfWork.SaveAsync();
+        await _unitOfWork.HouseholdMemberRepository.Add(member);
+        await _unitOfWork.SaveAsync();
 
-        //response.Success = true;
-        //response.Message = "Creation is Successful";
-        //response.Id = householdMember.Id;
+        response.Success = true;
+        response.Id = member.Id.Value;
+        response.Message = "Created successfully";
 
-        //return response;
+        return response;
     }
 }

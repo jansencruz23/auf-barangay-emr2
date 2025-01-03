@@ -16,6 +16,6 @@ public static partial class Errors
 
         public static Error NotFound => Error.NotFound(
             code: "Household.NotFound",
-            description: "Household cannot be found.");
+            description: "Household was not found.");
     }
 }

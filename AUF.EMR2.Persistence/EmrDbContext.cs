@@ -21,7 +21,7 @@ public class EmrDbContext(
 
     public DbSet<Barangay> Barangays { get; set; }
     public DbSet<Household> Households { get; set; }
-    //public DbSet<HouseholdMember> HouseholdMembers { get; set; }
+    public DbSet<HouseholdMember> HouseholdMembers { get; set; }
     //public DbSet<WomanOfReproductiveAge> WomenOfReproductiveAge { get; set; }
     //public DbSet<PregnancyTracking> PregnancyTrackings { get; set; }
     public DbSet<PregnancyTrackingHh> PregnancyTrackingHhs { get; set; }

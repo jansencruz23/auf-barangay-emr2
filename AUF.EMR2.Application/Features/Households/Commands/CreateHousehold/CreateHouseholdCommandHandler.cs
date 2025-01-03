@@ -10,12 +10,10 @@ using MediatR;
 namespace AUF.EMR2.Application.Features.Households.Commands.CreateHousehold;
 
 public class CreateHouseholdCommandHandler(
-    IUnitOfWork unitOfWork,
-    IPregnancyTrackingHHService pregnancyTrackingHhService) 
+    IUnitOfWork unitOfWork) 
     : IRequestHandler<CreateHouseholdCommand, ErrorOr<CommandResponse<Guid>>>
 {
     private readonly IUnitOfWork _unitOfWork = unitOfWork;
-    private readonly IPregnancyTrackingHHService _pregnancyTrackingHhService = pregnancyTrackingHhService;
 
     public async Task<ErrorOr<CommandResponse<Guid>>> Handle(CreateHouseholdCommand request, CancellationToken cancellationToken)
     {
