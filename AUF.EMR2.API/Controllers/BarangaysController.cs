@@ -27,7 +27,7 @@ public class BarangaysController : ApiController
     [HttpGet]
     public async Task<ActionResult<BarangayDto>> Get()
     {
-        var response = await _mediator.Send(new GetBarangayRequest());
+        var response = await _mediator.Send(new GetBarangayQuery());
         return Ok(response);
     }
 
