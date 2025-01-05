@@ -1,4 +1,5 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
+using AUF.EMR2.Application.Features.HouseholdMembers.Queries.Common;
 using AUF.EMR2.Application.Features.Households.Queries.Common;
 using AUF.EMR2.Domain.Aggregates.HouseholdAggregate.ValueObjects;
 using AUF.EMR2.Domain.Common.Errors;
@@ -30,7 +31,10 @@ public class GetHouseholdQueryHandler : IRequestHandler<GetHouseholdQuery, Error
             return Errors.Household.NotFound;
         }
 
+        var members = await _unitOfWork.HouseholdMemberRepository.GetHouseholdMemberList(request.Id);
         var response = _mapper.Map<HouseholdQueryResponse>(household);
+        response.SetHouseholdMembers(_mapper.Map<List<HouseholdMemberQueryResponse>>(members));
+
         return response;
     }
 }

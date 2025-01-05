@@ -1,4 +1,4 @@
-﻿using AUF.EMR2.Application.Features.Households.Queries.Common;
+﻿using AUF.EMR2.Application.Features.HouseholdMembers.Queries.Common;
 using AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate;
 using Mapster;
 
@@ -8,7 +8,8 @@ public class HouseholdMemberMappingConfig : IRegister
 {
     public void Register(TypeAdapterConfig config)
     {
-        //config.NewConfig<HouseholdMember, HouseholdQueryResponse>()
-        //    .Map(dest => dest.Id, src => src.Id.Value);
+        config.NewConfig<HouseholdMember, HouseholdMemberQueryResponse>()
+            .Map(dest => dest.Id, src => src.Id.Value)
+            .Map(dest => dest.HouseholdId, src => src.HouseholdId.Value);
     }
 }

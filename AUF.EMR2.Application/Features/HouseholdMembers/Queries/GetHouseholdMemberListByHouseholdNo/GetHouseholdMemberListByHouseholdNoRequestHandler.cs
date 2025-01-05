@@ -26,10 +26,11 @@ namespace AUF.EMR2.Application.Features.HouseholdMembers.Queries.GetHouseholdMem
 
         public async Task<List<HouseholdMemberDto>> Handle(GetHouseholdMemberListByHouseholdNoRequest request, CancellationToken cancellationToken)
         {
-            var householdMemberList = await _unitOfWork.HouseholdMemberRepository.GetHouseholdMemberList(request.HouseholdNo);
-            var householdMemberListDto = _mapper.Map<List<HouseholdMemberDto>>(householdMemberList);
+            throw new NotImplementedException();
+            //var householdMemberList = await _unitOfWork.HouseholdMemberRepository.GetHouseholdMemberList(request.HouseholdNo);
+            //var householdMemberListDto = _mapper.Map<List<HouseholdMemberDto>>(householdMemberList);
 
-            return householdMemberListDto;
+            //return householdMemberListDto;
         }
     }
 }

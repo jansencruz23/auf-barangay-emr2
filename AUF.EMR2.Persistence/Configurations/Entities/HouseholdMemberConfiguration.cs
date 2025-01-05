@@ -42,6 +42,11 @@ public sealed class HouseholdMemberConfiguration : IEntityTypeConfiguration<Hous
             qtrBuilder.Property(qtr => qtr.FourthQtrClassification).HasMaxLength(TablePropertiesConstants.MaxCategoryLength);
         });
 
+        builder.Property(member => member.HouseholdId)
+            .HasConversion(
+                id => id.Value,
+                value => HouseholdId.Create(value));
+
         builder.HasOne<Household>()
             .WithOne()
             .HasForeignKey<HouseholdMember>("HouseholdId")

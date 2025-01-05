@@ -63,8 +63,15 @@ public class CreateHouseholdCommandHandler(
             houseAddress: houseAddress
         );
 
-        await _unitOfWork.HouseholdRepository.Add(household);
-        await _unitOfWork.SaveAsync();
+        try
+        {
+            await _unitOfWork.HouseholdRepository.Add(household);
+            await _unitOfWork.SaveAsync();
+        }
+        catch (Exception)
+        {
+            return Errors.Household.FailedToCreate;
+        }
 
         response.Success = true;
         response.Id = household.Id.Value;

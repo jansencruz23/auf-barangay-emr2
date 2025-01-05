@@ -17,5 +17,9 @@ public static partial class Errors
         public static Error NotFound => Error.NotFound(
             code: "Household.NotFound",
             description: "Household was not found.");
+
+        public static Error FailedToCreate => Error.Failure(
+            code: "Household.FailedToCreate",
+            description: "Failed to create a household.");
     }
 }

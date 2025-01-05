@@ -4,6 +4,7 @@ using AUF.EMR2.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AUF.EMR2.Persistence.Migrations
 {
     [DbContext(typeof(EmrDbContext))]
-    partial class EmrDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250105132344_HouseholdMemberId")]
+    partial class HouseholdMemberId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,15 +81,15 @@ namespace AUF.EMR2.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("eb33ce77-3c2e-41ee-a145-2504666a91d4"),
+                            Id = new Guid("5c1b10fa-7a0b-4e6b-a9ef-e148c8acb50f"),
                             BarangayHealthStation = "Barangay Health Station",
                             BarangayName = "Brgy. Ninoy Aquino",
                             ContactNo = "09XXXXXXXXX",
-                            DateCreated = new DateTime(2025, 1, 5, 21, 44, 34, 693, DateTimeKind.Local).AddTicks(6247),
-                            LastModified = new DateTime(2025, 1, 5, 21, 44, 34, 693, DateTimeKind.Local).AddTicks(6257),
+                            DateCreated = new DateTime(2025, 1, 5, 21, 23, 42, 359, DateTimeKind.Local).AddTicks(1565),
+                            LastModified = new DateTime(2025, 1, 5, 21, 23, 42, 359, DateTimeKind.Local).AddTicks(1576),
                             RuralHealthUnit = "Rural Health Unit",
                             Status = true,
-                            Version = new Guid("130f90a1-5ec1-4841-9963-7a7653146540")
+                            Version = new Guid("2d7b85c3-3582-4fad-8fcf-69d489ed46f4")
                         });
                 });
 

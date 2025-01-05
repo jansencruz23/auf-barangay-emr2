@@ -1,5 +1,6 @@
 ﻿using AUF.EMR2.Domain.Aggregates.HouseholdAggregate.Events;
 using AUF.EMR2.Domain.Aggregates.HouseholdAggregate.ValueObjects;
+using AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate.ValueObjects;
 using AUF.EMR2.Domain.Common.Errors;
 using AUF.EMR2.Domain.Common.Models;
 using ErrorOr;

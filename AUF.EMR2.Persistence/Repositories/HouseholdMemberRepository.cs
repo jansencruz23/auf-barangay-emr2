@@ -1,6 +1,7 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence;
-
+using AUF.EMR2.Domain.Aggregates.HouseholdAggregate.ValueObjects;
 using AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate;
+using AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate.Enums;
 using AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate.ValueObjects;
 using AUF.EMR2.Persistence.Repositories.Common;
 using Microsoft.EntityFrameworkCore;
@@ -29,17 +30,33 @@ namespace AUF.EMR2.Persistence.Repositories
             //return householdMember;
         }
 
-        public async Task<List<HouseholdMember>> GetHouseholdMemberList(string householdNo)
+        public async Task<List<HouseholdMember>> GetHouseholdMemberList(Guid householdId)
         {
-            throw new NotImplementedException();
             //var householdMembers = await _dbContext.HouseholdMembers
             //    .AsNoTracking()
-            //    .Include(q => q.Household)
-            //    .Where(q => q.Household.Status && q.Household.HouseholdNo.Equals(householdNo) && q.Status)
-            //    .OrderBy(q => q.RelationshipToHouseholdHead == 1 ? 0 :
-            //        q.RelationshipToHouseholdHead == 2 ? 1 :
-            //        q.RelationshipToHouseholdHead == 3 || q.RelationshipToHouseholdHead == 4 ? 2 : 3)
-            //    .ThenBy(q => q.RelationshipToHouseholdHead == 3 || q.RelationshipToHouseholdHead == 4 ? q.Birthday : DateTime.MaxValue)
+            //    .ToListAsync();
+
+            var filteredMembers = await _dbContext.HouseholdMembers
+                .AsNoTracking()
+                .Where(q => q.HouseholdId == HouseholdId.Create(householdId))
+                .ToListAsync();
+
+            return filteredMembers;
+            //var householdMembers = await _dbContext.HouseholdMembers
+            //    .AsNoTracking()
+            //    .Where(q => q.HouseholdId.Value == householdId)
+            //    //.OrderBy(q => q.RelationshipToHouseholdHead == RelationshipToHouseholdHead.Head 
+            //    //    ? 0 
+            //    //    : q.RelationshipToHouseholdHead == RelationshipToHouseholdHead.Spouse 
+            //    //        ? 1 
+            //    //        : q.RelationshipToHouseholdHead == RelationshipToHouseholdHead.Son 
+            //    //        || q.RelationshipToHouseholdHead == RelationshipToHouseholdHead.Daughter 
+            //    //            ? 2 
+            //    //            : 3)
+            //    //.ThenBy(q => q.RelationshipToHouseholdHead == RelationshipToHouseholdHead.Son 
+            //    //    || q.RelationshipToHouseholdHead == RelationshipToHouseholdHead.Daughter 
+            //    //        ? q.Birthday 
+            //    //        : DateTime.MaxValue)
             //    .ToListAsync();
 
             //return householdMembers;
@@ -50,7 +67,7 @@ namespace AUF.EMR2.Persistence.Repositories
             throw new NotImplementedException();
             //var startDate = DateTime.Today.AddYears(WraAgeRange.WraStart).AddDays(1);
             //var endDate = DateTime.Today.AddYears(WraAgeRange.WraEnd);
-                
+
             //var wraMembers = await _dbContext.HouseholdMembers
             //    .AsNoTracking()
             //    .Include(m => m.Household)
