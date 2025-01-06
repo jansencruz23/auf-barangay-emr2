@@ -1,11 +1,15 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
 using AUF.EMR2.Application.Common.Responses;
+using AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate.ValueObjects;
+using AUF.EMR2.Domain.Common.Errors;
+using ErrorOr;
 using MapsterMapper;
 using MediatR;
+using System.Data;
 
 namespace AUF.EMR2.Application.Features.HouseholdMembers.Commands.UpdateHouseholdMember;
 
-public class UpdateHouseholdMemberCommandHandler : IRequestHandler<UpdateHouseholdMemberCommand, CommandResponse<Guid>>
+public class UpdateHouseholdMemberCommandHandler : IRequestHandler<UpdateHouseholdMemberCommand, ErrorOr<CommandResponse<Guid>>>
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
@@ -18,48 +22,57 @@ public class UpdateHouseholdMemberCommandHandler : IRequestHandler<UpdateHouseho
         _mapper = mapper;
     }
 
-    public async Task<CommandResponse<Guid>> Handle(UpdateHouseholdMemberCommand request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<CommandResponse<Guid>>> Handle(UpdateHouseholdMemberCommand request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
-        //var response = new BaseCommandResponse<Guid>();
-        //var validator = new UpdateHouseholdMemberDtoValidator(_unitOfWork);
-        //var validationResult = await validator.ValidateAsync(request.HouseholdMemberDto, cancellationToken);
+        try
+        {
+            var member = await _unitOfWork.HouseholdMemberRepository.GetHouseholdMember(HouseholdMemberId.Create(request.Id));
+            if (member is null)
+            {
+                return Errors.HouseholdMember.NotFound;
+            }
 
-        //if (!validationResult.IsValid)
-        //{
-        //    response.Success = false;
-        //    response.Message = "Updation Failed";
-        //    response.Errors = validationResult.Errors.Select(q => q.ErrorMessage).ToList();
+            var response = new CommandResponse<Guid>();
+            var quarterlyClassification = QuarterlyClassification.Create
+            (
+                firstQtrClassification: request.QuarterlyClassification?.FirstQtrClassification,
+                secondQtrClassification: request.QuarterlyClassification?.SecondQtrClassification,
+                thirdQtrClassification: request.QuarterlyClassification?.ThirdQtrClassification,
+                fourthQtrClassification: request.QuarterlyClassification?.FourthQtrClassification
+            );
 
-        //    throw new ValidationException(validationResult);
-        //}
+            member.Update(
+                lastName: request.LastName,
+                firstName: request.FirstName,
+                motherMaidenName: request.MotherMaidenName,
+                relationshipToHouseholdHead: request.RelationshipToHouseholdHead,
+                otherRelation: request.OtherRelation,
+                sex: request.Sex,
+                birthday: request.Birthday,
+                quarterlyClassification: quarterlyClassification,
+                remarks: request.Remarks,
+                nameOfMother: request.NameOfMother,
+                nameOfFather: request.NameOfFather,
+                isNhts: request.IsNhts,
+                isInSchool: request.IsInSchool
+            );
 
-        //var householdMember = await _unitOfWork.HouseholdMemberRepository.GetHouseholdMember(request.HouseholdMemberDto.Id);
+            _unitOfWork.HouseholdMemberRepository.Update(member);
+            await _unitOfWork.SaveAsync();
 
-        //if (householdMember == null)
-        //{
-        //    response.Success = false;
-        //    response.Message = $"{nameof(HouseholdMember)} with id: {request.HouseholdMemberDto.Id} is not existing";
+            response.Success = true;
+            response.Id = member.Id.Value;
+            response.Message = "Updated successfully";
 
-        //    throw new NotFoundException(nameof(HouseholdMember), request.HouseholdMemberDto.Id);
-        //}
-
-        //_mapper.Map(request.HouseholdMemberDto, householdMember);
-
-        //try
-        //{
-        //    _unitOfWork.HouseholdMemberRepository.Update(householdMember);
-        //    await _unitOfWork.SaveAsync();
-        //}
-        //catch (DbUpdateConcurrencyException ex)
-        //{
-        //    throw new ConcurrencyException("The entity you attempted to update was modified by another user.", ex);
-        //}
-
-        //response.Success = true;
-        //response.Message = "Updation is successful";
-        //response.Id = request.HouseholdMemberDto.Id;
-
-        //return response;
+            return response;
+        }
+        catch (DBConcurrencyException)
+        {
+            return Errors.ConcurrentIssue;
+        }
+        catch (Exception)
+        {
+            return Errors.HouseholdMember.FailedToFetch;
+        }
     }
 }

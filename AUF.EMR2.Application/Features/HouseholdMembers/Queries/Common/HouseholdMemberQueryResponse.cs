@@ -18,5 +18,6 @@ public sealed record HouseholdMemberQueryResponse(
     string? NameOfFather,
     bool IsNhts,
     bool? IsInSchool,
-    Guid HouseholdId
+    Guid HouseholdId,
+    Guid Version
 );

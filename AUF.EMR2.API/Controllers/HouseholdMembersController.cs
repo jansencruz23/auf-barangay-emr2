@@ -59,10 +59,15 @@ public class HouseholdMembersController : ApiController
 
     // GET api/<HouseholdMemberController>/5
     [HttpGet("{id}")]
-    public async Task<ActionResult<HouseholdMemberDto>> Get(Guid id)
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(HouseholdMemberResponse))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
+    public async Task<IActionResult> Get(Guid id)
     {
-        var response = await _mediator.Send(new GetHouseholdMemberRequest { Id = id });
-        return Ok(response);
+        var response = await _mediator.Send(new GetHouseholdMemberQuery(id));
+        return response.Match(
+            value => Ok(_mapper.Map<HouseholdMemberResponse>(value)),
+            error => Problem(error));
     }
 
     // POST api/<HouseholdMemberController>
@@ -81,11 +86,18 @@ public class HouseholdMembersController : ApiController
     }
 
     // PUT api/<HouseholdMemberController>/5
-    [HttpPut("{id}")]
-    public async Task<ActionResult<CommandResponse<Guid>>> Put([FromBody] UpdateHouseholdMemberDto dto)
+    [HttpPut]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<Guid>))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ValidationProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
+    public async Task<IActionResult> Put([FromBody] UpdateHouseholdMemberRequest request)
     {
-        var response = await _mediator.Send(new UpdateHouseholdMemberCommand { HouseholdMemberDto = dto });
-        return Ok(response);
+        var command = _mapper.Map<UpdateHouseholdMemberCommand>(request);
+        var response = await _mediator.Send(command);
+        return response.Match(
+            value => Ok(_mapper.Map<ApiResponse<Guid>>(value)),
+            error => Problem(error));
     }
 
     // DELETE api/<HouseholdMemberController>/5

@@ -8,7 +8,7 @@ using MediatR;
 
 namespace AUF.EMR2.Application.Features.HouseholdMembers.Queries.GetWraHouseholdMemberList;
 
-public class GetWraHouseholdMemberListQueryHandler : IRequestHandler<GetWraHouseholdMemberListQuery, ErrorOr<List<HouseholdMemberQueryResponse>>>
+public sealed class GetWraHouseholdMemberListQueryHandler : IRequestHandler<GetWraHouseholdMemberListQuery, ErrorOr<List<HouseholdMemberQueryResponse>>>
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;

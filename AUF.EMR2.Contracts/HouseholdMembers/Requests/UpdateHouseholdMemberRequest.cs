@@ -1,10 +1,10 @@
 ﻿using AUF.EMR2.Contracts.HouseholdMembers.Common.Enums;
 using AUF.EMR2.Contracts.HouseholdMembers.Common.ValueObjectDtos;
 
-namespace AUF.EMR2.Contracts.HouseholdMembers.Responses;
+namespace AUF.EMR2.Contracts.HouseholdMembers.Requests;
 
-public sealed record HouseholdMemberResponse(
-    string Id,
+public sealed record UpdateHouseholdMemberRequest(
+    Guid Id,
     string LastName,
     string FirstName,
     string? MotherMaidenName,
@@ -18,6 +18,5 @@ public sealed record HouseholdMemberResponse(
     string? NameOfFather,
     bool IsNhts,
     bool? IsInSchool,
-    Guid HouseholdId,
     Guid Version
 );

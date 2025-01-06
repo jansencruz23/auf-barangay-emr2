@@ -25,5 +25,8 @@ public static partial class Errors
         public static Error FailedToFetch => Error.Failure(
             code: "Household.FailedToFetch",
             description: "Failed to fetch a household.");
+        public static Error FailedToUpdate => Error.Failure(
+            code: "Household.FailedToUpdate",
+            description: "Failed to update a household.");
     }
 }

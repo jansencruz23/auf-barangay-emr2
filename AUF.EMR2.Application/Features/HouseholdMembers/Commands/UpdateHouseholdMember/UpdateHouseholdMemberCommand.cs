@@ -1,16 +1,26 @@
 ﻿using AUF.EMR2.Application.Common.Responses;
-using AUF.EMR2.Application.DTOs.HouseholdMember;
+using AUF.EMR2.Application.Features.HouseholdMembers.Commands.Common;
+using AUF.EMR2.Application.Features.HouseholdMembers.Common;
+using AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate.Enums;
+using ErrorOr;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace AUF.EMR2.Application.Features.HouseholdMembers.Commands.UpdateHouseholdMember
-{
-    public record UpdateHouseholdMemberCommand : IRequest<CommandResponse<Guid>>
-    {
-        public UpdateHouseholdMemberDto HouseholdMemberDto { get; set; }
-    }
-}
+namespace AUF.EMR2.Application.Features.HouseholdMembers.Commands.UpdateHouseholdMember;
+
+public sealed record UpdateHouseholdMemberCommand(
+    Guid Id,
+    string LastName,
+    string FirstName,
+    string? MotherMaidenName,
+    RelationshipToHouseholdHead RelationshipToHouseholdHead,
+    string? OtherRelation,
+    Sex Sex,
+    DateTime Birthday,
+    QuarterlyClassificationData? QuarterlyClassification,
+    string? Remarks,
+    string? NameOfMother,
+    string? NameOfFather,
+    bool IsNhts,
+    bool? IsInSchool,
+    Guid Version
+) : IRequest<ErrorOr<CommandResponse<Guid>>>, IHouseholdMemberCommand;

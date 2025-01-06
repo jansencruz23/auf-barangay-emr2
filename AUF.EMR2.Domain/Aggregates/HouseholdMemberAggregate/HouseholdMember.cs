@@ -2,6 +2,7 @@
 using AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate.Enums;
 using AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate.ValueObjects;
 using AUF.EMR2.Domain.Common.Models;
+using ErrorOr;
 
 namespace AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate;
 
@@ -89,6 +90,38 @@ public sealed class HouseholdMember : AggregateRoot<HouseholdMemberId>
             isNhts: isNhts,
             isInSchool: isInSchool,
             householdId: householdId);
+    }
+
+    public ErrorOr<HouseholdMemberId> Update(
+        string lastName,
+        string firstName,
+        string? motherMaidenName,
+        RelationshipToHouseholdHead relationshipToHouseholdHead,
+        string? otherRelation,
+        Sex sex,
+        DateTime birthday,
+        QuarterlyClassification? quarterlyClassification,
+        string? remarks,
+        string? nameOfMother,
+        string? nameOfFather,
+        bool isNhts,
+        bool? isInSchool)
+    {
+        LastName = lastName;
+        FirstName = firstName;
+        MotherMaidenName = motherMaidenName;
+        RelationshipToHouseholdHead = relationshipToHouseholdHead;
+        OtherRelation = otherRelation;
+        Sex = sex;
+        Birthday = birthday;
+        QuarterlyClassification = quarterlyClassification;
+        Remarks = remarks;
+        NameOfMother = nameOfMother;
+        NameOfFather = nameOfFather;
+        IsNhts = isNhts;
+        IsInSchool = isInSchool;
+
+        return Id;
     }
 
     private HouseholdMember() { }
