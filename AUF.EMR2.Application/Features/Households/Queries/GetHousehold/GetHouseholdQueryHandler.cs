@@ -34,10 +34,9 @@ public class GetHouseholdQueryHandler : IRequestHandler<GetHouseholdQuery, Error
             }
 
             var members = await _unitOfWork.HouseholdMemberRepository.GetHouseholdMemberList(HouseholdId.Create(request.Id));
-
             var response = _mapper.Map<HouseholdQueryResponse>(household);
-            response.SetHouseholdMembers(_mapper.Map<List<HouseholdMemberQueryResponse>>(members));
 
+            response.SetHouseholdMembers(_mapper.Map<List<HouseholdMemberQueryResponse>>(members));
             return response;
         }
         catch (Exception)
