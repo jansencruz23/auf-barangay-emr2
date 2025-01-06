@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AUF.EMR2.Persistence.Migrations
 {
     [DbContext(typeof(EmrDbContext))]
-    [Migration("20241014083032_barangaytable2")]
-    partial class barangaytable2
+    [Migration("20250106105820_initial_migrate")]
+    partial class initial_migrate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -81,15 +81,15 @@ namespace AUF.EMR2.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("198743c4-da4d-44cd-93f9-70e6b078e728"),
+                            Id = new Guid("6d0acb4f-482e-4536-8f5e-ac7787dc4fde"),
                             BarangayHealthStation = "Barangay Health Station",
                             BarangayName = "Brgy. Ninoy Aquino",
                             ContactNo = "09XXXXXXXXX",
-                            DateCreated = new DateTime(2024, 10, 14, 16, 30, 31, 743, DateTimeKind.Local).AddTicks(575),
-                            LastModified = new DateTime(2024, 10, 14, 16, 30, 31, 743, DateTimeKind.Local).AddTicks(590),
+                            DateCreated = new DateTime(2025, 1, 6, 18, 58, 19, 549, DateTimeKind.Local).AddTicks(4285),
+                            LastModified = new DateTime(2025, 1, 6, 18, 58, 19, 549, DateTimeKind.Local).AddTicks(4297),
                             RuralHealthUnit = "Rural Health Unit",
                             Status = true,
-                            Version = new Guid("105bf64a-7b6c-4970-b839-663713e6ff01")
+                            Version = new Guid("c8797663-1ab1-4d2c-bd92-ecd37f9f63f8")
                         });
                 });
 
@@ -113,12 +113,6 @@ namespace AUF.EMR2.Persistence.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
-
-                    b.Property<DateTime?>("FirstQtrVisit")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime?>("FourthQtrVisit")
-                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("HouseholdNo")
                         .IsRequired()
@@ -145,14 +139,8 @@ namespace AUF.EMR2.Persistence.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
-                    b.Property<DateTime?>("SecondQtrVisit")
-                        .HasColumnType("datetime(6)");
-
                     b.Property<bool>("Status")
                         .HasColumnType("tinyint(1)");
-
-                    b.Property<DateTime?>("ThirdQtrVisit")
-                        .HasColumnType("datetime(6)");
 
                     b.Property<Guid>("Version")
                         .HasColumnType("char(36)");
@@ -160,6 +148,85 @@ namespace AUF.EMR2.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Households", (string)null);
+                });
+
+            modelBuilder.Entity("AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate.HouseholdMember", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("Birthday")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<Guid>("HouseholdId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<bool?>("IsInSchool")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("IsNhts")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTime>("LastModified")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("ModifiedById")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("MotherMaidenName")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("NameOfFather")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("NameOfMother")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("OtherRelation")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<int>("RelationshipToHouseholdHead")
+                        .HasMaxLength(5)
+                        .HasColumnType("int");
+
+                    b.Property<string>("Remarks")
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("Sex")
+                        .HasMaxLength(5)
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<Guid>("Version")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HouseholdId");
+
+                    b.ToTable("HouseholdMembers", (string)null);
                 });
 
             modelBuilder.Entity("AUF.EMR2.Domain.Aggregates.PregnancyTrackingHhAggregate.PregnancyTrackingHh", b =>
@@ -322,11 +389,78 @@ namespace AUF.EMR2.Persistence.Migrations
                                 .HasForeignKey("HouseholdId");
                         });
 
+                    b.OwnsOne("AUF.EMR2.Domain.Aggregates.HouseholdAggregate.ValueObjects.QuarterlyVisit", "QuarterlyVisit", b1 =>
+                        {
+                            b1.Property<Guid>("HouseholdId")
+                                .HasColumnType("char(36)");
+
+                            b1.Property<DateTime?>("FirstQtrVisit")
+                                .HasColumnType("DateTime");
+
+                            b1.Property<DateTime?>("FourthQtrVisit")
+                                .HasColumnType("DateTime");
+
+                            b1.Property<DateTime?>("SecondQtrVisit")
+                                .HasColumnType("DateTime");
+
+                            b1.Property<DateTime?>("ThirdQtrVisit")
+                                .HasColumnType("DateTime");
+
+                            b1.HasKey("HouseholdId");
+
+                            b1.ToTable("Households");
+
+                            b1.WithOwner()
+                                .HasForeignKey("HouseholdId");
+                        });
+
                     b.Navigation("HouseAddress")
                         .IsRequired();
 
                     b.Navigation("Philhealth")
                         .IsRequired();
+
+                    b.Navigation("QuarterlyVisit");
+                });
+
+            modelBuilder.Entity("AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate.HouseholdMember", b =>
+                {
+                    b.HasOne("AUF.EMR2.Domain.Aggregates.HouseholdAggregate.Household", null)
+                        .WithMany()
+                        .HasForeignKey("HouseholdId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.OwnsOne("AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate.ValueObjects.QuarterlyClassification", "QuarterlyClassification", b1 =>
+                        {
+                            b1.Property<Guid>("HouseholdMemberId")
+                                .HasColumnType("char(36)");
+
+                            b1.Property<string>("FirstQtrClassification")
+                                .HasMaxLength(255)
+                                .HasColumnType("varchar(255)");
+
+                            b1.Property<string>("FourthQtrClassification")
+                                .HasMaxLength(255)
+                                .HasColumnType("varchar(255)");
+
+                            b1.Property<string>("SecondQtrClassification")
+                                .HasMaxLength(255)
+                                .HasColumnType("varchar(255)");
+
+                            b1.Property<string>("ThirdQtrClassification")
+                                .HasMaxLength(255)
+                                .HasColumnType("varchar(255)");
+
+                            b1.HasKey("HouseholdMemberId");
+
+                            b1.ToTable("HouseholdMembers");
+
+                            b1.WithOwner()
+                                .HasForeignKey("HouseholdMemberId");
+                        });
+
+                    b.Navigation("QuarterlyClassification");
                 });
 
             modelBuilder.Entity("AUF.EMR2.Domain.Aggregates.PregnancyTrackingHhAggregate.PregnancyTrackingHh", b =>

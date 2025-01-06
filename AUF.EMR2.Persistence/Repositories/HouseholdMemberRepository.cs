@@ -1,4 +1,5 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence;
+using AUF.EMR2.Application.Common.Constants;
 using AUF.EMR2.Domain.Aggregates.HouseholdAggregate.ValueObjects;
 using AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate;
 using AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate.Enums;
@@ -74,23 +75,21 @@ namespace AUF.EMR2.Persistence.Repositories
             return householdMembers;
         }
 
-        public async Task<List<HouseholdMember>> GetWraHouseholdMemberList(string householdNo)
+        public async Task<List<HouseholdMember>> GetWraHouseholdMemberList(HouseholdId householdId)
         {
-            throw new NotImplementedException();
-            //var startDate = DateTime.Today.AddYears(WraAgeRange.WraStart).AddDays(1);
-            //var endDate = DateTime.Today.AddYears(WraAgeRange.WraEnd);
+            var startDate = DateTime.Today.AddYears(WraAgeRange.WraStart).AddDays(1);
+            var endDate = DateTime.Today.AddYears(WraAgeRange.WraEnd);
 
-            //var wraMembers = await _dbContext.HouseholdMembers
-            //    .AsNoTracking()
-            //    .Include(m => m.Household)
-            //    .Where(m => m.Status && m.Household.Status &&
-            //                m.Household.HouseholdNo.Equals(householdNo) &&
-            //                m.Sex.Equals('F') &&
-            //                m.Birthday >= startDate &&
-            //                m.Birthday <= endDate)
-            //    .ToListAsync();
+            var wraMembers = await _dbContext.HouseholdMembers
+                .AsNoTracking()
+                .Where(m => m.Status &&
+                            m.HouseholdId == householdId &&
+                            m.Sex == Sex.Female &&
+                            m.Birthday >= startDate &&
+                            m.Birthday <= endDate)
+                .ToListAsync();
 
-            //return wraMembers;
+            return wraMembers;
         }
 
         public Task<bool> IsWraMember(HouseholdMemberId id)

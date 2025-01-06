@@ -1,6 +1,7 @@
 ﻿using AUF.EMR2.Application.Common.Constants;
 using AUF.EMR2.Domain.Aggregates.HouseholdAggregate;
 using AUF.EMR2.Domain.Aggregates.HouseholdAggregate.ValueObjects;
+using AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

@@ -5,7 +5,6 @@ using AUF.EMR2.Application.Features.HouseholdMembers.Commands.DeleteHouseholdMem
 using AUF.EMR2.Application.Features.HouseholdMembers.Commands.UpdateHouseholdMember;
 using AUF.EMR2.Application.Features.HouseholdMembers.Queries.GetHouseholdMember;
 using AUF.EMR2.Application.Features.HouseholdMembers.Queries.GetHouseholdMemberList;
-using AUF.EMR2.Application.Features.HouseholdMembers.Queries.GetHouseholdMemberListByHouseholdNo;
 using AUF.EMR2.Application.Features.HouseholdMembers.Queries.GetWraHouseholdMemberList;
 using AUF.EMR2.Contracts.Common.Responses;
 using AUF.EMR2.Contracts.HouseholdMembers.Requests;
@@ -33,17 +32,6 @@ public class HouseholdMembersController : ApiController
     }
 
     // GET: api/<HouseholdMemberController>/household/householdNo
-    [HttpGet("household-no/{householdNo}")]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<HouseholdMemberResponse>))]
-    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
-    public async Task<ActionResult<List<HouseholdMemberDto>>> GetHouseholdMembersByHouseholdNo(string householdNo)
-    {
-        var response = await _mediator.Send(new GetHouseholdMemberListByHouseholdNoRequest { HouseholdNo = householdNo });
-        return Ok(response);
-    }
-
-    // GET: api/<HouseholdMemberController>/household/householdNo
     [HttpGet("households/{householdId}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<HouseholdMemberResponse>))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
@@ -57,11 +45,16 @@ public class HouseholdMembersController : ApiController
     }
 
     // GET: api/<HouseholdMemberController>/wra/householdNo
-    [HttpGet("wra/{householdNo}")]
-    public async Task<ActionResult<List<HouseholdMemberDto>>> GetWraHouseholdMembers(string householdNo)
+    [HttpGet("wras/{householdId}")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<HouseholdMemberResponse>))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
+    public async Task<IActionResult> GetWraHouseholdMembers(Guid householdId)
     {
-        var response = await _mediator.Send(new GetWraHouseholdMemberListRequest { HouseholdNo = householdNo });
-        return Ok(response);
+        var response = await _mediator.Send(new GetWraHouseholdMemberListQuery(householdId));
+        return response.Match(
+            value => Ok(_mapper.Map<List<HouseholdMemberResponse>>(value)),
+            error => Problem(error));
     }
 
     // GET api/<HouseholdMemberController>/5

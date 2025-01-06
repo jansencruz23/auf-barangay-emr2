@@ -10,6 +10,6 @@ public interface IHouseholdMemberRepository : IGenericRepository<HouseholdMember
     Task<List<HouseholdMember>> GetHouseholdMemberList(HouseholdId householdId);
     Task<List<HouseholdMember>> GetHouseholdMemberList(List<HouseholdId> householdIds);
     Task<HouseholdMember> GetHouseholdMember(HouseholdMemberId id);
-    Task<List<HouseholdMember>> GetWraHouseholdMemberList(string householdNo);
+    Task<List<HouseholdMember>> GetWraHouseholdMemberList(HouseholdId householdId);
     Task<bool> IsWraMember(HouseholdMemberId id);
 }

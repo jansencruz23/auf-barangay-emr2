@@ -78,15 +78,15 @@ namespace AUF.EMR2.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("eb33ce77-3c2e-41ee-a145-2504666a91d4"),
+                            Id = new Guid("6d0acb4f-482e-4536-8f5e-ac7787dc4fde"),
                             BarangayHealthStation = "Barangay Health Station",
                             BarangayName = "Brgy. Ninoy Aquino",
                             ContactNo = "09XXXXXXXXX",
-                            DateCreated = new DateTime(2025, 1, 5, 21, 44, 34, 693, DateTimeKind.Local).AddTicks(6247),
-                            LastModified = new DateTime(2025, 1, 5, 21, 44, 34, 693, DateTimeKind.Local).AddTicks(6257),
+                            DateCreated = new DateTime(2025, 1, 6, 18, 58, 19, 549, DateTimeKind.Local).AddTicks(4285),
+                            LastModified = new DateTime(2025, 1, 6, 18, 58, 19, 549, DateTimeKind.Local).AddTicks(4297),
                             RuralHealthUnit = "Rural Health Unit",
                             Status = true,
-                            Version = new Guid("130f90a1-5ec1-4841-9963-7a7653146540")
+                            Version = new Guid("c8797663-1ab1-4d2c-bd92-ecd37f9f63f8")
                         });
                 });
 
@@ -221,8 +221,7 @@ namespace AUF.EMR2.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("HouseholdId")
-                        .IsUnique();
+                    b.HasIndex("HouseholdId");
 
                     b.ToTable("HouseholdMembers", (string)null);
                 });
@@ -424,8 +423,8 @@ namespace AUF.EMR2.Persistence.Migrations
             modelBuilder.Entity("AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate.HouseholdMember", b =>
                 {
                     b.HasOne("AUF.EMR2.Domain.Aggregates.HouseholdAggregate.Household", null)
-                        .WithOne()
-                        .HasForeignKey("AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate.HouseholdMember", "HouseholdId")
+                        .WithMany()
+                        .HasForeignKey("HouseholdId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

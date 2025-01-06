@@ -48,8 +48,8 @@ public sealed class HouseholdMemberConfiguration : IEntityTypeConfiguration<Hous
                 value => HouseholdId.Create(value));
 
         builder.HasOne<Household>()
-            .WithOne()
-            .HasForeignKey<HouseholdMember>("HouseholdId")
+            .WithMany()
+            .HasForeignKey(member => member.HouseholdId)
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
     }
