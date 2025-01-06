@@ -1,4 +1,5 @@
-﻿using AUF.EMR2.Contracts.Households.Common.ValueObjectDtos;
+﻿using AUF.EMR2.Contracts.HouseholdMembers.Responses;
+using AUF.EMR2.Contracts.Households.Common.ValueObjectDtos;
 
 namespace AUF.EMR2.Contracts.Households.Responses;
 
@@ -15,6 +16,6 @@ public sealed record HouseholdResponse(
     PhilhealthDto Philhealth,
     bool IsIp,
     Guid Version,
-    //IReadOnlyList<HouseholdMemberDto> HouseholdMembers,
+    IReadOnlyList<HouseholdMemberResponse> HouseholdMembers,
     bool Status = true
 );
