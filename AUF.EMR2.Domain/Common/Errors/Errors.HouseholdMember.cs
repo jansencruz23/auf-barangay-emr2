@@ -21,5 +21,9 @@ public static partial class Errors
         public static Error FailedToUpdate => Error.Failure(
             code: "HouseholdMember.FailedToUpdate",
             description: "Failed to update a household member.");
+
+        public static Error FailedToDelete => Error.Failure(
+            code: "HouseholdMember.FailedToDelete",
+            description: "Failed to delete a household member.");
     }
 }

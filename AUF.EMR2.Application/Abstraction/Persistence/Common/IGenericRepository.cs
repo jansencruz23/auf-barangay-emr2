@@ -10,6 +10,7 @@ public interface IGenericRepository<T, TId>
     Task<T> Get(TId id);
     Task<T> Add(T entity);
     void Update(T entity);
+    void UpdateBatch(IEnumerable<T> entities);
     Task Delete(TId id);
     Task<bool> Exists(TId id);
     Task<int> TotalCount();

@@ -54,4 +54,9 @@ public abstract class GenericRepository<T, TId> : IGenericRepository<T, TId>
         _dbContext.Entry(entity).State = EntityState.Modified;
         //_dbContext.Update(entity);
     }
+
+    public void UpdateBatch(IEnumerable<T> entities)
+    {
+        _dbContext.Set<T>().UpdateRange(entities);
+    }
 }

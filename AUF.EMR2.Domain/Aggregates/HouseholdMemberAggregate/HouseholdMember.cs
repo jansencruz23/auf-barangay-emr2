@@ -1,6 +1,8 @@
 ﻿using AUF.EMR2.Domain.Aggregates.HouseholdAggregate.ValueObjects;
 using AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate.Enums;
+using AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate.Events;
 using AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate.ValueObjects;
+using AUF.EMR2.Domain.Common.Errors;
 using AUF.EMR2.Domain.Common.Models;
 using ErrorOr;
 
@@ -120,6 +122,19 @@ public sealed class HouseholdMember : AggregateRoot<HouseholdMemberId>
         NameOfFather = nameOfFather;
         IsNhts = isNhts;
         IsInSchool = isInSchool;
+
+        return Id;
+    }
+
+    public ErrorOr<HouseholdMemberId> Delete()
+    {
+        if (!Status)
+        {
+            return Errors.HouseholdMember.NotFound;
+        }
+
+        Status = false;
+        AddDomainEvent(new HouseholdMemberDeleted(Id));
 
         return Id;
     }

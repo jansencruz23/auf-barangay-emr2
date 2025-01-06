@@ -102,9 +102,15 @@ public class HouseholdMembersController : ApiController
 
     // DELETE api/<HouseholdMemberController>/5
     [HttpDelete("{id}")]
-    public async Task<ActionResult<CommandResponse<Guid>>> Delete(Guid id)
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<Guid>))]
+    [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
+    public async Task<IActionResult> Delete(Guid id)
     {
-        var response = await _mediator.Send(new DeleteHouseholdMemberCommand { Id = id });
-        return Ok(response);
+        var command = new DeleteHouseholdMemberCommand(id);
+        var response = await _mediator.Send(command);
+        return response.Match(
+            value => Ok(_mapper.Map<ApiResponse<Guid>>(value)),
+            error => Problem(error));
     }
 }

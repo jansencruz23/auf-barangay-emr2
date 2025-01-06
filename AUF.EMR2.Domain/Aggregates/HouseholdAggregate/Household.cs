@@ -89,7 +89,7 @@ public sealed class Household : AggregateRoot<HouseholdId>
 
     public ErrorOr<HouseholdId> Delete()
     {
-        if (Status == false)
+        if (!Status)
         {
             return Errors.Household.NotFound;
         }

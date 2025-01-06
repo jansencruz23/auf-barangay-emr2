@@ -10,8 +10,8 @@ public sealed class HouseholdDeletedHandler(IUnitOfWork unitOfWork) : INotificat
 
     public async Task Handle(HouseholdDeleted notification, CancellationToken cancellationToken)
     {
-        var pregTrackHh = await _unitOfWork.PregnancyTrackingHhRepository
-            .GetPregnancyTrackingHh(notification.HouseholdId);
+        var pregTrackHh = await _unitOfWork.PregnancyTrackingHhRepository.GetPregnancyTrackingHh(notification.HouseholdId);
+        var members = await _unitOfWork.HouseholdMemberRepository.GetHouseholdMemberList(notification.HouseholdId);
 
         using var transaction = await _unitOfWork.BeginTransactionAsync();
         try
@@ -19,10 +19,13 @@ public sealed class HouseholdDeletedHandler(IUnitOfWork unitOfWork) : INotificat
             pregTrackHh.Delete();
             _unitOfWork.PregnancyTrackingHhRepository.Update(pregTrackHh);
 
+            members.ForEach(x => x.Delete());
+            _unitOfWork.HouseholdMemberRepository.UpdateBatch(members);
+
             await _unitOfWork.SaveAsync();
             await transaction.CommitAsync(cancellationToken);
         }
-        catch(Exception)
+        catch (Exception)
         {
             await transaction.RollbackAsync(cancellationToken);
         }
