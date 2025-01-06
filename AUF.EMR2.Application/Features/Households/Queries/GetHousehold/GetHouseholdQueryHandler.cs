@@ -24,17 +24,25 @@ public class GetHouseholdQueryHandler : IRequestHandler<GetHouseholdQuery, Error
 
     public async Task<ErrorOr<HouseholdQueryResponse>> Handle(GetHouseholdQuery request, CancellationToken cancellationToken)
     {
-        var household = await _unitOfWork.HouseholdRepository.GetHousehold(HouseholdId.Create(request.Id));
-
-        if (household is null)
+        try
         {
-            return Errors.Household.NotFound;
+            var household = await _unitOfWork.HouseholdRepository.GetHousehold(HouseholdId.Create(request.Id));
+
+            if (household is null)
+            {
+                return Errors.Household.NotFound;
+            }
+
+            var members = await _unitOfWork.HouseholdMemberRepository.GetHouseholdMemberList(HouseholdId.Create(request.Id));
+
+            var response = _mapper.Map<HouseholdQueryResponse>(household);
+            response.SetHouseholdMembers(_mapper.Map<List<HouseholdMemberQueryResponse>>(members));
+
+            return response;
         }
-
-        var members = await _unitOfWork.HouseholdMemberRepository.GetHouseholdMemberList(request.Id);
-        var response = _mapper.Map<HouseholdQueryResponse>(household);
-        response.SetHouseholdMembers(_mapper.Map<List<HouseholdMemberQueryResponse>>(members));
-
-        return response;
+        catch (Exception)
+        {
+            return Errors.Household.FailedToFetch;
+        }
     }
 }

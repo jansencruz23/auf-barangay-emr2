@@ -17,7 +17,7 @@ public sealed class HouseholdQueryResponse
     public PhilhealthData Philhealth { get; init; } = null!;
     public bool IsIp { get; init; }
     public Guid Version { get; init; }
-    public List<HouseholdMemberQueryResponse> HouseholdMembers { get; private set; } = new();
+    public List<HouseholdMemberQueryResponse> HouseholdMembers { get; private set; } = [];
     public bool Status { get; init; }
 
     public void SetHouseholdMembers(List<HouseholdMemberQueryResponse> householdMembers)

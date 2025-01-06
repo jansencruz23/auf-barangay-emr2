@@ -21,5 +21,9 @@ public static partial class Errors
         public static Error FailedToCreate => Error.Failure(
             code: "Household.FailedToCreate",
             description: "Failed to create a household.");
+
+        public static Error FailedToFetch => Error.Failure(
+            code: "Household.FailedToFetch",
+            description: "Failed to fetch a household.");
     }
 }

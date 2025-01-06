@@ -30,36 +30,48 @@ namespace AUF.EMR2.Persistence.Repositories
             //return householdMember;
         }
 
-        public async Task<List<HouseholdMember>> GetHouseholdMemberList(Guid householdId)
+        public async Task<List<HouseholdMember>> GetHouseholdMemberList(HouseholdId householdId)
         {
-            //var householdMembers = await _dbContext.HouseholdMembers
-            //    .AsNoTracking()
-            //    .ToListAsync();
-
-            var filteredMembers = await _dbContext.HouseholdMembers
+            var householdMembers = await _dbContext.HouseholdMembers
                 .AsNoTracking()
-                .Where(q => q.HouseholdId == HouseholdId.Create(householdId))
+                .Where(q => q.HouseholdId == householdId && q.Status)
+                .OrderBy(q => q.RelationshipToHouseholdHead == RelationshipToHouseholdHead.Head
+                    ? 0
+                    : q.RelationshipToHouseholdHead == RelationshipToHouseholdHead.Spouse
+                        ? 1
+                        : q.RelationshipToHouseholdHead == RelationshipToHouseholdHead.Son
+                        || q.RelationshipToHouseholdHead == RelationshipToHouseholdHead.Daughter
+                            ? 2
+                            : 3)
+                .ThenBy(q => q.RelationshipToHouseholdHead == RelationshipToHouseholdHead.Son
+                    || q.RelationshipToHouseholdHead == RelationshipToHouseholdHead.Daughter
+                        ? q.Birthday
+                        : DateTime.MaxValue)
                 .ToListAsync();
 
-            return filteredMembers;
-            //var householdMembers = await _dbContext.HouseholdMembers
-            //    .AsNoTracking()
-            //    .Where(q => q.HouseholdId.Value == householdId)
-            //    //.OrderBy(q => q.RelationshipToHouseholdHead == RelationshipToHouseholdHead.Head 
-            //    //    ? 0 
-            //    //    : q.RelationshipToHouseholdHead == RelationshipToHouseholdHead.Spouse 
-            //    //        ? 1 
-            //    //        : q.RelationshipToHouseholdHead == RelationshipToHouseholdHead.Son 
-            //    //        || q.RelationshipToHouseholdHead == RelationshipToHouseholdHead.Daughter 
-            //    //            ? 2 
-            //    //            : 3)
-            //    //.ThenBy(q => q.RelationshipToHouseholdHead == RelationshipToHouseholdHead.Son 
-            //    //    || q.RelationshipToHouseholdHead == RelationshipToHouseholdHead.Daughter 
-            //    //        ? q.Birthday 
-            //    //        : DateTime.MaxValue)
-            //    .ToListAsync();
+            return householdMembers;
+        }
 
-            //return householdMembers;
+        public async Task<List<HouseholdMember>> GetHouseholdMemberList(List<HouseholdId> householdIds)
+        {
+            var householdMembers = await _dbContext.HouseholdMembers
+                .AsNoTracking()
+                .Where(q => householdIds.Contains(q.HouseholdId) && q.Status)
+                .OrderBy(q => q.RelationshipToHouseholdHead == RelationshipToHouseholdHead.Head
+                    ? 0
+                    : q.RelationshipToHouseholdHead == RelationshipToHouseholdHead.Spouse
+                        ? 1
+                        : q.RelationshipToHouseholdHead == RelationshipToHouseholdHead.Son
+                        || q.RelationshipToHouseholdHead == RelationshipToHouseholdHead.Daughter
+                            ? 2
+                            : 3)
+                .ThenBy(q => q.RelationshipToHouseholdHead == RelationshipToHouseholdHead.Son
+                    || q.RelationshipToHouseholdHead == RelationshipToHouseholdHead.Daughter
+                        ? q.Birthday
+                        : DateTime.MaxValue)
+                .ToListAsync();
+
+            return householdMembers;
         }
 
         public async Task<List<HouseholdMember>> GetWraHouseholdMemberList(string householdNo)
