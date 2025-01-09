@@ -2,8 +2,8 @@
 using ErrorOr;
 using MediatR;
 
-namespace AUF.EMR2.Application.Features.Masterlists.Queries.GetMasterlistNewborn;
+namespace AUF.EMR2.Application.Features.Masterlists.Queries.GetMasterlistAdolescent;
 
-public sealed record GetMasterlistNewbornQuery(
+public sealed record GetMasterlistAdolescentQuery(
     Guid HouseholdId
 ) : IRequest<ErrorOr<List<MasterlistChildQueryResponse>>>, IMasterlistQuery;

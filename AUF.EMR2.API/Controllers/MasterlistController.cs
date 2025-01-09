@@ -61,35 +61,55 @@ public class MasterlistController : ApiController
     }
 
     // GET: api/<MasterlistController>/under-five/householdNo
-    [HttpGet("under-five/{householdNo}")]
-    public async Task<ActionResult<List<MasterlistChildDto>>> GetUnderFiveChildren(string householdNo)
+    [HttpGet("under-five/{householdId}")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<MasterlistChildResponse>))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
+    public async Task<IActionResult> GetUnderFiveChildren(Guid householdId)
     {
-        var response = await _mediator.Send(new GetMasterlistUnderFiveRequest { HouseholdNo = householdNo });
-        return Ok(response);
+        var response = await _mediator.Send(new GetMasterlistUnderFiveQuery(householdId));
+        return response.Match(
+            value => Ok(_mapper.Map<List<MasterlistChildResponse>>(value)),
+            error => Problem(error));
     }
 
     // GET: api/<MasterlistController>/school-aged/householdNo
-    [HttpGet("school-aged/{householdNo}")]
-    public async Task<ActionResult<List<MasterlistChildDto>>> GetSchoolAgedChildren(string householdNo)
+    [HttpGet("school-aged/{householdId}")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<MasterlistChildResponse>))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
+    public async Task<IActionResult> GetSchoolAgedChildren(Guid householdId)
     {
-        var response = await _mediator.Send(new GetMasterlistSchoolAgedRequest { HouseholdNo = householdNo });
-        return Ok(response);
+        var response = await _mediator.Send(new GetMasterlistSchoolAgedQuery(householdId));
+        return response.Match(
+            value => Ok(_mapper.Map<List<MasterlistChildResponse>>(value)),
+            error => Problem(error));
     }
 
     // GET: api/<MasterlistController>/adolescents/householdNo
-    [HttpGet("adolescents/{householdNo}")]
-    public async Task<ActionResult<List<MasterlistChildDto>>> GetAdolescents(string householdNo)
+    [HttpGet("adolescents/{householdId}")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<MasterlistChildResponse>))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
+    public async Task<IActionResult> GetAdolescents(Guid householdId)
     {
-        var response = await _mediator.Send(new GetMasterlistAdolescentRequest { HouseholdNo = householdNo });
-        return Ok(response);
+        var response = await _mediator.Send(new GetMasterlistAdolescentQuery(householdId));
+        return response.Match(
+            value => Ok(_mapper.Map<List<MasterlistChildResponse>>(value)),
+            error => Problem(error));
     }
 
     // GET: api/<MasterlistController>/adults/householdNo
-    [HttpGet("adults/{householdNo}")]
-    public async Task<ActionResult<List<MasterlistAdultDto>>> GetAdults(string householdNo)
+    [HttpGet("adults/{householdId}")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<MasterlistAdultResponse>))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
+    public async Task<IActionResult> GetAdults(Guid householdId)
     {
-        var response = await _mediator.Send(new GetMasterlistAdultRequest { HouseholdNo = householdNo });
-        return Ok(response);
+        var response = await _mediator.Send(new GetMasterlistAdultQuery(householdId));
+        return response.Match(
+            value => Ok(_mapper.Map<List<MasterlistAdultResponse>>(value)),
+            error => Problem(error));
     }
 
     // GET: api/<MasterlistController>/seniors/householdNo

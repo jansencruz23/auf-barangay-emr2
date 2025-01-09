@@ -9,5 +9,6 @@ public sealed class MasterlistApiMappingConfig : IRegister
     public void Register(TypeAdapterConfig config)
     {
         config.NewConfig<MasterlistChildResponse, MasterlistChildQueryResponse>();
+        config.NewConfig<MasterlistAdultResponse, MasterlistAdultQueryResponse>();
     }
 }

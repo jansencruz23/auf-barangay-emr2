@@ -3,7 +3,7 @@ using AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate.Enums;
 
 namespace AUF.EMR2.Application.Features.Masterlists.Queries.Common;
 
-public sealed record MasterlistChildQueryResponse(
+public sealed record MasterlistAdultQueryResponse(
     Guid Id,
     string LastName,
     string FirstName,
@@ -12,9 +12,6 @@ public sealed record MasterlistChildQueryResponse(
     DateTime Birthday,
     Guid HouseholdId,
     HouseholdQueryResponse Household,
-    string? NameOfMother,
-    string? NameOfFather,
     bool IsNhts,
-    bool? IsInSchool,
     Guid Version
 );

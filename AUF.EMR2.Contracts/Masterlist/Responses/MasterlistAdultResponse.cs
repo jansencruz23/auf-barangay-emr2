@@ -3,7 +3,7 @@ using AUF.EMR2.Contracts.Households.Responses;
 
 namespace AUF.EMR2.Contracts.Masterlist.Responses;
 
-public sealed record MasterlistChildResponse(
+public sealed record MasterlistAdultResponse(
     Guid Id,
     string LastName,
     string FirstName,
@@ -12,9 +12,6 @@ public sealed record MasterlistChildResponse(
     DateTime Birthday,
     Guid HouseholdId,
     HouseholdResponse Household,
-    string? NameOfMother,
-    string? NameOfFather,
     bool IsNhts,
-    bool? IsInSchool,
     Guid Version
 );
