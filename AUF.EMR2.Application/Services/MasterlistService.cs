@@ -1,6 +1,7 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
 using AUF.EMR2.Application.Abstraction.Services;
 using AUF.EMR2.Application.Common.Constants;
+using AUF.EMR2.Domain.Aggregates.HouseholdAggregate.ValueObjects;
 using AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate;
 using MediatR;
 using System;
@@ -48,6 +49,11 @@ namespace AUF.EMR2.Application.Services
         {
             var startDate = DateTime.Today.AddDays(MasterlistAgeRange.NewbornStart);
             return await _unitOfWork.MasterlistRepository.GetListQuery(householdNo, startDate);
+        }
+
+        public Task<List<HouseholdMember>> GetMasterlistNewborns(HouseholdId householdId)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<List<HouseholdMember>> GetMasterlistSchoolAgedChildren(string householdNo)

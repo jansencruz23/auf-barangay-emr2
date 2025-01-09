@@ -90,6 +90,19 @@ public class HouseholdMemberRepository : GenericRepository<HouseholdMember, Hous
         return wraMembers;
     }
 
+    public async Task<List<HouseholdMember>> GetListQuery(HouseholdId householdId, DateTime startDate)
+    {
+        var records = await _dbContext.HouseholdMembers
+            .AsNoTracking()
+            .Where(m => m.HouseholdId == householdId &&
+                m.Status &&
+                m.Birthday >= startDate &&
+                m.Birthday <= DateTime.Today.AddDays(1))
+            .ToListAsync();
+
+        return records;
+    }
+
     public Task<bool> IsWraMember(HouseholdMemberId id)
     {
         throw new NotImplementedException();

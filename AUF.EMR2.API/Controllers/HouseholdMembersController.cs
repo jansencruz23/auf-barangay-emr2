@@ -20,11 +20,11 @@ namespace AUF.EMR2.API.Controllers;
 [ApiController]
 public class HouseholdMembersController : ApiController
 {
-    private readonly IMediator _mediator;
+    private readonly ISender _mediator;
     private readonly IMapper _mapper;
 
     public HouseholdMembersController(
-        IMediator mediator, 
+        ISender mediator, 
         IMapper mapper)
     {
         _mediator = mediator;

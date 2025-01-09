@@ -33,7 +33,7 @@ namespace AUF.EMR2.Application.Features.Masterlists.Queries.GetPrintMasterlistRe
 
             var address = await _unitOfWork.HouseholdRepository.GetFullAddress(request.HouseholdNo);
 
-            var newborns = await _masterlistService.GetMasterlistNewborns(request.HouseholdNo);
+            //var newborns = await _masterlistService.GetMasterlistNewborns(request.HouseholdNo);
             var infants = await _masterlistService.GetMasterlistInfants(request.HouseholdNo);
             var underFive = await _masterlistService.GetMasterlistUnderFiveChildren(request.HouseholdNo);
             var schoolAged = await _masterlistService.GetMasterlistSchoolAgedChildren(request.HouseholdNo);
@@ -42,7 +42,7 @@ namespace AUF.EMR2.Application.Features.Masterlists.Queries.GetPrintMasterlistRe
             var seniors = await _masterlistService.GetMasterlistSeniors(request.HouseholdNo);
 
             dto.Address = address;
-            dto.Newborns = _mapper.Map<List<MasterlistChildOnlyDto>>(newborns);
+            //dto.Newborns = _mapper.Map<List<MasterlistChildOnlyDto>>(newborns);
             dto.Infants = _mapper.Map<List<MasterlistChildOnlyDto>>(infants);
             dto.UnderFiveChildren = _mapper.Map<List<MasterlistChildOnlyDto>>(underFive);
             dto.SchoolAgedChildren = _mapper.Map<List<MasterlistChildOnlyDto>>(schoolAged);
