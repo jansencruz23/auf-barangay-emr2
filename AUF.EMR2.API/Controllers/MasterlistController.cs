@@ -113,11 +113,16 @@ public class MasterlistController : ApiController
     }
 
     // GET: api/<MasterlistController>/seniors/householdNo
-    [HttpGet("seniors/{householdNo}")]
-    public async Task<ActionResult<List<MasterlistAdultDto>>> GetSeniors(string householdNo)
+    [HttpGet("seniors/{householdId}")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<MasterlistAdultResponse>))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
+    public async Task<IActionResult> GetSeniors(Guid householdId)
     {
-        var response = await _mediator.Send(new GetMasterlistSeniorRequest { HouseholdNo = householdNo });
-        return Ok(response);
+        var response = await _mediator.Send(new GetMasterlistSeniorQuery(householdId));
+        return response.Match(
+            value => Ok(_mapper.Map<List<MasterlistAdultResponse>>(value)),
+            error => Problem(error));
     }
 
     // GET: api/<MasterlistController>/print/householdNo
