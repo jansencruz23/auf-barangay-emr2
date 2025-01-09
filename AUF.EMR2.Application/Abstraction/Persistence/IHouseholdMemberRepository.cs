@@ -13,4 +13,5 @@ public interface IHouseholdMemberRepository : IGenericRepository<HouseholdMember
     Task<List<HouseholdMember>> GetWraHouseholdMemberList(HouseholdId householdId);
     Task<bool> IsWraMember(HouseholdMemberId id);
     Task<List<HouseholdMember>> GetListQuery(HouseholdId householdId, DateTime startDate);
+    Task<List<HouseholdMember>> GetListQuery(HouseholdId householdId, DateTime startDate, DateTime endDate);
 }

@@ -34,7 +34,7 @@ public class MasterlistController : ApiController
         _mapper = mapper;
     }
 
-    // GET: api/<MasterlistController>/newborns/householdNo
+    // GET: api/<MasterlistController>/newborns/householdId
     [HttpGet("newborns/{householdId}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<MasterlistChildResponse>))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
@@ -47,12 +47,17 @@ public class MasterlistController : ApiController
             error => Problem(error));
     }
 
-    // GET: api/<MasterlistController>/infants/householdNo
-    [HttpGet("infants/{householdNo}")]
-    public async Task<ActionResult<List<MasterlistChildDto>>> GetInfants(string householdNo)
+    // GET: api/<MasterlistController>/infants/householdId
+    [HttpGet("infants/{householdId}")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<MasterlistChildResponse>))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
+    public async Task<IActionResult> GetInfants(Guid householdId)
     {
-        var response = await _mediator.Send(new GetMasterlistInfantRequest { HouseholdNo = householdNo });
-        return Ok(response);
+        var response = await _mediator.Send(new GetMasterlistInfantQuery(householdId));
+        return response.Match(
+            value => Ok(_mapper.Map<List<MasterlistChildResponse>>(value)),
+            error => Problem(error));
     }
 
     // GET: api/<MasterlistController>/under-five/householdNo
