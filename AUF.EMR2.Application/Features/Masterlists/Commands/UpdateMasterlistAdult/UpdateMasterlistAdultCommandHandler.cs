@@ -1,76 +1,86 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
 using AUF.EMR2.Application.Common.Responses;
-using AUF.EMR2.Application.DTOs.HouseholdMember.Validators;
-using AUF.EMR2.Application.DTOs.Masterlist.Validators;
 using AUF.EMR2.Application.Exceptions;
-using AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate;
+using AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate.ValueObjects;
+using AUF.EMR2.Domain.Common.Errors;
+using ErrorOr;
 using MapsterMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace AUF.EMR2.Application.Features.Masterlists.Commands.UpdateMasterlistAdult
+namespace AUF.EMR2.Application.Features.Masterlists.Commands.UpdateMasterlistAdult;
+
+public sealed class UpdateMasterlistAdultCommandHandler : IRequestHandler<UpdateMasterlistAdultCommand, ErrorOr<CommandResponse<Guid>>>
 {
-    public class UpdateMasterlistAdultCommandHandler : IRequestHandler<UpdateMasterlistAdultCommand, CommandResponse<Guid>>
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly IMapper _mapper;
+
+    public UpdateMasterlistAdultCommandHandler(
+        IUnitOfWork unitOfWork,
+        IMapper mapper)
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
+        _unitOfWork = unitOfWork;
+        _mapper = mapper;
+    }
 
-        public UpdateMasterlistAdultCommandHandler(
-            IUnitOfWork unitOfWork,
-            IMapper mapper)
-        {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
-        }
+    public async Task<ErrorOr<CommandResponse<Guid>>> Handle(UpdateMasterlistAdultCommand request, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+        //try
+        //{
+        //    var member = await _unitOfWork.HouseholdMemberRepository.GetHouseholdMember(HouseholdMemberId.Create(request.Id));
+        //    if (member is null)
+        //    {
+        //        return Errors.HouseholdMember.NotFound;
+        //    }
 
-        public async Task<CommandResponse<Guid>> Handle(UpdateMasterlistAdultCommand request, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-            //var response = new BaseCommandResponse<Guid>();
-            //var validator = new UpdateMasterlistAdultDtoValidator();
-            //var validationResult = await validator.ValidateAsync(request.MasterlistDto, cancellationToken);
+        //    var response = new CommandResponse<Guid>();
+        //    member.
 
-            //if (!validationResult.IsValid)
-            //{
-            //    response.Success = false;
-            //    response.Message = "Updation Failed";
-            //    response.Errors = validationResult.Errors.Select(q => q.ErrorMessage).ToList();
+        //}
+        //catch (DbUpdateConcurrencyException ex)
+        //{
+        //    return Errors.ConcurrentIssue;
+        //}
+        //var response = new BaseCommandResponse<Guid>();
+        //var validator = new UpdateMasterlistAdultDtoValidator();
+        //var validationResult = await validator.ValidateAsync(request.MasterlistDto, cancellationToken);
 
-            //    throw new ValidationException(validationResult);
-            //}
+        //if (!validationResult.IsValid)
+        //{
+        //    response.Success = false;
+        //    response.Message = "Updation Failed";
+        //    response.Errors = validationResult.Errors.Select(q => q.ErrorMessage).ToList();
 
-            //var householdMember = await _unitOfWork.HouseholdMemberRepository.GetHouseholdMember(request.MasterlistDto.Id);
+        //    throw new ValidationException(validationResult);
+        //}
 
-            //if (householdMember == null)
-            //{
-            //    response.Success = false;
-            //    response.Message = $"{nameof(HouseholdMember)} with id: {request.MasterlistDto.Id} is not existing";
+        //var householdMember = await _unitOfWork.HouseholdMemberRepository.GetHouseholdMember(request.MasterlistDto.Id);
 
-            //    throw new NotFoundException(nameof(HouseholdMember), request.MasterlistDto.Id);
-            //}
+        //if (householdMember == null)
+        //{
+        //    response.Success = false;
+        //    response.Message = $"{nameof(HouseholdMember)} with id: {request.MasterlistDto.Id} is not existing";
 
-            //_mapper.Map(request.MasterlistDto, householdMember);
+        //    throw new NotFoundException(nameof(HouseholdMember), request.MasterlistDto.Id);
+        //}
 
-            //try
-            //{
-            //    _unitOfWork.HouseholdMemberRepository.Update(householdMember);
-            //    await _unitOfWork.SaveAsync();
-            //}
-            //catch (DbUpdateConcurrencyException ex)
-            //{
-            //    throw new ConcurrencyException("The entity you attempted to update was modified by another user.", ex);
-            //}
+        //_mapper.Map(request.MasterlistDto, householdMember);
 
-            //response.Success = true;
-            //response.Message = "Updation is successful";
-            //response.Id = request.MasterlistDto.Id;
+        //try
+        //{
+        //    _unitOfWork.HouseholdMemberRepository.Update(householdMember);
+        //    await _unitOfWork.SaveAsync();
+        //}
+        //catch (DbUpdateConcurrencyException ex)
+        //{
+        //    throw new ConcurrencyException("The entity you attempted to update was modified by another user.", ex);
+        //}
 
-            //return response;
-        }
+        //response.Success = true;
+        //response.Message = "Updation is successful";
+        //response.Id = request.MasterlistDto.Id;
+
+        //return response;
     }
 }
