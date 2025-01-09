@@ -47,11 +47,16 @@ public class CreateHouseholdMemberCommandHandler : IRequestHandler<CreateHouseho
                 householdId: request.HouseholdId
             );
 
-            await _unitOfWork.HouseholdMemberRepository.Add(member);
+            if (member.IsError)
+            {
+                return member.FirstError;
+            }
+
+            await _unitOfWork.HouseholdMemberRepository.Add(member.Value);
             await _unitOfWork.SaveAsync();
 
             response.Success = true;
-            response.Id = member.Id.Value;
+            response.Id = member.Value.Id.Value;
             response.Message = "Created successfully";
 
             return response;

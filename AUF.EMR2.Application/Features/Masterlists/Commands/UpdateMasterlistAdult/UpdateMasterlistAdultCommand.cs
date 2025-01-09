@@ -13,6 +13,5 @@ public sealed record UpdateMasterlistAdultCommand(
     string? MotherMaidenName,
     Sex Sex,
     DateTime Birthday,
-    Guid HouseholdId,
     bool IsNhts 
 ) : IRequest<ErrorOr<CommandResponse<Guid>>>;

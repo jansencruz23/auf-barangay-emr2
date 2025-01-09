@@ -25,5 +25,9 @@ public static partial class Errors
         public static Error FailedToDelete => Error.Failure(
             code: "HouseholdMember.FailedToDelete",
             description: "Failed to delete a household member.");
+
+        public static Error InvalidBirthday => Error.Failure(
+            code: "HouseholdMember.InvalidBirthday",
+            description: "Household Member's birthday is invalid.");
     }
 }

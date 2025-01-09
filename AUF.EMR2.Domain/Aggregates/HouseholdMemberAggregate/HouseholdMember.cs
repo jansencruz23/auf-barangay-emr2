@@ -60,7 +60,7 @@ public sealed class HouseholdMember : AggregateRoot<HouseholdMemberId>
         HouseholdId = HouseholdId.Create(householdId);
     }
 
-    public static HouseholdMember Create(
+    public static ErrorOr<HouseholdMember> Create(
         string lastName,
         string firstName,
         string? motherMaidenName,
@@ -76,6 +76,11 @@ public sealed class HouseholdMember : AggregateRoot<HouseholdMemberId>
         bool? isInSchool,
         Guid householdId)
     {
+        if (birthday > DateTime.Now.AddDays(1))
+        {
+            return Errors.HouseholdMember.InvalidBirthday;
+        }
+
         return new HouseholdMember(
             householdMemberId: HouseholdMemberId.Create(),
             lastName: lastName,
@@ -109,6 +114,16 @@ public sealed class HouseholdMember : AggregateRoot<HouseholdMemberId>
         bool isNhts,
         bool? isInSchool)
     {
+        if (!Status)
+        {
+            return Errors.HouseholdMember.NotFound;
+        }
+
+        if (birthday > DateTime.Today.AddDays(1))
+        {
+            return Errors.HouseholdMember.InvalidBirthday;
+        }
+
         LastName = lastName;
         FirstName = firstName;
         MotherMaidenName = motherMaidenName;
@@ -135,6 +150,34 @@ public sealed class HouseholdMember : AggregateRoot<HouseholdMemberId>
 
         Status = false;
         AddDomainEvent(new HouseholdMemberDeleted(Id));
+
+        return Id;
+    }
+
+    public ErrorOr<HouseholdMemberId> UpdateAsMasterlistAdult(
+        string lastName,
+        string firstName,
+        string? motherMaidenName,
+        Sex sex,
+        DateTime birthday,
+        bool isNhts)
+    {
+        if (!Status)
+        {
+            return Errors.HouseholdMember.NotFound;
+        }
+
+        if (birthday > DateTime.Today.AddDays(1))
+        {
+            return Errors.HouseholdMember.InvalidBirthday;
+        }
+
+        LastName = lastName;
+        FirstName = firstName;
+        MotherMaidenName = motherMaidenName;
+        Sex = sex;
+        Birthday = birthday;
+        IsNhts = isNhts;
 
         return Id;
     }

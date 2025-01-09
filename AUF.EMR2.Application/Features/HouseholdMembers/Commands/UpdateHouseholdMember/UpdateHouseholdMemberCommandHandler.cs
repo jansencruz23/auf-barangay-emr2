@@ -41,7 +41,7 @@ public class UpdateHouseholdMemberCommandHandler : IRequestHandler<UpdateHouseho
                 fourthQtrClassification: request.QuarterlyClassification?.FourthQtrClassification
             );
 
-            member.Update(
+            var result = member.Update(
                 lastName: request.LastName,
                 firstName: request.FirstName,
                 motherMaidenName: request.MotherMaidenName,
@@ -56,6 +56,11 @@ public class UpdateHouseholdMemberCommandHandler : IRequestHandler<UpdateHouseho
                 isNhts: request.IsNhts,
                 isInSchool: request.IsInSchool
             );
+
+            if (result.IsError)
+            {
+                return result.FirstError;
+            }
 
             _unitOfWork.HouseholdMemberRepository.Update(member);
             await _unitOfWork.SaveAsync();
