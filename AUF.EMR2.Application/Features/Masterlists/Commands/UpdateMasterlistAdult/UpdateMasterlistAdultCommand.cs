@@ -1,4 +1,5 @@
 ﻿using AUF.EMR2.Application.Common.Responses;
+using AUF.EMR2.Application.Features.Masterlists.Commands.Common;
 using AUF.EMR2.Domain.Aggregates.HouseholdMemberAggregate.Enums;
 using ErrorOr;
 using MediatR;
@@ -14,4 +15,4 @@ public sealed record UpdateMasterlistAdultCommand(
     Sex Sex,
     DateTime Birthday,
     bool IsNhts 
-) : IRequest<ErrorOr<CommandResponse<Guid>>>;
+) : IRequest<ErrorOr<CommandResponse<Guid>>>, IUpdateMasterlistCommand;

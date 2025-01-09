@@ -182,6 +182,40 @@ public sealed class HouseholdMember : AggregateRoot<HouseholdMemberId>
         return Id;
     }
 
+    public ErrorOr<HouseholdMemberId> UpdateAsMasterlistChild(
+        string lastName,
+        string firstName,
+        string? motherMaidenName,
+        Sex sex,
+        DateTime birthday,
+        string? nameOfMother,
+        string? nameOfFather,
+        bool isNhts,
+        bool? isInSchool)
+    {
+        if (!Status)
+        {
+            return Errors.HouseholdMember.NotFound;
+        }
+
+        if (birthday > DateTime.Today.AddDays(1))
+        {
+            return Errors.HouseholdMember.InvalidBirthday;
+        }
+
+        LastName = lastName;
+        FirstName = firstName;
+        MotherMaidenName = motherMaidenName;
+        Sex = sex;
+        Birthday = birthday;
+        NameOfMother = nameOfMother;
+        NameOfFather = nameOfFather;
+        IsNhts = isNhts;
+        IsInSchool = isInSchool;
+
+        return Id;
+    }
+
     private HouseholdMember() { }
     private HouseholdMember(HouseholdMemberId householdMemberId) : base(householdMemberId) { }
 }

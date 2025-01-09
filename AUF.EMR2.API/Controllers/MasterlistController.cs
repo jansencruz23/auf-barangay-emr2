@@ -1,5 +1,4 @@
-﻿using AUF.EMR2.Application.Common.Responses;
-using AUF.EMR2.Application.DTOs.Masterlist;
+﻿using AUF.EMR2.Application.DTOs.Masterlist;
 using AUF.EMR2.Application.Features.Masterlists.Commands.UpdateMasterlistAdult;
 using AUF.EMR2.Application.Features.Masterlists.Commands.UpdateMasterlistChild;
 using AUF.EMR2.Application.Features.Masterlists.Queries.GetMasterlistAdolescent;
@@ -163,10 +162,17 @@ public class MasterlistController : ApiController
 
     // PUT api/<MasterlistController>/child/5
     [HttpPut("child")]
-    public async Task<ActionResult<CommandResponse<Guid>>> UpdateChild([FromBody] UpdateMasterlistChildDto dto)
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<Guid>))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ValidationProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
+    public async Task<IActionResult> UpdateChild([FromBody] UpdateMasterlistChildRequest request)
     {
-        var response = await _mediator.Send(new UpdateMasterlistChildCommand { MasterlistDto = dto });
-        return Ok(response);
+        var command = _mapper.Map<UpdateMasterlistChildCommand>(request);
+        var response = await _mediator.Send(command);
+        return response.Match(
+            value => Ok(_mapper.Map<ApiResponse<Guid>>(value)),
+            error => Problem(error));
     }
 
     // PUT api/<MasterlistController>/child/5
