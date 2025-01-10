@@ -14,13 +14,16 @@ namespace AUF.EMR2.Application.Features.Masterlists.Queries.GetMasterlistNewborn
 public sealed class GetMasterlistNewbornQueryHandler : IRequestHandler<GetMasterlistNewbornQuery, ErrorOr<List<MasterlistChildQueryResponse>>>
 {
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IMasterlistService _masterlistService;
     private readonly IMapper _mapper;
 
     public GetMasterlistNewbornQueryHandler(
         IUnitOfWork unitOfWork,
+        IMasterlistService masterlistService,
         IMapper mapper)
     {
         _unitOfWork = unitOfWork;
+        _masterlistService = masterlistService;
         _mapper = mapper;
     }
 
@@ -28,12 +31,10 @@ public sealed class GetMasterlistNewbornQueryHandler : IRequestHandler<GetMaster
     {
         try
         {
-            var startDate = DateTime.Today.AddDays(MasterlistAgeRange.NewbornStart);
-            var members = await _unitOfWork.HouseholdMemberRepository.GetListQuery(HouseholdId.Create(request.HouseholdId), startDate);
-            
+            var members = await _masterlistService.GetMasterlistNewborns(HouseholdId.Create(request.HouseholdId));
             if (members is null)
             {
-                return Errors.HouseholdMember.FailedToFetch;
+                return Errors.HouseholdMember.NotFound;
             }
 
             var response = _mapper.Map<List<MasterlistChildQueryResponse>>(members);

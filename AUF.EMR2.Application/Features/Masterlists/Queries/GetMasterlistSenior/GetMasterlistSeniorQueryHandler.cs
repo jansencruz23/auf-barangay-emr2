@@ -1,5 +1,5 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
-using AUF.EMR2.Application.Common.Constants;
+using AUF.EMR2.Application.Abstraction.Services;
 using AUF.EMR2.Application.Features.Masterlists.Queries.Common;
 using AUF.EMR2.Domain.Aggregates.HouseholdAggregate.ValueObjects;
 using AUF.EMR2.Domain.Common.Errors;
@@ -12,13 +12,16 @@ namespace AUF.EMR2.Application.Features.Masterlists.Queries.GetMasterlistSenior;
 public sealed class GetMasterlistSeniorQueryHandler : IRequestHandler<GetMasterlistSeniorQuery, ErrorOr<List<MasterlistAdultQueryResponse>>>
 {
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IMasterlistService _masterlistService;
     private readonly IMapper _mapper;
 
     public GetMasterlistSeniorQueryHandler(
         IUnitOfWork unitOfWork,
+        IMasterlistService masterlistService,
         IMapper mapper)
     {
         _unitOfWork = unitOfWork;
+        _masterlistService = masterlistService;
         _mapper = mapper;
     }
 
@@ -26,13 +29,10 @@ public sealed class GetMasterlistSeniorQueryHandler : IRequestHandler<GetMasterl
     {
         try
         {
-            var startDate = DateTime.MinValue;
-            var endDate = DateTime.Today.AddYears(MasterlistAgeRange.SeniorEnd);
-
-            var members = await _unitOfWork.HouseholdMemberRepository.GetListQuery(HouseholdId.Create(request.HouseholdId), startDate, endDate);
+            var members = await _masterlistService.GetMasterlistSeniors(HouseholdId.Create(request.HouseholdId));
             if (members is null)
             {
-                return Errors.HouseholdMember.FailedToFetch;
+                return Errors.HouseholdMember.NotFound;
             }
 
             var response = _mapper.Map<List<MasterlistAdultQueryResponse>>(members);

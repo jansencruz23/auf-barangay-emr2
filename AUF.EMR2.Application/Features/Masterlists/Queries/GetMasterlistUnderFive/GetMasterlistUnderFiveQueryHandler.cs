@@ -1,5 +1,5 @@
 ﻿using AUF.EMR2.Application.Abstraction.Persistence.Common;
-using AUF.EMR2.Application.Common.Constants;
+using AUF.EMR2.Application.Abstraction.Services;
 using AUF.EMR2.Application.Features.Masterlists.Queries.Common;
 using AUF.EMR2.Domain.Aggregates.HouseholdAggregate.ValueObjects;
 using AUF.EMR2.Domain.Common.Errors;
@@ -12,13 +12,16 @@ namespace AUF.EMR2.Application.Features.Masterlists.Queries.GetMasterlistUnderFi
 public sealed class GetMasterlistUnderFiveQueryHandler : IRequestHandler<GetMasterlistUnderFiveQuery, ErrorOr<List<MasterlistChildQueryResponse>>>
 {
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IMasterlistService _masterlistService;
     private readonly IMapper _mapper;
 
     public GetMasterlistUnderFiveQueryHandler(
         IUnitOfWork unitOfWork,
+        IMasterlistService masterlistService,
         IMapper mapper)
     {
         _unitOfWork = unitOfWork;
+        _masterlistService = masterlistService;
         _mapper = mapper;
     }
 
@@ -26,10 +29,7 @@ public sealed class GetMasterlistUnderFiveQueryHandler : IRequestHandler<GetMast
     {
         try
         {
-            var startDate = DateTime.Today.AddYears(MasterlistAgeRange.UnderFiveStart).AddDays(1);
-            var endDate = DateTime.Today.AddYears(MasterlistAgeRange.UnderFiveEnd);
-
-            var members = await _unitOfWork.HouseholdMemberRepository.GetListQuery(HouseholdId.Create(request.HouseholdId), startDate, endDate);
+            var members = await _masterlistService.GetMasterlistUnderFiveChildren(HouseholdId.Create(request.HouseholdId));
             if (members is null)
             {
                 return Errors.HouseholdMember.FailedToFetch;

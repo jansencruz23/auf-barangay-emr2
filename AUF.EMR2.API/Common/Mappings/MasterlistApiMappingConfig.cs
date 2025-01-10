@@ -1,6 +1,7 @@
 ﻿using AUF.EMR2.Application.Features.Masterlists.Commands.UpdateMasterlistAdult;
 using AUF.EMR2.Application.Features.Masterlists.Commands.UpdateMasterlistChild;
 using AUF.EMR2.Application.Features.Masterlists.Queries.Common;
+using AUF.EMR2.Application.Features.Masterlists.Queries.GetAllMasterlistRecords;
 using AUF.EMR2.Contracts.Masterlist.Requests;
 using AUF.EMR2.Contracts.Masterlist.Responses;
 using Mapster;
@@ -15,5 +16,6 @@ public sealed class MasterlistApiMappingConfig : IRegister
         config.NewConfig<MasterlistAdultResponse, MasterlistAdultQueryResponse>();
         config.NewConfig<UpdateMasterlistAdultRequest, UpdateMasterlistAdultCommand>();
         config.NewConfig<UpdateMasterlistChildRequest, UpdateMasterlistChildCommand>();
+        config.NewConfig<AllMasterlistRecordResponse, AllMasterlistRecordQueryResponse>();
     }
 }

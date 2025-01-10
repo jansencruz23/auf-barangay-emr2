@@ -1,4 +1,5 @@
 ﻿using AUF.EMR2.Domain.Common.Models;
+using System.IO;
 
 namespace AUF.EMR2.Domain.Aggregates.HouseholdAggregate.ValueObjects;
 
@@ -36,6 +37,11 @@ public sealed class HouseAddress : ValueObject
         yield return Barangay;
         yield return City;
         yield return Province;
+    }
+
+    public string FormatAddress()
+    {
+        return $"{HouseNoAndStreet}, {Barangay}, {City}, {Province}";
     }
 
     private HouseAddress() { }

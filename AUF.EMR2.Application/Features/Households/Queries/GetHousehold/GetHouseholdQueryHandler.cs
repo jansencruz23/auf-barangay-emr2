@@ -6,6 +6,7 @@ using AUF.EMR2.Domain.Common.Errors;
 using ErrorOr;
 using MapsterMapper;
 using MediatR;
+using Microsoft.Extensions.Logging;
 
 namespace AUF.EMR2.Application.Features.Households.Queries.GetHousehold;
 
@@ -27,7 +28,6 @@ public class GetHouseholdQueryHandler : IRequestHandler<GetHouseholdQuery, Error
         try
         {
             var household = await _unitOfWork.HouseholdRepository.GetHousehold(HouseholdId.Create(request.Id));
-
             if (household is null)
             {
                 return Errors.Household.NotFound;

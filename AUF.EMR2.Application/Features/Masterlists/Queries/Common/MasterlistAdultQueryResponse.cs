@@ -11,7 +11,6 @@ public sealed record MasterlistAdultQueryResponse(
     Sex Sex,
     DateTime Birthday,
     Guid HouseholdId,
-    HouseholdQueryResponse Household,
     bool IsNhts,
     Guid Version
 );

@@ -11,7 +11,6 @@ public sealed record MasterlistChildQueryResponse(
     Sex Sex,
     DateTime Birthday,
     Guid HouseholdId,
-    HouseholdQueryResponse Household,
     string? NameOfMother,
     string? NameOfFather,
     bool IsNhts,
